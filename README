@@ -37,7 +37,7 @@ The Server can be configured with the following capabilities:
 
 Installing- 
 The requirements for installing are the following:
-  -A minimal install of Rocky Linux with at leats 2 GB of RAM and 10 GB of Disk Space, with root access enabled
+  -A minimal install of Rocky Linux with at least 2 GB of RAM (8 preferred) and 10 GB of Disk Space, with root access enabled
   -Please download https://download.rockylinux.org/pub/rocky/9/isos/x86_64/Rocky-9.4-x86_64-minimal.iso (for x86 Architecture)
 
 After the minimal installation of Rocky, in the repository, Click on the EASY_INSTALL file
