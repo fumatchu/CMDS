@@ -11,8 +11,7 @@ items=(1 "Change SSH User Login "
   3 "Change Switch IP Address(es)"
   4 "Specify the Switch Image"
   5 "Update Server IP Address"
-  6 "Update Meraki API Key"
-  7 "Show all Settings"
+  6 "Show all Settings"
 )
 
 while choice=$(dialog --title "$TITLE" \
@@ -25,8 +24,7 @@ while choice=$(dialog --title "$TITLE" \
   3) nano /root/.meraki_mig/ip_list ;;
   4) /root/.meraki_mig/image_change.sh ;;
   5) /root/.meraki_mig/tftp_server_change.sh ;;
-  6) /root/.meraki_mig/api_key.sh ;;
-  7) /root/.meraki_mig/show_global.sh ;;
+  6) /root/.meraki_mig/show_global.sh ;;
   esac
 done
 clear # clear after user pressed Cancel
