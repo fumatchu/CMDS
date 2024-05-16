@@ -50,7 +50,7 @@ sleep 1
 #Clone MIG
 mkdir /root/MIGInstaller
 
-git clone https://github.com/fumatchu/MerakiMigration_c9300.git /root/MIGInstaller
+git clone https://github.com/fumatchu/CMDS.git /root/MIGInstaller
 
 chmod 700 /root/MIGInstaller/MIG*
 
