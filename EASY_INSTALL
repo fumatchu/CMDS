@@ -6,6 +6,6 @@
 
 cd /root/
 dnf -y install wget
-wget https://raw.githubusercontent.com/fumatchu/MerakiMigration_c9300/main/mig-installer.sh
+wget https://raw.githubusercontent.com/fumatchu/CMDS/main/mig-installer.sh
 chmod 700 ./mig-installer.sh
 /root/mig-installer.sh
