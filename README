@@ -1,6 +1,6 @@
 (C)atalyst to (M)eraki (D)eployment (S)erver - CMDS (pronounced "commands")
 
-This is a server platform that is designed to provide a seamless experience for migrating 
+This is an on-premise server platform that is designed to provide a seamless experience for migrating 
 Catalyst 9300 series switches to the Meraki platform with a Dialog based menu system. 
 This can also be leveraged to deploy IOS-XE image updates to any switch needing requirements for catalyst monitoring
 
