@@ -2,7 +2,6 @@
 
 This is an on-premise server platform that is designed to provide a seamless experience for migrating 
 Catalyst 9300 series switches to the Meraki platform with a Dialog based menu system. 
-This can also be leveraged to deploy IOS-XE image updates to any switch needing requirements for catalyst monitoring
 
 The server is built upon Rocky Linux and is script based. It makes this a portable solution across 
 any hypervisor that will support Rocky linux, on multiple architectures. 
