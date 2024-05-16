@@ -9,7 +9,7 @@ clear
 cat <<EOF
 ${GREEN}Factory Default/Cleanup${TEXTRESET}
 
-This will archive all logs to an acrhive folder in the logs and root directory
+This will archive all logs to an archive folder in the logs and root directory
 It will also move the Registered Meraki Device (Serial and Hardware) to the root directory (for historical purposes)
 All Configuration data, like Switch usernames, passwords, and the Meraki API key
 will be destroyed. The application will be removed, and reinstalled from Git.
