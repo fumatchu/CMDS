@@ -13,7 +13,7 @@ items=(1 "Create a Template"
 )
 
 while choice=$(dialog --title "$TITLE" \
-  --backtitle "CMDS- Main Menu -->Template Builder" \
+  --backtitle "CMDS-Main Menu -->Template Builder" \
   --menu "Please select" 15 65 3 "${items[@]}" \
   2>&1 >/dev/tty); do
   case $choice in
