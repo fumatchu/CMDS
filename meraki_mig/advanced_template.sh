@@ -107,10 +107,10 @@ else
         read -p "Please provide the allowed VLANs for the trunk (i.e. 2,3,4 or 1-1000 or 2,3,4,10-50): " ALLOWED_VLAN
     done
 
-    read -p "Please provide the description for the port (Please do not use special characters): " DESCRIPTION
+    read -p "Please provide the description for the port (Please do not use special characters or spaces): " DESCRIPTION
     while [ -z "$DESCRIPTION" ]; do
         echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
-        read -p "Please provide the description for the port (Please do not use special characters): " DESCRIPTION
+        read -p "Please provide the description for the port (Please do not use special characters or spaces): " DESCRIPTION
     done
 fi
 
