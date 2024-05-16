@@ -15,7 +15,11 @@ To the root directory (for historical purposes)
 Configuration data, like Switch usernames, passwords, and the Meraki API key
 will exist for the next batch processing.
 
-${YELLOW}This process must be ran between batches (switch groups)${TEXTRESET}
+${YELLOW}
+This process must be ran between batches (switch groups-IP Address groups) 
+However DO NOT run this if you are in an active group deployment.
+Make sure at a minimum you have migrated the hostnames over.
+${TEXTRESET}
 EOF
 
 read -r -p "Would you Like to run the batch cleanup now? [y/N]" -n 1
