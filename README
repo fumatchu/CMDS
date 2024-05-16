@@ -12,7 +12,7 @@ The Server can be configured with the following capabilities:
   (If in a Lab setting or for testing)
   -An (Optional) NTP server to service the switches
   -An (Optional) DHCP Server to service the switches
-  -An (Optional) Caching name server to service the switches
+  -An (Optional) Caching name server to service the switches (for DNS resolution)
   -A TFTP server for switch config collection (mandatory)
    
   -A Set of scripts to allow you to do the following:
