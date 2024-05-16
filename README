@@ -38,14 +38,14 @@ The Server can be configured with the following capabilities:
 Installing- 
 The requirements for installing are the following:
   -A minimal install of Rocky Linux with at leats 2 GB of RAM and 10 GB of Disk Space, with root access enabled
+  -Please download https://download.rockylinux.org/pub/rocky/9/isos/x86_64/Rocky-9.4-x86_64-minimal.iso (for x86 Architecture)
 
 After the minimal installation of Rocky, in the repository, Click on the EASY_INSTALL file
-Inside of this file, you will see the folloing lines of Code:
-
+Inside of this file, you will see the following lines of Code:
 
 cd /root/
 dnf -y install wget
-wget https://raw.githubusercontent.com/fumatchu/MerakiMigration_c9300/main/mig-installer.sh
+wget https://raw.githubusercontent.com/fumatchu/CMDS/main/mig-installer.sh
 chmod 700 ./mig-installer.sh
 /root/mig-installer.sh
 
