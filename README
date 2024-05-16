@@ -7,6 +7,34 @@ This can also be leveraged to deploy IOS-XE image updates to any switch needing 
 The server is built upon Rocky Linux and is script based. It makes this a portable solution across 
 any hypervisor that will support Rocky linux, on multiple architectures. 
 
+
+The Server can be configured with the following capabilities:
+  (If in a Lab setting or for testing)
+  -An (Optional) NTP server to service the switches
+  -An (Optional) DHCP Server to service the switches
+  -An (Optional) Caching name server to service the switches
+  -A TFTP server for switch config collection (mandatory)
+   
+  -A Set of scripts to allow you to do the following:
+    -Harvest the switches (for analysis)
+    -Clean the File System on the switch (remove inactive files)
+    -Validate the Version of IOS-XE running on the switch platform (16.6.2 upgrade path to 16.12, oneshot to 17.09.03m3)
+    -Provide guidance on the version (s) needed to get to a supported version of IOS-XE for Meraki migration (minimum requirements and oneshot versions)
+    -Deploy these (IOS-XE) changes for you
+    -Deploy the upgrades on the switches
+    -Validate software configurations on the switches
+    -If there are any deltas in the configurations, provide guidance to put them into compliance
+    -The server will then deploy these changes for you (If needed)
+    -Validate hardware configurations on the switches and provide guidance for a successful upgrade
+    -Deploy the switches to be registered with the Meraki Cloud
+    -Provide API integration to claim the devices to the dashboard
+    -Migrate hostnames
+    -Provide Switch template configurations for the new deployment (assigning designated ports for wireless, cameras, etc) and deploy via API
+    -All of this being able to be scheduled (i.e. IOS-XE images can start at 1 A.M. without any intervention, short of you requesting it, with active and archive logging capabilities)
+    -Provide all logging/transaction history 
+    -Configuration archival and download
+    -Provide documentation of all logging and successful registration with converted Serial Numbers
+
 Installing- 
 The requirements for installing are the following:
   -A minimal install of Rocky Linux with at leats 2 GB of RAM and 10 GB of Disk Space, with root access enabled
@@ -21,31 +49,4 @@ wget https://raw.githubusercontent.com/fumatchu/MerakiMigration_c9300/main/mig-i
 chmod 700 ./mig-installer.sh
 /root/mig-installer.sh
 
-You can copy it (or from here) and paste into your terminal connection to the server via SSH
-to start the depndency installs
-
-The Server will be configured with the following capabilities:
-  (If in a Lab setting or for testing)
-  -An (Optional) NTP server to service the switches
-  -An (Optional) DHCP Server to service the switches
-  -An (Optional) Caching name server to service the switches
-  -A TFTP server for switch config collection
-   
-  -A Set of scripts to allow you to do the following:
-    -Harvest the switches (for analysis)
-    -Clean the File System on the switch (remove inactive files)
-    -Validate the Version of IOS-XE running on the switch platform
-    -Provide guidance on the version (s) needed to get to a supported version of IOS-XE for Meraki migration (minimum requirements and oneshot versions)
-    -Deploy these (IOS-XE) changes for you
-    -Deploy the upgrades on the switches
-    -Validate software configurations on the switches
-    -If there are any deltas in the configurations, provide guidance to put them into compliance
-      -The server will then deploy these changes for you 
-    -Validate hardware configurations on the switches and provide guidance for a successful upgrade
-    -Deploy the switches to be registered with the Meraki Cloud
-    -Provide API integration to claim the devices to the dashboard
-    -Provide Switch template configurations for the new deployment (assigning designated ports for wireless, cameras, etc) and deploy via API
-    -All of this being able to be scheduled (i.e. IOS-XE images can start at 1 A.M. without any intervention, short of you requesting it, with active and archive logging capabilities)
-    -Provide all logging/transaction history 
-    -Provide documentation of all logging and successful registration with converted Serial Numbers for documentation
-    -If you are in a hybrid environment of deploying Catalyst monitoring, and Catalyst migration, the server will be able to deploy both for you for image (IOS-XE) validation
+You can copy it (or from here) and paste into your terminal connection to the server via SSH to start the depndency installs
