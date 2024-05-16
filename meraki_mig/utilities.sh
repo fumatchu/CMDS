@@ -10,9 +10,7 @@ items=(1 "Ping Sweep Active Switches"
   2 "Monitor TFTP "
   3 "Deploy Global command for DNS"
   4 "Deploy Global command for http client"
-  5 "Archive Active Log Files"
-  6 "Dump Registered Switches to file"
-  7 "DHCP Server"
+  5 "DHCP Server"
 )
 
 while choice=$(dialog --title "$TITLE" \
@@ -24,9 +22,7 @@ while choice=$(dialog --title "$TITLE" \
   2) iptraf-ng -i all ;;
   3) /root/.meraki_mig/dynamic_set_ns.sh ;;
   4) /root/.meraki_mig/dynamic_set_httpclient.sh ;;
-  5) /root/.meraki_mig/archive.sh ;;
-  6) /root/.meraki_mig/archive_meraki_id.sh ;;
-  7) clear & /root/.servman/DHCPMan ;;
+  5) clear & /root/.servman/DHCPMan ;;
 
   esac
 done
