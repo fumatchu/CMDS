@@ -1,0 +1,60 @@
+#!/bin/bash
+TEXTRESET=$(tput sgr0)
+RED=$(tput setaf 1)
+YELLOW=$(tput setaf 3)
+GREEN=$(tput setaf 2)
+
+user=$(whoami)
+DHCP=$(find / -name dhcpd.conf -print)
+
+#Checking for user permissions
+if [ "$user" != "root" ]; then
+    echo ${red}"This program must be run as root ${textreset}"
+    echo "Exiting"
+    exit
+else
+    echo " "
+fi
+
+#See if DHCP is installed
+if [ "$DHCP" = "/etc/dhcp/dhcpd.conf" ]; then
+    echo " "
+else
+    echo ${RED}"Can't find dhcpd.conf in it's usual place. ${TEXTRESET}"
+    echo "Make sure you have isc-dhcp server installed"
+    echo Exiting...
+    sleep 3
+    exit
+fi
+
+
+items=(1 "Create new DHCP Scope"
+    2 "List DHCP Leases"
+    3 "Query DHCP Database"
+    4 "Start DHCP Server"
+    5 "Stop DHCP Server"
+    6 "Restart DHCP Service"
+    7 "Enable DHCP Server Service"
+    8 "Disable DHCP Service"
+    9 "DHCP Server Status"
+   10 "Edit DHCP Config Manually"
+)
+
+while choice=$(dialog --title "$TITLE" \
+    --backtitle "DHCP Server Management" \
+    --menu "Please select" 20 40 3 "${items[@]}" \
+    2>&1 >/dev/tty); do
+    case $choice in
+      1) /root/.servman/DHCPManager/create-scope ;;
+    2) /root/.servman/DHCPManager/dhcp-list ;;
+    3)  /root/.servman/DHCPManager/dhcp-query ;;
+    4) /root/.servman/DHCPManager/start-dhcp-server ;;
+    5) /root/.servman/DHCPManager/stop-dhcp-server ;;
+    6) /root/.servman/DHCPManager/restart-dhcp-server ;;
+    7) /root/.servman/DHCPManager/enable-dhcp-server ;;
+    8) /root/.servman/DHCPManager/disable-dhcp-server ;;
+    9) /root/.servman/DHCPManager/status-dhcp-server ;;
+   10) /root/.servman/DHCPManager/dhcp-edit-config ;;
+    esac
+done
+clear # clear after user pressed Cancel

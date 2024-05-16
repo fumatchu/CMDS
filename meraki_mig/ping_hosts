@@ -1,0 +1,18 @@
+#!/bin/bash
+TEXTRESET=$(tput sgr0)
+RED=$(tput setaf 1)
+YELLOW=$(tput setaf 3)
+GREEN=$(tput setaf 2)
+
+# Get the list of IP addresses to ping
+IPS=$(cat /root/.meraki_mig/ip_list)
+
+# Ping each IP address and report the results
+for IP in $IPS; do
+  ping -c 1 $IP > /dev/null
+  if [ $? -eq 0 ]; then
+    echo "$IP is ${GREEN}up${TEXTRESET}"
+  else
+    echo "$IP is ${RED}down${TEXTRESET}"
+  fi
+done

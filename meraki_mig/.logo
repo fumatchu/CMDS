@@ -1,0 +1,45 @@
+#!/bin/bash
+clear
+cat << "EOF"
+
+
+
+                                llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll
+                                llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll
+                                llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll
+                                llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll
+                                llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll
+                                lllllllllllllllllll;^'...'`"Illlllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll
+                                lllllllllllllllll,.          `;lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll
+                                llllllllllllllll"             .;llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll
+                                llllllllllllllll.              'llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll
+                                llllllllllllllll               .lllllll;,"^",;llllllllllllllllI,"^^,;lllllllllllllllllllllllllllllll
+                                llllllllllllllll               .llllI`.       .`;lllllllllll^.       .`:llllllllllllllllllllllllllll
+                                llllllllllllllll               .lll"             "llllllll:.            `lllllllllllllllllllllllllll
+                                llllllllllllllll               .ll:               ,lllllll.              `llllllllllllllllllllllllll
+                                llllllllllllllll               .ll`                ,lllll;                `lllllllllllllllllllllllll
+                                llllllllllllllll               .ll"                 :lllll                 "llllllllllllllllllllllll
+                                llllllllllllllll               .lll'                 :llll"                 ,lllllllllllllllllllllll
+                                llllllllllllllll               .llll'                 :llll^                 ,llllllllllllllllllllll
+                                llllllllllllllll               .lllll'                 :llll^                 ,lllllllllllllllllllll
+                                llllllllllllllll               .llllll'                .;llll`                 ,llllllllllllllllllll
+                                llllllllllllllll               .lllllll'                .;llll`                 :lllllllllllllllllll
+                                llllllllllllllll               .lllllllI.                .Illll`                 :llllllllllllllllll
+                                llllllllllllllll               .llllllllI.                'lllll'                 :lllllllllllllllll
+                                llllllllllllllll               .lllllllll;.                'lllll'                 ;llllllllllllllll
+                                llllllllllllllll               .llllllllll:                 `lllll'                .llllllllllllllll
+                                llllllllllllllll               .lllllllllll:                 lllll;.                :lllllllllllllll
+                                llllllllllllllll               .llllllllllll,                llllll;.               ;lllllllllllllll
+                                llllllllllllllll^              :lllllllllllll:              "lllllll;.             `llllllllllllllll
+                                lllllllllllllllll".          ';lllllllllllllll;'          .,lllllllllI`           ^lllllllllllllllll
+                                lllllllllllllllllll,`'....'^;lllllllllllllllllll;^'....'`,lllllllllllllI"'.....`"lllllllllllllllllll
+                                llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll
+                                llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll
+                                llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll
+                                llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll
+                                llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll
+                                llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll
+                                llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll
+
+EOF
+sleep 1

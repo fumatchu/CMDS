@@ -1,0 +1,31 @@
+#!/bin/bash
+TEXTRESET=$(tput sgr0)
+RED=$(tput setaf 1)
+YELLOW=$(tput setaf 3)
+GREEN=$(tput setaf 2)
+USER=$(whoami)
+
+#Checking for user permissions
+if [ "$USER" = "root" ]; then
+echo " "
+else
+  echo ${RED}"This program must be run as root ${TEXTRESET}"
+  echo "Exiting"
+fi
+clear
+cat << EOF
+${GREEN}DHCP Server Management${TEXTRESET}
+${GREEN}Query DHCP Leases${TEXTRESET}
+EOF
+
+read -p "Provide the MAC Address (i.e. 00:b0:d0:63:c2:21), IP address or hostname description to search: " QUERY
+
+echo "Result:"
+
+more /var/lib/dhcpd/dhcpd.leases | grep $QUERY -C12
+cat  << EOF
+
+${RED}Note- The Description is UNDER the MAC address Entry${TEXTRESET}
+
+EOF
+read -p "Press Any Key to Continue"
