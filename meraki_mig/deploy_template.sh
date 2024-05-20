@@ -12,7 +12,7 @@ cat << EOF
 ${GREEN}Deploy PreConfigured Template(s)${TEXTRESET}
 
 This allows you to link templates together and
-deploy them to the switches. you can link as menay templates
+deploy them to the switches. You can link as many templates
 together as you need to complete the deployment
 
 
