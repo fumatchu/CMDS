@@ -1,5 +1,5 @@
 #!/bin/bash
-#Ping Sweep
+#Ping Sweep Frot end to call ping_hosts
 TEXTRESET=$(tput sgr0)
 RED=$(tput setaf 1)
 YELLOW=$(tput setaf 3)

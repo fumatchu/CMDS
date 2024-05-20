@@ -1,5 +1,5 @@
 #!/bin/bash
-#Utilities Menu
+#Advanced Template Menu
 TEXTRESET=$(tput sgr0)
 RED=$(tput setaf 1)
 YELLOW=$(tput setaf 3)

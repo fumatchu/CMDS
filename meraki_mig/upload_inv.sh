@@ -1,5 +1,5 @@
 #!/bin/bash
-#UPLOAD MERAKI ID to ORG
+#DEFUNCT
 TEXTRESET=$(tput sgr0)
 RED=$(tput setaf 1)
 YELLOW=$(tput setaf 3)

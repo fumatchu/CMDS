@@ -1,5 +1,5 @@
 #!/bin/bash
-#Change SSH User Credentials
+#Query show meraki output to serials
 TEXTRESET=$(tput sgr0)
 RED=$(tput setaf 1)
 YELLOW=$(tput setaf 3)

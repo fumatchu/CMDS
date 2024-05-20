@@ -1,5 +1,5 @@
 #!/bin/bash
-#Meraki Mig deploy
+#deploy_check- Check reuirements to migrate Switch to Meraki Dashboard
 TEXTRESET=$(tput sgr0)
 RED=$(tput setaf 1)
 YELLOW=$(tput setaf 3)

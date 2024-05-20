@@ -1,5 +1,5 @@
 #!/bin/bash
-#Change SSH User Credentials
+#shotgun port deployment access only 
 TEXTRESET=$(tput sgr0)
 RED=$(tput setaf 1)
 YELLOW=$(tput setaf 3)

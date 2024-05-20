@@ -1,4 +1,5 @@
 #!/bin/bash
+#Delete Template
 TEXTRESET=$(tput sgr0)
 RED=$(tput setaf 1)
 YELLOW=$(tput setaf 3)

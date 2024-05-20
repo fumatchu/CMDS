@@ -1,5 +1,5 @@
 #!/bin/bash
-#Meraki Mig deploy
+#Script for IOS-XE migration (Sanity Check)
 TEXTRESET=$(tput sgr0)
 RED=$(tput setaf 1)
 YELLOW=$(tput setaf 3)

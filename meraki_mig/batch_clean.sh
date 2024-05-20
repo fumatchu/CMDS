@@ -1,5 +1,5 @@
 #!/bin/bash
-#Change SSH User Credentials
+#Batch Clean for Server
 TEXTRESET=$(tput sgr0)
 RED=$(tput setaf 1)
 YELLOW=$(tput setaf 3)
