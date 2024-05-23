@@ -24,7 +24,7 @@ _repeat="Y"
 while [ $_repeat = "Y" ]; do
         clear
         echo ${GREEN}"Deploy PreConfigured Template(s)"${TEXTRESET}
-        echo "Link templates together and deploy them to the switches"
+        echo "Link port templates together and deploy them to the switches"
         echo " "
         echo "Select a Template:"
         echo " "
