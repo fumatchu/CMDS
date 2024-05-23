@@ -13,9 +13,7 @@ rm -f /root/.meraki_mig/switch_serials_48.txt
 cat /root/.meraki_mig/build_port.tmp | grep C9300-48 | grep -E -o "Q.{0,13}" >/root/.meraki_mig/switch_serials_48.txt
 cat /root/.meraki_mig/build_port.tmp | grep C9300-24 | grep -E -o "Q.{0,13}" >/root/.meraki_mig/switch_serials_24.txt
 
-
 clear
-
 
 echo "############################Collection time ${DATE}######################################"
 
@@ -50,7 +48,7 @@ done
 
 clear
 
-cat << EOF
+cat <<EOF
 ${GREEN}These are the templates we are going to deploy:${TEXTRESET}
 
 EOF
@@ -60,29 +58,30 @@ echo " "
 
 while true; do
 
-read -p "Do you want to proceed? (y/n) " yn
+        read -p "Do you want to proceed? (y/n) " yn
 
-case $yn in
-        [yY] ) echo ${GREEN}Collecting Information ${TEXTRESET};
+        case $yn in
+        [yY])
+                echo ${GREEN}Collecting Information ${TEXTRESET}
 
-               echo "############################Collection time ${DATE}######################################"
-               echo ${GREEN}"Deploying the Script Now"${TEXTRESET}
-               echo "The screen may look frozen, please be patient"
-               sed -i "1i #!/bin/bash" "/root/.meraki_mig/templates/working.run"
-               chmod 700 /root/.meraki_mig/templates/working.run
-               unbuffer /root/.meraki_mig/templates/working.run
-               rm -f /root/.meraki_mig/templates/working.run
-               echo ${GREEN}"Script Complete"${TEXTRESET}
-               sleep 2
+                echo "############################Collection time ${DATE}######################################"
+                echo ${GREEN}"Deploying the Script Now"${TEXTRESET}
+                echo "The screen may look frozen, please be patient"
+                sed -i "1i #!/bin/bash" "/root/.meraki_mig/templates/working.run"
+                chmod 700 /root/.meraki_mig/templates/working.run
+                unbuffer /root/.meraki_mig/templates/working.run
+                rm -f /root/.meraki_mig/templates/working.run
+                echo ${GREEN}"Script Complete"${TEXTRESET}
+                sleep 2
 
-
-
-
-               break;;
-        [nN] ) echo ${RED}"Cancelling Deployment"${TEXTRESET};
-               rm -f /root/.meraki_mig/templates/working.run
-               exit;;
-        * ) echo invalid response;;
-esac
+                break
+                ;;
+        [nN])
+                echo ${RED}"Cancelling Deployment"${TEXTRESET}
+                rm -f /root/.meraki_mig/templates/working.run
+                exit
+                ;;
+        *) echo invalid response ;;
+        esac
 
 done
