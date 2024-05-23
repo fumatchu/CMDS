@@ -218,3 +218,5 @@ rm -f /root/.meraki_mig/templates/working.template
 rm -f /root/.meraki_mig/templates/name.tmp
 rm -f /root/.meraki_mig/templates/config.tmp
 rm -f /root/.meraki_mig/build_port.tmp
+echo ${GREEN}"Saving Template"${TEXTRESET}
+sleep 2
