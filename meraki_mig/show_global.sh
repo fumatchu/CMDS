@@ -16,4 +16,7 @@ cat /root/.meraki_mig/clean | grep "set switch_pass"
 cat /root/.meraki_mig/clean | grep "set image"
 cat /root/.meraki_mig/claim_devices.py | grep -m 1 "API_KEY"
 echo " "
+echo "Batch IP List"
+more /root/.meraki_mig/ip_list
+echo " "
 read -p "Press Any Key"
