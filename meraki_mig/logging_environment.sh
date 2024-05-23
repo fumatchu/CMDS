@@ -13,7 +13,7 @@ items=(1 "Active Logging"
   5 "Meraki Software/Hardware"
   6 "Show Hostname Migration"
   7 "Search Log files"
-  8 "Search Template Deployment"
+  8 "Search Port Template Deployment"
 )
 
 while choice=$(dialog --title "$TITLE" \
