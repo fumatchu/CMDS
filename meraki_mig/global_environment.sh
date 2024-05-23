@@ -8,7 +8,7 @@ USER=$(whoami)
 
 items=(1 "Change SSH User Login "
   2 "Change SSH password to switch"
-  3 "Change Switch IP Address(es)"
+  3 "Update Batch IP Address(es)"
   4 "Specify the Switch Image"
   5 "Update Server IP Address"
   6 "Show all Settings"
