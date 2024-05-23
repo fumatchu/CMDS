@@ -60,7 +60,7 @@ while read -r IP; do
     sleep 1
   else
     echo "${RED}ERROR:IOS-XE Needs Updating - The Version should be 17.09.03m3"${TEXTRESET}
-    echo "${RED}Please upgrade to 17.09.03m3 on all switches then re-run the Meraki Compatibility Collection"${TEXTRESET}
+    echo "${RED}Please upgrade to 17.09.03m3 on all switches then re-run the Meraki PreCheck Collection"${TEXTRESET}
     echo "Exiting..."
     sleep 5
     exit
