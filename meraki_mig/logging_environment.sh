@@ -13,6 +13,7 @@ items=(1 "Active Logging"
   5 "Meraki Software/Hardware"
   6 "Show Hostname Migration"
   7 "Search Log files"
+  8 "Search Template Deployment"
 )
 
 while choice=$(dialog --title "$TITLE" \
@@ -27,6 +28,7 @@ while choice=$(dialog --title "$TITLE" \
   5) /root/.meraki_mig/show_soft_hard_log.sh ;;
   6) /root/.meraki_mig/show_hostnames_log.sh ;;
   7) /root/.meraki_mig/log_search ;;
+  8) /root/.meraki_mig/show_template_deploy.sh ;;
   esac
 done
 clear # clear after user pressed Cancel
