@@ -5,6 +5,15 @@ RED=$(tput setaf 1)
 YELLOW=$(tput setaf 3)
 GREEN=$(tput setaf 2)
 DATE=$(date)
+
+#Generating 24 and 48 port Serial Numbers
+cat /var/lib/tftpboot/*-shmr >/root/.meraki_mig/build_port.tmp
+rm -f /root/.meraki_mig/switch_serials_24.txt
+rm -f /root/.meraki_mig/switch_serials_48.txt
+cat /root/.meraki_mig/build_port.tmp | grep C9300-48 | grep -E -o "Q.{0,13}" >/root/.meraki_mig/switch_serials_48.txt
+cat /root/.meraki_mig/build_port.tmp | grep C9300-24 | grep -E -o "Q.{0,13}" >/root/.meraki_mig/switch_serials_24.txt
+
+
 clear
 
 
