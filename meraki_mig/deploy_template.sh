@@ -54,7 +54,7 @@ while true; do
 read -p "Do you want to proceed? (y/n) " yn
 
 case $yn in
-        [yY] ) echo ${GREEN} Collecting Information ${TEXTRESET};
+        [yY] ) echo ${GREEN}Collecting Information ${TEXTRESET};
 
                echo "############################Collection time ${DATE}######################################"
                echo ${GREEN}"Deploying the Script Now"${TEXTRESET}
