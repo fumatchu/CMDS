@@ -9,7 +9,8 @@ USER=$(whoami)
 items=(1 "Create a Template"
   2 "Deploy a Template"
   3 "Show templates"
-  
+  4 "Deploy Linked (Nested) Template"
+  5 "Show Linked (Nested) Template"
 )
 
 while choice=$(dialog --title "$TITLE" \
@@ -20,6 +21,8 @@ while choice=$(dialog --title "$TITLE" \
   1) /root/.meraki_mig/advanced_template.sh ;;
   2) /root/.meraki_mig/deploy_template.sh | tee -a /root/.meraki_mig/logs/template_deployment.log ;;
   3) /root/.meraki_mig/show_template.sh ;;
+  4) clear ;;
+  5) clear ;;
   esac
 done
 clear # clear after user pressed Cancel
