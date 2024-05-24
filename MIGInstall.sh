@@ -413,6 +413,9 @@ chmod 700 /root/.meraki_mig/.logo
 #Create Directory for Active Templates
 mkdir /root/.meraki_mig/templates/active
 
+#Create linked folder for linked template option
+mkdir /root/.meraki_mig/templates/active/linked
+
 #Bracketed pasting...yuck!
 sed -i '8i set enable-bracketed-paste off' /etc/inputrc
 
