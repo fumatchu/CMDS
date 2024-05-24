@@ -57,6 +57,7 @@ EOF
   mv /root/.meraki_mig/meraki_migration /usr/sbin/
   #Create Directory for Active Templates
   mkdir /root/.meraki_mig/templates/active
+  mkdir /root/.meraki_mig/templates/linked
 
   # Mr. M
   chmod 700 /root/.meraki_mig/.logo
