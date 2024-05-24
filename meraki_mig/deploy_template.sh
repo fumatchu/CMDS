@@ -30,6 +30,10 @@ while [ $_repeat = "Y" ]; do
         echo " "
         echo "${YELLOW}(Hint, you should be able to copy and paste the filename)"${TEXTRESET}
         read -p "Please provide the template name you would like to run: " TEMPLATE_SELECTION
+        while [ -z "$TEMPLATE_SELECTION" ]; do
+        echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+        read -p "Please provide the template name you would like to run: " TEMPLATE_SELECTION
+        done
         echo ${GREEN}"Adding ${TEMPLATE_SELECTION}"${TEXTRESET}
         echo python3 /root/.meraki_mig/templates/active/$TEMPLATE_SELECTION >>/root/.meraki_mig/templates/working.run
 
@@ -63,6 +67,10 @@ echo ${GREEN}"Save this Set of templates as a Linked Template"${TEXTRESET}
                 echo "Something that makes sense to your Organization"
                 echo " "
                 read -p "Please provide the name you would like to use to save this linked template: " SAVE_TEMPLATE
+                while [ -z "$SAVE_TEMPLATE" ]; do
+                echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+                read -p "Please provide the name you would like to use to save this linked template: " SAVE_TEMPLATE
+                done
                 echo " "
                 echo "Saving the template. It can be viewed under Main Menu --> Template Deployment --> Linked Templates"
                 sleep 3
