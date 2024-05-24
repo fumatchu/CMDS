@@ -46,7 +46,7 @@ read -r -p "Would you like to deploy the selected template? (y/n) " response
                 echo ${GREEN}Deploying Template ${TEMPLATE_SELECTION} ${TEXTRESET}
                 echo " "
                 sleep 3
-                /root/.meraki_mig/templates/linked/${TEMPLATE_SELECTION}
+                unbuffer /root/.meraki_mig/templates/linked/${TEMPLATE_SELECTION}
                 echo ${GREEN}Script Complete${TEXTRESET}
                 ;;
         *)
