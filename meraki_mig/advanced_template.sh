@@ -210,7 +210,10 @@ EOF
 
 echo ${YELLOW}"*hint: If you want to use the generated file name, just highlight, copy and paste)"$TEXTRESET
 read -p "Please provide a name for this template : " TEMPLATE_NAME
-
+while [ -z "$TEMPLATE_NAME" ]; do
+    echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+    read -p "Please provide a name for this template: " TEMPLATE_NAME
+done
 echo ${GREEN}"Saving Template"${TEXTRESET}
 sleep 2
 
@@ -220,4 +223,3 @@ rm -f /root/.meraki_mig/templates/working.template
 rm -f /root/.meraki_mig/templates/name.tmp
 rm -f /root/.meraki_mig/templates/config.tmp
 rm -f /root/.meraki_mig/build_port.tmp
-
