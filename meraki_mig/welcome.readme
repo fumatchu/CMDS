@@ -1,5 +1,4 @@
 #!/bin/bash
-#welcome.readme
 TEXTRESET=$(tput sgr0)
 RED=$(tput setaf 1)
 YELLOW=$(tput setaf 3)
@@ -117,3 +116,8 @@ ${GREEN}Batch Cleanup${TEXTRESET}
                 - Add a New list of of IP addresses to the batch (MainMenu-->Global Environment Settings-->Update Batch IP Address(es)
 
 Rinse, repeat
+
+EOF
+echo "End of File"
+
+sleep 5
