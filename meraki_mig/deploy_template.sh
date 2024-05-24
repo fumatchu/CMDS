@@ -85,3 +85,4 @@ while true; do
         esac
 
 done
+rm -f /root/.meraki_mig/build_port.tmp
