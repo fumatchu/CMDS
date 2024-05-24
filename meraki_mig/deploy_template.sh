@@ -26,7 +26,7 @@ while [ $_repeat = "Y" ]; do
         echo " "
         echo "Select a Template:"
         echo " "
-        ls /root/.meraki_mig/templates/active
+        ls /root/.meraki_mig/templates/active/*.py | cut -c36-
         echo " "
         echo "${YELLOW}(Hint, you should be able to copy and paste the filename)"${TEXTRESET}
         read -p "Please provide the template name you would like to run: " TEMPLATE_SELECTION
