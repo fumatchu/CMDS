@@ -21,7 +21,7 @@ while choice=$(dialog --title "$TITLE" \
   1) /root/.meraki_mig/advanced_template.sh ;;
   2) /root/.meraki_mig/deploy_template.sh | tee -a /root/.meraki_mig/logs/template_deployment.log ;;
   3) /root/.meraki_mig/show_template.sh ;;
-  4) clear ;;
+  4) /root/.meraki_mig/deploy_linked_template.sh | tee -a /root/.meraki_mig/logs/template_deployment.log ;;
   5) /root/.meraki_mig/show_linked_template.sh ;;
   esac
 done
