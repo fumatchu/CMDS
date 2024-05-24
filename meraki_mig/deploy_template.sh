@@ -31,8 +31,8 @@ while [ $_repeat = "Y" ]; do
         echo "${YELLOW}(Hint, you should be able to copy and paste the filename)"${TEXTRESET}
         read -p "Please provide the template name you would like to run: " TEMPLATE_SELECTION
         while [ -z "$TEMPLATE_SELECTION" ]; do
-        echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
-        read -p "Please provide the template name you would like to run: " TEMPLATE_SELECTION
+                echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+                read -p "Please provide the template name you would like to run: " TEMPLATE_SELECTION
         done
         echo ${GREEN}"Adding ${TEMPLATE_SELECTION}"${TEXTRESET}
         echo python3 /root/.meraki_mig/templates/active/$TEMPLATE_SELECTION >>/root/.meraki_mig/templates/working.run
@@ -52,38 +52,36 @@ done
 
 clear
 
-
 echo ${GREEN}"Save this Set of templates as a Linked Template"${TEXTRESET}
-        read -r -p "Would you like to save this template series collection as a linked template for future use? (y/n) " response
+read -r -p "Would you like to save this template series collection as a linked template for future use? (y/n) " response
 
-        case "$response" in
-                [yY][eE][sS]|[yY])
-                echo " "
-                echo ${GREEN}Saving as Linked template ${TEXTRESET}
-                echo " "
-                echo "Since you are saving a linked template, please use a name that makes sense for the combination"
-                echo "you are saving. Most Linked Templates will be re-used for whole networks."
-                echo "Maybe the NetworkName_Description? -i.e. Network_Name_1_24_and_48_Port_Switches_UPLINK_EndUser_AP"
-                echo "Something that makes sense to your Organization"
-                echo " "
-                read -p "Please provide the name you would like to use to save this linked template: " SAVE_TEMPLATE
-                while [ -z "$SAVE_TEMPLATE" ]; do
+case "$response" in
+[yY][eE][sS] | [yY])
+        echo " "
+        echo ${GREEN}Saving as Linked template ${TEXTRESET}
+        echo " "
+        echo "Since you are saving a linked template, please use a name that makes sense for the combination"
+        echo "you are saving. Most Linked Templates will be re-used for whole networks."
+        echo "Maybe the NetworkName_Description? -i.e. Network_Name_1_24_and_48_Port_Switches_UPLINK_EndUser_AP"
+        echo "Something that makes sense to your Organization"
+        echo " "
+        read -p "Please provide the name you would like to use to save this linked template: " SAVE_TEMPLATE
+        while [ -z "$SAVE_TEMPLATE" ]; do
                 echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
                 read -p "Please provide the name you would like to use to save this linked template: " SAVE_TEMPLATE
-                done
-                echo " "
-                echo "Saving the template. It can be viewed under Main Menu --> Template Deployment --> Linked Templates"
-                sleep 3
-                cp /root/.meraki_mig/templates/working.run /root/.meraki_mig/templates/linked/${SAVE_TEMPLATE}.py
-                sed -i "1i #!/bin/bash" "/root/.meraki_mig/templates/linked/${SAVE_TEMPLATE}.py"
-                chmod 700 /root/.meraki_mig/templates/linked/${SAVE_TEMPLATE}.py
-                ;;
-        *)
+        done
+        echo " "
+        echo "Saving the template. It can be viewed under Main Menu --> Template Deployment --> Linked Templates"
+        sleep 3
+        cp /root/.meraki_mig/templates/working.run /root/.meraki_mig/templates/linked/${SAVE_TEMPLATE}.py
+        sed -i "1i #!/bin/bash" "/root/.meraki_mig/templates/linked/${SAVE_TEMPLATE}.py"
+        chmod 700 /root/.meraki_mig/templates/linked/${SAVE_TEMPLATE}.py
+        ;;
+*)
 
-                echo ${RED}"Not Saving the configuration as a template"${TEXTRESET}
-                ;;
+        echo ${RED}"Not Saving the configuration as a template"${TEXTRESET}
+        ;;
 esac
-
 
 clear
 cat <<EOF
