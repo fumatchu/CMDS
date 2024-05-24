@@ -1,0 +1,119 @@
+#!/bin/bash
+#welcome.readme
+TEXTRESET=$(tput sgr0)
+RED=$(tput setaf 1)
+YELLOW=$(tput setaf 3)
+GREEN=$(tput setaf 2)
+
+clear
+cat <<EOF
+${GREEN}Catalyst to Meraki Deployment Server${TEXTRESET}
+
+Welcome to ${GREEN}CMDS${TEXTRESET}. This is a dialog based driven GUI menu system backed by smaller scripts
+to help you get things done efficiently for your Meraki Migration.
+You can start CMDS at any time by typing ${YELLOW}meraki_migration${TEXTRESET} from the terminal.
+
+There is a walkthrough YT video if you would like to watch:
+https://youtu.be/7m1T3dSq6QE
+
+
+Starting your first migration is simple. You will first run the Setup Wizard from the main menu.
+
+
+${GREEN}Setup Wizard${TEXTRESET}
+
+The setup wizard will walk you through a fresh install of a CMDS server. It will prompt you for the following information:
+        -SSH Username (must be Priv 15)
+        -SSH Password
+        -Sets the IP address of the CMDS for TFTP
+        -Prompts for the Meraki API Key
+        -Prompts for the IP addresses of the switches (Batch) to migrate (one per line, no crriage returns)
+        -Prompts you to upload (at a minimum) (1) IOS-XE image
+        -This can be accomplished by SCP, or using the Navigator component in cockpit that is running at the (IP address of the server):9090
+
+After the Setup wizard completes, you are ready to start migrating your switches
+The steps are as follows
+
+${GREEN}Data Collection and Clean File System Flash${TEXTRESET}
+        -This is the First operational step.
+        -CMDS will login to the switches via the list of IP addresses provided and collect the earlier mentioned switch data.
+        -It will then run the remove install active command on the switches
+
+${GREEN}IOS-XE Precheck${TEXTRESET}
+        -This is the next step after Data Collection. CMDS will evaluate the Versions and provide capabilities on if the Version is compatible, and if one-shot is supported.
+        -It will also make suggestion on IOS-XE versions if needed to achieve version 17.0.03.m3
+
+${GREEN}Deploy IOS-XE image to switch${TEXTRESET}
+        -Deploys the uploaded IOS-XE and Chosen IOS-XE image to the batch
+
+${GREEN}Install the IOS-XE Update${TEXTRESET}
+        -Connects to each batch switch and runs the command “activate commit prompt-level none”
+        -Looks for the switch response of “*Finished Commit*” and moves on the next switch in the batch until all switches are initiated for upgrade
+
+${YELLOW}Steps Above may need to be executed multiples times to get to the desired image of 17.09.03.m3 (the approved version to migrate IOS-XE to Meraki${TEXTRESET}
+
+
+Next we start the Meraki migration components
+
+
+${GREEN}Meraki Precheck Collection${TEXTRESET}
+        -Runs the “show Meraki compatibility”, collects additional metrics and stores them for the validate software hardware option.
+        -Also validates the running IOS-XE version for migration, assessed by CMDS
+
+${GREEN}Validate Switch Software/Hardware Configuration${TEXTRESET}
+        -Is there a DHCP interface? If not it will warn yellow, reminding the admin that a DHCP Server is needed after migration
+        -Does the switch have the command ip http client -source-interface?
+        -Does the switch have a DNS entry? (Static or Dynamic)
+        -Does the IOS-XE version match?
+        -Is the switch in INSTALL mode?
+        -Is there a GW of last resort?
+        -Are there any hardware incompatibilities?
+
+All requirements must be met (there are no red warnings). If there are the admin must correct these issues first, then re-run the Meraki PreCheck
+After the Precheck has been re-run, we must validate the configuration again (so Meraki PreCheck, then Validation- again)
+Then we continue with:
+
+${GREEN}Register Catalyst switch to Meraki Dashboard${TEXTRESET}
+        -Runs the command service meraki register
+        -Collects the serial numbers and stores them locally and historically
+
+${GREEN}Show Converted Meraki ID${TEXTRESET}
+        -Provides a sanity check of the serial numbers for the registered switches.
+        -Uses this information moving forward for API commands for templates and device claim
+
+${GREEN}Claim Inventory/Serials to Organization${TEXTRESET}
+        -Calls the Meraki API to take the stored serial numbers, allow you to choose the Org (If more than one)
+        -Registers these devices to the ORG under the associated API
+
+${YELLOW}After you have claimed the devices to Inventory, You must move these devices to an active Network with a firmware version minimum of 16.6 (Meraki 16.6)
+Please call support if you need assistance with this${TEXTRESET}
+
+${GREEN}Migrate Hostnames${TEXTRESET}
+        -Takes the pre-existing switch names from Catalyst config and uses the serial number to update the batch with the appropriate hostnames
+
+${GREEN}Template Deployment${TEXTRESET}
+        -When deploying new equipment in a network it is always best practice to put a “plan” in place for port allocations on the network.
+        -The Template deployment allows the admin to do the following:
+                -Create templates based on physical ports (i.e. port 2-10, 11-20, 21 -24)
+                -Apply either an access port configuration or trunk configuration on the physical ports
+                -Apply a standard nomenclature for the port conventions (i.e. AP_Port or EndUser_Port, etc. etc.)
+                -Take each individual template created, and “link” them together for deployment across the switches that were just imported.
+
+When Templates have been created, they can also be linked. This is the process of taking the created templates and "binding" them together so when you
+deploy the next bacth of switches, you do not have to go through the same template selection, it can just be a grouped, pre-selected, set of templates
+already bound together
+
+
+${GREEN}Batch Cleanup${TEXTRESET}
+        -Creates an archive in the root directory for historical purposes
+        -Archives all expect script transaction between CMDS and the switch
+        -Archive all the validation scripts
+                -IOS-XE precheck
+                -Meraki Precheck
+                -Software/Hardware configuration validation
+                -Archives all template deployments (for historical purposes)
+                -Archive all the migrated Meraki serial numbers to a separate log for housekeeping
+        -Resets the IP addresses in the Batch file
+                - Add a New list of of IP addresses to the batch (MainMenu-->Global Environment Settings-->Update Batch IP Address(es)
+
+Rinse, repeat
