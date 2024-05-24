@@ -7,12 +7,15 @@ GREEN=$(tput setaf 2)
 DATE=$(date)
 clear
 
-echo "Gathering Data"
-sleep 1
+
+
 cat /var/lib/tftpboot/*-shmr >/root/.meraki_mig/build_port.tmp
-echo "Splitting Port Densities"
-sleep 1
-clear
+rm -f /root/.meraki_mig/switch_serials_24.txt
+rm -f /root/.meraki_mig/switch_serials_48.txt
+cat /root/.meraki_mig/build_port.tmp | grep C9300-48 | grep -E -o "Q.{0,13}" >/root/.meraki_mig/switch_serials_48.txt
+cat /root/.meraki_mig/build_port.tmp | grep C9300-24 | grep -E -o "Q.{0,13}" >/root/.meraki_mig/switch_serials_24.txt
+
+
 cat <<EOF
 ${GREEN}Port Template Creation${TEXTRESET}
 
@@ -29,10 +32,6 @@ EOF
 read -p "Press Any Key when Ready"
 
 clear
-rm -f /root/.meraki_mig/switch_serials_24.txt
-rm -f /root/.meraki_mig/switch_serials_48.txt
-cat /root/.meraki_mig/build_port.tmp | grep C9300-48 | grep -E -o "Q.{0,13}" >/root/.meraki_mig/switch_serials_48.txt
-cat /root/.meraki_mig/build_port.tmp | grep C9300-24 | grep -E -o "Q.{0,13}" >/root/.meraki_mig/switch_serials_24.txt
 
 read -p "Is this a 24 port switch or a 48 port switch template? (Please specify 24 or 48): " SWITCH_DENSITY
 while [ -z "$SWITCH_DENSITY" ]; do
