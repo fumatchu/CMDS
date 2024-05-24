@@ -25,6 +25,7 @@ items=(1 "Data Collection and Clean File System Flash"
  17 "Logs"
  18 "Utilities"
  19 "Setup Wizard"
+ 20 "Welcome to CMDS"
 )
 
 while choice=$(dialog --title "$TITLE" \
@@ -51,6 +52,7 @@ while choice=$(dialog --title "$TITLE" \
  17) /root/.meraki_mig/logging_environment.sh ;;
  18) /root/.meraki_mig/utilities.sh ;;
  19) /root/.meraki_mig/wizard.sh ;;
+ 20) /root/.meraki_mig/welcome.readme | more ;;
   esac
 done
 clear # clear after user pressed Cancel
