@@ -72,3 +72,4 @@ echo ${GREEN}"Save this Set of templates as a Linked Template"${TEXTRESET}
         cp /root/.meraki_mig/templates/working.run /root/.meraki_mig/templates/linked/${SAVE_TEMPLATE}.py
         sed -i "1i #!/bin/bash" "/root/.meraki_mig/templates/linked/${SAVE_TEMPLATE}.py"
         chmod 700 /root/.meraki_mig/templates/linked/${SAVE_TEMPLATE}.py
+        rm -f /root/.meraki_mig/templates/working.run
