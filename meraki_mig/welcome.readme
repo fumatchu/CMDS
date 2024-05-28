@@ -6,7 +6,7 @@ GREEN=$(tput setaf 2)
 
 clear
 cat <<EOF
-${GREEN}Catalyst to Meraki Deployment Server${TEXTRESET}
+${GREEN}Catalyst to Meraki Deployment Server v1.0(01)${TEXTRESET}
 
 Welcome to ${GREEN}CMDS${TEXTRESET}. This is a dialog based driven GUI menu system backed by smaller scripts
 to help you get things done efficiently for your Meraki Migration.
@@ -118,6 +118,19 @@ ${GREEN}Batch Cleanup${TEXTRESET}
 Rinse, repeat
 
 EOF
-echo "End of File"
+
+
+
+
+cat << EOF
+
+${GREEN}Features/Additions to 1.0 (01)${TEXTRESET}
+
+Added Nested templates to template deployment
+
+${GREEN}Bug Fixes${TEXTRESET}
+None
+
+EOF
 
 sleep 5
