@@ -6,11 +6,13 @@ YELLOW=$(tput setaf 3)
 GREEN=$(tput setaf 2)
 USER=$(whoami)
 
-items=(1 "Create a Template"
-  2 "Deploy a Template"
-  3 "Show templates"
-  4 "Deploy Linked (Nested) Template"
-  5 "Show Linked (Nested) Template"
+items=(1 "Create a Port Template"
+  2 "Deploy a Port Template"
+  3 "Show Port Templates"
+  4 "Delete a Port Template"
+  5 "Deploy Linked (Nested) Template"
+  6 "Show Linked (Nested) Template"
+  7 "Delete Linked (Nested) Template"
 )
 
 while choice=$(dialog --title "$TITLE" \
@@ -21,8 +23,10 @@ while choice=$(dialog --title "$TITLE" \
   1) /root/.meraki_mig/advanced_template.sh ;;
   2) /root/.meraki_mig/deploy_template.sh | tee -a /root/.meraki_mig/logs/template_deployment.log ;;
   3) /root/.meraki_mig/show_template.sh ;;
-  4) /root/.meraki_mig/deploy_linked_template.sh | tee -a /root/.meraki_mig/logs/template_deployment.log ;;
-  5) /root/.meraki_mig/show_linked_template.sh ;;
+  4) /root/.meraki_mig/delete_port_template.sh ;;
+  5) /root/.meraki_mig/deploy_linked_template.sh | tee -a /root/.meraki_mig/logs/template_deployment.log ;;
+  6) /root/.meraki_mig/show_linked_template.sh ;;
+  7) /root/.meraki_mig/delete_nested_port_template.sh ;;
   esac
 done
 clear # clear after user pressed Cancel
