@@ -33,8 +33,9 @@ The server will want to be prompted in enable mode already (SSH should be enable
 An Example configuration on the switch:
 
 i.e. username ssh_user priv 15 password 0 password
-                line vty 0 4
-                login local
+     ip ssh ver 2
+     line vty 0 4
+     login local
 
 Scenarios may differ in setups. However, it is expected that when the server logs into the switch, it be presented with already
 being in enable mode (i.e. the prompt will look like this: ${GREEN}switch#${TEXTRESET}, not this ${RED}switch>${TEXTRESET}
