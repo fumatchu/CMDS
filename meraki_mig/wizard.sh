@@ -32,11 +32,8 @@ Please keep in mind that it's required to have a privileged user (15) on the swi
 The server will want to be prompted in enable mode already (SSH should be enabled on the switch)
 An Example configuration on the switch:
 
-i.e. username ssh_user priv 15 password password
+i.e. username ssh_user priv 15 password 0 password
                 line vty 0 4
-                login local
-
-                line vty 5 15
                 login local
 
 Scenarios may differ in setups. However, it is expected that when the server logs into the switch, it be presented with already
