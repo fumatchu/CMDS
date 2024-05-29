@@ -68,8 +68,16 @@ while read -r IP; do
 
 done <"$INPUT"
 cat <<EOF
+${GREEN}
 Collection complete
+${TEXTRESET}
+${YELLOW}
+#############################################################################################
+If the IOS-XE version has been met, you may continue to Validate Switch Software/Hardware
+#############################################################################################
+${TEXTRESET}
 Please review the logs at MainMenu --> Logs --> Meraki PreCheck Log
+
 The script will terminate momentarily
 EOF
 sleep 6
