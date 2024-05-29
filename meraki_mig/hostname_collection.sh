@@ -11,7 +11,9 @@ ${GREEN}Hostname Migration${TEXTRESET}
 
 ${YELLOW}
 Did you move the claimed devices from Inventory into the networks you want on your dashboard?
-If you did not, please do so now, otherwise the rest of the deployment will fail
+If you did not, please do so now.
+This can be accomplished by selecting Organization --> Inventory, Search for 9300
+Find the newly enetred devices, select their checkbox, then Change Network Assignment
 ${TEXTRESET}
 EOF
 
