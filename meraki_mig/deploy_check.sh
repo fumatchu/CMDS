@@ -48,6 +48,7 @@ while read -r IP; do
   else
     echo ${RED}"ERROR: An entry on the switch with ip http client source-interface was not found${TEXTRESET}"
     echo "Per the Documentation, Please make sure the switch has this command on the internet facing vlan"
+    echo ${YELLOW}"This can be corrected with Main Menu --> Utilities --> Global command for http client${TEXTRESET}"
     sleep 3
   fi
 
@@ -63,6 +64,7 @@ while read -r IP; do
     echo " "
   else
     echo ${RED}"ERROR: A "name-server" entry  was not found on the switch please add one before continuing ${TEXTRESET}"
+    echo ${YELLOW}"This can be corrected with Main Menu --> Utilities --> Global command for DNS${TEXTRESET}"
     sleep 3
   fi
 
@@ -71,6 +73,7 @@ while read -r IP; do
   STATICNAMESERVER=$(cat /var/lib/tftpboot/${IP}-shipnm | grep 255.255.255.255)
   if [ "$NAMESERVER" = "255.255.255.255" ]; then
     echo ${RED}"ERROR: A "name-server" entry  was not found on the switch please add one before continuing ${TEXTRESET}"
+    echo ${YELLOW}"This can be corrected with Main Menu --> Utilities --> Global command for DNS${TEXTRESET}"
     sleep 3
   else
     echo "${GREEN}No Errors${TEXTRESET}"
