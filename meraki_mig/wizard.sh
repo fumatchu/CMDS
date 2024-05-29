@@ -55,9 +55,9 @@ EOF
 
 read -p "Please provide the user login for the Switch: " USER
 while [ -z "$USER" ]; do
-    echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
-    read -p "Please provide the user login for the Switch: " USER
-  done
+  echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+  read -p "Please provide the user login for the Switch: " USER
+done
 
 cat <<EOF
 ${GREEN}Updating User Credentials${TEXTRESET}
@@ -80,9 +80,9 @@ EOF
 sleep 1
 read -p "Please provide the password for the Switch: " PASS
 while [ -z "$PASS" ]; do
-    echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
-    read -p "Please provide the password for the Switch: " PASS
-  done
+  echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+  read -p "Please provide the password for the Switch: " PASS
+done
 
 cat <<EOF
 ${GREEN}Updating Password Credential${TEXTRESET}
@@ -121,9 +121,9 @@ EOF
 read -p "Please provide your Meraki API Key: " API_KEY
 
 while [ -z "$API_KEY" ]; do
-    echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
-    read -p "Please provide your Meraki API Key: " API_KEY
-  done
+  echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+  read -p "Please provide your Meraki API Key: " API_KEY
+done
 
 #remove the instance of API Key first
 
@@ -172,9 +172,9 @@ ls -al /var/lib/tftpboot/images
 echo " "
 read -p "Please specify the image you would like to use: " IMAGE
 while [ -z "$IMAGE" ]; do
-    echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
-    read -p "Please specify the image you would like to use: " IMAGE
-  done
+  echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+  read -p "Please specify the image you would like to use: " IMAGE
+done
 
 cat <<EOF
 ${GREEN}Updating Preference${TEXTRESET}

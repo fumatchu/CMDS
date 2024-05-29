@@ -7,13 +7,13 @@ USER=$(whoami)
 
 #Checking for user permissions
 if [ "$USER" = "root" ]; then
-echo " "
+  echo " "
 else
   echo ${RED}"This program must be run as root ${TEXTRESET}"
   echo "Exiting"
 fi
 clear
-cat << EOF
+cat <<EOF
 ${GREEN}DHCP Server Management${TEXTRESET}
 ${GREEN}Create DHCP Scope${TEXTRESET}
 EOF
@@ -22,34 +22,34 @@ echo "Please provide the following information to create a new scope for DHCP:"
 
 read -p "Please provide the Network SUBNET to create (i.e. 192.168.25.0): " SUBNETNETWORK
 while [ -z "$SUBNETNETWORK" ]; do
-    echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
-    read -p "Please provide the Network SUBNET to create (i.e. 192.168.25.0): " SUBNETNETWORK
-  done
+  echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+  read -p "Please provide the Network SUBNET to create (i.e. 192.168.25.0): " SUBNETNETWORK
+done
 read -p "Please provide the Network MASK to create (i.e. 255.255.255.0): " DHCPNETMASK
 while [ -z "$DHCPNETMASK" ]; do
-    echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
-    read -p "Please provide the Network MASK to create (i.e. 255.255.255.0): " DHCPNETMASK
-  done
+  echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+  read -p "Please provide the Network MASK to create (i.e. 255.255.255.0): " DHCPNETMASK
+done
 read -p "Please provide the beginning IP address in the lease range: " DHCPBEGIP
 while [ -z "$DHCPBEGIP" ]; do
-    echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
-    read -p "Please provide the beginning IP address in the lease range: " DHCPBEGIP
-  done
+  echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+  read -p "Please provide the beginning IP address in the lease range: " DHCPBEGIP
+done
 read -p "Please provide the ending IP address in the lease range: " DHCPENDIP
 while [ -z "$DHCPENDIP" ]; do
-    echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
-   read -p "Please provide the ending IP address in the lease range: " DHCPENDIP
-  done
+  echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+  read -p "Please provide the ending IP address in the lease range: " DHCPENDIP
+done
 read -p "Please provide the default gateway for clients: " DHCPDEFGW
 while [ -z "$DHCPDEFGW" ]; do
-    echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
-   read -p "Please provide the default gateway for clients: " DHCPDEFGW
-  done
+  echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+  read -p "Please provide the default gateway for clients: " DHCPDEFGW
+done
 read -p "Please provide a description for this subnet: " SUBNETDESC
 while [ -z "$SUBNETDESC" ]; do
-    echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
-   read -p "Please provide a description for this subnet: " SUBNETDESC
-  done
+  echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+  read -p "Please provide a description for this subnet: " SUBNETDESC
+done
 
 cat <<EOF >/root/.servman/DHCPManager/dhcp.tmp
 
@@ -68,18 +68,18 @@ echo "The new configuration has been applied to dhcpd.conf"
 more /etc/dhcp/dhcpd.conf
 
 while true; do
-   read -p "Would you like to restart the DHCP service now? (y/n) " yn
-   case $yn in
-   [yY])
-      systemctl restart dhcpd
-      break
-      ;;
-   [nN])
-      echo exiting...
-      exit
-      ;;
-   *) echo invalid response ;;
-   esac
+  read -p "Would you like to restart the DHCP service now? (y/n) " yn
+  case $yn in
+  [yY])
+    systemctl restart dhcpd
+    break
+    ;;
+  [nN])
+    echo exiting...
+    exit
+    ;;
+  *) echo invalid response ;;
+  esac
 done
 exit
 
