@@ -93,8 +93,11 @@ done <"$INPUT"
 
 cat <<EOF
 IOS-XE Version checking complete
-If minimum Base requirement met, please proceed to Deploy IOS-XE Image to switch
-
+${YELLOW}
+#############################################################################################
+If the minimum Base requirement has been met, please proceed to Deploy IOS-XE Image to switch
+#############################################################################################
+${TEXTRESET}
 Please review the logs at MainMenu --> Logs --> IOS-XE PreCheck Log
 The script will terminate shortly
 EOF
