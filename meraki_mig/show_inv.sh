@@ -22,6 +22,8 @@ The next screen will allow you to select it.
 ${YELLOW}
 After you have claimed your devices, please login to your dashboard and place the inventory
 in the correct networks before proceeding to the next step in the menu (Migrate Hostnames)
+This can be accomplished by selecting Organization --> Inventory, Search for 9300
+Find the newly enetred devices, select their checkbox, then Change Network Assignment
 ${TEXTRESET}
 
 EOF
