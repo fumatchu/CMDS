@@ -11,7 +11,7 @@ ${GREEN}Delete Port Template(s)${TEXTRESET}
 
 ${YELLOW}
 If you have created nested templates, please make sure
-port template you are creating does not affect them
+port template you are deleting does not affect them
 ${TEXTRESET}
 
 Current port templates on the system
