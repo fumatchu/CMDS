@@ -65,10 +65,10 @@ case "$response" in
         echo "Maybe the NetworkName_Description? -i.e. Network_Name_1_24_and_48_Port_Switches_UPLINK_EndUser_AP"
         echo "Something that makes sense to your Organization"
         echo " "
-        read -p "Please provide the name you would like to use to save this linked template: " SAVE_TEMPLATE
+        read -p "Please provide the name you would like to use to save this linked template (no spaces): " SAVE_TEMPLATE
         while [ -z "$SAVE_TEMPLATE" ]; do
                 echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
-                read -p "Please provide the name you would like to use to save this linked template: " SAVE_TEMPLATE
+                read -p "Please provide the name you would like to use to save this linked template (no spaces): " SAVE_TEMPLATE
         done
         echo " "
         echo "Saving the template. It can be viewed under Main Menu --> Template Deployment --> Linked Templates"
