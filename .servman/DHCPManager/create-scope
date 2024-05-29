@@ -21,11 +21,35 @@ EOF
 echo "Please provide the following information to create a new scope for DHCP:"
 
 read -p "Please provide the Network SUBNET to create (i.e. 192.168.25.0): " SUBNETNETWORK
+while [ -z "$SUBNETNETWORK" ]; do
+    echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+    read -p "Please provide the Network SUBNET to create (i.e. 192.168.25.0): " SUBNETNETWORK
+  done
 read -p "Please provide the Network MASK to create (i.e. 255.255.255.0): " DHCPNETMASK
+while [ -z "$DHCPNETMASK" ]; do
+    echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+    read -p "Please provide the Network MASK to create (i.e. 255.255.255.0): " DHCPNETMASK
+  done
 read -p "Please provide the beginning IP address in the lease range: " DHCPBEGIP
+while [ -z "$DHCPBEGIP" ]; do
+    echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+    read -p "Please provide the beginning IP address in the lease range: " DHCPBEGIP
+  done
 read -p "Please provide the ending IP address in the lease range: " DHCPENDIP
+while [ -z "$DHCPENDIP" ]; do
+    echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+   read -p "Please provide the ending IP address in the lease range: " DHCPENDIP
+  done
 read -p "Please provide the default gateway for clients: " DHCPDEFGW
+while [ -z "$DHCPDEFGW" ]; do
+    echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+   read -p "Please provide the default gateway for clients: " DHCPDEFGW
+  done
 read -p "Please provide a description for this subnet: " SUBNETDESC
+while [ -z "$SUBNETDESC" ]; do
+    echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+   read -p "Please provide a description for this subnet: " SUBNETDESC
+  done
 
 cat <<EOF >/root/.servman/DHCPManager/dhcp.tmp
 
