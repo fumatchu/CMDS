@@ -150,9 +150,9 @@ Please review the logs at MainMenu --> Logs --> Meraki Software/Hardware Log
 ${RED}If there are any errors, Please correct before proceeding${TEXTRESET}
 
 ${YELLOW}
-####################################################################################
-After the Errors have been corrected, Please Re-run the Meraki PreCheck Collection
-####################################################################################
+###########################################################################################
+After the Errors have been corrected (if any), Please Re-run the Meraki PreCheck Collection
+###########################################################################################
 ${TEXTRESET}
 
 The script will quit momentarily
