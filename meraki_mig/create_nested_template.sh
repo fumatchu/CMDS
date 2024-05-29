@@ -34,8 +34,13 @@ while [ $_repeat = "Y" ]; do
                 echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
                 read -p "Please provide the template name you would like to run: " TEMPLATE_SELECTION
         done
+        echo " "
         echo ${GREEN}"Adding ${TEMPLATE_SELECTION}"${TEXTRESET}
+        clear
         echo python3 /root/.meraki_mig/templates/active/$TEMPLATE_SELECTION >>/root/.meraki_mig/templates/working.run
+        echo ${GREEN}"Current Port Templates in this nested Template:"${TEXTRESET}
+        more /root/.meraki_mig/templates/working.run | cut -c44-
+        echo " "
 
         # Prompt for repeat
         echo " "
