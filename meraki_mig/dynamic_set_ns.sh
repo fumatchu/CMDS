@@ -35,3 +35,15 @@ if [[ "$REPLY" =~ ^[Yy]$ ]]; then
         sleep 1
         /root/.meraki_mig/dynamic_set_ns.exp
 fi
+cat <<EOF
+
+${YELLOW}
+##########################################################################
+Please re-run the Meraki Pre-Check collection after this script completes
+##########################################################################
+${TEXTRESET}
+
+The script will quit momentarily
+
+EOF
+sleep 5
