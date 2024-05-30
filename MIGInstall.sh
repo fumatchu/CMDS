@@ -419,6 +419,10 @@ mkdir /root/.meraki_mig/templates/linked
 #Create Folder for imported port configurations into templates for pre-existing switches
 mkdir /root/.meraki_mig/templates/already_installed
 
+#Create Switch files to modify for already configured switches
+touch /root/.meraki_mig/templates/already_installed/switch_serials_24.txt
+touch /root/.meraki_mig/templates/already_installed/switch_serials_48.txt
+
 #Bracketed pasting...yuck!
 sed -i '8i set enable-bracketed-paste off' /etc/inputrc
 
