@@ -418,6 +418,8 @@ mkdir /root/.meraki_mig/templates/linked
 
 #Create Folder for imported port configurations into templates for pre-existing switches
 mkdir /root/.meraki_mig/templates/already_installed
+mkdir /root/.meraki_mig/templates/already_installed/active
+mkdir /root/.meraki_mig/templates/already_installed/linked
 
 #Create Switch files to modify for already configured switches
 touch /root/.meraki_mig/templates/already_installed/switch_serials_24.txt
