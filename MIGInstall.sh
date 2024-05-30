@@ -416,6 +416,9 @@ mkdir /root/.meraki_mig/templates/active
 #Create linked folder for linked template option
 mkdir /root/.meraki_mig/templates/linked
 
+#Create Folder for imported port configurations into templates for pre-existing switches
+mkdir /root/.meraki_mig/templates/already_installed
+
 #Bracketed pasting...yuck!
 sed -i '8i set enable-bracketed-paste off' /etc/inputrc
 
