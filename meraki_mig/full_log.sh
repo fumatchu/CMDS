@@ -10,7 +10,7 @@ cat <<EOF
 ${GREEN}Log Search${TEXTRESET}
 EOF
 
-more /root/.meraki_mig/logs/${DATE}.log
+more /root/.meraki_mig/logs/20*.log
 
 cat <<EOF
 #########
