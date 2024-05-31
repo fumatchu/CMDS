@@ -76,6 +76,9 @@ case "$response" in
         cp /root/.meraki_mig/templates/working.run /root/.meraki_mig/templates/linked/${SAVE_TEMPLATE}.py
         sed -i "1i #!/bin/bash" "/root/.meraki_mig/templates/linked/${SAVE_TEMPLATE}.py"
         chmod 700 /root/.meraki_mig/templates/linked/${SAVE_TEMPLATE}.py
+        #Duplicate nested templates for Override Use
+        \cp -r -f /root/.meraki_mig/templates/linked /root/.meraki_mig/templates/already_installed/
+        sed -i 's#/root/.meraki_mig/templates/active#/root/.meraki_mig/templates/already_installed/active#g' /root/.meraki_mig/templates/already_installed/linked/*
         ;;
 *)
 
