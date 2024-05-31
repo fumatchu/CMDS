@@ -14,11 +14,12 @@ items=(1 "Create Port Template"
   6 "Deploy Linked (Nested) Template"
   7 "Show Linked (Nested) Template"
   8 "Delete Linked (Nested) Template"
+  9 "Apply Template(s) to Pre-Existing Switches"
 )
 
 while choice=$(dialog --title "$TITLE" \
   --backtitle "CMDS-Main Menu -->Template Builder" \
-  --menu "Please select" 15 65 3 "${items[@]}" \
+  --menu "Please select" 18 65 3 "${items[@]}" \
   2>&1 >/dev/tty); do
   case $choice in
   1) /root/.meraki_mig/advanced_template.sh ;;
@@ -29,6 +30,7 @@ while choice=$(dialog --title "$TITLE" \
   6) /root/.meraki_mig/deploy_linked_template.sh | tee -a /root/.meraki_mig/logs/template_deployment.log ;;
   7) /root/.meraki_mig/show_linked_template.sh ;;
   8) /root/.meraki_mig/delete_nested_port_template.sh ;;
+  9) /root/.meraki_mig/existing_switch_deployment.sh ;;
   esac
 done
 clear # clear after user pressed Cancel
