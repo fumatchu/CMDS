@@ -21,7 +21,7 @@ while [ $_repeat = "Y" ]; do
         echo " "
         ls /root/.meraki_mig/templates/already_installed/active/*.py | cut -c54-
         echo " "
-        echo "${YELLOW}(Hint, you should be able to copy and paste the filename)"${TEXTRESET}
+        
         read -p "Please provide the template name you would like to run: " TEMPLATE_SELECTION
         while [ -z "$TEMPLATE_SELECTION" ]; do
                 echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"

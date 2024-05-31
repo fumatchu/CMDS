@@ -18,7 +18,7 @@ EOF
 
 ls /root/.meraki_mig/templates/linked/
 echo " "
-echo "${YELLOW}(Hint, you should be able to copy and paste the filename)"${TEXTRESET}
+
 read -p "Please provide the name of the file to inspect for nested templates: " TEMPLATE
 cat << EOF
 

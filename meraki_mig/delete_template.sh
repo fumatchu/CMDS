@@ -28,7 +28,6 @@ _repeat="Y"
 while [ $_repeat = "Y" ]; do
         ls /root/.meraki_mig/templates/active
         echo " "
-        echo "${YELLOW}(Hint, you should be able to copy and paste the filename)"${TEXTRESET}
         read -p "Please provide the template name you would like to run: " TEMPLATE_SELECTION
         echo ${GREEN}"Adding ${TEMPLATE_SELECTION}"${TEXTRESET}
         echo python3 /root/.meraki_mig/templates/active/$TEMPLATE_SELECTION >>/root/.meraki_mig/templates/working.run

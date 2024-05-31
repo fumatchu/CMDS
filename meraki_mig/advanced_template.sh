@@ -205,7 +205,7 @@ Something that makes sense to your organization, but is descriptive
 
 EOF
 
-echo ${YELLOW}"*hint: If you want to use the generated file name, just highlight, copy and paste)"$TEXTRESET
+
 read -p "Please provide a name for this template : " TEMPLATE_NAME
 while [ -z "$TEMPLATE_NAME" ]; do
     echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
