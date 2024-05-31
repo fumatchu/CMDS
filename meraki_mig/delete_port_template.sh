@@ -22,9 +22,13 @@ ls /root/.meraki_mig/templates/active/*.py | cut -c36-
 
 echo " "
 read -p "Please provide the template name you would like to delete: " DELETE_TEMPLATE
-
+echo " "
+echo ${RED}"Deleting ${DELETE_TEMPLATE}"${TEXTRESET}
 rm /root/.meraki_mig/templates/active/${DELETE_TEMPLATE}
 
-echo ${RED}"Deleting ${DELETE_TEMPLATE}"${TEXTRESET}
+#Duplicate the template for Override Use
+\cp -r -f /root/.meraki_mig/templates/active /root/.meraki_mig/templates/already_installed/
+sed -i 's#/root/.meraki_mig/switch_serials_24.txt#/root/.meraki_mig/templates/already_installed/switch_serials_24.txt#g' /root/.meraki_mig/templates/already_installed/active/*
+sed -i 's#/root/.meraki_mig/switch_serials_48.txt#/root/.meraki_mig/templates/already_installed/switch_serials_48.txt#g' /root/.meraki_mig/templates/already_installed/active/*
 
 sleep 2
