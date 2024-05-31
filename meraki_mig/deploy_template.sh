@@ -52,7 +52,6 @@ done
 
 clear
 
-echo ${GREEN}"Save this Set of templates as a Linked Template"${TEXTRESET}
 read -r -p "Would you like to save this template series collection as a linked template for future use? (y/n) " response
 
 case "$response" in
@@ -105,7 +104,6 @@ while true; do
 
                 echo "############################Collection time ${DATE}######################################"
                 echo ${GREEN}"Deploying the Script Now"${TEXTRESET}
-                echo "The screen may look frozen, please be patient"
                 sed -i "1i #!/bin/bash" "/root/.meraki_mig/templates/working.run"
                 chmod 700 /root/.meraki_mig/templates/working.run
                 unbuffer /root/.meraki_mig/templates/working.run
