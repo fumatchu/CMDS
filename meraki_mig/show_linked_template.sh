@@ -20,6 +20,10 @@ ls /root/.meraki_mig/templates/linked/
 echo " "
 echo "${YELLOW}(Hint, you should be able to copy and paste the filename)"${TEXTRESET}
 read -p "Please provide the name of the file to inspect for nested templates: " TEMPLATE
+while [ -z "$TEMPLATE" ]; do
+  echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+  read -p "Please provide the name of the file to inspect for nested templates: " TEMPLATE
+done
 cat << EOF
 
 
