@@ -15,16 +15,16 @@ items=(1 "Deploy Port Template"
 )
 
 while choice=$(dialog --title "$TITLE" \
-  --backtitle "CMDS-Main Menu -->Template Builder" \
+  --backtitle "CMDS-Main Menu -->Template Builder -->Modify Existing Switches in Dashboard" \
   --menu "Please select" 18 65 3 "${items[@]}" \
   2>&1 >/dev/tty); do
   case $choice in
   1) /root/.meraki_mig/deploy_existing_template.sh | tee -a /root/.meraki_mig/logs/template_deployment.log ;;
   2) /root/.meraki_mig/show_template.sh ;;
-  3) /root/.meraki_mig/deploy_linked_template.sh | tee -a /root/.meraki_mig/logs/template_deployment.log ;;
+  3) /root/.meraki_mig/deploy_existing_linked_template.sh | tee -a /root/.meraki_mig/logs/template_deployment.log ;;
   4) /root/.meraki_mig/show_linked_template.sh ;;
   5) nano /root/.meraki_mig/templates/already_installed/switch_serials_24.txt ;;
-  6) nano nano /root/.meraki_mig/templates/already_installed/switch_serials_48.txt ;;
+  6) nano /root/.meraki_mig/templates/already_installed/switch_serials_48.txt ;;
   esac
 done
 clear # clear after user pressed Cancel
