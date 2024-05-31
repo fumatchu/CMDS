@@ -216,6 +216,13 @@ sleep 2
 
 \cp /root/.meraki_mig/templates/working.template /root/.meraki_mig/templates/active/$TEMPLATE_NAME.py
 
+#Duplicate the template for Override Use
+\cp -r -f /root/.meraki_mig/templates/active /root/.meraki_mig/templates/already_installed/
+sed -i 's#/root/.meraki_mig/switch_serials_24.txt#/root/.meraki_mig/templates/already_installed/switch_serials_24.txt#g' /root/.meraki_mig/templates/already_installed/active/*
+sed -i 's#/root/.meraki_mig/switch_serials_48.txt#/root/.meraki_mig/templates/already_installed/switch_serials_48.txt#g' /root/.meraki_mig/templates/already_installed/active/*
+
+
+
 rm -f /root/.meraki_mig/templates/working.template
 rm -f /root/.meraki_mig/templates/name.tmp
 rm -f /root/.meraki_mig/templates/config.tmp
