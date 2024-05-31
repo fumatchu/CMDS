@@ -5,7 +5,7 @@ RED=$(tput setaf 1)
 YELLOW=$(tput setaf 3)
 GREEN=$(tput setaf 2)
 DATE=$(date)
-
+clear
 
 echo "############################Collection time ${DATE}######################################"
 
