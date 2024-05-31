@@ -22,7 +22,7 @@ while choice=$(dialog --title "$TITLE" \
   1) /root/.meraki_mig/deploy_template.sh | tee -a /root/.meraki_mig/logs/template_deployment.log ;;
   2) /root/.meraki_mig/show_existing_template.sh ;;
   3) /root/.meraki_mig/deploy_linked_template.sh | tee -a /root/.meraki_mig/logs/template_deployment.log ;;
-  4) /root/.meraki_mig/show_linked_template.sh ;;
+  4) /root/.meraki_mig/show_linked_existing_template.sh ;;
   5) nano /root/.meraki_mig/templates/already_installed/switch_serials_24.txt ;;
   6) nano nano /root/.meraki_mig/templates/already_installed/switch_serials_48.txt ;;
   esac
