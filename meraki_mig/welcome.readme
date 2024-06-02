@@ -97,6 +97,7 @@ ${GREEN}Template Deployment${TEXTRESET}
                 -Apply either an access port configuration or trunk configuration on the physical ports
                 -Apply a standard nomenclature for the port conventions (i.e. AP_Port or EndUser_Port, etc. etc.)
                 -Take each individual template created, and “link” them together for deployment across the switches that were just imported.
+                -Allow you to specify the Serial numbers for 24 and 48 port switches already provisioned, and apply templates to them
 
 When Templates have been created, they can also be linked. This is the process of taking the created templates and "binding" them together so when you
 deploy the next bacth of switches, you do not have to go through the same template selection, it can just be a grouped, pre-selected, set of templates
