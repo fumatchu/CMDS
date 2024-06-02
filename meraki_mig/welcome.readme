@@ -8,6 +8,18 @@ clear
 cat <<EOF
 ${GREEN}Catalyst to Meraki Deployment Server v1.0(01)${TEXTRESET}
 
+cat << EOF
+
+${GREEN}Features/Additions to 1.0 (01)${TEXTRESET}
+
+Added Nested templates to template deployment
+Added Capability to deploy templates (port or nested) to ANY 24 or 48 port switch in the dashboard 
+
+${GREEN}Bug Fixes${TEXTRESET}
+None
+
+EOF
+
 Welcome to ${GREEN}CMDS${TEXTRESET}. This is a dialog based driven GUI menu system backed by smaller scripts
 to help you get things done efficiently for your Meraki Migration.
 You can start CMDS at any time by typing ${YELLOW}meraki_migration${TEXTRESET} from the terminal.
@@ -120,18 +132,5 @@ Rinse, repeat
 
 EOF
 
-
-
-
-cat << EOF
-
-${GREEN}Features/Additions to 1.0 (01)${TEXTRESET}
-
-Added Nested templates to template deployment
-
-${GREEN}Bug Fixes${TEXTRESET}
-None
-
-EOF
 
 sleep 5
