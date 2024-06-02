@@ -13,7 +13,8 @@ cat << EOF
 ${GREEN}Features/Additions to 1.0 (01)${TEXTRESET}
 
 Added Nested templates to port template deployment
-Added Capability to deploy templates (port or nested) to ANY 24 or 48 port switch in the dashboard 
+Added Capability to deploy templates (port or nested) to ANY (migrated Catalsyt or "regular" Meraki)
+24 or 48 port switch in the dashboard 
 
 ${GREEN}Bug Fixes${TEXTRESET}
 None
