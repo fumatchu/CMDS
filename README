@@ -34,7 +34,9 @@ The Server can be configured with the following capabilities:
     -Provide API integration to claim the devices to the dashboard
     -Migrate hostnames
     -Provide Switch template configurations for the new deployment (assigning designated ports for wireless, cameras, etc) and deploy via API
-    -All of this being able to be scheduled (i.e. IOS-XE images can start at 1 A.M. without any intervention, short of you requesting it, with active and archive logging capabilities)
+    -Modify pre-existing (already registered) Meraki Switches to adhere to port template conversion
+    -Scheduled operations for IOS-XE collection, upgrade, image deployment and meraki switch registration
+     (i.e. IOS-XE images can start at 1 A.M. without any intervention, short of you requesting it, with active and archive logging capabilities)
     -Provide all logging/transaction history 
     -Configuration archival and download
     -Provide documentation of all logging and successful registration with converted Serial Numbers
