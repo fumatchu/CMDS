@@ -7,6 +7,13 @@ Part 2 https://youtu.be/7m1T3dSq6QE
 Deployment Documentation:
 https://docs.google.com/document/d/11V8D7SMiOxh83LpjK7glNaEX1MU6rLAe/edit?usp=sharing&ouid=113942710510622294220&rtpof=true&sd=true
 
+Features/Additions to 1.0 (01)
+
+Added Nested templates to port template deployment
+Added Capability to deploy templates (port or nested) to ANY (migrated Catalsyt or pre-existing MS Meraki)
+24 or 48 port switch in the dashboard 
+
+
 This is an on-premise server platform that is designed to provide a seamless experience for migrating 
 Catalyst 9300 series switches to the Meraki platform with a Dialog based menu system. 
 
