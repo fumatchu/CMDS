@@ -206,10 +206,10 @@ Something that makes sense to your organization, but is descriptive
 EOF
 
 
-read -p "Please provide a name for this template (no spaces) : " TEMPLATE_NAME
+read -p "Please provide a name for this template (no spaces): " TEMPLATE_NAME
 while [ -z "$TEMPLATE_NAME" ]; do
     echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
-    read -p "Please provide a name for this template: " TEMPLATE_NAME
+    read -p "Please provide a name for this template (no speaces): " TEMPLATE_NAME
 done
 echo ${GREEN}"Saving Template"${TEXTRESET}
 sleep 2
