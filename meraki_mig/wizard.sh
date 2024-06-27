@@ -23,7 +23,6 @@ and use the Navigator component on the left hand side
 Once you have uploaded the IOS images, then you must specify the following (via this wizard):
         -The SSH User (to login to the switch)
         -The SSH Password (to login to the switch)
-        -The Server IP of this machine (this is automatic, but you must allow it)
         -The Meraki API Key for Dashboard integration
         -The IOS image you would like to use (must be uploaded first)
         -The IP addresses of the switches to migrate (management IP via VLAN)
