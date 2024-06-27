@@ -19,7 +19,6 @@ Added Capability to deploy templates (port or nested) to ANY (migrated Catalsyt 
 ${GREEN}Bug Fixes${TEXTRESET}
 None
 
-EOF
 
 Welcome to ${GREEN}CMDS${TEXTRESET}. This is a dialog based driven GUI menu system backed by smaller scripts
 to help you get things done efficiently for your Meraki Migration.
