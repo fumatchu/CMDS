@@ -399,11 +399,15 @@ EOF
 
 #Put meraki_migration in the path 
 mv /root/MIGInstaller/meraki_mig /root/.meraki_mig
+#Catalyst Wireless Monitoring
+mv /root/MIGInstaller/meraki_mon_wlc /root/.meraki_mon_wlc
 mkdir /root/.meraki_mig/logs
 mkdir /root/.meraki_mon_wlc/logs
 chmod 700 -R /root/.meraki_mig
 chmod 700 -R /root/.meraki_mon_wlc
 mv /root/.meraki_mig/meraki_migration /usr/sbin/
+
+
 
 #Add DHCP Module
 mv /root/MIGInstaller/.servman /root
