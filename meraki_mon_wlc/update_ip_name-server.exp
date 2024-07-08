@@ -1,0 +1,80 @@
+#!/usr/bin/expect -f
+set timeout -1
+set server_ip 192.168.245.21 
+set switch_user administrator
+set switch_pass Nocompromise75!!
+set nameserver 192.168.240.4
+set image C9800-L-universalk9_wlc.17.12.03.SPA.bin
+set DATE [timestamp -format %Y%m%d]
+log_file /root/.meraki_mon_wlc/logs/$DATE.log
+set fh [open /root/.meraki_mon_wlc/ip_list r]
+set expected_value_user "default_user"
+spawn echo "$switch_user"
+expect -re expect -re "$expected_value_user"
+if { $expect_out(buffer) eq $expected_value_user } {
+  puts "The variable $switch_user is the set default. Did you modify Global Environment Settings?"
+  exit
+} else {
+  puts " "
+}
+
+set expected_value_pass "default_pass"
+spawn echo "$switch_pass"
+expect -re expect -re "$expected_value_pass"
+if { $expect_out(buffer) eq $expected_value_pass } {
+  puts "The variable $switch_pass is the set default. Did you modify Global Environment Settings?"
+  exit
+} else {
+  puts " "
+}
+
+set expected_value_server "default_server"
+spawn echo "$server_ip"
+expect -re expect -re "$expected_value_server"
+if { $expect_out(buffer) eq $expected_value_server } {
+  puts "The variable $server_ip is the set default. Did you modify Global Environment Settings?"
+  exit
+} else {
+  puts " "
+}
+
+set expected_value_ios_image "default_ios_image"
+spawn echo "$image"
+expect -re expect -re "$expected_value_ios_image"
+if { $expect_out(buffer) eq $expected_value_ios_image } {
+  puts "The variable $image is the set default. Did you modify Global Environment Settings?"
+  exit
+} else {
+  puts " "
+}
+
+while {[gets $fh ip] != -1} {
+
+spawn rm /root/.ssh/known_hosts
+spawn clear
+spawn ssh $switch_user@$ip
+expect "])? "
+send -- "yes\r"
+
+expect "Password: "
+send -- "$switch_pass\r"
+expect "*#"
+send -- "logout\r"
+spawn ssh $switch_user@$ip
+expect "Password: "
+send -- "$switch_pass\r"
+expect "*#"
+send "conf t\r"
+expect "*#"
+send -- "file prompt quiet\r"
+expect "*#"
+send -- "ip name-server $nameserver\r"
+expect "*#"
+send -- "ip domain lookup\r"
+expect "*#"
+send -- "file prompt noisy\r"
+expect "*#"
+send -- "do wr\r"
+expect "*#"
+}
+close $fh
