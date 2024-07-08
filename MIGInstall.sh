@@ -377,6 +377,7 @@ pip install requests
 sed -i '/Requires/c\Requires=tftp-server.socket' /etc/systemd/system/tftp-server.service
 sed -i '/ExecStart/c\ExecStart=/usr/sbin/in.tftpd -c -p -s /var/lib/tftpboot' /etc/systemd/system/tftp-server.service
 mkdir /var/lib/tftpboot/images
+mkdir /var/lib/tftpboot/wlc
 
 chmod 777 -R /var/lib/tftpboot
 firewall-cmd --permanent --add-service tftp
