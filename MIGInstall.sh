@@ -400,7 +400,9 @@ EOF
 #Put meraki_migration in the path 
 mv /root/MIGInstaller/meraki_mig /root/.meraki_mig
 mkdir /root/.meraki_mig/logs
+mkdir /root/.meraki_mon_wlc/logs
 chmod 700 -R /root/.meraki_mig
+chmod 700 -R /root/.meraki_mon_wlc
 mv /root/.meraki_mig/meraki_migration /usr/sbin/
 
 #Add DHCP Module
@@ -409,6 +411,7 @@ chmod 700 -R /root/.servman
 
 # Mr. M
 chmod 700 /root/.meraki_mig/.logo
+chmod 700 /root/.meraki_mon_wlc/.logo
 
 #Create Directory for Active Templates
 mkdir /root/.meraki_mig/templates/active
