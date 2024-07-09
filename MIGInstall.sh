@@ -152,7 +152,7 @@ EOF
 fi
 cat <<EOF
 *********************************************
-${GREEN}This will Install CMDS (Catalyst to Meraki Deployment Server) for C9300 series${TEXTRESET}
+${GREEN}This will Install CMDS (Catalyst to Meraki Deployment Server)${TEXTRESET}
 
 Checklist:
 Before the Installer starts, please make sure you have the following information
