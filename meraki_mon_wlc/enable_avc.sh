@@ -13,6 +13,7 @@ This script will validate that you have the correct license level and enable AVC
 
 ${RED}This script WILL BE disruptive to clients as it needs to shutdown wireless profiles for a successful AVC enablement
 APs must REJOIN (Not reboot) to the WLC after the profile update${TEXTRESET}
+
 EOF
 
 read -r -p "Would you like to continue? [y/N]" -n 1
