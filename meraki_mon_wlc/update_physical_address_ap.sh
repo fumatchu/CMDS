@@ -34,7 +34,7 @@ sed -i '32 r /root/.meraki_mon_wlc/address.txt' /root/.meraki_mon_wlc/update_phy
 
 /root/.meraki_mon_wlc/sh_ap_meraki_mon_summ.exp
 
-cat /var/lib/tftpboot/wlc/ap_mon_summ | cat /var/lib/tftpboot/wlc/ap_mon_summ | cut -c108- | cut -c-14 | grep -E -o "Q.{0,13}" >>/root/.meraki_mon_wlc/ap_serials.txt
+cat /var/lib/tftpboot/wlc/ap_mon_summ | cut -c108- | cut -c-14 | grep -E -o "Q.{0,13}" >>/root/.meraki_mon_wlc/ap_serials.txt
 
 clear
 echo "${GREEN}Deploying Script${TEXTRESET}"
