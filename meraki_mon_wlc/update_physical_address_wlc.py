@@ -30,7 +30,7 @@ serial_numbers_file = "wlc_serials.txt"
 with open(serial_numbers_file, "r") as f:
   serial_numbers = [line.strip() for line in f.readlines()]
 
-new_address = "4125 Highlander Pkwy Richfield OH 44286"
+new_address = " "
 # Define new address (replace with your desired address)
 MOVE_MAP_MARKER = True
 UPDATE_LOCATION = True
