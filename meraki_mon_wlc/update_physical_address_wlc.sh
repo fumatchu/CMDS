@@ -59,7 +59,7 @@ while read -r IP; do
   cat /var/lib/tftpboot/wlc/$IP-wlc_mon_summ | grep -E -o "Q.{0,13}" >>/root/.meraki_mon_wlc/wlc_serials.txt
 
 done <"$INPUT"
-
+sleep 2
 python3 /root/.meraki_mon_wlc/update_physical_address_wlc.py
 
 rm -r /root/.meraki_mon_wlc/address.txt
