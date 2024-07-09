@@ -15,8 +15,11 @@ The file directory is located at:
 /var/lib/tftpboot/images
 
 You can accomplish this by uploading the files via SCP and copying them, or you can login to this server at
+EOF
 
-${YELLOW}${SERVER_IP}:9090${TEXTRESET}
+echo "https://$SERVER_IP:9090" | tr -d '[:blank:]'
+
+cat <<EOF
 
 and use the Navigator component on the left hand side
 
