@@ -30,9 +30,10 @@ if [[ "$REPLY" =~ ^[Yy]$ ]]; then
         echo ${YELLOW}"Archiving the logs files"${TEXTRESET}
         mkdir /root/.meraki_mig/logs/"archive-logs-${DATE}"
         mv -v /root/.meraki_mig/logs/*.log /root/.meraki_mig/logs/"archive-logs-${DATE}"/
-        \cp -R /root/.meraki_mig/logs/"archive-logs-${DATE}"/ /root/archive
-        echo ${YELLOW}"Dumping Device information to /root/archive/Catalyst_Meraki_Inventory_${DATE}.log"${TEXTRESET}
-        more /var/lib/tftpboot/*-shmr >>/root/archive/"Catalyst_Meraki_Inventory_${DATE}.log"
+        mkdir /root/archive/c9300_migration
+        \cp -R /root/.meraki_mig/logs/"archive-logs-${DATE}"/ /root/archive/c9300_migration
+        echo ${YELLOW}"Dumping Device information to /root/archive/Catalyst_c9300_Meraki_Inventory_${DATE}.log"${TEXTRESET}
+        more /var/lib/tftpboot/*-shmr >>/root/archive/"Catalyst_c9300_Meraki_Inventory_${DATE}.log"
         echo ${YELLOW}"Moving all Catalyst configs to the root folder"${TEXTRESET}
         find /var/lib/tftpboot/. -name . -o -type d -prune -o -exec sh -c 'mv "$@" "$0"' /root/archive/CatalystConfigurations/ {} +
         rm -f /root/.meraki_mig/switch_serials*
