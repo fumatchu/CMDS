@@ -16,6 +16,10 @@ Validate that the WLC is producing it's IP address information
 (Check this by looking at the network you placed the WLC) 
 Wireless --> Wireless LAN Controller -->List --> The WLC itself
 
+Also, validate that the banner:
+"Onboarding is still in progress for this device."
+Is gone
+
 This provides a confirmation that the config has been synced. 
 If not, you may encounter a failure until this happens
 
