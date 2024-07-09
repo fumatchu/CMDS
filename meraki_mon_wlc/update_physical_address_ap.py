@@ -30,7 +30,7 @@ with open(serial_numbers_file, "r") as f:
   serial_numbers = [line.strip() for line in f.readlines()]
 
 # Define new address (replace with your desired address)
-new_address = "4125 Highlander Pkwy Richfeidl OH 44286"
+new_address = " "
 MOVE_MAP_MARKER = True
 UPDATE_LOCATION = True
 
