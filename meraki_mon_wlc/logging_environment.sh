@@ -15,8 +15,8 @@ while choice=$(dialog --title "$TITLE" \
   --menu "Please select" 15 65 3 "${items[@]}" \
   2>&1 >/dev/tty); do
   case $choice in
-  1) /root/.meraki_mig/log_tail ;;
-  2) /root/.meraki_mig/full_log.sh ;;
+  1) /root/.meraki_mon_wlc/log_tail ;;
+  2) /root/.meraki_mon_wlc/full_log.sh ;;
   esac
 done
 clear # clear after user pressed Cancel
