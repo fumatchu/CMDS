@@ -57,10 +57,10 @@ cat <<EOF
 ${GREEN}Change SSH User Credentials${TEXTRESET}
 EOF
 
-read -p "Please provide the user login for the Switch: " USER
+read -p "Please provide the user login for the WLC: " USER
 while [ -z "$USER" ]; do
   echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
-  read -p "Please provide the user login for the Switch: " USER
+  read -p "Please provide the user login for the WLC: " USER
 done
 
 cat <<EOF
@@ -86,10 +86,10 @@ cat <<EOF
 ${GREEN}Update Password Credential${TEXTRESET}
 EOF
 sleep 1
-read -p "Please provide the password for the Switch: " PASS
+read -p "Please provide the password for the WLC: " PASS
 while [ -z "$PASS" ]; do
   echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
-  read -p "Please provide the password for the Switch: " PASS
+  read -p "Please provide the password for the WLC: " PASS
 done
 
 cat <<EOF
