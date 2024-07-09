@@ -49,7 +49,7 @@ ${GREEN}
 Cleanup Complete!
 ${TEXTRESET}
 
-Please make sure that you update the IP Batch list with new addresses before running a new batch of switches
+Please make sure that you update the IP Batch list with new addresses before running a new batch of WLC's
 
 This can be accomplished by navigating to:
 ${YELLOW}
