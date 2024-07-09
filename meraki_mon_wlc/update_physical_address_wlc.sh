@@ -12,10 +12,13 @@ ${YELLOW}**********BEFORE YOU PROCEED***********${TEXTRESET}
 
 It is suggested that you review the configuration of the WLC and the AP onboarding on the Meraki dashboard. 
 Validate that the WLC is producing it's IP address information 
+
 (Check this by looking at the network you placed the WLC) 
 Wireless --> Wireless LAN Controller -->List --> The WLC itself
+
 This provides a confirmation that the config has been synced. 
 If not, you may encounter a failure until this happens
+
 EOF
 read -p "Press Any Key when you have validated this information is on the dashboard"
 
