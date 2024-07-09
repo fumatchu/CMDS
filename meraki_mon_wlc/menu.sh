@@ -1,5 +1,5 @@
 #!/bin/bash
-#Meraki C9300 Migration Menu
+#Meraki Catalyst Monitoring Migration Menu
 TEXTRESET=$(tput sgr0)
 RED=$(tput setaf 1)
 YELLOW=$(tput setaf 3)
@@ -29,7 +29,7 @@ items=(1 "Data Collection and Clean File System Flash"
 )
 
 while choice=$(dialog --title "$TITLE" \
-  --backtitle "CMDS-->Main Menu" \
+  --backtitle "Catalyst Wireless Monitoring -->CMDS-->Main Menu" \
   --menu "Please select" 30 65 3 "${items[@]}" \
   2>&1 >/dev/tty); do
   case $choice in
