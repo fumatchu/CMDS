@@ -154,9 +154,11 @@ Before continuing, please make sure you have uploaded the (IOS-XE) images you wa
 
 You can either upload these via SCP, or you can use the navigator component, mentioned earlier:
 
-${YELLOW}${SERVER_IP}:9090${TEXTRESET}
-
 EOF
+
+echo "https://$SERVER_IP:9090" | tr -d '[:blank:]'
+
+echo " "
 
 read -p "Press Any Key When Ready"
 clear
