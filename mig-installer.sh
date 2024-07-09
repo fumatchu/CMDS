@@ -73,7 +73,7 @@ cat <<EOF
  5. Provides an (optional) DHCP Server
  6. Provides a tftp collection server
  7. Provides all the scripts to migrate the c9300's
- 8. Provides all the scripts to setup Catalyst Monitoring for c9800's
+ 8. Provides all the scripts to setup Catalyst Monitoring for c9800s
 
  *********************************************
  
