@@ -22,7 +22,7 @@ If not, you may encounter a failure until this happens
 EOF
 read -p "Press Any Key when you have validated this information is on the dashboard"
 
-This will allow you to update Physical Address of the WLC and Move the Map Marker 
+
 cat << EOF
 ${GREEN}Update Physical Address on WLC${TEXTRESET}
 Please provide the Physical address in the correct format:
