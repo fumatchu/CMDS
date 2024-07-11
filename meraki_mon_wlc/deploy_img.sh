@@ -13,7 +13,7 @@ This will deploy an IOS-XE Image to the WLC
 
 If you have a Single WLC in your envrionnment, you can successfully use this script
 
-${YELLOW}If you are in an HA envrionment, currently, the server does not support SSO, or ISSU Upgrades ${TEXTRESET}
+${YELLOW}If you are in an HA environment, currently, the server does not support SSO, or ISSU Upgrades ${TEXTRESET}
 
 It will be available in a future release
 
