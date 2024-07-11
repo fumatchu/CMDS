@@ -378,6 +378,7 @@ sed -i '/Requires/c\Requires=tftp-server.socket' /etc/systemd/system/tftp-server
 sed -i '/ExecStart/c\ExecStart=/usr/sbin/in.tftpd -c -p -s /var/lib/tftpboot' /etc/systemd/system/tftp-server.service
 mkdir /var/lib/tftpboot/images
 mkdir /var/lib/tftpboot/wlc
+mkdir /var/lib/tftpboot/catmon
 
 chmod 777 -R /var/lib/tftpboot
 firewall-cmd --permanent --add-service tftp
@@ -403,6 +404,8 @@ EOF
 mv /root/MIGInstaller/meraki_mig /root/.meraki_mig
 #Catalyst Wireless Monitoring
 mv /root/MIGInstaller/meraki_mon_wlc /root/.meraki_mon_wlc
+#Catalyst Wireless Monitoring
+mv /root/MIGInstaller/meraki_mon_switch /root/.meraki_mon_switch
 mkdir /root/.meraki_mig/logs
 mkdir /root/.meraki_mon_wlc/logs
 chmod 700 -R /root/.meraki_mig
@@ -418,6 +421,7 @@ chmod 700 -R /root/.servman
 # Mr. M
 chmod 700 /root/.meraki_mig/.logo
 chmod 700 /root/.meraki_mon_wlc/.logo
+chmod 700 /root/.meraki_mon_switch/.logo
 
 #Create Directory for Active Templates
 mkdir /root/.meraki_mig/templates/active
