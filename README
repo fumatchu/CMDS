@@ -12,6 +12,7 @@ https://docs.google.com/document/d/11V8D7SMiOxh83LpjK7glNaEX1MU6rLAe/edit?usp=sh
 
 Features/Additions to 1.0 (01)
 
+Added the ability to provision Physical Addresses for the migrated switches 
 Added Nested templates to port template deployment
 Added Capability to deploy templates (port or nested) to ANY (migrated Catalsyt or pre-existing MS Meraki)
 24 or 48 port switch in the dashboard 
