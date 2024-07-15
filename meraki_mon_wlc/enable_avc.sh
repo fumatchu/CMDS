@@ -5,9 +5,11 @@ RED=$(tput setaf 1)
 YELLOW=$(tput setaf 3)
 GREEN=$(tput setaf 2)
 SERVER_IP=$(hostname -I)
+DATE=$(date)
 INPUT="/root/.meraki_mon_wlc/ip_list"
 clear
 cat <<EOF
+echo "############################Collection time ${DATE}######################################"
 ${GREEN}Enable AVC/Telemtry${TEXTRESET}
 This script will validate that you have the correct license level and enable AVC/Telemetry for you
 
