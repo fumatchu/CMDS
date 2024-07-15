@@ -17,12 +17,9 @@ This can be accomplished by selecting Organization --> Inventory, Search for 980
 ${TEXTRESET}
 
 Find the newly entered devices, select their checkbox, then Add to Network
-Proceed to run through the wizard on the Dashboard for WLC placement and AP allocation, 
+Proceed to run through the wizard on the Dashboard for WLC placement and AP allocation,
 Using either single ("flat", allocated network) or leveraging the Site Tags
 Then provide your login credentials for the dashboard.
-
-If you see the banner on the dashboard that the WLC is still onboarding, please wait until
-the Process is complete 
 
 EOF
 
@@ -45,6 +42,7 @@ while read -r IP; do
   echo "$IP"
 
   cat /var/lib/tftpboot/wlc/$IP-wlc_mon_summ | grep -E -o "Q.{0,13}" >>/root/.meraki_mon_wlc/working.tmp
+  sed -i '2d;3d' /root/.meraki_mon_wlc/working.tmp
   sed -i 's/$/,/g' /root/.meraki_mon_wlc/working.tmp
   cat /var/lib/tftpboot/wlc/$IP | grep hostname | cut -c10- >>/root/.meraki_mon_wlc/working.tmp
   awk '{if(NR%2==0) {print var,$0} else {var=$0}}' /root/.meraki_mon_wlc/working.tmp >>/root/.meraki_mon_wlc/hostnames.txt
