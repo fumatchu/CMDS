@@ -43,7 +43,7 @@ while choice=$(dialog --title "$TITLE" \
   8) /root/.meraki_mon_wlc/hostname_wlc_collection.sh ;;
   9) /root/.meraki_mon_wlc/update_physical_address_wlc.sh | tee -a /root/.meraki_mon_wlc/logs/physical_address.log ;;
  10) /root/.meraki_mon_wlc/ap_phy_update.sh  | tee -a /root/.meraki_mon_wlc/logs/physical_address.log ;;
- 11) clear & /root/.meraki_mon_wlc/enable_avc.sh | tee -a /root/.meraki_mon_wlc/logs/avc_enable.log ;; ;;
+ 11) clear & /root/.meraki_mon_wlc/enable_avc.sh | tee -a /root/.meraki_mon_wlc/logs/avc_enable.log ;;
  12) clear & /root/.meraki_mon_wlc/sh_wlc_meraki_mon_summ.sh ;;
  13) clear & /root/.meraki_mon_wlc/sh_ap_meraki_mon_summ.sh ;;
  14) /root/.meraki_mon_wlc/batch_clean.sh ;;
