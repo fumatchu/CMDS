@@ -38,12 +38,12 @@ while choice=$(dialog --title "$TITLE" \
   3) clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mon_wlc/deploy.exp ;;
   4) clear ;;
   5) clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mon_wlc/check_baseline_wlc.sh | tee -a /root/.meraki_mon_wlc/logs/pre_check_deployment.log ;;
-  6) clear & /root/.meraki_mon_wlc/register_wlc_2_cloud.sh ;;
+  6) clear & /root/.meraki_mon_wlc/register_wlc_2_cloud.sh | tee -a /root/.meraki_mon_wlc/logs/device_registration.log ;;
   7) /root/.meraki_mon_wlc/claim_devices.sh ;;
   8) /root/.meraki_mon_wlc/hostname_wlc_collection.sh ;;
-  9) /root/.meraki_mon_wlc/update_physical_address_wlc.sh ;;
- 10) /root/.meraki_mon_wlc/ap_phy_update.sh ;;
- 11) clear & /root/.meraki_mon_wlc/enable_avc.sh ;;
+  9) /root/.meraki_mon_wlc/update_physical_address_wlc.sh | tee -a /root/.meraki_mon_wlc/logs/physical_address.log ;;
+ 10) /root/.meraki_mon_wlc/ap_phy_update.sh  | tee -a /root/.meraki_mon_wlc/logs/physical_address.log ;;
+ 11) clear & /root/.meraki_mon_wlc/enable_avc.sh | tee -a /root/.meraki_mon_wlc/logs/avc_enable.log ;; ;;
  12) clear & /root/.meraki_mon_wlc/sh_wlc_meraki_mon_summ.sh ;;
  13) clear & /root/.meraki_mon_wlc/sh_ap_meraki_mon_summ.sh ;;
  14) /root/.meraki_mon_wlc/batch_clean.sh ;;
