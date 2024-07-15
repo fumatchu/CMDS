@@ -7,7 +7,7 @@ GREEN=$(tput setaf 2)
 SERVERIP=$(hostname -I)
 
 items=(1 "Catalyst Migration for c9300 Series Switches"
-  2 "Catalyst Monitoring for Wireless"
+  2 "Catalyst Monitoring for Wireless (Coming Soon!)"
 )
 
 while choice=$(dialog --title "$TITLE" \
@@ -16,7 +16,7 @@ while choice=$(dialog --title "$TITLE" \
   2>&1 >/dev/tty); do
   case $choice in
   1) clear & /root/.meraki_mig/menu.sh ;;
-  2) clear & /root/.meraki_mon_wlc/menu.sh ;;
+  2) clear ;;
 esac
 done
 clear # clear after user pressed Cancel
