@@ -21,6 +21,9 @@ Proceed to run through the wizard on the Dashboard for WLC placement and AP allo
 Using either single ("flat", allocated network) or leveraging the Site Tags
 Then provide your login credentials for the dashboard.
 
+If you see the banner on the dashboard that the WLC is still onboarding, please wait until
+the Process is complete 
+
 EOF
 
 read -p "Press any key to confirm you have made that change, and the migration will continue"
