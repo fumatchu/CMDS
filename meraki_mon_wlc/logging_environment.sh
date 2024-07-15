@@ -8,6 +8,7 @@ USER=$(whoami)
 
 items=(1 "Active Logging"
   2 "Show Full Log"
+  3 "WLC Monitoring Setup Log"
 )
 
 while choice=$(dialog --title "$TITLE" \
@@ -17,6 +18,7 @@ while choice=$(dialog --title "$TITLE" \
   case $choice in
   1) /root/.meraki_mon_wlc/log_tail ;;
   2) /root/.meraki_mon_wlc/full_log.sh ;;
+  3) /root/.meraki_mon_wlc/pre_check_log.sh ;;
   esac
 done
 clear # clear after user pressed Cancel
