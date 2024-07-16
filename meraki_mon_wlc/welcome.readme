@@ -1,0 +1,134 @@
+#!/bin/bash
+TEXTRESET=$(tput sgr0)
+RED=$(tput setaf 1)
+YELLOW=$(tput setaf 3)
+GREEN=$(tput setaf 2)
+
+clear
+cat <<EOF
+${GREEN}Catalyst to Meraki Deployment Server v1.0(01)${TEXTRESET}
+
+cat << EOF
+
+${GREEN}Features/Additions to 1.0 (01)${TEXTRESET}
+
+Added Nested templates to port template deployment
+Added Capability to deploy templates (port or nested) to ANY (migrated Catalsyt or "regular" Meraki)
+24 or 48 port switch in the dashboard 
+
+Introduced Catalyst Monitoring for Wireless
+
+${GREEN}Bug Fixes${TEXTRESET}
+None
+
+
+Welcome to ${GREEN}CMDS${TEXTRESET}. This is a dialog based driven GUI menu system backed by smaller scripts
+to help you get things done efficiently for your Meraki Migration/Catalyst Monitoring setup.
+You can start CMDS at any time by typing ${YELLOW}meraki_migration${TEXTRESET} from the terminal.
+
+
+
+Setting up your WLC for Monitoring is simple. You will first run the Setup Wizard from the main menu.
+
+
+${GREEN}Setup Wizard${TEXTRESET}
+
+The setup wizard will walk you through a fresh install of a CMDS server. It will prompt you for the following information:
+        -SSH Username (must be Priv 15)
+        -SSH Password
+        -Sets the IP address of the CMDS for TFTP
+        -Prompts for the Meraki API Key
+        -Prompts for the IP addresses of the WLC (Batch) to migrate (one per line, no crriage returns)
+        -Prompts you to upload (at a minimum) (1) IOS-XE image
+        -This can be accomplished by SCP, or using the Navigator component in cockpit that is running at the (IP address of the server):9090
+
+After the Setup wizard completes, you are ready to start the process of monitoring your WLC
+The steps are as follows
+
+${GREEN}Data Collection and Clean File System Flash${TEXTRESET}
+        -This is the First operational step.
+        -CMDS will login to the WLC via the IP address provided and collect the earlier mentioned data.
+        -It will then run the remove install active command on the WLC
+
+${GREEN}IOS-XE Precheck${TEXTRESET}
+        -This is the next step after Data Collection. CMDS will evaluate the Versions and provide capabilities on if the Version is compatible.
+        -It will also make suggestion on IOS-XE versions if needed to achieve version 17.12.03
+
+${GREEN}Deploy IOS-XE image to WLC${TEXTRESET}
+        -Deploys the uploaded IOS-XE and Chosen IOS-XE image to the batch
+
+${GREEN}Install the IOS-XE Update${TEXTRESET}
+        -Connects to the WLC and runs the command “activate commit prompt-level none”
+        -Looks for the WLC response of “*Finished Commit*” and disconnects
+
+${YELLOW}Steps Above may need to be executed multiples times to get to the desired image of 17.12.03 (the approved version to monitor WLC/IOS-XE to Meraki${TEXTRESET}
+
+
+Next we start the Meraki/Catalyst Monitoring components
+
+
+${GREEN}Meraki Precheck Collection${TEXTRESET}
+        -Runs the “show Meraki compatibility”, collects additional metrics and stores them for the validate software hardware option.
+        -Also validates the running IOS-XE version for migration, assessed by CMDS
+
+${GREEN}Validate Software${TEXTRESET}
+        -Does the WLC have a DNS entry? (Static or Dynamic)
+        -Does the IOS-XE version match?
+        -Is the WLC in INSTALL mode?
+        -Is NTP active on the WLC and is it syncronized?
+        -Is aaa-new model in the config?
+
+All requirements must be met (there are no red warnings). If there are the admin must correct these issues first, then re-run the Meraki PreCheck
+After the Precheck has been re-run, we must validate the configuration again (so Meraki PreCheck, then Validation- again)
+Then we continue with:
+
+${GREEN}Register Catalyst WLC to Meraki Dashboard${TEXTRESET}
+        -Runs the command service meraki register
+        -Collects the serial numbers and stores them locally and historically
+
+
+${GREEN}Claim WLC to Organization${TEXTRESET}
+        -Calls the Meraki API to take the stored serial numbers, allow you to choose the Org (If more than one)
+        -Registers these devices to the ORG under the associated API
+
+${YELLOW}After you have claimed the devices to Inventory, You must move these devices to an active Network ${TEXTRESET}
+         Please see the details of these rquirements at:
+         https://documentation.meraki.com/Cloud_Monitoring_for_Catalyst/Onboarding/Adding_Catalyst_9800_Wireless_Controller_and_Access_Points_to_Dashboard
+                                                                                                         
+
+${GREEN}Migrate Hostnames${TEXTRESET}
+        -Takes the pre-existing WLC name from Catalyst config and uses the serial number to update the batch with the appropriate hostnames (SSO)
+
+${GREEN}Update Physical Address${TEXTRESET}
+        -When deploying new equipment in a network, the server has the capability to update the Physical address of the WLC and APs.
+        -The server allows you to update the physical address in the following ways:
+                -Update the Physical Address of the WLC 
+                -Update ALL APs with the same physcial address
+                -Update SOME APs with a physcial address and others with a separate physical address
+                      -The Server will create an Excel sheet of registered APs in a CSV format for you to download
+                      -You can then take that spreadsheet, pick and choose Serial numbers, and "import them back" with updated address 
+                                                                                                      
+${GREEN}Enable AVC${TEXTRESET}
+        -Checks that the WLC has a license level of DNA-A
+        -Creates flow exporters
+        -Collects the profiles from the WLC and then updates each profile to Best practice for AVC and telemtry collection
+                
+
+${GREEN}Batch Cleanup${TEXTRESET}
+        -Creates an archive in the root directory for historical purposes
+        -Archives all expect script transaction between CMDS and the switch
+        -Archive all the validation scripts
+                -IOS-XE precheck
+                -Meraki Precheck
+                -Software/Hardware configuration validation
+                -Archives all template deployments/Physical Address Updates (for historical purposes)
+                -Archive all the migrated Meraki serial numbers to a separate log for housekeeping
+        -Resets the IP addresses in the Batch file
+                - Add a New list of of IP addresses to the batch (MainMenu-->Global Environment Settings-->Update Batch IP Address(es)
+
+Rinse, repeat
+
+EOF
+
+
+sleep 5
