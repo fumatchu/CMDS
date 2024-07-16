@@ -52,7 +52,7 @@ while choice=$(dialog --title "$TITLE" \
  17) /root/.meraki_mon_wlc/logging_environment.sh ;;
  18) /root/.meraki_mon_wlc/utilities.sh ;;
  19) /root/.meraki_mon_wlc/setup_wizard.sh ;;
- 20) /root/.meraki_mig/welcome.readme | more ;;
+ 20) /root/.meraki_mon_wlc/welcome.readme | more ;;
   esac
 done
 clear # clear after user pressed Cancel
