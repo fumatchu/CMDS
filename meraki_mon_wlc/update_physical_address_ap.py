@@ -25,7 +25,7 @@ def update_device_address(serial, new_address, MOVE_MAP_MARKER, UPDATE_LOCATION)
     print(f"Error updating device {serial}: {e}")
 
 # Load list of serial numbers from a file (modify as needed)
-serial_numbers_file = "ap_serials.txt"
+serial_numbers_file = "/root/.meraki_mon_wlc/ap_serials.txt"
 with open(serial_numbers_file, "r") as f:
   serial_numbers = [line.strip() for line in f.readlines()]
 
