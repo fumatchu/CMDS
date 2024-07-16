@@ -28,7 +28,18 @@ You can start CMDS at any time by typing ${YELLOW}meraki_migration${TEXTRESET} f
 
 
 
-Setting up your WLC for Monitoring is simple. You will first run the Setup Wizard from the main menu.
+${YELLOW}BEFORE YOU START:${TEXTRESET}
+
+At the time of this documentation, please make sure you have the following enabled in Early Access on the dashboard:
+Cloud Monitoring for Catalyst Wireless
+
+${RED}WLC environments wildy vary depending on the setup. This server will support SSO environments in 17.5 or higher, for IOS-XE upgrades. 
+If you version is earlier than 17,5 on the WLC, you may consider using the GUI. Software development for the WLC has matured, with ISSU and SMU. 
+However, in some earlier versions, there was manual intervention needed. Take heed as you progress if you are on an earlier version of code.${TEXTRESET}
+
+
+Setting up your WLC for Monitoring is simple.
+You will first run the Setup Wizard from the main menu.
 
 
 ${GREEN}Setup Wizard${TEXTRESET}
