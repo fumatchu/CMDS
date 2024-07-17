@@ -32,7 +32,7 @@ The Server can be configured with the following capabilities:
   -An (Optional) Caching name server to service the switches (for DNS resolution)
   -A TFTP server for switch config collection (mandatory)
    
-  -A Set of scripts to allow you to do the following:
+  -A Set of scripts to allow you to do the following (For C9300 migration to Meraki):
     -Harvest the switches (for analysis)
     -Clean the File System on the switch (remove inactive files)
     -Validate the Version of IOS-XE running on the switch platform (16.6.2 upgrade path to 16.12, oneshot to 17.09.03m3)
@@ -53,6 +53,33 @@ The Server can be configured with the following capabilities:
     -Provide all logging/transaction history 
     -Configuration archival and download
     -Provide documentation of all logging and successful registration with converted Serial Numbers
+
+ -A Set of scripts to allow you to do the following (For Catalyst Monitoring deployment- Wireless):
+    -Harvest the WLC (for analysis)
+      -Support Single and SSO Mode for onboarding
+    -Clean the File System on the WLC (remove inactive files)
+    -Validate the Version of IOS-XE running on the WLC
+    -Deploy these (IOS-XE) changes for you
+    -Deploy the upgrades on the WLC
+    -Validate software configurations on the WLC
+      -All the current requirements
+      -NTP 
+      -aaa new-model
+      -AVC (If DNA-A)
+      -DNS Lookup and ip name-server
+
+    -If there are any deltas in the configurations, provide guidance to put them into compliance
+    -The server will then deploy these changes for you (If needed)
+    -Deploy the WLC (or SSO WLC) to be registered with the Meraki Cloud
+    -Provide API integration to claim the devices to the dashboard
+    -Migrate hostnames
+    -Update Physical Address of the WLC and AP
+    -Create an Inventory CSV to download if updating physical addresses over multiple locations (for AP) and updating the Serials chosen 
+    -Deploy Control Flow and update Wireless Profiles for client tracking and ip nbar
+    -Provide all logging/transaction history 
+    -Configuration archival and download
+    -Provide documentation of all logging and successful registration with converted Serial Number
+
 
 Installing- 
 The requirements for installing are the following:
