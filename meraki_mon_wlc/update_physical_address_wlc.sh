@@ -6,27 +6,6 @@ YELLOW=$(tput setaf 3)
 GREEN=$(tput setaf 2)
 
 clear
-cat <<EOF
-
-${YELLOW}**********BEFORE YOU PROCEED***********${TEXTRESET}
-
-It is suggested that you review the configuration of the WLC and the AP onboarding on the Meraki dashboard. 
-Validate that the WLC is producing it's IP address information 
-
-(Check this by looking at the network you placed the WLC) 
-Wireless --> Wireless LAN Controller -->List --> The WLC itself
-
-Also, validate that the banner:
-"Onboarding is still in progress for this device."
-Is gone
-
-This provides a confirmation that the config has been synced. 
-If not, you may encounter a failure until this happens
-
-EOF
-read -p "Press Any Key when you have validated this information is on the dashboard"
-
-clear
 cat << EOF
 ${GREEN}Update Physical Address on WLC${TEXTRESET}
 Please provide the Physical address in the correct format:
