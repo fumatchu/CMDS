@@ -21,6 +21,8 @@ Added Capability to deploy templates (port or nested) to ANY (migrated Catalsyt 
 This is an on-premise server platform that is designed to provide a seamless experience for migrating 
 Catalyst 9300 series switches to the Meraki platform with a Dialog based menu system. 
 
+This server will also setup and deploy pre-existing WLC's in an environment for Catalyst Wireless Monitoring (Onboarding, Physical address update, AVC) 
+
 The server is built upon Rocky Linux and is script based. It makes this a portable solution across 
 any hypervisor that will support Rocky linux, on multiple architectures. 
 
