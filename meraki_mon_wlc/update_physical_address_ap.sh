@@ -10,6 +10,11 @@ cat <<EOF
 ${GREEN}Update Physical Address on AP${TEXTRESET}
 This will allow you to update Physical Address of the AP and Move the Map Marker 
 
+Please make sure that the AP's you want to modify are actively registered to the WLC. 
+If you have any question, you can select the option:
+${YELLOW}Main Menu --> Check AP Registration to Cloud ${TEXTRESET}
+for the Current List of AP's
+
 Please provide the Physical address in the correct format:
 (i.e. 123 AnyStreet St. City State ZIP)
 
