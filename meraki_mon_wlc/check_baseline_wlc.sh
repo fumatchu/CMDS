@@ -81,6 +81,31 @@ while read -r IP; do
   # Print the IP address to the console
   echo "$IP"
 
+  #Remnants of an old mmonitoring install?
+  echo "Making sure meraki user does not exist"
+  MERAKI_USER=$(cat /var/lib/tftpboot/wlc/${IP} | grep username | grep meraki)
+  if [ "$MERAKI_USER" = "" ]; then
+    echo "${GREEN}No Meraki User found${TEXTRESET}"
+    echo " "
+  else
+    echo ${RED}"ERROR: Found an instance of Meraki User in the username DB on the WLC. This must be resolved before proceeding${TEXTRESET}"
+    echo "The usernames meraki-user and meraki-tdluser cannot pre-exist on the WLC when onboarding for Catalyst management"
+    echo ${RED}"Exiting...${TEXTRESET}"
+    sleep 10
+    exit
+  fi
+  #cat <<EOF
+
+  #EOF
+done <"$INPUT"
+
+
+
+# Read file line-by-line to get an IP address
+while read -r IP; do
+  # Print the IP address to the console
+  echo "$IP"
+
   #NTP Sync?
   echo "Checking NTP"
   NTP=$(cat /var/lib/tftpboot/wlc/${IP}-ntpsta | grep synchronized | sed -e 's/,.*$//' | cut -c10-)
