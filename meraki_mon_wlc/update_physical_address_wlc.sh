@@ -24,7 +24,8 @@ ${GREEN}Updating the WLC Physical address with: ${ADDR} ${TEXTRESET}
 
 EOF
 sleep 1
-
+/root/.meraki_mon_wlc/sh_wlc_meraki_mon_summ.exp
+clear
 sed -i '0,/new_address = /{/new_address = /d;}' /root/.meraki_mon_wlc/update_physical_address_wlc.py
 echo new_address = "\"${ADDR}\"" >/root/.meraki_mon_wlc/address.txt
 sed -i '32 r /root/.meraki_mon_wlc/address.txt' /root/.meraki_mon_wlc/update_physical_address_wlc.py
