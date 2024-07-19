@@ -8,7 +8,7 @@ GREEN=$(tput setaf 2)
 clear
 
 cat <<EOF
-${GREEN}Update Physical Address on AP${TEXTRESET}
+${GREEN}Update Physical Address on Selective AP${TEXTRESET}
 
 This will allow you to update Physical Address of the AP(s) and Move the Map Marker 
 
