@@ -72,7 +72,7 @@ ${GREEN}Install the IOS-XE Update${TEXTRESET}
         -Connects to the WLC and runs the command “activate commit prompt-level none”
         -Looks for the WLC response of “*Finished Commit*” and disconnects
 
-${YELLOW}Steps Above may need to be executed multiples times to get to the desired image of 17.12.03 (the approved version to monitor WLC/IOS-XE to Meraki${TEXTRESET}
+${YELLOW}Steps Above may need to be executed multiple times to get to the desired image of 17.12.03 (the approved version to monitor WLC/IOS-XE to Meraki)${TEXTRESET}
 
 
 Next we start the Meraki/Catalyst Monitoring components
