@@ -65,6 +65,7 @@ The Server can be configured with the following capabilities:
     -Deploy the upgrades on the WLC
     -Validate software configurations on the WLC
       -All the current requirements
+      -Validate the WLC does not have a pre-existing configuration for Monitoring
       -NTP 
       -aaa new-model
       -AVC (If DNA-A)
@@ -74,7 +75,6 @@ The Server can be configured with the following capabilities:
     -The server will then deploy these changes for you (If needed)
     -Deploy the WLC (or SSO WLC) to be registered with the Meraki Cloud
     -Provide API integration to claim the devices to the dashboard
-    -Migrate hostnames
     -Update Physical Address of the WLC and AP
     -Create an Inventory CSV to download if updating physical addresses over multiple locations (for AP) and updating the Serials chosen 
     -Deploy Control Flow and update Wireless Profiles for client tracking and ip nbar
