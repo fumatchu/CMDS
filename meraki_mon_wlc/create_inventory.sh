@@ -13,7 +13,7 @@ This will allow you to download the Whole AP inventory to csv and update AP addr
 EOF
 
 read -p "Press Any Key to Continue"
-
+clear
 echo "Creating the CSV File"
 sleep 1
 
