@@ -34,7 +34,7 @@ At the time of this documentation, please make sure you have the following enabl
 Cloud Monitoring for Catalyst Wireless
 
 ${RED}WLC environments wildy vary depending on the setup. This server will support SSO environments in 17.5 or higher, for IOS-XE upgrades. 
-If you version is earlier than 17,5 on the WLC, you may consider using the GUI. Software development for the WLC has matured, with ISSU and SMU. 
+If your version is earlier than 17.5 on the WLC, you may consider using the GUI. Software development for the WLC has matured, with ISSU and SMU. 
 However, in some earlier versions, there was manual intervention needed. Take heed as you progress if you are on an earlier version of code.${TEXTRESET}
 
 
