@@ -8,6 +8,14 @@ GREEN=$(tput setaf 2)
 clear
 cat << EOF
 ${GREEN}Update Physical Address on WLC${TEXTRESET}
+
+This will allow you to update Physical Address of the AP and Move the Map Marker 
+
+${YELLOW}
+Please make sure that you have moved the WLC from the general inventory 
+to the sleected network you would like to deploy.
+${TEXTRESET}
+
 Please provide the Physical address in the correct format:
 (i.e. 123 AnyStreet St. City State ZIP)
 
