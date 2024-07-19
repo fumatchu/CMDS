@@ -11,7 +11,14 @@ ${GREEN}Setup Wizard${TEXTRESET}
 
 This Wizard will allow you to configure this server for IOS-XE deployment and Meraki Registration of your WLC
 You must upload the IOS-XE image(s) that you need into the images directory of this tftp server.
-The file directory is located at:
+
+As of now, the required IOS-XE image to use is:
+${YELLOW}17.12.3${TEXTRESET}
+
+And can be obtained at:
+https://software.cisco.com/download/home/286322524
+
+The file directory on this server is located at:
 
 /var/lib/tftpboot/images
 
