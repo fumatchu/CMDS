@@ -107,8 +107,6 @@ ${YELLOW}After you have claimed the devices to Inventory, You must move these de
          https://documentation.meraki.com/Cloud_Monitoring_for_Catalyst/Onboarding/Adding_Catalyst_9800_Wireless_Controller_and_Access_Points_to_Dashboard
                                                                                                          
 
-${GREEN}Migrate Hostnames${TEXTRESET}
-        -Takes the pre-existing WLC name from Catalyst config and uses the serial number to update the batch with the appropriate hostnames (SSO)
 
 ${GREEN}Update Physical Address${TEXTRESET}
         -When deploying new equipment in a network, the server has the capability to update the Physical address of the WLC and APs.
