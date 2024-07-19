@@ -37,6 +37,8 @@ ${RED}WLC environments wildy vary depending on the setup. This server will suppo
 If your version is earlier than 17.5 on the WLC, you may consider using the GUI. Software development for the WLC has matured, with ISSU and SMU. 
 However, in some earlier versions, there was manual intervention needed. Take heed as you progress if you are on an earlier version of code.${TEXTRESET}
 
+Please review the requirements for AP placement and network creation at the following link:
+https://documentation.meraki.com/Cloud_Monitoring_for_Catalyst/Onboarding/Adding_Catalyst_9800_Wireless_Controller_and_Access_Points_to_Dashboard
 
 Setting up your WLC for Monitoring is simple.
 You will first run the Setup Wizard from the main menu.
