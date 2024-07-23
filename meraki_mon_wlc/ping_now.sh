@@ -7,7 +7,7 @@ GREEN=$(tput setaf 2)
 DATE=$(date "+%Y%m%d")
 clear
 cat <<EOF
-${GREEN}Ping Sweep Switches${TEXTRESET}
+${GREEN}Ping Sweep WLC${TEXTRESET}
 
 It is suggested that you open a separate terminal to the server and run this option
 EOF
