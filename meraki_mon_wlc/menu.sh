@@ -49,7 +49,7 @@ while choice=$(dialog --title "$TITLE" \
  15) /root/.meraki_mon_wlc/global_environment.sh ;;
  16) /root/.meraki_mon_wlc/logging_environment.sh ;;
  17) /root/.meraki_mon_wlc/utilities.sh ;;
- 18) /root/.meraki_mon_wlc/setup_wizard.sh ;;
+ 18) clear & /root/.meraki_mon_wlc/setup_wizard.sh ;;
  19) /root/.meraki_mon_wlc/welcome.readme | more ;;
   esac
 done
