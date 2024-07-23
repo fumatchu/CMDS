@@ -6,7 +6,7 @@ YELLOW=$(tput setaf 3)
 GREEN=$(tput setaf 2)
 USER=$(whoami)
 
-items=(1 "Ping Sweep Active Switches"
+items=(1 "Ping Sweep Active WLC(s)"
   2 "Monitor TFTP "
   3 "Deploy Global command for DNS"
   4 "Deploy Remove and Update NTP"
