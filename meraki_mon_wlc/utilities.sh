@@ -10,9 +10,9 @@ items=(1 "Ping Sweep Active WLC(s)"
   2 "Monitor TFTP "
   3 "Deploy Global command for DNS"
   4 "Deploy Remove and Update NTP"
-  4 "Deploy aaa new-model update"
-  5 "DHCP Server"
-  6 "Factory Default"
+  5 "Deploy aaa new-model update"
+  6 "DHCP Server"
+  7 "Factory Default"
 )
 
 while choice=$(dialog --title "$TITLE" \
