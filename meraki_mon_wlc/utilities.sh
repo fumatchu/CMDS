@@ -11,8 +11,7 @@ items=(1 "Ping Sweep Active WLC(s)"
   3 "Deploy Global command for DNS"
   4 "Deploy Remove and Update NTP"
   5 "Deploy aaa new-model update"
-  6 "DHCP Server"
- 
+  6 "DHCP Server" 
 )
 
 while choice=$(dialog --title "$TITLE" \
@@ -25,8 +24,7 @@ while choice=$(dialog --title "$TITLE" \
   3) clear & /root/.meraki_mon_wlc/update_ip_name-server.sh ;;
   4) clear & /root/.meraki_mon_wlc/update_ntp_server.sh ;;
   5) clear & /root/.meraki_mon_wlc/update_aaa_config.sh ;;
-  6) clear & /root/.servman/DHCPMan ;;
-  
+  6) clear & /root/.servman/DHCPMan ;;  
   esac
 done
 clear # clear after user pressed Cancel
