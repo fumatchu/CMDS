@@ -23,8 +23,9 @@ items=(1 "Data Collection and Clean File System Flash"
  15 "Global Environment Settings"
  16 "Logs"
  17 "Utilities"
- 18 "Setup Wizard"
- 19 "Welcome to CMDS-Catalyst Wireless Monitoring"
+ 18 "Scheduler"
+ 19 "Setup Wizard"
+ 20 "Welcome to CMDS-Catalyst Wireless Monitoring"
 )
 
 while choice=$(dialog --title "$TITLE" \
@@ -49,8 +50,9 @@ while choice=$(dialog --title "$TITLE" \
  15) clear & /root/.meraki_mon_wlc/global_environment.sh ;;
  16) clear & /root/.meraki_mon_wlc/logging_environment.sh ;;
  17) clear & /root/.meraki_mon_wlc/utilities.sh ;;
- 18) clear & /root/.meraki_mon_wlc/setup_wizard.sh ;;
- 19) clear & /root/.meraki_mon_wlc/welcome.readme | more ;;
+ 18) clear & /root/.meraki_mon_wlc/schedule.sh ;;
+ 19) clear & /root/.meraki_mon_wlc/setup_wizard.sh ;;
+ 20) clear & /root/.meraki_mon_wlc/welcome.readme | more ;;
   esac
 done
 clear # clear after user pressed Cancel
