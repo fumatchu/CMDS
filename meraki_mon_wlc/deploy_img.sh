@@ -18,14 +18,14 @@ ${YELLOW}If you are in an HA environment, The minimum version to upgrade is 17.5
 If your WLC Code is below 17.5, you must use the GUI on the WLC to peform your Upgrade, first.
 When you get to >17.5, you may use the server to upgrade to 17.12
 
+
+${GREEN}Current Version of IOS-XE on the WLC(s) ${TEXTRESET}
 EOF
 while read -r IP; do
   # Print the IP address to the console
   echo "$IP"
 
 VERSIONFULL=$(cat /var/lib/tftpboot/wlc/${IP}-shver | grep "Cisco IOS XE Software, Version")
- echo " "
- ${GREEN} Current Version of IOS-XE on the WLC(s) ${TEXTRESET}
   echo " "
   echo "The Version is:"
   echo "${YELLOW}${VERSIONFULL}${TEXTRESET}"
