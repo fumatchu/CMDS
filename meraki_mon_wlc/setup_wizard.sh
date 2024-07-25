@@ -26,7 +26,7 @@ You can accomplish this by uploading the files via SCP and copying them, or you 
 
 EOF
 
-echo "https://$SERVER_IP:9090" | tr -d '[:blank:]'
+echo "https://$IP:9090/=$IP/navigator" | tr -d '[:blank:]'
 
 cat <<EOF
 
@@ -185,7 +185,7 @@ You can either upload these via SCP, or you can use the navigator component, men
 
 EOF
 
-echo "https://$SERVER_IP:9090" | tr -d '[:blank:]'
+echo "https://$IP:9090/=$IP/navigator" | tr -d '[:blank:]'
 echo " "
 
 read -p "Press Any Key When Ready"
