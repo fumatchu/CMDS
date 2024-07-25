@@ -24,6 +24,7 @@ while read -r IP; do
   echo "$IP"
 
 VERSIONFULL=$(cat /var/lib/tftpboot/wlc/${IP}-shver | grep "Cisco IOS XE Software, Version")
+ echo " "
  ${GREEN} Current Version of IOS-XE on the WLC(s) ${TEXTRESET}
   echo " "
   echo "The Version is:"
