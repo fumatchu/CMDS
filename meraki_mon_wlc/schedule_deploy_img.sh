@@ -26,7 +26,7 @@ ${GREEN}Updating the Schedule${TEXTRESET}
 EOF
 sleep 1
 
-echo /root/.meraki_mig/deploy_img.exp | at ${TIME}
+echo /root/.meraki_mon_wlc/deploy_img.exp | at ${TIME}
 
 echo "These are the current jobs scehduled:"
 
