@@ -38,19 +38,19 @@ while choice=$(dialog --title "$TITLE" \
   4) clear ;;
   5) clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mon_wlc/check_baseline_wlc.sh | tee -a /root/.meraki_mon_wlc/logs/pre_check_deployment.log ;;
   6) clear & /root/.meraki_mon_wlc/register_wlc_2_cloud.sh | tee -a /root/.meraki_mon_wlc/logs/device_registration.log ;;
-  7) /root/.meraki_mon_wlc/claim_devices.sh ;;
-  8) /root/.meraki_mon_wlc/update_physical_address_wlc.sh | tee -a /root/.meraki_mon_wlc/logs/physical_address.log ;;
-  9) /root/.meraki_mon_wlc/ap_phy_update.sh  | tee -a /root/.meraki_mon_wlc/logs/physical_address.log ;;
+  7) clear & /root/.meraki_mon_wlc/claim_devices.sh ;;
+  8) clear &/root/.meraki_mon_wlc/update_physical_address_wlc.sh | tee -a /root/.meraki_mon_wlc/logs/physical_address.log ;;
+  9) clear &/root/.meraki_mon_wlc/ap_phy_update.sh  | tee -a /root/.meraki_mon_wlc/logs/physical_address.log ;;
  10) clear & /root/.meraki_mon_wlc/enable_avc.sh | tee -a /root/.meraki_mon_wlc/logs/avc_enable.log ;;
  11) clear & /root/.meraki_mon_wlc/sh_wlc_meraki_mon_summ.sh ;;
  12) clear & /root/.meraki_mon_wlc/sh_ap_meraki_mon_summ.sh ;;
- 13) /root/.meraki_mon_wlc/batch_clean.sh ;;
+ 13) clear & /root/.meraki_mon_wlc/batch_clean.sh ;;
  14) /root/.meraki_mon_wlc/.logo ;;
- 15) /root/.meraki_mon_wlc/global_environment.sh ;;
- 16) /root/.meraki_mon_wlc/logging_environment.sh ;;
- 17) /root/.meraki_mon_wlc/utilities.sh ;;
+ 15) clear & /root/.meraki_mon_wlc/global_environment.sh ;;
+ 16) clear & /root/.meraki_mon_wlc/logging_environment.sh ;;
+ 17) clear & /root/.meraki_mon_wlc/utilities.sh ;;
  18) clear & /root/.meraki_mon_wlc/setup_wizard.sh ;;
- 19) /root/.meraki_mon_wlc/welcome.readme | more ;;
+ 19) clear & /root/.meraki_mon_wlc/welcome.readme | more ;;
   esac
 done
 clear # clear after user pressed Cancel
