@@ -46,7 +46,7 @@ while choice=$(dialog --title "$TITLE" \
  11) clear & /root/.meraki_mon_wlc/sh_wlc_meraki_mon_summ.sh ;;
  12) clear & /root/.meraki_mon_wlc/sh_ap_meraki_mon_summ.sh ;;
  13) clear & /root/.meraki_mon_wlc/batch_clean.sh ;;
- 14) /root/.meraki_mon_wlc/.logo ;;
+ 14) clear & /root/.meraki_mon_wlc/.logo ;;
  15) clear & /root/.meraki_mon_wlc/global_environment.sh ;;
  16) clear & /root/.meraki_mon_wlc/logging_environment.sh ;;
  17) clear & /root/.meraki_mon_wlc/utilities.sh ;;
