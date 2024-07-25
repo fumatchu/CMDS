@@ -5,6 +5,7 @@ RED=$(tput setaf 1)
 YELLOW=$(tput setaf 3)
 GREEN=$(tput setaf 2)
 SERVER_IP=$(hostname -I)
+IP=$(hostname -I)
 clear
 cat <<EOF
 ${GREEN}Setup Wizard${TEXTRESET}
