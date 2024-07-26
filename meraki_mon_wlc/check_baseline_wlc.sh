@@ -14,7 +14,7 @@ This script will analyze your current configuration and setup your WLC for Monit
 
 ${YELLOW}
 *If you have just upgraded the IOS-XE version on an SSO pair, please wait at leat 5 minutes before proceeding
-The WLC's may still be syncing 
+The WLC's may still be syncing
 ${TEXTRESET}
 EOF
 
@@ -56,12 +56,7 @@ while read -r IP; do
     exit
   fi
 
-done <"$INPUT"
 
-# Read file line-by-line to get an IP address
-while read -r IP; do
-  # Print the IP address to the console
-  echo "$IP"
 
   #Is the WLC in INSTALL Mode?
   echo "Checking INSTALL or BUNDLE Mode"
@@ -79,12 +74,7 @@ while read -r IP; do
   #cat <<EOF
 
   #EOF
-done <"$INPUT"
 
-# Read file line-by-line to get an IP address
-while read -r IP; do
-  # Print the IP address to the console
-  echo "$IP"
 
   #Remnants of an old mmonitoring install?
   echo "Making sure meraki user does not exist"
@@ -104,14 +94,9 @@ while read -r IP; do
   #cat <<EOF
 
   #EOF
-done <"$INPUT"
 
 
 
-# Read file line-by-line to get an IP address
-while read -r IP; do
-  # Print the IP address to the console
-  echo "$IP"
 
   #NTP Sync?
   echo "Checking NTP"
@@ -127,11 +112,7 @@ while read -r IP; do
   #cat <<EOF
 
   #EOF
-done <"$INPUT"
 
-while read -r IP; do
-  # Print the IP address to the console
-  echo "$IP"
 
   #Does the WLC  report at least one DNS entry?
   echo "Checking for DNS Name server"
@@ -148,13 +129,8 @@ while read -r IP; do
     echo " "
   fi
 
-done <"$INPUT"
 
 #Check if we have domain lookup configured
-
-while read -r IP; do
-  # Print the IP address to the console
-  echo "$IP"
 
   echo "Checking for ip domain lookup Entry"
   LOOKUP=$(cat /var/lib/tftpboot/wlc/${IP}-lookup | head -6 | grep "Domain lookup" | cut -c20-)
@@ -165,13 +141,8 @@ while read -r IP; do
     echo "${RED}ERROR${TEXTRESET}"
     echo " "
   fi
-done <"$INPUT"
 
 #Check for aaa new-model
-
-while read -r IP; do
-  # Print the IP address to the console
-  echo "$IP"
 
   echo "Checking for aaa new-model entry"
   AAA=$(cat /var/lib/tftpboot/wlc/${IP} | grep "aaa new-model")
