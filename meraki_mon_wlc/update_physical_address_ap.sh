@@ -14,7 +14,7 @@ Please make sure that the AP's you want to modify are actively registered to the
 If you have any question, you can select the option:
 ${YELLOW}Main Menu --> Check AP Registration to Cloud ${TEXTRESET}
 for the Current List of AP's
-Or, Check their status on the Merkai Dashboard for your newly onboarded 9800
+Check their status on the Merkai Dashboard for your newly onboarded 9800/APs
 
 Please provide the Physical address in the correct format:
 (i.e. 123 AnyStreet St. City State ZIP)
