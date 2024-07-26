@@ -63,10 +63,6 @@ ${GREEN}Data Collection and Clean File System Flash${TEXTRESET}
         -CMDS will login to the WLC via the IP address provided and collect the earlier mentioned data.
         -It will then run the remove install active command on the WLC
 
-${GREEN}IOS-XE Precheck${TEXTRESET}
-        -This is the next step after Data Collection. CMDS will evaluate the Versions and provide capabilities on if the Version is compatible.
-        -It will also make suggestion on IOS-XE versions if needed to achieve version 17.12.03
-
 ${GREEN}Deploy IOS-XE image to WLC${TEXTRESET}
         -Deploys the uploaded IOS-XE and Chosen IOS-XE image to the batch
 
@@ -80,7 +76,7 @@ ${YELLOW}Steps Above may need to be executed multiple times to get to the desire
 Next we start the Meraki/Catalyst Monitoring components
 
 
-${GREEN}Meraki Precheck Collection${TEXTRESET}
+${GREEN}WLC Monitoring Setup${TEXTRESET}
         -Runs the “show Meraki compatibility”, collects additional metrics and stores them for the validate software hardware option.
         -Also validates the running IOS-XE version for migration, assessed by CMDS
 
