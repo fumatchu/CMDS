@@ -13,7 +13,7 @@ This will allow you to update the ntp name server entry on the WLC
 EOF
 
 read -p "Please provide the NTP IP address you would like to use for time syncronization: " NTP
-while [ -z "$USER" ]; do
+while [ -z "$NTP" ]; do
   echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
   read -p "Please provide the NTP IP address you would like to use for time syncronization: " NTP
 done
