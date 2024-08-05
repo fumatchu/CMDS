@@ -411,7 +411,7 @@ mkdir /root/.meraki_mon_wlc/logs
 mkdir /root/.meraki_mon_switch/logs
 chmod 700 -R /root/.meraki_mig
 chmod 700 -R /root/.meraki_mon_wlc
-chmod 700 -R /root/.meraki_mon_switch/
+chmod 700 -R /root/.meraki_mon_switch
 mv /root/.meraki_mig/meraki_migration /usr/sbin/
 
 
