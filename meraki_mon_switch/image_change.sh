@@ -7,12 +7,21 @@ GREEN=$(tput setaf 2)
 
 clear
 cat <<EOF
-${GREEN}Change Image to download to the switch${TEXTRESET}
 
+${GREEN}Change Image to download to the switch${TEXTRESET}
 These are the current images on the Server
 
-EOF
+${GREEN}For your image selection, please use the "full" IOS version image file name.${TEXTRESET}
+${YELLOW}*Please do not rename the file. Use the original file from the Cisco Downloads Site*${TEXTRESET}
+An example: cat9k_iosxe.17.12.03.SPA.bin
 
+${RED}Do Not use the Lite Image here.${TEXTRESET}
+An example: cat9k_lite_iosxe.17.12.03.SPA.bin
+
+If you have 9200's and 9300/9500's in your envrionment, the server must decipher between
+the FULL IOS image that is used on 9300/9500 and the "Lite" image that is used for 9200's.
+
+EOF
 ls -al /var/lib/tftpboot/images
 
 echo " "
