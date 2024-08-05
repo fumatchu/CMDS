@@ -8,7 +8,7 @@ set nameserver default_name_server
 
 set DATE [timestamp -format %Y%m%d]
 log_file /root/.meraki_mon_wlc/logs/$DATE.log
-set fh [open /root/.meraki_mon_wlc/ip_list r]
+set fh [open /root/.meraki_mon_switch/ip_list r]
 set expected_value_user "default_user"
 spawn echo "$switch_user"
 expect -re expect -re "$expected_value_user"
