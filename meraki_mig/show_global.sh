@@ -19,4 +19,4 @@ echo " "
 echo "Batch IP List"
 more /root/.meraki_mig/ip_list
 echo " "
-read -p "Press Any Key"
+read -p "Press Enter"

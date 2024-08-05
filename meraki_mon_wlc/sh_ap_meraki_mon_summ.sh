@@ -20,4 +20,4 @@ echo ${GREEN}"These are the current status of registered AP's via WLC to the clo
 
 more /var/lib/tftpboot/wlc/ap_mon_summ
 
-read -p "Press any key"
+read -p "Press Enter"

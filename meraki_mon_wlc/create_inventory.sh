@@ -12,7 +12,7 @@ This will allow you to download the Whole AP inventory to csv and update AP addr
 
 EOF
 
-read -p "Press Any Key to Continue"
+read -p "Press Enter to Continue"
 clear
 echo "Creating the CSV File"
 sleep 1
@@ -49,4 +49,4 @@ EOF
 echo "https://$IP:9090/=$IP/navigator" | tr -d '[:blank:]'
 echo " "
 
-read -p "Press Any Key to Exit"
+read -p "Press Enter to Exit"

@@ -32,4 +32,4 @@ EOF
 more /root/.meraki_mig/templates/linked/${TEMPLATE} | cut -c44-
 
 echo " "
-read -p "Press Any Key"
+read -p "Press Enter"

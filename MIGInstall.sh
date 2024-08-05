@@ -101,7 +101,7 @@ DNS Search: ${GREEN}$DNSSEARCH${TEXTRESET}
 DNS Server: ${GREEN}$DNSSERVER${TEXTRESET}
 HOSTNAME: ${GREEN}$HOSTNAME${TEXTRESET}
 EOF
-  read -p "Press any Key to Continue"
+  read -p "Press Enter to Continue"
   nmcli con mod $INTERFACE ipv4.address $IPADDR
   nmcli con mod $INTERFACE ipv4.gateway $GW
   nmcli con mod $INTERFACE ipv4.method manual
@@ -116,7 +116,7 @@ The installer will continue when you log back in.
 If using SSH, please use the IP Address: $IPADDR
 
 EOF
-  read -p "Press Any Key to Continue"
+  read -p "Press Enter to Continue"
   clear
   echo "/root/MIGInstaller/MIGInstall.sh" >>/root/.bash_profile
   reboot
@@ -143,7 +143,7 @@ The installer will continue when you log back in.
 If using SSH, please use the IP Address: ${NMCLIIP}
 
 EOF
-  read -p "Press Any Key to Continue"
+  read -p "Press Enter to Continue"
   clear
   echo "/root/MIGInstaller/MIGInstall.sh" >>/root/.bash_profile
   reboot
@@ -165,7 +165,7 @@ Before the Installer starts, please make sure you have the following information
 
 *********************************************
 EOF
-read -p "Press Any Key to Continue or Ctrl-C to exit the Installer"
+read -p "Press Enter to Continue or Ctrl-C to exit the Installer"
 clear
 
 #OPTIONAL NTP Installation
@@ -465,7 +465,7 @@ ${TEXTRESET}
 The server will reboot now
 EOF
 echo " "
-read -p "Press Any Key to Continue"
+read -p "Press Enter to Continue"
 echo ${RED}"Rebooting${TEXTRESET}"
 sleep 1
 reboot

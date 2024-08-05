@@ -15,7 +15,7 @@ EOF
 
 more /var/lib/tftpboot/*-shmr
 
-read -p "Press Any Key"
+read -p "Press Enter"
 
 clear
 
@@ -23,4 +23,4 @@ echo ${GREEN}"Historical Registered Devices"${TEXTRESET}
 
 more /root/archive/Catalyst_Meraki_Inventory*
 
-read -p "Press Any Key"
+read -p "Press Enter"

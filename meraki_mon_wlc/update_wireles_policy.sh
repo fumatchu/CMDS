@@ -28,7 +28,7 @@ more /root/.meraki_mon_wlc/wireless_profile.tmp
 cat <<EOF
 
 EOF
-read -p "Press Any Key"
+read -p "Press Enter"
 clear
 
 echo ${GREEN}"Creating local Flow Exporters${TEXTRESET}"

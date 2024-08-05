@@ -18,7 +18,7 @@ The WLC's may still be syncing
 ${TEXTRESET}
 EOF
 
-read -p "Press any Key to Continue"
+read -p "Press Enter to Continue"
 clear
 /root/.meraki_mon_wlc/clean.exp
 clear

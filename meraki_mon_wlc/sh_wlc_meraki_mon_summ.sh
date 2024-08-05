@@ -20,4 +20,4 @@ echo ${GREEN}"This is the WLC's current resgistration status${TEXTRESET}"
 
 more /var/lib/tftpboot/wlc/wlc_mon_summ
 
-read -p "Press any key"
+read -p "Press Enter"

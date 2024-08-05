@@ -90,7 +90,7 @@ ${TEXTRESET}
 The server will reboot now
 EOF
   echo " "
-  read -p "Press Any Key to Continue"
+  read -p "Press Enter to Continue"
   echo ${RED}"Rebooting${TEXTRESET}"
   sleep 1
   reboot

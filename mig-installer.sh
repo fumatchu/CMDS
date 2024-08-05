@@ -80,7 +80,7 @@ cat <<EOF
 
 EOF
 
-read -p "Press Any Key to Continue"
+read -p "Press Enter to Continue"
 
 items=(1 "Deploy CMDS"
 )

@@ -17,7 +17,7 @@ Find the newly entered devices, select their checkbox, then Change Network Assig
 ${TEXTRESET}
 EOF
 
-read -p "Press any key to confirm you have made that change, and the migration will continue"
+read -p "Press Enter to confirm you have made that change, and the migration will continue"
 
 # Set the input file name here
 INPUT="/root/.meraki_mig/ip_list"

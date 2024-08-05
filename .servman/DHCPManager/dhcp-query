@@ -28,4 +28,4 @@ cat  << EOF
 ${RED}Note- The Description is UNDER the MAC address Entry${TEXTRESET}
 
 EOF
-read -p "Press Any Key to Continue"
+read -p "Press Enter to Continue"

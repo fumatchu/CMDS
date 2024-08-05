@@ -23,7 +23,7 @@ Then provide your login credentials for the dashboard.
 
 EOF
 
-read -p "Press any key to confirm you have made that change, and the migration will continue"
+read -p "Press Enter to confirm you have made that change, and the migration will continue"
 
 # Set the input file name here
 INPUT="/root/.meraki_mon_wlc/ip_list"

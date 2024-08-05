@@ -26,7 +26,7 @@ You create templates for each need, then with the Deploy a Template Option, you 
 the templates you want, linked together, for a 24 or 48 port switch to have all ports be configured.
 
 EOF
-read -p "Press Any Key when Ready"
+read -p "Press Enter when Ready"
 
 clear
 

@@ -13,7 +13,7 @@ This will take the newly registered WLC and claim it to your inventory in the Me
 
 EOF
 
-read -p "Press Any Key"
+read -p "Press Enter"
 
 more /var/lib/tftpboot/wlc/sh-meraki-connect | grep -E -o "Q.{0,13}" >>/root/.meraki_mon_wlc/wlc_serials.txt
 
@@ -41,7 +41,7 @@ and allow you to join the serial number to the Organitzation of your choice.
 ${YELLOW}After claiming is complete, You Must Move the WLC from General inventory to the Network you wish to service for itself and the AP's.${TEXTRESET}
 
 EOF
-read -p "Press Any Key"
+read -p "Press Enter"
 
 clear
 cat <<EOF

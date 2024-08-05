@@ -52,7 +52,7 @@ QQQQ-QQQQ-ZZZZ_
 
 EOF
 
-read -p "Press any Key"
+read -p "Press Enter"
 
 nano /root/.meraki_mon_wlc/phys_ap_serials.txt
 

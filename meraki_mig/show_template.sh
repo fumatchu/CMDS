@@ -19,4 +19,4 @@ EOF
 ls /root/.meraki_mig/templates/active
 
 echo " "
-read -p "Press Any Key"
+read -p "Press Enter"

@@ -46,7 +46,7 @@ being in enable mode (i.e. the prompt will look like this: ${GREEN}switch#${TEXT
 Once you have met these requirements you may continue
 
 EOF
-read -p "Press Any key when ready"
+read -p "Press Enter when ready"
 
 clear
 
@@ -161,7 +161,7 @@ echo "https://$IP:9090/=$IP/navigator" | tr -d '[:blank:]'
 
 echo " "
 
-read -p "Press Any Key When Ready"
+read -p "Press Enter When Ready"
 clear
 
 cat <<EOF
@@ -203,7 +203,7 @@ Here is an example:
 192.168.1.2
 192.168.1.3
 EOF
-read -p "Press Any Key When Ready"
+read -p "Press Enter When Ready"
 
 nano /root/.meraki_mig/ip_list
 clear

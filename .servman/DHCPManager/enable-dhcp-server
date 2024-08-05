@@ -22,4 +22,4 @@ systemctl enable dhcpd
 
 systemctl --type=service --all | grep dhcpd
 
-read -p "Press Any Key"
+read -p "Press Enter"

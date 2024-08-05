@@ -19,4 +19,4 @@ ${GREEN}List DHCP Leases${TEXTRESET}
 EOF
 cat /var/lib/dhcpd/dhcpd.leases | more
 
-read -p "Press Any Key"
+read -p "Press Enter"

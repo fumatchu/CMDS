@@ -56,4 +56,4 @@ ${YELLOW}
 Main Menu --> Global Environment Settings --> Update Batch IP Address(es)
 ${TEXTRESET}
 EOF
-read -p "Press Any Key"
+read -p "Press Enter"

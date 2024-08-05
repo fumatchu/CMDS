@@ -27,4 +27,4 @@ These are the Templates inside of this linked template:
 EOF
 more /root/.meraki_mig/templates/already_installed/linked/${TEMPLATE} | cut -c62-
 echo " "
-read -p "Press Any Key"
+read -p "Press Enter"

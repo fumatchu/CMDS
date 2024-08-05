@@ -27,7 +27,7 @@ Find the newly entered devices, select their checkbox, then Change Network Assig
 ${TEXTRESET}
 
 EOF
-read -p "Press Any Key to claim your devices into general inventory"
+read -p "Press Enter to claim your devices into general inventory"
 clear
 echo ${GREEN}"Select your Organization from the List Below"${TEXTRESET}
 python3 /root/.meraki_mig/claim_devices.py

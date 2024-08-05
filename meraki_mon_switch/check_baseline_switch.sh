@@ -13,7 +13,7 @@ ${GREEN}Catalyst Monitoring Setup${TEXTRESET}
 This script will analyze your current configuration and make reccomendations for Monitoring in the Meraki Dashboard
 EOF
 
-read -p "Press any Key to Continue"
+read -p "Press Enter to Continue"
 clear
 /root/.meraki_mon_switch/clean.exp
 clear

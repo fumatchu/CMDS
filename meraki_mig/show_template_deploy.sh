@@ -21,5 +21,5 @@ cat <<EOF
 #########
 EOF
 
-read -p "Press Any Key"
+read -p "Press Enter"
 

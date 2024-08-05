@@ -12,7 +12,7 @@ This will register the WLC to the Cloud
 
 EOF
 
-read -p "Press Any Key"
+read -p "Press Enter"
 
 /root/.meraki_mon_wlc/register_wlc_2_cloud.exp
 
@@ -34,4 +34,4 @@ ${GREEN}Current status of WLC Registration${TEXTRESET}
 EOF
 more /var/lib/tftpboot/wlc/sh-meraki-connect
 
-read -p "Press Any Key"
+read -p "Press Enter"

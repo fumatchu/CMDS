@@ -44,7 +44,7 @@ while [ $_repeat = "Y" ]; do
                 ;;
         esac
 done
-read -p "Press Any Key to begin deployment"
+read -p "Press Enter to begin deployment"
 clear
 echo "############################Collection time ${DATE}######################################"
 echo ${GREEN}"Deploying the Script Now"${TEXTRESET}
