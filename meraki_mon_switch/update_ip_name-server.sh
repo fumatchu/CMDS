@@ -7,7 +7,7 @@ GREEN=$(tput setaf 2)
 
 clear
 cat <<EOF
-${GREEN}Update IP Name Server on WLC${TEXTRESET}
+${GREEN}Update IP Name Server on Switch${TEXTRESET}
 This will allow you to update the ip name server entry on the WLC
 
 EOF
