@@ -36,7 +36,7 @@ cat /root/.meraki_mon_switch/api_key.key
 
 cat << EOF
 
-The Onboarding application will also ask you for the list of IP addresses. 
+The Onboarding application will also ask you for the list of IP addresses for switches to provision. 
 
 EOF
 
