@@ -7,6 +7,7 @@ GREEN=$(tput setaf 2)
 SERVER_IP=$(hostname -I)
 INPUT="/root/.meraki_mon_switch/ip_list"
 DATE=$(date)
+touch /root/.meraki_mon_switch/check.tmp
 clear
 cat <<EOF
 ${GREEN}Catalyst Monitoring Setup${TEXTRESET}
@@ -60,7 +61,9 @@ while read -r IP; do
     echo " "
   else
     echo ${RED}"ERROR: The Switch is in BUNDLE mode. It must be converted to INSTALL Mode First${TEXTRESET}"
-    sleep 3
+    echo " "
+    echo "1" >> /root/.meraki_mon_switch/check.tmp
+    sleep 5
   fi
 
   #NTP Sync?
@@ -71,7 +74,9 @@ while read -r IP; do
     echo " "
   else
     echo ${RED}"ERROR: NTP is not syncronized. Please validate that your NTP is configured correctly${TEXTRESET}"
-    echo ${RED}"Exiting...${TEXTRESET}"
+    echo ${YELLOW}"This can be corrected with Main Menu --> Utilities --> Deploy Globald NTP Removal and Update${TEXTRESET}"
+    echo " "
+    echo "1" >> /root/.meraki_mon_switch/check.tmp
     sleep 5
   fi
   #cat <<EOF
@@ -87,8 +92,10 @@ while read -r IP; do
     echo " "
   else
     echo ${RED}"ERROR: A "name-server" entry  was not found on the switch please add one before continuing ${TEXTRESET}"
-    echo ${YELLOW}"This can be corrected with Main Menu --> Utilities --> Global command for DNS${TEXTRESET}"
-    sleep 3
+    echo ${YELLOW}"This can be corrected with Main Menu --> Utilities --> Deploy Global command for DNS${TEXTRESET}"
+    echo " "
+    echo "1" >> /root/.meraki_mon_switch/check.tmp
+    sleep 5
   fi
 
   #Does the switch report at least one DNS entry?
@@ -96,11 +103,10 @@ while read -r IP; do
   STATICNAMESERVER=$(cat /var/lib/tftpboot/mon_switch/${IP}-shipnm | grep 255.255.255.255)
   if [ "$STATICNAMESERVER" = "255.255.255.255" ]; then
     echo ${RED}"ERROR: A "name-server" entry  was not found on the switch"
-    echo ${YELLOW}"Please correct this with Main Menu-->Utilities-->Deploy Global Command for DNS, then try again${TEXTRESET}"
-    echo ${RED}"Cancelling Additional Checks${TEXTRESET}"
-    echo "Exiting..."
+    echo ${YELLOW}"Please correct this with Main Menu-->Utilities-->Deploy Global Command for DNS${TEXTRESET}"
+    echo " "
+    echo "1" >> /root/.meraki_mon_switch/check.tmp
     sleep 5
-    exit
   else
     echo "${GREEN}No Errors${TEXTRESET}"
     echo " "
@@ -118,6 +124,8 @@ while read -r IP; do
   else
     echo "${RED}ERROR${TEXTRESET}"
     echo " "
+    echo "1" >> /root/.meraki_mon_switch/check.tmp
+    sleep 5
   fi
 
 #Check for aaa new-model
@@ -128,8 +136,11 @@ while read -r IP; do
     echo "${GREEN}No Errors${TEXTRESET}"
     echo " "
   else
-    echo "${RED}ERROR${TEXTRESET}"
+    echo "${RED}ERROR: Could not find an Entry for aaa new model in the configuration${TEXTRESET}"
+    echo ${YELLOW}"Please correct this with Main Menu-->Utilities-->Deploy Global aaa new-model Update${TEXTRESET}"
     echo " "
+    echo "1" >> /root/.meraki_mon_switch/check.tmp
+    sleep 5 
   fi
 
 #Is IP routing enabled?
@@ -139,23 +150,45 @@ while read -r IP; do
     echo "${GREEN}Found${TEXTRESET}"
     echo " "
   else
-    echo ${RED}"ip routing must be enabled${TEXTRESET}"
-    sleep 3
+    echo ${RED}"ERROR: Could not find ip routing in config. It must be enabled${TEXTRESET}"
+    echo ${YELLOW}"Please correct this with Main Menu-->Utilities-->Enable ip routing command${TEXTRESET}"
+    echo " "
+    echo "1" >> /root/.meraki_mon_switch/check.tmp
+    sleep 5
   fi
 
 #Is the Switch presenting at least a GW of Last resort?
   echo "Checking for Default Gateway"
-  ROUTE=$(cat /var/lib/tftpboot/mon_switch/${IP}-shroute | grep 0.0.0.0/0 | cut -c7- | sed 's/\(.*\)........................../\1/')
-  if [ "$ROUTE" = "0.0.0.0/0" ]; then
+  ROUTE=$(cat /var/lib/tftpboot/mon_switch/${IP}-shroute | grep 0.0.0.0/0 | cut -c7- | sed 's/\(.*\)......................../\1/')
+  IPROUTE=$(cat /var/lib/tftpboot/mon_switch/${IP} | grep "ip route" | cut -c 1-24)
+  if [ "$ROUTE" = "0.0.0.0/0" ] && [ "$IPROUTE" = "ip route 0.0.0.0 0.0.0.0" ]; then
     echo "${GREEN}Found GW of Last Resort${TEXTRESET}"
     echo " "
   else
     echo ${RED}"The switch requires a configuration of a default gateway${TEXTRESET}"
-    sleep 3
+    echo ${YELLOW}"This can be corrected with Main Menu --> Utilities --> Deploy Default Route${TEXTRESET}"
+    echo " "
+    echo "1" >> /root/.meraki_mon_switch/check.tmp
+    sleep 5
   fi
 
 
 done <"$INPUT"
 
-echo "${GREEN}Script Complete${TEXTRESET}"
-sleep 5
+CHECK=$(cat /root/.meraki_mon_switch/check.tmp | grep 1)
+if grep -q '[^[:space:]]' "/root/.meraki_mon_switch/check.tmp"; then
+    echo "${RED}Please review the Pre-Check${TEXTRESET}"
+    echo "${YELLOW}Main Menu --> Logs --> Meraki Pre Check"
+    echo "After the Issues have been resolved please re-run this script"
+    echo "Main Menu--> Meraki Pre-Check Collection"
+    echo " "
+  else
+    echo ${GREEN}"All Switches meet the requirement to proceed${TEXTRESET}"
+    echo " "
+    sleep 5
+  fi
+
+rm -r -f /root/.meraki_mon_switch/check.tmp
+echo "${YELLOW}Script Complete${TEXTRESET}"
+echo "Returning to the main menu shortly"
+sleep 10
