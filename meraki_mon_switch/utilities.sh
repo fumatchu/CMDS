@@ -12,7 +12,8 @@ items=(1 "Ping Sweep Active Switches"
   4 "Deploy Global aaa new-model update"
   5 "Deploy Global NTP removal and update"
   6 "Enable ip routing command"
-  7 "DHCP Server"
+  7 "Deploy Default Route" 
+  8 "DHCP Server"
 )
 
 while choice=$(dialog --title "$TITLE" \
@@ -26,7 +27,8 @@ while choice=$(dialog --title "$TITLE" \
   4) clear & /root/.meraki_mon_switch/update_aaa_config.sh ;;
   5) clear & /root/.meraki_mon_switch/update_ntp_server.sh ;;
   6) clear & /root/.meraki_mon_switch/update_iprouting_config.sh ;;
-  7) clear & /root/.servman/DHCPMan ;;
+  7) clear & /root/.meraki_mon_switch/update_defgw.sh ;;
+  8) clear & /root/.servman/DHCPMan ;;
 
   esac
 done
