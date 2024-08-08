@@ -12,6 +12,13 @@ cat <<EOF
 ${GREEN}Setup Wizard${TEXTRESET}
 This Wizard will allow you to configure this server for IOS-XE deployment and Meraki PreCheck for Catalyst Monitoring
 You must upload the IOS-XE image(s) that you need into the images directory of this tftp server.
+If you Need the IOS Images, please use the following link:
+
+https://software.cisco.com/download/home/278875285
+
+${YELLOW}*Please do not rename the file(s). Use the original file from the Cisco Downloads Site*${TEXTRESET}
+A Valid CCO ID is required
+
 The file directory is located at:
 
 /var/lib/tftpboot/images
