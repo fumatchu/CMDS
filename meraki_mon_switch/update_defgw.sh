@@ -15,7 +15,7 @@ Enabling a Gateway of last resort should be implemented by subnet.
 Please make sure that all the switches you have in the current batch
 are in the same subnet and would use the same upstream ip address for access 
 
-Catalyst monitoring needs a routable GW of last resort above and beyond the command
+Catalyst Monitoring needs a routable GW of last resort above and beyond the command
 "ip default-gateway"
 
 
