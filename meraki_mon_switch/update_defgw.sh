@@ -10,7 +10,7 @@ cat <<EOF
 ${GREEN}Update Gateway of Last Resort on Switches${TEXTRESET}
 This will allow you to update Default Gateway entry on the Switches
 
-Enabling a Gateway of last reosrt should be implemented by subnet.
+Enabling a Gateway of last resort should be implemented by subnet.
 
 Please make sure that all the switches you have in the current batch
 are in the same subnet and would use the same upstream ip address for access 
