@@ -95,7 +95,7 @@ while read -r IP; do
   echo "Checking for DNS Entry if Static assignment"
   STATICNAMESERVER=$(cat /var/lib/tftpboot/mon_switch/${IP}-shipnm | grep 255.255.255.255)
   if [ "$STATICNAMESERVER" = "255.255.255.255" ]; then
-    echo ${RED}"ERROR: A "name-server" entry  was not found on the WLC"
+    echo ${RED}"ERROR: A "name-server" entry  was not found on the switch"
     echo ${YELLOW}"Please correct this with Main Menu-->Utilities-->Deploy Global Command for DNS, then try again${TEXTRESET}"
     echo ${RED}"Cancelling Additional Checks${TEXTRESET}"
     echo "Exiting..."
