@@ -82,6 +82,7 @@ sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mon_switch/upd
 sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mon_switch/update_aaa_config.exp
 sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mon_switch/update_iprouting_config.exp
 sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mon_switch/update_config.exp
+sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mon_switch/update_defgw.exp
 clear
 
 cat <<EOF
@@ -109,6 +110,7 @@ sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_switch/upd
 sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_switch/update_aaa_config.exp
 sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_switch/update_iprouting_config.exp
 sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_switch/update_config.exp
+sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_switch/update_defgw.exp
 clear
 cat <<EOF
 ${GREEN}Update Server IP${TEXTRESET}
@@ -128,6 +130,8 @@ sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/up
 sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/update_aaa_config.exp
 sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/update_iprouting_config.exp
 sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/update_config.exp
+sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/update_defgw.exp
+
 clear
 
 cat <<EOF
@@ -143,7 +147,7 @@ done
 
 #remove the instance of API Key first
 
-sed -i '0,/API_KEY/{/API_KEY/d;}' /root/.meraki_mon_switch/update_physical_address_switch.py
+#sed -i '0,/API_KEY/{/API_KEY/d;}' /root/.meraki_mon_switch/update_physical_address_switch.py
 
 echo API_KEY = "\"${API_KEY}\"" >/root/.meraki_mon_switch/api_key.key
 
@@ -212,6 +216,7 @@ sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_ip_name
 sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_aaa_config.exp
 sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_iprouting_config.exp
 sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_config.exp
+sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_defgw.exp
 clear
 cat <<EOF
 ${GREEN}Update Complete${TEXTRESET}
