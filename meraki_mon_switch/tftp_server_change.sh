@@ -27,4 +27,5 @@ sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/up
 sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/update_aaa_config.exp
 sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/update_iprouting_config.exp
 sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/update_config.exp
+sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/update_defgw.exp
 fi
