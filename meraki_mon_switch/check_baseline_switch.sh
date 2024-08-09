@@ -11,7 +11,7 @@ touch /root/.meraki_mon_switch/check.tmp
 clear
 cat <<EOF
 ${GREEN}Catalyst Monitoring Setup${TEXTRESET}
-This script will analyze your current configuration and make reccomendations for Monitoring in the Meraki Dashboard
+This script will analyze your current configuration and make recommendations for Monitoring in the Meraki Dashboard
 EOF
 
 read -p "Press Enter to Continue"
