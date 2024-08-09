@@ -4,6 +4,12 @@ RED=$(tput setaf 1)
 YELLOW=$(tput setaf 3)
 GREEN=$(tput setaf 2)
 INPUT="/root/.meraki_mon_switch/ip_list"
+cat << EOF
+${GREEN}
+IOS-XE Version Check
+${TEXTRSET}
+
+EOF
 # Read file line-by-line to get an IP address
 while read -r IP; do
   # Print the IP address to the console
