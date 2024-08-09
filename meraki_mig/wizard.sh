@@ -11,7 +11,16 @@ cat <<EOF
 ${GREEN}Setup Wizard${TEXTRESET}
 This Wizard will allow you to configure this server for IOS-XE deployment and Meraki Registration
 You must upload the IOS-XE image(s) that you need into the images directory of this tftp server.
-The file directory is located at:
+
+The current, supported IOS-XE image for Meraki migration is:
+${YELLOW}17.9.3m3${TEXTRESET} 
+
+And can be downloaded at:
+https://software.cisco.com/download/specialrelease/b53558e8586d98df4e9e7860c7692e75
+
+${YELLOW}*A Valid CCO ID is required to download this code*${TEXTRESET} 
+
+Once you have downloaded the image, you must place it into:
 
 /var/lib/tftpboot/images
 
