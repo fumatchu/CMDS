@@ -177,7 +177,7 @@ done <"$INPUT"
 
 CHECK=$(cat /root/.meraki_mon_switch/check.tmp | grep 1)
 if grep -q '[^[:space:]]' "/root/.meraki_mon_switch/check.tmp"; then
-    echo "${RED}Please review the Pre-Check${TEXTRESET}"
+    echo "${RED}The Switches did not pass all checks. Please review the Pre-Check Log${TEXTRESET}"
     echo "${YELLOW}Main Menu --> Logs --> Meraki Pre Check"
     echo "After the Issues have been resolved please re-run this script"
     echo "Main Menu--> Meraki Pre-Check Collection"
