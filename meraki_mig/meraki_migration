@@ -8,6 +8,7 @@ SERVERIP=$(hostname -I)
 
 items=(1 "Catalyst Migration for c9300 Series Switches"
   2 "Catalyst Monitoring for Wireless"
+  3 "Catalyst Monitoring for Switching Prep Tool"
 )
 
 while choice=$(dialog --title "$TITLE" \
@@ -17,6 +18,7 @@ while choice=$(dialog --title "$TITLE" \
   case $choice in
   1) clear & /root/.meraki_mig/menu.sh ;;
   2) clear & /root/.meraki_mon_wlc/menu.sh ;;
+  3) clear & /root/.meraki_mon_switch/menu.sh ;;
 esac
 done
 clear # clear after user pressed Cancel
