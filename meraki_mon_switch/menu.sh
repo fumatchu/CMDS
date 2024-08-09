@@ -12,14 +12,15 @@ items=(1 "Data Collection and Clean File System Flash"
   4 "Install IOS-XE Update"
   5 "-----------------------------------------------"
   6 "Meraki Pre-Check Collection"
-  7 "Batch Cleanup"
-  8 "-----------------------------------------------"
-  9 "Global Environment Settings"
- 10 "Schedule Deployment"
- 11 "Logs"
- 12 "Utilities"
- 13 "Setup Wizard"
- 14 "Welcome to CMDS"
+  7 "Download Meraki Onboarding Client"
+  8 "Batch Cleanup"
+  9 "-----------------------------------------------"
+ 10 "Global Environment Settings"
+ 11 "Schedule Deployment"
+ 12 "Logs"
+ 13 "Utilities"
+ 14 "Setup Wizard"
+ 15 "Welcome to CMDS"
 )
 
 while choice=$(dialog --title "$TITLE" \
@@ -33,14 +34,15 @@ while choice=$(dialog --title "$TITLE" \
   4) clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mon_switch/deploy.sh ;;
   5) clear ;;
   6) clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mon_switch/check_baseline_switch.sh | tee -a /root/.meraki_mon_switch/logs/pre_check_deployment.log ;;
-  7) /root/.meraki_mon_switch/batch_clean.sh ;;
-  8) /root/.meraki_mon_switch/.logo ;;
-  9) /root/.meraki_mon_switch/global_environment.sh ;;
- 10) /root/.meraki_mon_switch/schedule.sh ;;
- 11) /root/.meraki_mon_switch/logging_environment.sh ;;
- 12) /root/.meraki_mon_switch/utilities.sh ;;
- 13) /root/.meraki_mon_switch/setup_wizard.sh ;;
- 14) /root/.meraki_mon_switch/welcome.readme | more ;;
+  7) clear & /root/.meraki_mon_switch/download_client.sh ;;
+  8) /root/.meraki_mon_switch/batch_clean.sh ;;
+  9) /root/.meraki_mon_switch/.logo ;;
+ 10) /root/.meraki_mon_switch/global_environment.sh ;;
+ 11) /root/.meraki_mon_switch/schedule.sh ;;
+ 12) /root/.meraki_mon_switch/logging_environment.sh ;;
+ 13) /root/.meraki_mon_switch/utilities.sh ;;
+ 14) /root/.meraki_mon_switch/setup_wizard.sh ;;
+ 15) /root/.meraki_mon_switch/welcome.readme | more ;;
   esac
 done
 clear # clear after user pressed Cancel
