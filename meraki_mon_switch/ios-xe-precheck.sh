@@ -29,4 +29,5 @@ echo "IOS-XE Version is ${YELLOW}$x${TEXTRESET}"
     echo "A CCO ID is required"    
 fi
 done <"$INPUT"
+echo " "
 read -p "Press Enter to Continue"
