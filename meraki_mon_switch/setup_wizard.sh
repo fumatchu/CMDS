@@ -19,6 +19,18 @@ https://software.cisco.com/download/home/278875285
 ${YELLOW}*Please do not rename the file(s). Use the original file from the Cisco Downloads Site*${TEXTRESET}
 A Valid CCO ID is required
 
+The Current suggested version(s) are:
+${YELLOW}
+17.12.3 (ED)
+17.9.5 (MD)
+${TEXTRESET}
+
+It is highly suggested to upgrade to 17.12.3
+EOF
+
+read -p "Press Enter When Ready"
+clear
+cat << EOF
 The file directory is located at:
 
 /var/lib/tftpboot/images
@@ -37,6 +49,10 @@ Once you have uploaded the IOS images, then you must specify the following (via 
         -The Meraki API Key for Dashboard integration
         -The IOS image you would like to use (must be uploaded first)
         -The IP addresses of the switches to migrate (management IP via VLAN)
+        -An NTP Server if needed for the Switches
+        -An IP Address of a DNS Server for the switches 
+        -A Gateway of last resort IP Address. This will be used to enable routing. 
+         ${YELLOW}*Keep in mind this address will change with every subnet/batch you use$*${TEXTRESET}
 
 Please keep in mind that it's required to have a privileged user (15) on the switch(es)
 The server will want to be prompted in enable mode already (SSH should be enabled on the switch)
@@ -134,7 +150,6 @@ sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/up
 sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/update_config.exp
 sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/update_defgw.exp
 sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/update_ip_domain_lookup.exp
-
 clear
 
 cat <<EOF
@@ -221,7 +236,6 @@ sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_iprouti
 sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_config.exp
 sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_defgw.exp
 sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_ip_domain_lookup.exp
-
 clear
 cat <<EOF
 ${GREEN}Update Complete${TEXTRESET}
@@ -239,8 +253,69 @@ read -p "Press Enter When Ready"
 
 nano /root/.meraki_mon_switch/ip_list
 clear
+
+read -p "Please provide the NTP IP address you would like to use for time syncronization (If Needed): " NTP
+while [ -z "$NTP" ]; do
+  echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+  read -p "Please provide the NTP IP address you would like to use for time syncronization: " NTP
+done
+clear
+cat <<EOF
+${GREEN}Updating ntp name server with IP address ${NTP} ${TEXTRESET}
+
+EOF
+sleep 1
+
+sed -i "/set ntpserver/c\set ntpserver ${NTP}" /root/.meraki_mon_switch/update_ntp_server.exp
+
+
+clear
+
+read -p "Please provide the DNS IP address you would like to use for name resolution (If Needed): " NSIP
+while [ -z "$USER" ]; do
+  echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+  read -p "Please provide the DNS IP address you would like to use for name resolution: " NSIP
+done
+clear
+cat <<EOF
+${GREEN}Updating ip name server with IP address ${NSIP} ${TEXTRESET}
+
+EOF
+sleep 1
+
+sed -i "/set nameserver/c\set nameserver ${NSIP}" /root/.meraki_mon_switch/update_ip_name-server.exp
+
+clear
+
+read -p "Please provide the IP address you would like to use for the Gateway of Last resort (routing Default Gateway): " GWLR
+while [ -z "$USER" ]; do
+  echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+  read -p  "Please provide the IP address you would like to use for the Gateway of Last resort:" GWLR
+done
+clear
+cat <<EOF
+${GREEN}Updating gateway of last resort with IP address ${GWLR} ${TEXTRESET}
+
+EOF
+sleep 1
+
+sed -i "/set def_gw/c\set def_gw ${GWLR}" /root/.meraki_mon_switch/update_defgw.exp
+
+clear
+
+
+
+
 cat <<EOF
 The Wizard is complete!
+
+The following information has ben set:
+Username to login to the switches: ${GREEN}${USER}${TEXTRESET}
+Password to login to the switches: ${GREEN}${PASS}${TEXTRESET}
+Active IOS-XE Images to Use: ${GREEN}${IMAGE}${TEXTRESET}
+NTP Server: ${GREEN}${NTP}${TEXTRESET}
+DNS IP Address: ${GREEN}${NSIP}${TEXTRESET}
+Routing Default Gateway: ${GREEN}${GWLR}${TEXTRESET}
 
 Start your first collection by selecting
 ${GREEN}Data Collection and Clean File System Flash${TEXTRESET} from the Main Menu
@@ -248,4 +323,4 @@ ${GREEN}Data Collection and Clean File System Flash${TEXTRESET} from the Main Me
 
 This will return to the Main Menu shortly
 EOF
-sleep 5
+read -p "Press Enter When Ready"
