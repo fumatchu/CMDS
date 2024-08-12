@@ -19,10 +19,10 @@ clear
 /root/.meraki_mon_switch/clean.exp
 clear
 cat <<EOF
-${GREEN}Validating that we are running the approved version of IOS-XE to migrate to Meraki${TEXTRESET}
+############################Collection time ${DATE}######################################
+${GREEN}Validating Requirements${TEXTRESET}
 EOF
 sleep 1
-echo "############################Collection time ${DATE}######################################"
 # Read file line-by-line to get an IP address
 while read -r IP; do
   # Print the IP address to the console
@@ -63,7 +63,13 @@ while read -r IP; do
     echo ${RED}"ERROR: The Switch is in BUNDLE mode. It must be converted to INSTALL Mode First${TEXTRESET}"
     echo " "
     echo "1" >> /root/.meraki_mon_switch/check.tmp
+    echo "Please refer to this document for further information:"
+    echo "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-9300-series-switches/216231-upgrade-guide-for-cisco-catalyst-9000-sw.html"
     sleep 5
+    echo "Exiting the Check"
+    sleep 5
+    exit
+    
   fi
 
   #NTP Sync?
@@ -74,9 +80,13 @@ while read -r IP; do
     echo " "
   else
     echo ${RED}"ERROR: NTP is not syncronized. Please validate that your NTP is configured correctly${TEXTRESET}"
-    echo ${YELLOW}"This can be corrected with Main Menu --> Utilities --> Deploy Global NTP Removal and Update${TEXTRESET}"
+    echo ${YELLOW}"This can be manually corrected with Main Menu --> Utilities --> Deploy Global NTP Removal and Update${TEXTRESET}"
     echo " "
     echo "1" >> /root/.meraki_mon_switch/check.tmp
+    echo ${YELLOW}"Attemping to Correct Issue"${TEXTRESET}
+    echo " "
+    sleep 1 
+    /root/.meraki_mon_switch/update_ntp_server.exp > /dev/null 2>&1
     sleep 5
   fi
   #cat <<EOF
@@ -92,9 +102,13 @@ while read -r IP; do
     echo " "
   else
     echo ${RED}"ERROR: A "name-server" entry  was not found on the switch please add one before continuing ${TEXTRESET}"
-    echo ${YELLOW}"This can be corrected with Main Menu --> Utilities --> Deploy Global command for DNS${TEXTRESET}"
+    echo ${YELLOW}"This can be manually corrected with Main Menu --> Utilities --> Deploy Global command for DNS${TEXTRESET}"
     echo " "
     echo "1" >> /root/.meraki_mon_switch/check.tmp
+    echo ${YELLOW}"Attemping to Correct Issue"${TEXTRESET}
+    echo " "
+    sleep 1 
+    /root/.meraki_mon_switch/update_ip_name-server.exp > /dev/null 2>&1
     sleep 5
   fi
 
@@ -103,9 +117,13 @@ while read -r IP; do
   STATICNAMESERVER=$(cat /var/lib/tftpboot/mon_switch/${IP}-shipnm | grep 255.255.255.255)
   if [ "$STATICNAMESERVER" = "255.255.255.255" ]; then
     echo ${RED}"ERROR: A "name-server" entry  was not found on the switch"
-    echo ${YELLOW}"Please correct this with Main Menu-->Utilities-->Deploy Global Command for DNS${TEXTRESET}"
+    echo ${YELLOW}"This can be manually corrected with Main Menu-->Utilities-->Deploy Global Command for DNS${TEXTRESET}"
     echo " "
     echo "1" >> /root/.meraki_mon_switch/check.tmp
+    echo ${YELLOW}"Attemping to Correct Issue"${TEXTRESET}
+    echo " "
+    sleep 1 
+    /root/.meraki_mon_switch/update_ip_name-server.exp > /dev/null 2>&1
     sleep 5
   else
     echo "${GREEN}No Errors${TEXTRESET}"
@@ -122,9 +140,13 @@ while read -r IP; do
     echo "${GREEN}No Errors${TEXTRESET}"
     echo " "
   else
-    echo "${RED}ERROR${TEXTRESET}"
+    echo "${RED}ERROR: ip domain lookup was not found${TEXTRESET}"
     echo " "
     echo "1" >> /root/.meraki_mon_switch/check.tmp
+    echo ${YELLOW}"Attemping to Correct Issue"${TEXTRESET}
+    echo " "
+    sleep 1
+    /root/.meraki_mon_switch/update_ip_domain_lookup.exp > /dev/null 2>&1
     sleep 5
   fi
 
@@ -137,9 +159,12 @@ while read -r IP; do
     echo " "
   else
     echo "${RED}ERROR: Could not find an Entry for aaa new model in the configuration${TEXTRESET}"
-    echo ${YELLOW}"Please correct this with Main Menu-->Utilities-->Deploy Global aaa new-model Update${TEXTRESET}"
+    echo ${YELLOW}"This can be manually corrected with Main Menu-->Utilities-->Deploy Global aaa new-model Update${TEXTRESET}"
     echo " "
     echo "1" >> /root/.meraki_mon_switch/check.tmp
+    echo ${YELLOW}"Attemping to Correct Issue"${TEXTRESET}
+    echo " "
+    /root/.meraki_mon_switch/update_aaa_config.exp > /dev/null 2>&1
     sleep 5 
   fi
 
@@ -151,9 +176,12 @@ while read -r IP; do
     echo " "
   else
     echo ${RED}"ERROR: Could not find ip routing in config. It must be enabled${TEXTRESET}"
-    echo ${YELLOW}"Please correct this with Main Menu-->Utilities-->Enable ip routing command${TEXTRESET}"
+    echo ${YELLOW}"This can be manually corrected with Main Menu-->Utilities-->Enable ip routing command${TEXTRESET}"
     echo " "
     echo "1" >> /root/.meraki_mon_switch/check.tmp
+    echo ${YELLOW}"Attemping to Correct Issue${TEXTRESET}"
+    echo " "
+    /root/.meraki_mon_switch/update_iprouting_config.exp > /dev/null 2>&1
     sleep 5
   fi
 
@@ -166,9 +194,11 @@ while read -r IP; do
     echo " "
   else
     echo ${RED}"The switch requires a configuration of a default gateway${TEXTRESET}"
-    echo ${YELLOW}"This can be corrected with Main Menu --> Utilities --> Deploy Default Route${TEXTRESET}"
+    echo ${YELLOW}"This can be manually corrected with Main Menu --> Utilities --> Deploy Default Route${TEXTRESET}"
     echo " "
     echo "1" >> /root/.meraki_mon_switch/check.tmp
+    echo ${YELLOW}"Attemping to Correct Issue${TEXTRESET}"
+    /root/.meraki_mon_switch/update_defgw.exp > /dev/null 2>&1
     sleep 5
   fi
 
@@ -177,18 +207,18 @@ done <"$INPUT"
 
 CHECK=$(cat /root/.meraki_mon_switch/check.tmp | grep 1)
 if grep -q '[^[:space:]]' "/root/.meraki_mon_switch/check.tmp"; then
-    echo "${RED}The Switches did not pass all checks. Please review the Pre-Check Log${TEXTRESET}"
+    echo "${RED}The Switches did not pass all checks. Please review the Pre-Check Log (If Needed)${TEXTRESET}"
     echo "${YELLOW}Main Menu --> Logs --> Meraki Pre Check"
-    echo "After the Issues have been resolved please re-run this script"
+    echo "CMDS has attempted to correct the issues, please re-run this script"
     echo "Main Menu--> Meraki Pre-Check Collection"
     echo " "
   else
-    echo ${GREEN}"All Switches meet the requirement to proceed${TEXTRESET}"
+    echo ${GREEN}"All requirements met ${TEXTRESET}"
     echo " "
     sleep 5
   fi
 
 rm -r -f /root/.meraki_mon_switch/check.tmp
-echo "${YELLOW}Script Complete${TEXTRESET}"
+echo "${GREEN}Script Complete${TEXTRESET}"
 echo "Returning to the main menu shortly"
 sleep 10
