@@ -198,6 +198,7 @@ while read -r IP; do
     echo " "
     echo "1" >> /root/.meraki_mon_switch/check.tmp
     echo ${YELLOW}"Attemping to Correct Issue${TEXTRESET}"
+    echo " "
     /root/.meraki_mon_switch/update_defgw.exp > /dev/null 2>&1
     sleep 5
   fi
