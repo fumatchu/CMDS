@@ -7,6 +7,7 @@ GREEN=$(tput setaf 2)
 IOS_IMAGE_FULL=$(more /root/.meraki_mon_switch/clean.exp | grep "set image" | cut -c11-)
 IOS_IMAGE_LITE=$(more /root/.meraki_mon_switch/clean.exp | grep "set image" | cut -c11- | sed 's/cat9k_/cat9k_lite_/g')
 INPUT="/root/.meraki_mon_switch/ip_list"
+touch /root/.meraki_mon_switch/ip_list_single
 clear
 
 cat <<EOF
