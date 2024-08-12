@@ -15,7 +15,7 @@ items=(1 "Change SSH User Login "
 )
 
 while choice=$(dialog --title "$TITLE" \
-  --backtitle "CMDS-Main Menu-->Global Settings" \
+  --backtitle "Catalyst Monitoring for Switching Prep Tool-->CMDS-->Main Menu-->Global Settings" \
   --menu "Please select" 15 65 3 "${items[@]}" \
   2>&1 >/dev/tty); do
   case $choice in
