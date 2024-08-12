@@ -12,7 +12,7 @@ items=(1 "Data Collection and Inactive File Removal "
 )
 
 while choice=$(dialog --title "$TITLE" \
-  --backtitle "CMDS-Main Menu-->Scheduler" \
+  --backtitle "Catalyst Monitoring for Switching Prep Tool-->CMDS-Main Menu-->Scheduler" \
   --menu "Please select" 15 65 3 "${items[@]}" \
   2>&1 >/dev/tty); do
   case $choice in
