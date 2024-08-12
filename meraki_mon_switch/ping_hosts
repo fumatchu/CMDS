@@ -9,7 +9,7 @@ GREEN=$(tput setaf 2)
 IPS=$(cat /root/.meraki_mon_switch/ip_list)
 
 # Ping each IP address and report the results
-echo ${GREEN}"Monitoring connectivity to Switches${TEXTRESET}"
+echo ${GREEN}"Monitoring connectivity to Switches(Catalyst Monitoring-Switches)${TEXTRESET}"
 for IP in $IPS; do
   ping -c 1 $IP > /dev/null
   if [ $? -eq 0 ]; then
