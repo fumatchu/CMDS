@@ -83,6 +83,7 @@ sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mon_switch/upd
 sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mon_switch/update_iprouting_config.exp
 sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mon_switch/update_config.exp
 sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mon_switch/update_defgw.exp
+sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mon_switch/update_ip_domain_lookup.exp
 clear
 
 cat <<EOF
@@ -111,6 +112,7 @@ sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_switch/upd
 sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_switch/update_iprouting_config.exp
 sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_switch/update_config.exp
 sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_switch/update_defgw.exp
+sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_switch/update_ip_domain_lookup.exp
 clear
 cat <<EOF
 ${GREEN}Update Server IP${TEXTRESET}
@@ -131,6 +133,7 @@ sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/up
 sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/update_iprouting_config.exp
 sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/update_config.exp
 sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/update_defgw.exp
+sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/update_ip_domain_lookup.exp
 
 clear
 
@@ -217,6 +220,8 @@ sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_aaa_con
 sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_iprouting_config.exp
 sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_config.exp
 sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_defgw.exp
+sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_ip_domain_lookup.exp
+
 clear
 cat <<EOF
 ${GREEN}Update Complete${TEXTRESET}
