@@ -5,6 +5,18 @@ RED=$(tput setaf 1)
 YELLOW=$(tput setaf 3)
 GREEN=$(tput setaf 2)
 SERVERIP=$(hostname -I)
+clear
+echo "
+${GREEN}
+v1.02(1)
+****************************************************************
+                    Welcome to CMDS
+****************************************************************
+${TEXTRESET}
+
+At Any time, you can type ${YELLOW}meraki_migration${TEXTRESET} from the cli to access the menu
+"
+sleep 4
 
 items=(1 "Catalyst Migration for c9300 Series Switches"
   2 "Catalyst Monitoring for Wireless"
@@ -13,7 +25,7 @@ items=(1 "Catalyst Migration for c9300 Series Switches"
 
 while choice=$(dialog --title "$TITLE" \
   --backtitle "CMDS-->Main Menu" \
-  --menu "Please select" 30 65 3 "${items[@]}" \
+  --menu "Please Select" 30 75 3 "${items[@]}" \
   2>&1 >/dev/tty); do
   case $choice in
   1) clear & /root/.meraki_mig/menu.sh ;;
