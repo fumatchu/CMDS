@@ -9,11 +9,11 @@ USER=$(whoami)
 items=(1 "Ping Sweep Active Switches"
   2 "Monitor TFTP "
   3 "Deploy Global command for DNS"
-  4 "Deploy ip domain lookup"
+  4 "Deploy Global ip domain lookup"
   5 "Deploy Global aaa new-model update"
   6 "Deploy Global NTP removal and update"
-  7 "Deploy ip routing command"
-  8 "Deploy Default Route" 
+  7 "Deploy Global ip routing command"
+  8 "Deploy Global Default Route" 
   9 "DHCP Server"
 )
 
