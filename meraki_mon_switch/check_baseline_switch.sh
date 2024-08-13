@@ -67,7 +67,7 @@ while read -r IP; do
     echo "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-9300-series-switches/216231-upgrade-guide-for-cisco-catalyst-9000-sw.html"
     sleep 5
     echo "Exiting the Check"
-    sleep 5
+    sleep 2
     exit
     
   fi
@@ -87,7 +87,7 @@ while read -r IP; do
     echo " "
     sleep 1 
     /root/.meraki_mon_switch/update_ntp_server.exp > /dev/null 2>&1
-    sleep 5
+    sleep 2
   fi
   #cat <<EOF
 
@@ -109,7 +109,7 @@ while read -r IP; do
     echo " "
     sleep 1 
     /root/.meraki_mon_switch/update_ip_name-server.exp > /dev/null 2>&1
-    sleep 5
+    sleep 2
   fi
 
   #Does the switch report at least one DNS entry?
@@ -124,7 +124,7 @@ while read -r IP; do
     echo " "
     sleep 1 
     /root/.meraki_mon_switch/update_ip_name-server.exp > /dev/null 2>&1
-    sleep 5
+    sleep 2
   else
     echo "${GREEN}No Errors${TEXTRESET}"
     echo " "
@@ -147,7 +147,7 @@ while read -r IP; do
     echo " "
     sleep 1
     /root/.meraki_mon_switch/update_ip_domain_lookup.exp > /dev/null 2>&1
-    sleep 5
+    sleep 2
   fi
 
 #Check for aaa new-model
@@ -165,25 +165,9 @@ while read -r IP; do
     echo ${YELLOW}"Attemping to Correct Issue"${TEXTRESET}
     echo " "
     /root/.meraki_mon_switch/update_aaa_config.exp > /dev/null 2>&1
-    sleep 5 
+    sleep 2 
   fi
 
-#Is IP routing enabled?
-  echo "Checking for ip routing command"
-  IPROUTE=$(cat /var/lib/tftpboot/mon_switch/${IP} | grep "ip routing")
-  if [ "$IPROUTE" = "ip routing" ]; then
-    echo "${GREEN}Found${TEXTRESET}"
-    echo " "
-  else
-    echo ${RED}"ERROR: Could not find ip routing in config. It must be enabled${TEXTRESET}"
-    echo ${YELLOW}"This can be manually corrected with Main Menu-->Utilities-->Enable ip routing command${TEXTRESET}"
-    echo " "
-    echo "1" >> /root/.meraki_mon_switch/check.tmp
-    echo ${YELLOW}"Attemping to Correct Issue${TEXTRESET}"
-    echo " "
-    /root/.meraki_mon_switch/update_iprouting_config.exp > /dev/null 2>&1
-    sleep 5
-  fi
 
 #Is the Switch presenting at least a GW of Last resort?
   echo "Checking for Default Gateway"
@@ -200,7 +184,26 @@ while read -r IP; do
     echo ${YELLOW}"Attemping to Correct Issue${TEXTRESET}"
     echo " "
     /root/.meraki_mon_switch/update_defgw.exp > /dev/null 2>&1
-    sleep 5
+    sleep 2
+  fi
+
+
+
+#Is IP routing enabled?
+  echo "Checking for ip routing command"
+  IPROUTE=$(cat /var/lib/tftpboot/mon_switch/${IP} | grep "ip routing")
+  if [ "$IPROUTE" = "ip routing" ]; then
+    echo "${GREEN}Found${TEXTRESET}"
+    echo " "
+  else
+    echo ${RED}"ERROR: Could not find ip routing in config. It must be enabled${TEXTRESET}"
+    echo ${YELLOW}"This can be manually corrected with Main Menu-->Utilities-->Enable ip routing command${TEXTRESET}"
+    echo " "
+    echo "1" >> /root/.meraki_mon_switch/check.tmp
+    echo ${YELLOW}"Attemping to Correct Issue${TEXTRESET}"
+    echo " "
+    /root/.meraki_mon_switch/update_iprouting_config.exp > /dev/null 2>&1
+    sleep 2
   fi
 
 
