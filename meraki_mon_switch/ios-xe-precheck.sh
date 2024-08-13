@@ -23,7 +23,7 @@ first=${x%%.*}          # Delete first dot and what follows.
 last=${x##*.}           # Delete up to last dot.
 mid=${x##$first.}       # Delete first number and dot.
 mid=${mid%%.$last}      # Delete dot and last number.
-#echo $first $mid $last  # Voila!
+#echo $first $mid $last
 echo "IOS-XE Version is ${YELLOW}$x${TEXTRESET}"
  if [ $first -ge 17 ] && [ $mid -ge 3 ] && [ $last -gt 1 ]; then
     echo "${GREEN}IOS-XE Version Meets Requirement${TEXTRESET}"
