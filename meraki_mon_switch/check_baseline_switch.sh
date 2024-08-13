@@ -29,28 +29,22 @@ while read -r IP; do
   echo "$IP"
 
   echo ${GREEN}"Checking IOS-XE Version${TEXTRESET} "
-  VERSIONFULL=$(cat /var/lib/tftpboot/mon_switch/${IP}-shver | grep "Cisco IOS XE Software, Version")
-  echo "The Current Version is:"
-  echo "${YELLOW}${VERSIONFULL}${TEXTRESET}"
-  echo " "
-  sleep 1
-#  if [ "$VERSIONFULL" == "Cisco IOS XE Software, Version 17.12.03" ]; then
-#    echo "${GREEN}IOS-XE Version Matches Requirement"${TEXTRESET}
-#    echo " "
-#    sleep 1
-#  else
-#    echo "${RED}ERROR:IOS-XE Needs Updating - The Version should be 17.12.03"${TEXTRESET}
-#    echo "${RED}Please upgrade to 17.12.03 before proceeding"${TEXTRESET}
-#    echo " "
-#    echo "Use this Link to download IOS-XE Software:"
-#    echo "https://software.cisco.com/download/home/278875285"
-#    echo " "
-#    echo ${RED}"Cancelling Additional Checks${TEXTRESET}"
-#    echo "Exiting..."
-#    sleep 10
-#    exit
-#  fi
-
+x=$(cat /var/lib/tftpboot/mon_switch/$IP-shver |grep "Cisco IOS XE Software, Version" | cut -c32-)
+first=${x%%.*}          # Delete first dot and what follows.
+last=${x##*.}           # Delete up to last dot.
+mid=${x##$first.}       # Delete first number and dot.
+mid=${mid%%.$last}      # Delete dot and last number.
+#echo $first $mid $last
+echo "IOS-XE Version is ${YELLOW}$x${TEXTRESET}"
+ if [ $first -ge 17 ] && [ $mid -ge 3 ] && [ $last -gt 1 ]; then
+    echo "${GREEN}IOS-XE Version Meets Minimum Requirement${TEXTRESET}"
+  else
+    echo "${RED}ERROR: IOS-XE version does not meet the minimum requirement${TEXTRESET}"
+    echo "Supported versions are IOS-XE 17.3 - 17.10.1, and 17.12.3"
+    echo "Please see the following link to download:"
+    echo "https://software.cisco.com/download/home"
+    echo "A CCO ID is required"    
+fi
 
 
  #Is the Switch in INSTALL Mode?
