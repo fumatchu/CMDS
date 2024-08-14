@@ -25,6 +25,7 @@ EOF
 sleep 1
 
 sed -i "/set ntpserver/c\set ntpserver ${NTP}" /root/.meraki_mon_switch/update_ntp_server.exp
+sed -i "/set ntpserver/c\set ntpserver ${NTP}" /root/.meraki_mon_switch/update_ntp_server_single.exp
 
 /root/.meraki_mon_switch/update_ntp_server.exp
 clear
