@@ -101,6 +101,13 @@ sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mon_switch/upd
 sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mon_switch/update_defgw.exp
 sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mon_switch/update_ip_domain_lookup.exp
 sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mon_switch/update_vty.exp
+sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mon_switch/update_aaa_config_single.exp
+sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mon_switch/update_ntp_server_single.exp
+sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mon_switch/update_vty_single.exp
+sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mon_switch/update_ip_name-server_single.exp
+sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mon_switch/update_ip_domain_lookup_single.exp
+sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mon_switch/update_defgw_single.exp
+sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mon_switch/update_iprouting_config_single.exp
 clear
 
 cat <<EOF
@@ -131,6 +138,13 @@ sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_switch/upd
 sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_switch/update_defgw.exp
 sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_switch/update_ip_domain_lookup.exp
 sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_switch/update_vty.exp
+sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_switch/update_aaa_config_single.exp
+sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_switch/update_ntp_server_single.exp
+sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_switch/update_vty_single.exp
+sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_switch/update_ip_name-server_single.exp
+sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_switch/update_ip_domain_lookup_single.exp
+sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_switch/update_defgw_single.exp
+sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_switch/update_iprouting_config_single.exp
 clear
 cat <<EOF
 ${GREEN}Update Server IP${TEXTRESET}
@@ -153,6 +167,13 @@ sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/up
 sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/update_defgw.exp
 sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/update_ip_domain_lookup.exp
 sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/update_vty.exp
+sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/update_aaa_config_single.exp
+sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/update_ntp_server_single.exp
+sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/update_vty_single.exp
+sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/update_ip_name-server_single.exp
+sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/update_ip_domain_lookup_single.exp
+sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/update_defgw_single.exp
+sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/update_iprouting_config_single.exp
 
 clear
 
@@ -241,6 +262,13 @@ sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_config.
 sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_defgw.exp
 sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_ip_domain_lookup.exp
 sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_vty.exp
+sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_aaa_config_single.exp
+sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_ntp_server_single.exp
+sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_vty_single.exp
+sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_ip_name-server_single.exp
+sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_ip_domain_lookup_single.exp
+sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_defgw_single.exp
+sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_iprouting_config_single.exp
 clear
 cat <<EOF
 ${GREEN}Update Complete${TEXTRESET}
@@ -314,7 +342,7 @@ EOF
 sleep 1
 
 sed -i "/set def_gw/c\set def_gw ${GWLR}" /root/.meraki_mon_switch/update_defgw.exp
-
+sed -i "/set def_gw/c\set def_gw ${GWLR}" /root/.meraki_mon_switch/update_defgw_single.exp
 clear
 
 
