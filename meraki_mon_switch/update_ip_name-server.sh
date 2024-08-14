@@ -25,6 +25,7 @@ EOF
 sleep 1
 
 sed -i "/set nameserver/c\set nameserver ${NSIP}" /root/.meraki_mon_switch/update_ip_name-server.exp
+sed -i "/set nameserver/c\set nameserver ${NSIP}" /root/.meraki_mon_switch/update_ip_name-server_single.exp
 
 /root/.meraki_mon_switch/update_ip_name-server.exp
 clear
