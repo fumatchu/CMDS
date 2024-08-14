@@ -44,6 +44,9 @@ echo "IOS-XE Version is ${YELLOW}$x${TEXTRESET}"
     echo "Please see the following link to download:"
     echo "https://software.cisco.com/download/home"
     echo "A CCO ID is required"    
+    sleep2 
+    Exiting...
+    exit
 fi
 
 
