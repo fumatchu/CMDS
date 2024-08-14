@@ -43,3 +43,4 @@ sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_aaa_con
 sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_iprouting_config.exp
 sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_config.exp
 sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_defgw.exp
+sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_vty.exp
