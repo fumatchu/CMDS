@@ -17,6 +17,11 @@ EOF
 read -p "Press Enter to Continue"
 clear
 /root/.meraki_mon_switch/clean.exp
+rm -r -f /root/.meraki_mon_switch/ip_list_single
+sed -i '/^/d' /root/.meraki_mon_switch/ip_list_single
+touch /root/.meraki_mon_switch/ip_list_single
+
+
 clear
 cat <<EOF
 ############################Collection time ${DATE}######################################
@@ -82,7 +87,9 @@ fi
     echo "1" >> /root/.meraki_mon_switch/check.tmp
     echo ${YELLOW}"Attemping to Correct Issue${TEXTRESET}"
     echo " "
-    /root/.meraki_mon_switch/update_vty.exp > /dev/null 2>&1
+    echo $IP >> /root/.meraki_mon_switch/ip_list_single
+    /root/.meraki_mon_switch/update_vty_single.exp > /dev/null 2>&1
+    sed -i '/^/d' /root/.meraki_mon_switch/ip_list_single
     sleep 2
   fi
 
@@ -102,7 +109,9 @@ fi
     echo ${YELLOW}"Attemping to Correct Issue"${TEXTRESET}
     echo " "
     sleep 1 
-    /root/.meraki_mon_switch/update_ntp_server.exp > /dev/null 2>&1
+    echo $IP >> /root/.meraki_mon_switch/ip_list_single
+    /root/.meraki_mon_switch/update_ntp_server_single.exp > /dev/null 2>&1
+    sed -i '/^/d' /root/.meraki_mon_switch/ip_list_single
     sleep 2
   fi
 
@@ -120,7 +129,9 @@ fi
     echo ${YELLOW}"Attemping to Correct Issue"${TEXTRESET}
     echo " "
     sleep 1 
-    /root/.meraki_mon_switch/update_ip_name-server.exp > /dev/null 2>&1
+    echo $IP >> /root/.meraki_mon_switch/ip_list_single
+    /root/.meraki_mon_switch/update_ip_name-server_single.exp > /dev/null 2>&1
+    sed -i '/^/d' /root/.meraki_mon_switch/ip_list_single
     sleep 2
   fi
 
@@ -135,7 +146,9 @@ fi
     echo ${YELLOW}"Attemping to Correct Issue"${TEXTRESET}
     echo " "
     sleep 1 
-    /root/.meraki_mon_switch/update_ip_name-server.exp > /dev/null 2>&1
+    echo $IP >> /root/.meraki_mon_switch/ip_list_single
+    /root/.meraki_mon_switch/update_ip_name-server_single.exp > /dev/null 2>&1
+    sed -i '/^/d' /root/.meraki_mon_switch/ip_list_single
     sleep 2
   else
     echo "${GREEN}No Errors${TEXTRESET}"
@@ -156,7 +169,9 @@ fi
     echo ${YELLOW}"Attemping to Correct Issue"${TEXTRESET}
     echo " "
     sleep 1
-    /root/.meraki_mon_switch/update_ip_domain_lookup.exp > /dev/null 2>&1
+    echo $IP >> /root/.meraki_mon_switch/ip_list_single
+    /root/.meraki_mon_switch/update_ip_domain_lookup_single.exp > /dev/null 2>&1
+    sed -i '/^/d' /root/.meraki_mon_switch/ip_list_single
     sleep 2
   fi
 
@@ -173,7 +188,9 @@ fi
     echo "1" >> /root/.meraki_mon_switch/check.tmp
     echo ${YELLOW}"Attemping to Correct Issue"${TEXTRESET}
     echo " "
-    /root/.meraki_mon_switch/update_aaa_config.exp > /dev/null 2>&1
+    echo $IP >> /root/.meraki_mon_switch/ip_list_single
+    /root/.meraki_mon_switch/update_aaa_config_single.exp > /dev/null 2>&1
+    sed -i '/^/d' /root/.meraki_mon_switch/ip_list_single
     sleep 2 
   fi
 
@@ -192,7 +209,9 @@ fi
     echo "1" >> /root/.meraki_mon_switch/check.tmp
     echo ${YELLOW}"Attemping to Correct Issue${TEXTRESET}"
     echo " "
-    /root/.meraki_mon_switch/update_defgw.exp > /dev/null 2>&1
+    echo $IP >> /root/.meraki_mon_switch/ip_list_single
+    /root/.meraki_mon_switch/update_defgw_single.exp > /dev/null 2>&1
+    sed -i '/^/d' /root/.meraki_mon_switch/ip_list_single
     sleep 2
   fi
 
@@ -211,7 +230,9 @@ fi
     echo "1" >> /root/.meraki_mon_switch/check.tmp
     echo ${YELLOW}"Attemping to Correct Issue${TEXTRESET}"
     echo " "
-    /root/.meraki_mon_switch/update_iprouting_config.exp > /dev/null 2>&1
+    echo $IP >> /root/.meraki_mon_switch/ip_list_single
+    /root/.meraki_mon_switch/update_iprouting_config_single.exp > /dev/null 2>&1
+    sed -i '/^/d' /root/.meraki_mon_switch/ip_list_single
     sleep 2
   fi
 
@@ -226,12 +247,13 @@ if grep -q '[^[:space:]]' "/root/.meraki_mon_switch/check.tmp"; then
     echo "Main Menu--> Meraki Pre-Check Collection"
     echo " "
   else
-    echo ${GREEN}"All requirements met ${TEXTRESET}"
+    echo ${GREEN}"All requirements met for Meraki Onboarding ${TEXTRESET}"
     echo " "
     sleep 5
   fi
 
 rm -r -f /root/.meraki_mon_switch/check.tmp
+rm -r -f /root/.meraki_mon_switch/ip_list_single
 echo "${GREEN}Script Complete${TEXTRESET}"
 echo "Returning to the main menu shortly"
 sleep 10
