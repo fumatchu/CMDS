@@ -5,7 +5,7 @@ set switch_user default_user
 set switch_pass default_pass
 set image default_ios_image
 set DATE [timestamp -format %Y%m%d]
-log_file /root/.meraki_mon_wlc/logs/$DATE.log
+log_file /root/.meraki_mon_switch/logs/$DATE.log
 set fh [open /root/.meraki_mon_switch/ip_list r]
 set expected_value_user "default_user"
 spawn echo "$switch_user"
