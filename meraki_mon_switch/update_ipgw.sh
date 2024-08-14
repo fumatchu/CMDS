@@ -25,6 +25,7 @@ EOF
 sleep 1
 
 sed -i "/set def_gw/c\set def_gw ${GWLR}" /root/.meraki_mon_switch/update_defgw.exp
+sed -i "/set def_gw/c\set def_gw ${GWLR}" /root/.meraki_mon_switch/update_defgw_single.exp
 
 /root/.meraki_mon_switch/update_defgw.exp
 clear
