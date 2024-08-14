@@ -5,7 +5,7 @@ TEXTRESET=$(tput sgr0)
 RED=$(tput setaf 1)
 YELLOW=$(tput setaf 3)
 GREEN=$(tput setaf 2)
-IPDEFGW=$(cat /var/lib/tftpboot/mon_switch/${IP} | grep "ip default-gateway" | grep "ip default-gateway" | cut -c 20-)
+IPDEFGW=$(cat /var/lib/tftpboot/mon_switch/${IP} | grep "ip default-gateway" | cut -c 20-)
 
 if [ "$IPDEFGW" = "" ]; then
     echo "${RED}Did not find an ip default-gateway statement"
