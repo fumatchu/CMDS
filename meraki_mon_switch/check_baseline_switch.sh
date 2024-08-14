@@ -214,7 +214,7 @@ if grep -q '[^[:space:]]' "/root/.meraki_mon_switch/check.tmp"; then
     echo "Main Menu--> Meraki Pre-Check Collection"
     echo " "
   else
-    echo ${GREEN}"All requirements met ${TEXTRESET}"
+    echo ${GREEN}"All requirements met for all switches! ${TEXTRESET}"
     echo " "
     sleep 5
   fi
