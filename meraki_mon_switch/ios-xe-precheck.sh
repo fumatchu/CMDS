@@ -8,7 +8,6 @@ cat << EOF
 ${GREEN}
 IOS-XE Version Check
 ${TEXTRSET}
-
 EOF
 # Read file line-by-line to get an IP address
 while read -r IP; do
