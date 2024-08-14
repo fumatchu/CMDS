@@ -253,7 +253,7 @@ read -p "Press Enter When Ready"
 
 nano /root/.meraki_mon_switch/ip_list
 clear
-
+echo "${GREEN}Provide an NTP Server IP address${TEXTRESET}"
 read -p "Please provide the NTP IP address you would like to use for time syncronization (If Needed): " NTP
 while [ -z "$NTP" ]; do
   echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
@@ -270,7 +270,7 @@ sed -i "/set ntpserver/c\set ntpserver ${NTP}" /root/.meraki_mon_switch/update_n
 
 
 clear
-
+echo "${GREEN}Provide a DNS Server IP address${TEXTRESET}"
 read -p "Please provide the DNS IP address you would like to use for name resolution (If Needed): " NSIP
 while [ -z "$USER" ]; do
   echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
@@ -286,7 +286,13 @@ sleep 1
 sed -i "/set nameserver/c\set nameserver ${NSIP}" /root/.meraki_mon_switch/update_ip_name-server.exp
 
 clear
-
+cat << EOF 
+${GREEN}Provide Default Gateway IP address${TEXTRESET}
+For each subnet of switches you modify, you must provide the corresponding Default-Gateway for the network segment
+This must be changed per subnet and can be done so with the menu option 
+Main Menu --> Utilities --> Deploy Default Route
+One IP Routing is enabled, the switch must have a Gateway of last resort 
+EOF
 read -p "Please provide the IP address you would like to use for the Gateway of Last resort (routing Default Gateway): " GWLR
 while [ -z "$USER" ]; do
   echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
@@ -320,7 +326,5 @@ Routing Default Gateway: ${GREEN}${GWLR}${TEXTRESET}
 Start your first collection by selecting
 ${GREEN}Data Collection and Clean File System Flash${TEXTRESET} from the Main Menu
 
-
-This will return to the Main Menu shortly
 EOF
 read -p "Press Enter When Ready"
