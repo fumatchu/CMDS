@@ -292,6 +292,7 @@ For each subnet of switches you modify, you must provide the corresponding Defau
 This must be changed per subnet and can be done so with the menu option 
 Main Menu --> Utilities --> Deploy Default Route
 One IP Routing is enabled, the switch must have a Gateway of last resort 
+If IP routing is already enabled, the server will detect this, and bypass updating the Gateway of last resort
 EOF
 read -p "Please provide the IP address you would like to use for the Gateway of Last resort (routing Default Gateway): " GWLR
 while [ -z "$USER" ]; do
