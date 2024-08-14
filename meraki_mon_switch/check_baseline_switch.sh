@@ -209,8 +209,10 @@ fi
     echo "1" >> /root/.meraki_mon_switch/check.tmp
     echo ${YELLOW}"Attemping to Correct Issue${TEXTRESET}"
     echo " "
-    echo $IP >> /root/.meraki_mon_switch/ip_list_single
-    /root/.meraki_mon_switch/update_defgw_single.exp > /dev/null 2>&1
+    echo "Looking for a pre-existing statement of ip default-gateway in the config:"
+    sed -i '/IP=/d' /root/.meraki_mon_switch/ip_defgw_check.sh
+    sed -i "3i IP=${IP}" /root/.meraki_mon_switch/ip_defgw_check.sh
+    /root/.meraki_mon_switch/ip_defgw_check.sh
     sed -i '/^/d' /root/.meraki_mon_switch/ip_list_single
     sleep 2
   fi
