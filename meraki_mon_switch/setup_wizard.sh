@@ -300,7 +300,7 @@ EOF
 sleep 1
 
 sed -i "/set ntpserver/c\set ntpserver ${NTP}" /root/.meraki_mon_switch/update_ntp_server.exp
-
+sed -i "/set ntpserver/c\set ntpserver ${NTP}" /root/.meraki_mon_switch/update_ntp_server_single.exp
 
 clear
 echo "${GREEN}Provide a DNS Server IP address${TEXTRESET}"
@@ -317,7 +317,7 @@ EOF
 sleep 1
 
 sed -i "/set nameserver/c\set nameserver ${NSIP}" /root/.meraki_mon_switch/update_ip_name-server.exp
-
+sed -i "/set nameserver/c\set nameserver ${NSIP}" /root/.meraki_mon_switch/update_ip_name-server_single.exp
 clear
 cat << EOF 
 ${GREEN}Provide Default Gateway IP address${TEXTRESET}
