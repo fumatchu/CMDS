@@ -21,6 +21,7 @@ clear
 cat <<EOF
 ############################Collection time ${DATE}######################################
 ${GREEN}Validating Requirements${TEXTRESET}
+
 EOF
 sleep 1
 # Read file line-by-line to get an IP address
@@ -28,7 +29,8 @@ while read -r IP; do
   # Print the IP address to the console
   echo "$IP"
 
-  echo ${GREEN}"Checking IOS-XE Version${TEXTRESET} "
+  echo ${GREEN}"Checking IOS-XE Version${TEXTRESET}"
+  echo " "
 x=$(cat /var/lib/tftpboot/mon_switch/$IP-shver |grep "Cisco IOS XE Software, Version" | cut -c32-)
 first=${x%%.*}          # Delete first dot and what follows.
 last=${x##*.}           # Delete up to last dot.
@@ -38,15 +40,13 @@ mid=${mid%%.$last}      # Delete dot and last number.
 echo "IOS-XE Version is ${YELLOW}$x${TEXTRESET}"
  if [ $first -ge 17 ] && [ $mid -ge 3 ] && [ $last -gt 1 ]; then
     echo "${GREEN}IOS-XE Version Meets Minimum Requirement${TEXTRESET}"
+    echo " "
   else
     echo "${RED}ERROR: IOS-XE version does not meet the minimum requirement${TEXTRESET}"
     echo "Supported versions are IOS-XE 17.3 - 17.10.1, and 17.12.3"
     echo "Please see the following link to download:"
     echo "https://software.cisco.com/download/home"
     echo "A CCO ID is required"    
-    sleep2 
-    Exiting...
-    exit
 fi
 
 
@@ -69,6 +69,25 @@ fi
     
   fi
 
+#Does the Switch allow VTY telnet output?
+  echo "Checking for VTY to allow telnet out"
+  VTY=$(cat /var/lib/tftpboot/mon_switch/${IP}-vty | grep "Allowed output transports are")
+  if [ "$VTY" = "Allowed output transports are telnet ssh." ]; then
+    echo "${GREEN}VTY OUTPUT for Telnet ALLOWED${TEXTRESET}"
+    echo " "
+  else
+    echo ${RED}"ERROR: VTY Lines must allow telnet for connectivity checking to *.tlsgw.meraki.com 443. It MUST be enabled${TEXTRESET}"
+    echo ${YELLOW}"This can be manually corrected with Main Menu-->Utilities-->Deploy Global VTY Change for telnet output ${TEXTRESET}"
+    echo " "
+    echo "1" >> /root/.meraki_mon_switch/check.tmp
+    echo ${YELLOW}"Attemping to Correct Issue${TEXTRESET}"
+    echo " "
+    /root/.meraki_mon_switch/update_vty.exp > /dev/null 2>&1
+    sleep 2
+  fi
+
+
+
   #NTP Sync?
   echo "Checking NTP"
   NTP=$(cat /var/lib/tftpboot/mon_switch/${IP}-ntpsta | grep synchronized | sed -e 's/,.*$//' | cut -c10-)
@@ -86,10 +105,6 @@ fi
     /root/.meraki_mon_switch/update_ntp_server.exp > /dev/null 2>&1
     sleep 2
   fi
-  #cat <<EOF
-
-  #EOF
-
 
 #Does the Switch report at least one DNS entry if DHCP?
   echo "Checking for DNS Entry if DHCP assigned"
@@ -129,8 +144,6 @@ fi
 
 
 #Check if we have domain lookup configured
-
-
   echo "Checking for ip domain lookup Entry"
   LOOKUP=$(cat /var/lib/tftpboot/mon_switch/${IP}-lookup | head -6 | grep "Domain lookup" | cut -c20-)
   if [ "$LOOKUP" = "enabled" ]; then
@@ -148,7 +161,6 @@ fi
   fi
 
 #Check for aaa new-model
-
   echo "Checking for aaa new-model entry"
   AAA=$(cat /var/lib/tftpboot/mon_switch/${IP} | grep "aaa new-model")
   if [ "$AAA" = "aaa new-model" ]; then
@@ -214,7 +226,7 @@ if grep -q '[^[:space:]]' "/root/.meraki_mon_switch/check.tmp"; then
     echo "Main Menu--> Meraki Pre-Check Collection"
     echo " "
   else
-    echo ${GREEN}"All requirements met for all switches! ${TEXTRESET}"
+    echo ${GREEN}"All requirements met ${TEXTRESET}"
     echo " "
     sleep 5
   fi
