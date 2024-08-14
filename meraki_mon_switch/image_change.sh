@@ -44,3 +44,12 @@ sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_iprouti
 sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_config.exp
 sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_defgw.exp
 sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_vty.exp
+sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_aaa_config_single.exp
+sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_ntp_server_single.exp
+sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_vty_single.exp
+sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_ip_name-server_single.exp
+sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_ip_domain_lookup_single.exp
+sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_defgw_single.exp
+sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_iprouting_config_single.exp
+
+
