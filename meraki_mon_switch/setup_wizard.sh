@@ -296,7 +296,8 @@ ${GREEN}Provide Default Gateway IP address${TEXTRESET}
 For each subnet of switches you modify, you must provide the corresponding Default-Gateway for the network segment
 This must be changed per subnet and can be done so with the menu option 
 Main Menu --> Utilities --> Deploy Default Route
-One IP Routing is enabled, the switch must have a Gateway of last resort 
+${RED}*THIS MUST BE DONE FOR EACH SUBNET OF SWITCHES, OTHERWISE, CONNECTIVITY WILL BE LOST*${TEXTRESET}
+Once IP Routing is enabled, the switch must have a Gateway of last resort
 If IP routing is already enabled, the server will detect this, and bypass updating the Gateway of last resort
 
 EOF
