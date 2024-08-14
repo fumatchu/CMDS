@@ -1,6 +1,6 @@
 #!/bin/bash
 #Pre-Check Script
-IP=192.168.241.42
+IP=
 TEXTRESET=$(tput sgr0)
 RED=$(tput setaf 1)
 YELLOW=$(tput setaf 3)
