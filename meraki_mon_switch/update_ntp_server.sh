@@ -19,7 +19,6 @@ while [ -z "$NTP" ]; do
 done
 clear
 cat <<EOF
-${GREEN}Updating ntp name server with IP address ${NTP} ${TEXTRESET}
 
 EOF
 sleep 1
@@ -27,10 +26,14 @@ sleep 1
 sed -i "/set ntpserver/c\set ntpserver ${NTP}" /root/.meraki_mon_switch/update_ntp_server.exp
 sed -i "/set ntpserver/c\set ntpserver ${NTP}" /root/.meraki_mon_switch/update_ntp_server_single.exp
 
+
+read -r -p "Would you like to deploy these changes over the Batch now? [y/N]" -n 1
+echo # (optional) move to a new line
+if [[ "$REPLY" =~ ^[Yy]$ ]]; then
+  clear
+  ${GREEN}Updating ntp name server with IP address ${NTP} ${TEXTRESET}
+  sleep 1
 /root/.meraki_mon_switch/update_ntp_server.exp
-clear
-cat <<EOF
-${GREEN}Gathering new Data${TEXTRESET}
-EOF
-sleep 1
-/root/.meraki_mon_switch/update_config.exp
+fi
+echo ${GREEN}"Script Complete"${TEXTRESET}
+sleep 2
