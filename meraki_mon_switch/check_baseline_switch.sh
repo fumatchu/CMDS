@@ -216,7 +216,7 @@ fi
     echo "Looking for a pre-existing statement of ip default-gateway in the config:"
     sed -i '/IP=/d' /root/.meraki_mon_switch/ip_defgw_check.sh
     sed -i "3i IP=${IP}" /root/.meraki_mon_switch/ip_defgw_check.sh
-    /root/.meraki_mon_switch/ip_defgw_check.sh
+    /root/.meraki_mon_switch/ip_defgw_check.sh > /dev/null 2>&1
     sed -i '/^/d' /root/.meraki_mon_switch/ip_list_single
     sleep 2
   fi
