@@ -330,6 +330,11 @@ Main Menu --> Utilities --> Deploy Default Route
 ${RED}*THIS MUST BE DONE FOR EACH SUBNET OF SWITCHES, OTHERWISE, CONNECTIVITY WILL BE LOST*${TEXTRESET}
 Once IP Routing is enabled, the switch must have a Gateway of last resort
 If IP routing is already enabled, the server will detect this, and bypass updating the Gateway of last resort
+If the switch has the statement "ip default-gateway" programmed, the server will use that
+Order of operations on selection:
+If ip routing is enabled and GW of last resort, server will ignore
+If ip default-gateway is programmed, server will use that from switch config
+If routing is not enabled, and there is no ip defaut-gateway statement, the server will default to what you specify here
 
 EOF
 read -p "Please provide the IP address you would like to use for the Gateway of Last resort (routing Default Gateway): " GWLR
