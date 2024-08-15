@@ -1,5 +1,5 @@
 #!/bin/bash
-#Set the command ip name-server
+#Set the aaa
 TEXTRESET=$(tput sgr0)
 RED=$(tput setaf 1)
 YELLOW=$(tput setaf 3)
@@ -34,7 +34,7 @@ login authentication CON0
 
 EOF
 
-read -r -p "Would you like to deploy these aaa changes? [y/N]" -n 1
+read -r -p "Would you like to deploy these changes to all switches now? [y/N]" -n 1
 echo # (optional) move to a new line
 if [[ "$REPLY" =~ ^[Yy]$ ]]; then
   clear
@@ -42,10 +42,5 @@ if [[ "$REPLY" =~ ^[Yy]$ ]]; then
   sleep 1
   /root/.meraki_mon_switch/update_aaa_config.exp
 fi
-
-clear
-cat <<EOF
-${GREEN}Gathering new Data${TEXTRESET}
-EOF
-sleep 1
-/root/.meraki_mon_switch/update_config.exp
+echo ${GREEN}"Script Complete"${TEXTRESET}
+sleep 2
