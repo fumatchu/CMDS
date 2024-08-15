@@ -25,7 +25,6 @@ ${YELLOW}
 17.9.5 (MD)
 ${TEXTRESET}
 
-It is highly suggested to upgrade to 17.12.3
 EOF
 
 read -p "Press Enter When Ready"
@@ -38,7 +37,6 @@ The file directory is located at:
 You should start uploading them now as you will specify the image in a couple of screens
 
 You can accomplish this by uploading the files via SCP and copying them, or you can login to this server at
-
 EOF
 
 echo "https://$IP:9090/=$IP/navigator" | tr -d '[:blank:]'
@@ -239,8 +237,9 @@ the FULL IOS image that is used on 9300/9500 and the "Lite" image that is used f
 
 EOF
 
-ls -al /var/lib/tftpboot/images
-
+cd /var/lib/tftpboot/images
+echo ${GREEN}"Current MD5 Checksums and Image Names"${TEXTRESET}
+md5sum ./*
 echo " "
 read -p "Please specify the image you would like to use: " IMAGE
 while [ -z "$IMAGE" ]; do
@@ -251,6 +250,7 @@ done
 cat <<EOF
 ${GREEN}Updating Preference${TEXTRESET}
 EOF
+
 sleep 1
 
 sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/clean.exp
@@ -334,8 +334,8 @@ If IP routing is already enabled, the server will detect this, and bypass updati
 If the switch has the statement "ip default-gateway" programmed, the server will use that
 
 Order of operations on selection:
-If ip routing is enabled and GW of last resort, server will ignore
-If ip default-gateway is programmed, server will use that from switch config
+If ip routing is enabled and GW of last resort is set, server will ignore and continue processing
+If ip default-gateway is programmed, server will use that entry as the gateway of last resort
 If routing is not enabled, and there is no ip defaut-gateway statement, the server will default to what you specify here
 
 EOF
