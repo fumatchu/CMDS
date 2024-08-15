@@ -27,7 +27,7 @@ sed -i "/set ntpserver/c\set ntpserver ${NTP}" /root/.meraki_mon_switch/update_n
 sed -i "/set ntpserver/c\set ntpserver ${NTP}" /root/.meraki_mon_switch/update_ntp_server_single.exp
 
 
-read -r -p "Would you like to deploy these changes over the Batch now? [y/N]" -n 1
+read -r -p "Would you like to deploy these changes to all switches now? [y/N]" -n 1
 echo # (optional) move to a new line
 if [[ "$REPLY" =~ ^[Yy]$ ]]; then
   clear
