@@ -332,6 +332,7 @@ ${RED}*THIS MUST BE DONE FOR EACH SUBNET OF SWITCHES, OTHERWISE, CONNECTIVITY WI
 Once IP Routing is enabled, the switch must have a Gateway of last resort
 If IP routing is already enabled, the server will detect this, and bypass updating the Gateway of last resort
 If the switch has the statement "ip default-gateway" programmed, the server will use that
+
 Order of operations on selection:
 If ip routing is enabled and GW of last resort, server will ignore
 If ip default-gateway is programmed, server will use that from switch config
