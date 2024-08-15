@@ -239,7 +239,7 @@ EOF
 
 cd /var/lib/tftpboot/images
 echo ${GREEN}"Current MD5 Checksums and Image Names"${TEXTRESET}
-md5sum ./*
+md5sum ./* | sed -e 's/\.\///'
 echo " "
 read -p "Please specify the image you would like to use: " IMAGE
 while [ -z "$IMAGE" ]; do
