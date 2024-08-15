@@ -10,16 +10,15 @@ cat <<EOF
 ${GREEN}Update Switch with ip domain lookup ${TEXTRESET}
 This will allow you to update the ip domain lookup command
 
-${GREEN}Updating switch with "ip domain lookup" command ${TEXTRESET}
-
 EOF
 
-sleep 3
-
-/root/.meraki_mon_switch/update_ip_domain_lookup.exp
-clear
-cat <<EOF
-${GREEN}Gathering new Data${TEXTRESET}
-EOF
-sleep 1
-/root/.meraki_mon_switch/update_config.exp
+read -r -p "Would you like to deploy these changes to all switches now? [y/N]" -n 1
+echo # (optional) move to a new line
+if [[ "$REPLY" =~ ^[Yy]$ ]]; then
+  clear
+  echo ${GREEN}"Updating domain lookup command${TEXTRESET}"
+  sleep 1
+  /root/.meraki_mon_switch/update_ip_domain_lookup.exp
+fi
+echo ${GREEN}"Script Complete"${TEXTRESET}
+sleep 2
