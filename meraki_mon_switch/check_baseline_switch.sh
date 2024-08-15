@@ -51,7 +51,11 @@ echo "IOS-XE Version is ${YELLOW}$x${TEXTRESET}"
     echo "Supported versions are IOS-XE 17.3 - 17.10.1, and 17.12.3"
     echo "Please see the following link to download:"
     echo "https://software.cisco.com/download/home"
-    echo "A CCO ID is required"    
+    echo "A CCO ID is required"  
+    sleep 5
+    echo "Exiting the Check"
+    sleep 2
+    
 fi
 
 
