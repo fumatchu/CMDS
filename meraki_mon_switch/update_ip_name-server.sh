@@ -17,20 +17,17 @@ while [ -z "$USER" ]; do
   echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
   read -p "Please provide the DNS IP address you would like to use for name resolution: " NSIP
 done
-clear
-cat <<EOF
-${GREEN}Updating ip name server with IP address ${NSIP} ${TEXTRESET}
-
-EOF
-sleep 1
 
 sed -i "/set nameserver/c\set nameserver ${NSIP}" /root/.meraki_mon_switch/update_ip_name-server.exp
 sed -i "/set nameserver/c\set nameserver ${NSIP}" /root/.meraki_mon_switch/update_ip_name-server_single.exp
 
-/root/.meraki_mon_switch/update_ip_name-server.exp
-clear
-cat <<EOF
-${GREEN}Gathering new Data${TEXTRESET}
-EOF
-sleep 1
-/root/.meraki_mon_switch/update_config.exp
+read -r -p "Would you like to deploy these changes to all switches now? [y/N]" -n 1
+echo # (optional) move to a new line
+if [[ "$REPLY" =~ ^[Yy]$ ]]; then
+  clear
+  echo ${GREEN}"Updating Switches with ip name-server ${NSIP}${TEXTRESET}"
+  sleep 1
+ /root/.meraki_mon_switch/update_ip_name-server.exp
+fi
+echo ${GREEN}"Script Complete"${TEXTRESET}
+sleep 2
