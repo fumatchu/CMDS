@@ -38,6 +38,7 @@ The file directory is located at:
 You should start uploading them now as you will specify the image in a couple of screens
 
 You can accomplish this by uploading the files via SCP and copying them, or you can login to this server at
+
 EOF
 
 echo "https://$IP:9090/=$IP/navigator" | tr -d '[:blank:]'
