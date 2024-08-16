@@ -329,12 +329,9 @@ For each subnet of switches you modify, you must provide the corresponding Defau
 This must be changed per subnet and can be done so with the menu option 
 Main Menu --> Utilities --> Deploy Default Route
 ${RED}*THIS MUST BE DONE FOR EACH SUBNET OF SWITCHES, OTHERWISE, CONNECTIVITY WILL BE LOST*${TEXTRESET}
-Once IP Routing is enabled, the switch must have a Gateway of last resort
-If IP routing is already enabled, the server will detect this, and bypass updating the Gateway of last resort
-If the switch has the statement "ip default-gateway" programmed, the server will use that
 
 Order of operations on selection:
-If ip routing is enabled and GW of last resort is set, server will ignore and continue processing
+If GW of last resort is set (ip route 0.0.0.0/0), server will ignore and continue processing
 If ip default-gateway is programmed, server will use that entry as the gateway of last resort
 If routing is not enabled, and there is no ip defaut-gateway statement, the server will default to what you specify here
 
