@@ -54,10 +54,19 @@ The server will want to be prompted in enable mode already (SSH should be enable
 An Example configuration on the WLC:
 
 i.e. 
-aaa new-model
+For General AAA and SSH:
+
+aaa new-model 
 aaa authentication login default local
 aaa authentication enable default enable
 aaa authorization exec default local if-authenticated
+
+For the console:
+aaa authentication login CON0 local
+aaa authorization exec CON0 if-authenticated
+aaa authorization console
+line con 0 
+login authentication CON0
 
 Scenarios may differ in setups. However, it is expected that when the server logs into the WLC, it be presented with already
 being in enable mode.
