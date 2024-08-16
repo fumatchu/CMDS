@@ -1,8 +1,8 @@
 #!/usr/bin/expect -f
 set timeout -1
 set server_ip default_server
-set switch_user admin
-set switch_pass Nocompromise75!!
+set switch_user default_user
+set switch_pass default_pass
 set nameserver default_server
 set image default_ios_image
 set DATE [timestamp -format %Y%m%d]
