@@ -131,7 +131,7 @@ while read -r IP; do
     echo " "
     sleep 1 
     echo $IP >> /root/.meraki_mon_wlc/ip_list_single
-    /root/.meraki_mon_wlc/update_ip_name-server_single.exp
+    /root/.meraki_mon_wlc/update_ip_name-server_single.exp > /dev/null 2>&1
     sed -i '/^/d' /root/.meraki_mon_wlc/ip_list_single
     sleep 2
   else
@@ -155,7 +155,7 @@ while read -r IP; do
     echo " "
     sleep 1
     echo $IP >> /root/.meraki_mon_wlc/ip_list_single
-    /root/.meraki_mon_wlc/update_ip_domain_lookup_single.exp
+    /root/.meraki_mon_wlc/update_ip_domain_lookup_single.exp > /dev/null 2>&1
     sed -i '/^/d' /root/.meraki_mon_wlc/ip_list_single
     sleep 2
   fi
