@@ -10,6 +10,7 @@ IPDEFGW=$(cat /var/lib/tftpboot/mon_switch/${IP} | grep "ip default-gateway" | c
 if [ "$IPDEFGW" = "" ]; then
     echo "${RED}Did not find an ip default-gateway statement${TEXTRESET}"
     echo "${YELLOW}Using user programmed gateway of last resort${TEXTRESET}"
+    echo " "
     echo $IP >> /root/.meraki_mon_switch/ip_list_single
     /root/.meraki_mon_switch/update_defgw_single.exp > /dev/null 2>&1
     sed -i '/^/d' /root/.meraki_mon_switch/ip_list_single
