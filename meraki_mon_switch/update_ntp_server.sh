@@ -17,10 +17,7 @@ while [ -z "$NTP" ]; do
   echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
   read -p "Please provide the NTP IP address you would like to use for time syncronization: " NTP
 done
-clear
-cat <<EOF
 
-EOF
 sleep 1
 
 sed -i "/set ntpserver/c\set ntpserver ${NTP}" /root/.meraki_mon_switch/update_ntp_server.exp
