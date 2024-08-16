@@ -22,7 +22,9 @@ If you have 9200's and 9300/9500's in your envrionment, the server must decipher
 the FULL IOS image that is used on 9300/9500 and the "Lite" image that is used for 9200's.
 
 EOF
-ls -al /var/lib/tftpboot/images
+echo ${GREEN}"Current MD5 Checksums and Image Names"${TEXTRESET}
+md5sum ./* | sed -e 's/\.\///'
+echo " "
 
 echo " "
 read -p "Please specify the image you would like to use: " IMAGE
