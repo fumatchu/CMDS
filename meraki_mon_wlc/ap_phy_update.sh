@@ -12,7 +12,7 @@ items=(1 "Update all AP(s) to same Physical Address"
 )
 
 while choice=$(dialog --title "$TITLE" \
-  --backtitle "CMDS-->Main Menu" \
+  --backtitle "Catalyst Monitoring for Wireless-->Main Menu-->AP Update Options" \
   --menu "Please select" 30 65 3 "${items[@]}" \
   2>&1 >/dev/tty); do
   case $choice in
