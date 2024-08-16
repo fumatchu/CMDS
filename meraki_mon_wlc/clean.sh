@@ -14,10 +14,24 @@ Please make sure you have SSH enabled.
  
 This can be accomplished by providing the basic AAA information to the WLC:
 
+For General AAA and SSH:
+
 aaa new-model 
 aaa authentication login default local
 aaa authentication enable default enable
 aaa authorization exec default local if-authenticated
+aaa authentication login CON0 local
+aaa authorization exec CON0 if-authenticated
+aaa authorization console
+line con 0 
+login authentication CON0
+
+You can implement these changes vis the GUI on the WLC
+ -Login to the WLC GUI
+ -Select Administration --> Command Line Interface
+ -Select the "Configure" Radio Button
+ -Paste the above commands (aaa new-model to login Authentication CON0) in the "Enter the config command here"
+ -Press the "Run Command" button
 
 Please make sure you have minimally setup access for SSH first, before continuing
 
