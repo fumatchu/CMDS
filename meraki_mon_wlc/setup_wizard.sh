@@ -253,13 +253,55 @@ read -p "Press Enter When Ready"
 
 nano /root/.meraki_mon_wlc/ip_list
 clear
+clear
+echo "${GREEN}Provide an NTP Server IP address${TEXTRESET}"
+read -p "Please provide the NTP IP address you would like to use for time syncronization (If Needed): " NTP
+while [ -z "$NTP" ]; do
+  echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+  read -p "Please provide the NTP IP address you would like to use for time syncronization: " NTP
+done
+clear
+cat <<EOF
+${GREEN}Updating ntp name server with IP address ${NTP} ${TEXTRESET}
+
+EOF
+sleep 1
+
+sed -i "/set ntpserver/c\set ntpserver ${NTP}" /root/.meraki_mon_wlc/update_ntp_server.exp
+sed -i "/set ntpserver/c\set ntpserver ${NTP}" /root/.meraki_mon_wlc/update_ntp_server_single.exp
+
+clear
+echo "${GREEN}Provide a DNS Server IP address${TEXTRESET}"
+read -p "Please provide the DNS IP address you would like to use for name resolution (If Needed): " NSIP
+while [ -z "$USER" ]; do
+  echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+  read -p "Please provide the DNS IP address you would like to use for name resolution: " NSIP
+done
+clear
+cat <<EOF
+${GREEN}Updating ip name server with IP address ${NSIP} ${TEXTRESET}
+
+EOF
+sleep 1
+
+sed -i "/set nameserver/c\set nameserver ${NSIP}" /root/.meraki_mon_wlc/update_ip_name-server.exp
+sed -i "/set nameserver/c\set nameserver ${NSIP}" /root/.meraki_mon_wlc/update_ip_name-server_single.exp
+clear
+
 cat <<EOF
 The Wizard is complete!
+
+The following information has ben set:
+Username to login to the switches: ${GREEN}${USER}${TEXTRESET}
+Password to login to the switches: ${GREEN}${PASS}${TEXTRESET}
+Active IOS-XE Images to Use: ${GREEN}${IMAGE}${TEXTRESET}
+NTP Server: ${GREEN}${NTP}${TEXTRESET}
+DNS IP Address: ${GREEN}${NSIP}${TEXTRESET}
+
 
 Start your first collection by selecting
 ${GREEN}Data Collection and Clean File System Flash${TEXTRESET} from the Main Menu
 
-
-This will return to the Main Menu shortly
 EOF
-sleep 5
+read -p "Press Enter When Ready"
+
