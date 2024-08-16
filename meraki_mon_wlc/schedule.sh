@@ -10,7 +10,7 @@ items=(1 "Schedule IOS-XE Image Deployment"
 )
 
 while choice=$(dialog --title "$TITLE" \
-  --backtitle "CMDS-Main Menu-->Scheduler" \
+  --backtitle "Catalyst Monitoring for Wireless-->Main Menu-->Scheduler" \
   --menu "Please select" 15 65 3 "${items[@]}" \
   2>&1 >/dev/tty); do
   case $choice in
