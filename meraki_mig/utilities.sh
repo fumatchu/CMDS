@@ -15,7 +15,7 @@ items=(1 "Ping Sweep Active Switches"
 )
 
 while choice=$(dialog --title "$TITLE" \
-  --backtitle "CMDS-Main Menu -->Utilities" \
+  --backtitle "Catalyst Migration to Dashboard-->Main Menu-->Utilities" \
   --menu "Please select" 15 65 3 "${items[@]}" \
   2>&1 >/dev/tty); do
   case $choice in
