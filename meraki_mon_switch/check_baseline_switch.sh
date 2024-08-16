@@ -55,7 +55,7 @@ echo "IOS-XE Version is ${YELLOW}$x${TEXTRESET}"
     sleep 5
     echo "Exiting the Check"
     sleep 2
-    
+    exit    
 fi
 
 
