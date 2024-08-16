@@ -15,7 +15,7 @@ items=(1 "Active Logging"
 )
 
 while choice=$(dialog --title "$TITLE" \
-  --backtitle "Catalyst Wireless Monitoring-->CMDS-->Main Menu-->Log Search" \
+  --backtitle "Catalyst Monitoring for Wireless-->Main Menu-->Log Search" \
   --menu "Please select" 15 65 3 "${items[@]}" \
   2>&1 >/dev/tty); do
   case $choice in
