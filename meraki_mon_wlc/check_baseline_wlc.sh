@@ -65,7 +65,7 @@ while read -r IP; do
     echo "${GREEN}WLC is in INSTALL Mode${TEXTRESET}"
     echo " "
   else
-    echo ${RED}"ERROR: The Switch is in BUNDLE mode. It must be converted to INSTALL Mode First${TEXTRESET}"
+    echo ${RED}"ERROR: The WLC is in BUNDLE mode. It must be converted to INSTALL Mode First${TEXTRESET}"
     echo "Please review the following Link:"
     echo "https://www.cisco.com/c/en/us/support/docs/wireless/catalyst-9800-series-wireless-controllers/217050-convert-installation-mode-between-instal.html#toc-hId-1378002048"
     sleep 10
