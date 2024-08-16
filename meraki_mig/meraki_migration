@@ -18,9 +18,12 @@ At Any time, you can type ${YELLOW}meraki_migration${TEXTRESET} from the cli to 
 "
 sleep 4
 
-items=(1 "Catalyst Migration for c9300 Series Switches"
-  2 "Catalyst Monitoring for Wireless"
+items=(1 "--------Catalyst Switching Tools--------" 
+  2 "Catalyst Migration for c9300 Series Switches"
   3 "Catalyst Monitoring for Switching Prep Tool"
+  4 " "
+  5 "--------Catalyst Wireless Tools--------"
+  6 "Catalyst Monitoring for Wireless"
 )
 
 while choice=$(dialog --title "$TITLE" \
@@ -28,9 +31,12 @@ while choice=$(dialog --title "$TITLE" \
   --menu "Please Select" 30 75 3 "${items[@]}" \
   2>&1 >/dev/tty); do
   case $choice in
-  1) clear & /root/.meraki_mig/menu.sh ;;
-  2) clear & /root/.meraki_mon_wlc/menu.sh ;;
+  1) clear ;;
+  2) clear & /root/.meraki_mig/menu.sh ;;
   3) clear & /root/.meraki_mon_switch/menu.sh ;;
+  4) clear ;;
+  5) clear ;;
+  6) clear & /root/.meraki_mon_wlc/menu.sh ;;
 esac
 done
 clear # clear after user pressed Cancel
