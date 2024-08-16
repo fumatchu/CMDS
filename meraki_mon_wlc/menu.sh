@@ -29,7 +29,7 @@ items=(1 "Data Collection and Clean File System Flash"
 )
 
 while choice=$(dialog --title "$TITLE" \
-  --backtitle "Catalyst Wireless Monitoring-->CMDS-->Main Menu" \
+  --backtitle "Catalyst Wireless Monitoring-->Main Menu" \
   --menu "Please select" 30 65 3 "${items[@]}" \
   2>&1 >/dev/tty); do
   case $choice in
