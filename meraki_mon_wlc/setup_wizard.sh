@@ -18,10 +18,16 @@ ${YELLOW}17.12.3${TEXTRESET}
 
 And can be obtained at:
 https://software.cisco.com/download/home/286322524
+EOF
 
+read -p "Press Enter When Ready"
+clear
+cat <<EOF
 The file directory on this server is located at:
 
 /var/lib/tftpboot/images
+
+You should start uploading them now as you will specify the image in a couple of screens
 
 You can accomplish this by uploading the files via SCP and copying them, or you can login to this server at
 
@@ -31,7 +37,6 @@ echo "https://$IP:9090/=$IP/navigator" | tr -d '[:blank:]'
 
 cat <<EOF
 
-and use the Navigator component on the left hand side
 
 Once you have uploaded the IOS images, then you must specify the following (via this wizard):
         -The SSH User (to login to the WLC)
@@ -40,6 +45,8 @@ Once you have uploaded the IOS images, then you must specify the following (via 
         -The Meraki API Key for Dashboard integration
         -The IOS image you would like to use (must be uploaded first)
         -The IP address of the WLC to Monitor (management IP via VLAN)
+        -An NTP Server if needed for the WLC
+        -An IP Address of a DNS Server for the WLC
 
 Please keep in mind that it's required to have a privileged user (15) on the WLC
 The server will want to be prompted in enable mode already (SSH should be enabled on the WLC)
@@ -200,9 +207,11 @@ These are the current images on the Server
 
 EOF
 
-ls -al /var/lib/tftpboot/images
-
+cd /var/lib/tftpboot/images
+echo ${GREEN}"Current MD5 Checksums and Image Names"${TEXTRESET}
+md5sum ./* | sed -e 's/\.\///'
 echo " "
+
 read -p "Please specify the image you would like to use: " IMAGE
 while [ -z "$IMAGE" ]; do
   echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
