@@ -51,23 +51,28 @@ Once you have uploaded the IOS images, then you must specify the following (via 
 
 Please keep in mind that it's required to have a privileged user (15) on the WLC
 The server will want to be prompted in enable mode already (SSH should be enabled on the WLC)
-An Example configuration on the WLC:
+This can be accomplished by providing the basic AAA information to the WLC:
 
-i.e. 
 For General AAA and SSH:
 
 aaa new-model 
 aaa authentication login default local
 aaa authentication enable default enable
 aaa authorization exec default local if-authenticated
-
-For the console:
 aaa authentication login CON0 local
 aaa authorization exec CON0 if-authenticated
 aaa authorization console
 line con 0 
 login authentication CON0
 
+You can implement these changes via the GUI on the WLC
+ -Login to the WLC GUI
+ -Select Administration --> Command Line Interface
+ -Select the "Configure" Radio Button
+ -Paste the above commands (aaa new-model to login Authentication CON0) in the "Enter the config command here"
+ -Press the "Run Command" button
+
+Please make sure you have minimally setup access for SSH first, before continuing
 Scenarios may differ in setups. However, it is expected that when the server logs into the WLC, it be presented with already
 being in enable mode.
 
