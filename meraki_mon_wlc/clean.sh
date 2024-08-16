@@ -26,7 +26,7 @@ aaa authorization console
 line con 0 
 login authentication CON0
 
-You can implement these changes vis the GUI on the WLC
+You can implement these changes via the GUI on the WLC
  -Login to the WLC GUI
  -Select Administration --> Command Line Interface
  -Select the "Configure" Radio Button
