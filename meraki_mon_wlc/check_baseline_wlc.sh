@@ -22,16 +22,24 @@ read -p "Press Enter to Continue"
 clear
 /root/.meraki_mon_wlc/clean.exp
 clear
+
+rm -r -f /root/.meraki_mon_wlc/ip_list_single
+touch /root/.meraki_mon_wlc/ip_list_single
+sed -i '/^/d' /root/.meraki_mon_wlc/ip_list_single
+touch /root/.meraki_mon_wlc/check.tmp
+
+echo "############################Collection time ${DATE}######################################"
 cat <<EOF
-${GREEN}Validating that we are running the approved version of IOS-XE to migrate to Meraki${TEXTRESET}
+${GREEN}Validating Requirements${TEXTRESET}
 EOF
 sleep 1
-echo "############################Collection time ${DATE}######################################"
+
+
 # Read file line-by-line to get an IP address
 while read -r IP; do
   # Print the IP address to the console
   echo "$IP"
-
+  echo " "
   echo ${GREEN}"Checking IOS Version is 17.12.03${TEXTRESET} "
   VERSIONFULL=$(cat /var/lib/tftpboot/wlc/${IP}-shver | grep "Cisco IOS XE Software, Version")
   echo "The Version is:"
@@ -71,12 +79,9 @@ while read -r IP; do
     sleep 10
     echo ${RED}"Exiting...${TEXTRESET}"
   fi
-  #cat <<EOF
-
-  #EOF
 
 
-  #Remnants of an old mmonitoring install?
+  #Remnants of an old monitoring install?
   echo "Making sure meraki user does not exist"
   MERAKI_USER=$(cat /var/lib/tftpboot/wlc/${IP} | grep username | grep meraki)
   if [ "$MERAKI_USER" = "" ]; then
@@ -91,12 +96,7 @@ while read -r IP; do
     sleep 10
     exit
   fi
-  #cat <<EOF
-
-  #EOF
-
-
-
+  
 
   #NTP Sync?
   echo "Checking NTP"
@@ -106,24 +106,34 @@ while read -r IP; do
     echo " "
   else
     echo ${RED}"ERROR: NTP is not syncronized. Please validate that your NTP is configured correctly${TEXTRESET}"
-    echo ${RED}"Exiting...${TEXTRESET}"
-    sleep 5
+    echo ${YELLOW}"This can be manually corrected with Main Menu --> Utilities --> Deploy Global NTP Removal and Update${TEXTRESET}"
+    echo " "
+    echo "1" >> /root/.meraki_mon_wlc/check.tmp
+    echo ${YELLOW}"Attemping to Correct Issue"${TEXTRESET}
+    echo " "
+    sleep 1 
+    echo $IP >> /root/.meraki_mon_wlc/ip_list_single
+    /root/.meraki_mon_wlc/update_ntp_server_single.exp > /dev/null 2>&1
+    sed -i '/^/d' /root/.meraki_mon_wlc/ip_list_single
+    sleep 2
   fi
-  #cat <<EOF
-
-  #EOF
 
 
   #Does the WLC  report at least one DNS entry?
   echo "Checking for DNS Name server"
   STATICNAMESERVER=$(cat /var/lib/tftpboot/wlc/${IP}-shipnm | grep 255.255.255.255)
   if [ "$STATICNAMESERVER" = "255.255.255.255" ]; then
-    echo ${RED}"ERROR: A "name-server" entry  was not found on the WLC"
-    echo ${YELLOW}"Please correct this with Main Menu-->Utilities-->Deploy Global Command for DNS, then try again${TEXTRESET}"
-    echo ${RED}"Cancelling Additional Checks${TEXTRESET}"
-    echo "Exiting..."
-    sleep 5
-    exit
+    echo ${RED}"ERROR: A "name-server" entry  was not found on the switch"
+    echo ${YELLOW}"This can be manually corrected with Main Menu-->Utilities-->Deploy Global Command for DNS${TEXTRESET}"
+    echo " "
+    echo "1" >> /root/.meraki_mon_wlc/check.tmp
+    echo ${YELLOW}"Attemping to Correct Issue"${TEXTRESET}
+    echo " "
+    sleep 1 
+    echo $IP >> /root/.meraki_mon_wlc/ip_list_single
+    /root/.meraki_mon_wlc/update_ip_name-server_single.exp
+    sed -i '/^/d' /root/.meraki_mon_wlc/ip_list_single
+    sleep 2
   else
     echo "${GREEN}No Errors${TEXTRESET}"
     echo " "
@@ -138,23 +148,54 @@ while read -r IP; do
     echo "${GREEN}No Errors${TEXTRESET}"
     echo " "
   else
-    echo "${RED}ERROR${TEXTRESET}"
+    echo "${RED}ERROR: ip domain lookup was not found${TEXTRESET}"
     echo " "
+    echo "1" >> /root/.meraki_mon_wlc/check.tmp
+    echo ${YELLOW}"Attemping to Correct Issue"${TEXTRESET}
+    echo " "
+    sleep 1
+    echo $IP >> /root/.meraki_mon_wlc/ip_list_single
+    /root/.meraki_mon_wlc/update_ip_domain_lookup_single.exp
+    sed -i '/^/d' /root/.meraki_mon_wlc/ip_list_single
+    sleep 2
   fi
 
-#Check for aaa new-model
-
-  echo "Checking for aaa new-model entry"
-  AAA=$(cat /var/lib/tftpboot/wlc/${IP} | grep "aaa new-model")
-  if [ "$AAA" = "aaa new-model" ]; then
-    echo "${GREEN}No Errors${TEXTRESET}"
+#Can we ping outside the Network with name resolution?
+  echo "Pinging google.com"
+  /root/.meraki_mon_wlc/network_test.exp > /root/.meraki_mon_wlc/network_test.tmp
+  PING=$(cat /root/.meraki_mon_wlc/network_test.tmp | grep Success |grep 100 | sed 's/(...........................................//')
+  if [ "$PING" = "Success rate is 100 percent " ]; then
+    echo "${GREEN}Success rate is 100 percent${TEXTRESET}"
     echo " "
   else
-    echo "${RED}ERROR${TEXTRESET}"
+    echo "${YELLOW}WARNING: Expected 5 replies from google.com${TEXTRESET}"
     echo " "
-  fi
+    echo "1" >> /root/.meraki_mon_wlc/check.tmp
+    echo "The response was:"
+    cat /root/.meraki_mon_wlc/network_test.tmp | grep Success 
+    echo " "
+ fi
+
+
 
 done <"$INPUT"
 
-echo "Script Complete"
-sleep 5
+CHECK=$(cat /root/.meraki_mon_wlc/check.tmp | grep 1)
+if grep -q '[^[:space:]]' "/root/.meraki_mon_wlc/check.tmp"; then
+    echo "${RED}The WLC did not pass all checks. Please review the Pre-Check Log (If Needed)${TEXTRESET}"
+    echo "${YELLOW}Main Menu --> Logs --> Meraki Pre Check"
+    echo "CMDS has attempted to correct the issues, please re-run this script"
+    echo "Main Menu--> Meraki Pre-Check Collection"
+    echo " "
+  else
+    echo ${GREEN}"All requirements met for Meraki Onboarding ${TEXTRESET}"
+    echo " "
+    sleep 5
+  fi
+
+rm -r -f /root/.meraki_mon_wlc/check.tmp
+rm -r -f /root/.meraki_mon_wlc/ip_list_single
+rm -r -f /root/.meraki_mon_wlc/network_test.tmp
+echo "${GREEN}Script Complete${TEXTRESET}"
+echo "Returning to the main menu shortly"
+sleep 10
