@@ -111,6 +111,7 @@ sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mon_switch/upd
 sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mon_switch/update_defgw_single.exp
 sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mon_switch/update_iprouting_config_single.exp
 sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mon_switch/network_test.exp
+sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mon_switch/get_ios_ver.exp
 clear
 
 cat <<EOF
@@ -149,6 +150,7 @@ sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_switch/upd
 sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_switch/update_defgw_single.exp
 sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_switch/update_iprouting_config_single.exp
 sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_switch/network_test.exp
+sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_switch/get_ios_ver.exp
 clear
 cat <<EOF
 ${GREEN}Update Server IP${TEXTRESET}
@@ -179,7 +181,7 @@ sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/up
 sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/update_defgw_single.exp
 sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/update_iprouting_config_single.exp
 sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/network_test.exp
-
+sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/get_ios_ver.exp
 clear
 
 cat <<EOF
@@ -276,6 +278,7 @@ sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_ip_name
 sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_ip_domain_lookup_single.exp
 sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_defgw_single.exp
 sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/update_iprouting_config_single.exp
+sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/get_ios_ver.exp
 clear
 cat <<EOF
 ${GREEN}Update Complete${TEXTRESET}
