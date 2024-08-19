@@ -268,8 +268,10 @@ fi
 done <"$INPUT"
 
 #Committing Changes to Switches
-echo "Committing Switch Changes- This may take some time depending on the number of switches.."
-echo "Please wait"
+cat << EOF
+Committing Switch Changes- This may take some time depending on the number of switches..
+Please wait...
+EOF
 /root/.meraki_mon_switch/clean.exp > /dev/null 2>&1
 
 CHECK=$(cat /root/.meraki_mon_switch/check.tmp | grep 1)
