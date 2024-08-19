@@ -251,6 +251,7 @@ fi
   if [ "$PING" = "Success rate is 100 percent " ]; then
     echo "${GREEN}Success rate is 100 percent${TEXTRESET}"
     rm -r -f /root/.meraki_mon_switch/network_test.tmp
+    sed -i '/^/d' /root/.meraki_mon_switch/ip_list_single
     echo " "
   else
     echo "${YELLOW}WARNING: Expected 5 replies from google.com${TEXTRESET}"
@@ -259,6 +260,7 @@ fi
     echo "The response was:"
     cat /root/.meraki_mon_switch/network_test.tmp | grep Success
     rm -r -f /root/.meraki_mon_switch/network_test.tmp
+    sed -i '/^/d' /root/.meraki_mon_switch/ip_list_single
     echo " "
     sleep 2
  fi
