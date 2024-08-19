@@ -7,8 +7,13 @@ INPUT="/root/.meraki_mon_switch/ip_list"
 cat << EOF
 ${GREEN}
 IOS-XE Version Check
-${TEXTRSET}
+${TEXTRESET}
+
+Getting latest information from Switches, Please wait
 EOF
+
+/root/.meraki_mon_switch/get_ios_ver.exp > /dev/null 2>&1
+clear
 # Read file line-by-line to get an IP address
 while read -r IP; do
   # Print the IP address to the console
@@ -31,7 +36,7 @@ echo "IOS-XE Version is ${YELLOW}$x${TEXTRESET}"
     echo "Supported versions are IOS-XE 17.3 - 17.10.1, and 17.12.3"
     echo "Please see the following link to download:"
     echo "https://software.cisco.com/download/home"
-    echo "A CCO ID is required"    
+    echo "A CCO ID is required"
 fi
 done <"$INPUT"
 echo " "
