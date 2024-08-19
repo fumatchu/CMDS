@@ -37,3 +37,4 @@ sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_switch/upd
 sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_switch/update_defgw_single.exp
 sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_switch/update_iprouting_config_single.exp
 sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_switch/network_test.exp
+sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_switch/get_ios_ver.exp
