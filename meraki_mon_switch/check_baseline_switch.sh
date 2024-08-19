@@ -267,6 +267,10 @@ fi
 
 done <"$INPUT"
 
+#Committing Changes to Switches
+echo "Committing Switch Changes- This may take some time depending on the number of switches"
+/root/.meraki_mon_switch/clean.exp > /dev/null 2>&1
+
 CHECK=$(cat /root/.meraki_mon_switch/check.tmp | grep 1)
 if grep -q '[^[:space:]]' "/root/.meraki_mon_switch/check.tmp"; then
     echo "${RED}The Switches did not pass all checks. Please review the Pre-Check Log (If Needed)${TEXTRESET}"
