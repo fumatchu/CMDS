@@ -10,7 +10,7 @@ clear
 
 cat <<EOF
 
-${GREEN}Download Client for Meraki Onboarding ${TEXTRESET}
+${GREEN}Download Cloud Monitoring for Catalyst Application${TEXTRESET}
 
 You can Download the Onboarding client for the Following Operating Systems:
 ${YELLOW}
