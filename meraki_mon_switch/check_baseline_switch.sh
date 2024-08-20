@@ -271,6 +271,7 @@ done <"$INPUT"
 cat << EOF
 Committing Switch Changes- This may take some time depending on the number of switches..
 Please wait...
+
 EOF
 /root/.meraki_mon_switch/clean.exp > /dev/null 2>&1
 
@@ -282,6 +283,7 @@ if grep -q '[^[:space:]]' "/root/.meraki_mon_switch/check.tmp"; then
     echo "Main Menu--> Meraki Pre-Check Collection"
     echo " "
   else
+    echo " "
     echo ${GREEN}"All requirements met for Meraki Onboarding ${TEXTRESET}"
     echo " "
     sleep 5
