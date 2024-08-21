@@ -38,10 +38,10 @@ You can accomplish this by uploading the files via SCP and copying them, or you 
 EOF
 
 echo "https://$IP:9090/=$IP/navigator" | tr -d '[:blank:]'
-
-cat <<EOF
+echo " "
 read -p "Press Enter When Ready"
 
+cat <<EOF
 
 Once you have uploaded the IOS images, then you must specify the following (via this wizard):
         -The SSH User (to login to the WLC)
