@@ -29,7 +29,10 @@ The file directory on this server is located at:
 /var/lib/tftpboot/images
 
 You should start uploading them now as you will specify the image in a couple of screens
-
+${YELLOW}
+When uploading the Catalyst image to the server, please do not rename the file. 
+Use the original file nomenclature from the Cisco Downloads site
+${TEXTRESET}
 You can accomplish this by uploading the files via SCP and copying them, or you can login to this server at
 
 EOF
@@ -37,6 +40,7 @@ EOF
 echo "https://$IP:9090/=$IP/navigator" | tr -d '[:blank:]'
 
 cat <<EOF
+read -p "Press Enter When Ready"
 
 
 Once you have uploaded the IOS images, then you must specify the following (via this wizard):
@@ -212,6 +216,10 @@ Before continuing, please make sure you have uploaded the (IOS-XE) images you wa
 /var/lib/tftpboot/images
 
 You can either upload these via SCP, or you can use the navigator component, mentioned earlier:
+${YELLOW}
+When uploading the Catalyst image to the server, please do not rename the file. 
+Use the original file nomenclature from the Cisco Downloads site
+${TEXTRESET}
 
 EOF
 
@@ -231,7 +239,7 @@ EOF
 
 cd /var/lib/tftpboot/images
 echo ${GREEN}"Current MD5 Checksums and Image Names"${TEXTRESET}
-md5sum ./* | sed -e 's/\.\///'
+md5sum ./C9800* | sed -e 's/\.\///'
 echo " "
 
 read -p "Please specify the image you would like to use: " IMAGE
