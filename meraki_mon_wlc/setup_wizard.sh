@@ -28,7 +28,7 @@ The file directory on this server is located at:
 
 You should start uploading them now as you will specify the image in a couple of screens
 ${YELLOW}
-When uploading the Catalyst image to the server, please do not rename the file. 
+When uploading the Catalyst image to the server, please do not rename the file.
 Use the original file nomenclature from the Cisco Downloads site
 ${TEXTRESET}
 You can accomplish this by uploading the files via SCP and copying them, or you can login to this server at
@@ -38,7 +38,7 @@ EOF
 echo "https://$IP:9090/=$IP/navigator" | tr -d '[:blank:]'
 echo " "
 read -p "Press Enter When Ready"
-
+clear
 cat <<EOF
 
 Once you have uploaded the IOS images, then you must specify the following (via this wizard):
@@ -57,14 +57,14 @@ This can be accomplished by providing the basic AAA information to the WLC:
 
 For General AAA and SSH:
 
-aaa new-model 
+aaa new-model
 aaa authentication login default local
 aaa authentication enable default enable
 aaa authorization exec default local if-authenticated
 aaa authentication login CON0 local
 aaa authorization exec CON0 if-authenticated
 aaa authorization console
-line con 0 
+line con 0
 login authentication CON0
 
 You can implement these changes via the GUI on the WLC
@@ -218,7 +218,7 @@ Before continuing, please make sure you have uploaded the (IOS-XE) images you wa
 
 You can either upload these via SCP, or you can use the navigator component, mentioned earlier:
 ${YELLOW}
-When uploading the Catalyst image to the server, please do not rename the file. 
+When uploading the Catalyst image to the server, please do not rename the file.
 Use the original file nomenclature from the Cisco Downloads site
 ${TEXTRESET}
 
@@ -337,4 +337,3 @@ ${GREEN}Data Collection and Clean File System Flash${TEXTRESET} from the Main Me
 
 EOF
 read -p "Press Enter When Ready"
-
