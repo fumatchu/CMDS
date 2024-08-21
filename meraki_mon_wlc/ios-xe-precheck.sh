@@ -9,7 +9,7 @@ ${GREEN}
 IOS-XE Version Check
 ${TEXTRESET}
 
-Getting latest information from Switches, Please wait
+Getting latest information, Please wait
 EOF
 
 /root/.meraki_mon_wlc/get_ios_ver.exp > /dev/null 2>&1
