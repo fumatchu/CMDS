@@ -21,7 +21,6 @@ https://software.cisco.com/download/home/286322524
 
 EOF
 
-clear
 cat <<EOF
 The file directory on this server is located at:
 
