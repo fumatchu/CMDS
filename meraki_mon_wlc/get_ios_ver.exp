@@ -3,7 +3,7 @@ set timeout -1
 set server_ip default_server
 set switch_user default_user
 set switch_pass default_pass
-set image cat9k_iosxe.17.12.03.SPA.bin
+set image default_ios_image
 set DATE [timestamp -format %Y%m%d]
 log_file /root/.meraki_mon_wlc/logs/$DATE.log
 set fh [open /root/.meraki_mon_wlc/ip_list r]
