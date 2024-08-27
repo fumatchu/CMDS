@@ -6,7 +6,7 @@ set switch_pass default_pass
 set image default_ios_image
 set DATE [timestamp -format %Y%m%d]
 log_file /root/.meraki_mon_wlc/logs/$DATE.log
-set fh [open /root/.meraki_mon_wlc/ip_list r]
+set fh [open /root/.meraki_mon_wlc/ip_list_single r]
 while {[gets $fh ip] != -1} {
 
 spawn rm /root/.ssh/known_hosts
