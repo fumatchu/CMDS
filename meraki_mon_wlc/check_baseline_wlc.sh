@@ -75,7 +75,8 @@ while read -r IP; do
   else
     echo ${RED}"ERROR: The WLC is in BUNDLE mode. It must be converted to INSTALL Mode First${TEXTRESET}"
     echo "Please review the following Link:"
-    echo "https://www.cisco.com/c/en/us/support/docs/wireless/catalyst-9800-series-wireless-controllers/217050-convert-installation-mode-between-instal.html#toc-hId-1378002048"
+    echo "https://www.cisco.com/c/en/us/support/docs/wireless/catalyst-9800-series-wireless-controllers/217050-convert-installation
+-mode-between-instal.html#toc-hId-1378002048"
     sleep 10
     echo ${RED}"Exiting...${TEXTRESET}"
   fi
@@ -88,15 +89,17 @@ while read -r IP; do
     echo "${GREEN}No Meraki User found${TEXTRESET}"
     echo " "
   else
-    echo ${RED}"ERROR: Found an instance of Meraki User in the username DB on the WLC. This must be resolved before proceeding${TEXTRESET}"
+    echo ${RED}"ERROR: Found an instance of Meraki User in the username DB on the WLC. This must be resolved before proceeding${TEX
+TRESET}"
     echo "The usernames meraki-user and meraki-tdluser cannot pre-exist on the WLC when onboarding for Catalyst management"
     echo "Please review the requirements and remediation at:"
-    echo "https://documentation.meraki.com/Cloud_Monitoring_for_Catalyst/Onboarding/Adding_Catalyst_9800_Wireless_Controller_and_Access_Points_to_Dashboard"
+    echo "https://documentation.meraki.com/Cloud_Monitoring_for_Catalyst/Onboarding/Adding_Catalyst_9800_Wireless_Controller_and_Ac
+cess_Points_to_Dashboard"
     echo ${RED}"Exiting...${TEXTRESET}"
     sleep 10
     exit
   fi
-  
+
 
   #NTP Sync?
   echo "Checking NTP"
@@ -106,12 +109,13 @@ while read -r IP; do
     echo " "
   else
     echo ${RED}"ERROR: NTP is not syncronized. Please validate that your NTP is configured correctly${TEXTRESET}"
-    echo ${YELLOW}"This can be manually corrected with Main Menu --> Utilities --> Deploy Global NTP Removal and Update${TEXTRESET}"
+    echo ${YELLOW}"This can be manually corrected with Main Menu --> Utilities --> Deploy Global NTP Removal and Update${TEXTRESET}
+"
     echo " "
     echo "1" >> /root/.meraki_mon_wlc/check.tmp
     echo ${YELLOW}"Attemping to Correct Issue"${TEXTRESET}
     echo " "
-    sleep 1 
+    sleep 1
     echo $IP >> /root/.meraki_mon_wlc/ip_list_single
     /root/.meraki_mon_wlc/update_ntp_server_single.exp > /dev/null 2>&1
     sed -i '/^/d' /root/.meraki_mon_wlc/ip_list_single
@@ -129,7 +133,7 @@ while read -r IP; do
     echo "1" >> /root/.meraki_mon_wlc/check.tmp
     echo ${YELLOW}"Attemping to Correct Issue"${TEXTRESET}
     echo " "
-    sleep 1 
+    sleep 1
     echo $IP >> /root/.meraki_mon_wlc/ip_list_single
     /root/.meraki_mon_wlc/update_ip_name-server_single.exp > /dev/null 2>&1
     sed -i '/^/d' /root/.meraki_mon_wlc/ip_list_single
@@ -162,7 +166,9 @@ while read -r IP; do
 
 #Can we ping outside the Network with name resolution?
   echo "Pinging google.com"
+  echo $IP >> /root/.meraki_mon_wlc/ip_list_single
   /root/.meraki_mon_wlc/network_test.exp > /root/.meraki_mon_wlc/network_test.tmp
+  sed -i '/^/d' /root/.meraki_mon_wlc/ip_list_single
   PING=$(cat /root/.meraki_mon_wlc/network_test.tmp | grep Success |grep 100 | sed 's/(...........................................//')
   if [ "$PING" = "Success rate is 100 percent " ]; then
     echo "${GREEN}Success rate is 100 percent${TEXTRESET}"
@@ -172,10 +178,28 @@ while read -r IP; do
     echo " "
     echo "1" >> /root/.meraki_mon_wlc/check.tmp
     echo "The response was:"
-    cat /root/.meraki_mon_wlc/network_test.tmp | grep Success 
+    cat /root/.meraki_mon_wlc/network_test.tmp | grep Success
     echo " "
  fi
 
+
+#Pinging from Wireless Management Interface
+echo "Pinging google.com from WLAN Management Interface"
+  WVLAN=$(cat /var/lib/tftpboot/wlc/${IP} | grep "wireless management" | cut -c31-)
+  sed -i "/set wvlan/c\set wvlan ${WVLAN}" /root/.meraki_mon_wlc/network_test_wlan.exp
+  /root/.meraki_mon_wlc/network_test_wlan.exp > /root/.meraki_mon_wlc/network_test_wlan.tmp
+  PING=$(cat /root/.meraki_mon_wlc/network_test_wlan.tmp | grep Success |grep 100 | sed 's/(...........................................//')
+  if [ "$PING" = "Success rate is 100 percent " ]; then
+    echo "${GREEN}Success rate is 100 percent${TEXTRESET}"
+    echo " "
+  else
+    echo "${YELLOW}WARNING: Expected 5 replies from google.com${TEXTRESET}"
+    echo " "
+    echo "1" >> /root/.meraki_mon_wlc/check.tmp
+    echo "The response was:"
+    cat /root/.meraki_mon_wlc/network_test_wlan.tmp | grep Success
+    echo " "
+ fi
 
 
 done <"$INPUT"
@@ -195,6 +219,7 @@ if grep -q '[^[:space:]]' "/root/.meraki_mon_wlc/check.tmp"; then
 
 rm -r -f /root/.meraki_mon_wlc/check.tmp
 rm -r -f /root/.meraki_mon_wlc/ip_list_single
+rm -r -f /root/.meraki_mon_wlc/network_test_wlan.tmp
 rm -r -f /root/.meraki_mon_wlc/network_test.tmp
 echo "${GREEN}Script Complete${TEXTRESET}"
 echo "Returning to the main menu shortly"
