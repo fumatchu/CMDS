@@ -33,3 +33,4 @@ sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_wlc/update
 sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_wlc/update_ntp_server_single.exp
 sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_wlc/update_ip_name-server_single.exp
 sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_wlc/network_test.exp
+sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_wlc/network_test_wlan.exp
