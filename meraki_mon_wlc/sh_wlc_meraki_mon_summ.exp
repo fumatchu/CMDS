@@ -71,8 +71,6 @@ send "conf t\r"
 expect "*#"
 send -- "do show meraki connect | redirect tftp://$server_ip/wlc/$ip-wlc_mon_summ\r"
 expect "*#"
-send -- "do show meraki connect | redirect tftp://$server_ip/wlc/wlc_mon_summ\r"
-expect "*#"
 }
 exit
 expect eof
