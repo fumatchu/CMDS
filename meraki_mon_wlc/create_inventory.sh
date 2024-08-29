@@ -4,6 +4,7 @@ TEXTRESET=$(tput sgr0)
 RED=$(tput setaf 1)
 YELLOW=$(tput setaf 3)
 GREEN=$(tput setaf 2)
+HOST=$(hostname -I)
 INPUT="/root/.meraki_mon_wlc/ip_list"
 clear
 cat <<EOF
@@ -15,10 +16,12 @@ EOF
 read -p "Press Enter to Continue"
 clear
 echo "Creating the CSV File"
+echo "Please Wait"
 sleep 1
 
-/root/.meraki_mon_wlc/sh_ap_meraki_mon_summ.exp
+/root/.meraki_mon_wlc/sh_ap_meraki_mon_summ.exp > /dev/null 2>&1
 
+#cp -v /var/lib/tftpboot/wlc/ap_mon_summ /root/.meraki_mon_wlc/ap_mon_summ
 #Remove the Trash at the TOP of Each file
 sed -i 1,6d /var/lib/tftpboot/wlc/*-ap_mon_summ
 
@@ -51,7 +54,7 @@ Please use the Navigator plugin or SCP to download the file for review
 
 EOF
 
-echo "https://$IP:9090/=$IP/navigator" | tr -d '[:blank:]'
+echo "https://$HOST:9090/=$IP/navigator" | tr -d '[:blank:]'
 echo " "
 
 read -p "Press Enter to Exit"
