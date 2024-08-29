@@ -4,7 +4,7 @@ TEXTRESET=$(tput sgr0)
 RED=$(tput setaf 1)
 YELLOW=$(tput setaf 3)
 GREEN=$(tput setaf 2)
-
+INPUT="/root/.meraki_mon_wlc/ip_list"
 clear
 cat <<EOF
 ${GREEN}Register WLC to Cloud${TEXTRESET}
@@ -23,7 +23,7 @@ ${YELLOW}Waiting for WLC Registration${TEXTRESET}
 EOF
 
 echo "Please Wait..."
-i=60;while [ $i -gt 0 ];do if [ $i -gt 9 ];then printf "\b\b$i";else  printf "\b\b $i";fi;sleep 1;i=`expr $i - 1`;done
+i=45;while [ $i -gt 0 ];do if [ $i -gt 9 ];then printf "\b\b$i";else  printf "\b\b $i";fi;sleep 1;i=`expr $i - 1`;done
 clear
 /root/.meraki_mon_wlc/register_wlc_2_cloud_check.exp
 
@@ -32,6 +32,22 @@ clear
 cat <<EOF
 ${GREEN}Current status of WLC Registration${TEXTRESET}
 EOF
-more /var/lib/tftpboot/wlc/sh-meraki-connect
-
-read -p "Press Enter"
+# Read file line-by-line to get an IP address
+while read -r IP; do
+  # Print the IP address to the console
+  echo ${GREEN}"$IP"${TEXTRESET}
+  echo " "
+cat /var/lib/tftpboot/wlc/${IP}-sh-meraki-connect | grep "Fetch State"
+echo " "
+sleep 2
+cat /var/lib/tftpboot/wlc/${IP}-sh-meraki-connect | grep "Meraki Tunnel State" -A 3
+echo " "
+sleep 2
+cat /var/lib/tftpboot/wlc/${IP}-sh-meraki-connect | grep "Meraki Tunnel Config" -A 8
+echo " "
+sleep 2
+cat /var/lib/tftpboot/wlc/${IP}-sh-meraki-connect | grep "Meraki Device Registration" -A 9
+echo " "
+sleep 2
+clear
+done <"$INPUT"
