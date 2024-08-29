@@ -4,7 +4,7 @@ TEXTRESET=$(tput sgr0)
 RED=$(tput setaf 1)
 YELLOW=$(tput setaf 3)
 GREEN=$(tput setaf 2)
-IP=$(hostname -I)
+INPUT="/root/.meraki_mon_wlc/ip_list"
 clear
 cat <<EOF
 ${GREEN}Download AP inventory${TEXTRESET}
@@ -19,13 +19,18 @@ sleep 1
 
 /root/.meraki_mon_wlc/sh_ap_meraki_mon_summ.exp
 
-cp -v /var/lib/tftpboot/wlc/ap_mon_summ /root/.meraki_mon_wlc/ap_mon_summ
+#Remove the Trash at the TOP of Each file
+sed -i 1,6d /var/lib/tftpboot/wlc/*-ap_mon_summ
+
 #Remove spaces
-tr -s ' ' </root/.meraki_mon_wlc/ap_mon_summ >/root/.meraki_mon_wlc/ap_mon_clean
+# Read file line-by-line to get an IP address
+while read -r IP; do
+
+tr -s ' ' </var/lib/tftpboot/wlc/${IP}-ap_mon_summ >>/root/.meraki_mon_wlc/ap_mon_clean
+done <"$INPUT"
+
 #Insert commas
 sed -e "s/ /,/g" </root/.meraki_mon_wlc/ap_mon_clean >>/root/.meraki_mon_wlc/ap_mon_final.csv
-#Remove trash at the top
-sed -i 1,6d /root/.meraki_mon_wlc/ap_mon_final.csv
 
 mkdir /root/wlc_ap_inventory
 
