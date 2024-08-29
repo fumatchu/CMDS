@@ -1,9 +1,9 @@
 #!/usr/bin/expect -f
 set timeout -1
-set server_ip 192.168.245.23
-set switch_user admin
-set switch_pass Nocompromise75!!
-set image C9800-L-universalk9_wlc.17.12.03.SPA.bin
+set server_ip default_server
+set switch_user default_user
+set switch_pass default_pass
+set image default_ios_image
 set DATE [timestamp -format %Y%m%d]
 log_file /root/.meraki_mon_wlc/logs/$DATE.log
 set fh [open /root/.meraki_mon_wlc/ip_list_single r]
