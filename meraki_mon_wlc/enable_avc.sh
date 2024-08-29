@@ -18,17 +18,87 @@ APs must REJOIN (Not reboot) to the WLC after the profile update${TEXTRESET}
 
 EOF
 
-read -r -p "Would you like to continue? [y/N]" -n 1
-echo # (optional) move to a new line
-if [[ "$REPLY" =~ ^[Yy]$ ]]; then
-    clear
+while true; do
 
-    /root/.meraki_mon_wlc/check_license_level.sh
+read -p "Do you want to proceed? (y/n) " yn
 
-    /root/.meraki_mon_wlc/update_config.exp
+case $yn in 
+	[yY] ) " ";
+		break;;
+	[nN] ) echo exiting...;
+		exit;;
+	* ) echo invalid response;;
+esac
 
-    /root/.meraki_mon_wlc/update_wireles_policy.sh
-fi
+done
+clear
+# Read file line-by-line to get an IP address
+while read -r IP; do
+  # Print the IP address to the console
+  clear
+  echo ${GREEN}"$IP"${TEXTRESET}
+#CHECK LICENSE
+  echo ${YELLOW}"Checking License Compatbility ${TEXTRESET} "
+  LICENSE=$(cat /var/lib/tftpboot/wlc/$IP-shver | grep "AIR License Level:" | cut -c20-)
+  echo "The DNA Level of license is:"
+  echo "${LICENSE}"
+  if [ "$LICENSE" == "AIR DNA Advantage" ]; then
+    echo "${GREEN}Version Matches Requirement"${TEXTRESET}
+    echo " "
+    echo "Please make sure that you have the correct QTY of DNA-A licenses to accomodate the AP's for AVC"
+    sleep 5
+  else
+    echo "${RED}ERROR:The License Level does not allow for enabling AVC analytics."${TEXTRESET}
+    echo "${RED}Please Validate that you have DNA Advantage licenses before enabling this feature"${TEXTRESET}
+    echo "Exiting..."
+    sleep 10
+    exit
+  fi
 
-echo "script complete"
+#Get Each WLC Config
+echo $IP >> /root/.meraki_mon_wlc/ip_list_single
+    /root/.meraki_mon_wlc/update_config_single.exp
+    sed -i '/^/d' /root/.meraki_mon_wlc/ip_list_single
+    sleep 2
+
+#Update Wireless policy
+#Get Wireless Profiles
+cat /var/lib/tftpboot/wlc/$IP | grep "wireless profile policy" | cut -c25- >>/root/.meraki_mon_wlc/${IP}-wireless_profile.tmp
+clear
+
+echo "${GREEN}Wireless Profiles Found${TEXTRESET}"
+
+cat /root/.meraki_mon_wlc/${IP}-wireless_profile.tmp
+sleep 5
+
+clear
+echo ${GREEN}"Creating local Flow Exporters${TEXTRESET}"
+sleep 3
+
+echo $IP >> /root/.meraki_mon_wlc/ip_list_single
+/root/.meraki_mon_wlc/update_avc_ta.exp
+sed -i '/^/d' /root/.meraki_mon_wlc/ip_list_single
 sleep 2
+
+clear
+
+file="/root/.meraki_mon_wlc/${IP}-wireless_profile.tmp"
+
+while IFS= read -r line; do
+  #  echo "$line"
+  clear
+  echo ${GREEN}"Updating Policy $line for AVC ${TEXTRESET}"
+  sleep 3
+  echo $IP >> /root/.meraki_mon_wlc/ip_list_single
+  sed -i "/set policy/c\set policy ${line}" /root/.meraki_mon_wlc/update_ip_nbar.exp
+  /root/.meraki_mon_wlc/update_ip_nbar.exp
+  sed -i '/^/d' /root/.meraki_mon_wlc/ip_list_single
+
+done <"$file"
+
+done <"$INPUT"
+rm -r -f /root/.meraki_mon_wlc/*-wireless_profile.tmp
+rm -r -f /root/.meraki_mon_wlc/ip_list_single
+echo "${IP} Complete"
+sleep 3
+clear
