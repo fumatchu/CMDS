@@ -1,10 +1,9 @@
 #!/usr/bin/expect -f
 set timeout -1
-set server_ip 192.168.245.21 
-set switch_user administrator
-set switch_pass Nocompromise75!!
-set nameserver 208.67.222.222
-set image C9800-L-universalk9_wlc.17.12.03.SPA.bin
+set server_ip default_server
+set switch_user default_user
+set switch_pass default_pass
+set image default_image
 set DATE [timestamp -format %Y%m%d]
 log_file /root/.meraki_mon_wlc/logs/$DATE.log
 set fh [open /root/.meraki_mon_wlc/ip_list r]
@@ -66,7 +65,7 @@ send -- "$switch_pass\r"
 expect "*#"
 send "conf t\r"
 expect "*#"
-send -- "service meraki connect\r" 
+send -- "service meraki connect\r"
 expect "*#"
 }
 close $fh
