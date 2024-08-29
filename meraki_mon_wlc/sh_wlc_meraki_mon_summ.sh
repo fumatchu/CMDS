@@ -8,7 +8,7 @@ INPUT="/root/.meraki_mon_wlc/ip_list"
 
 clear
 cat <<EOF
-${GREEN}Creating the AP Regsitration Summary${TEXTRESET}
+${GREEN}Creating the WLC Registration Summary${TEXTRESET}
 EOF
 sleep 2
 cat << EOF
