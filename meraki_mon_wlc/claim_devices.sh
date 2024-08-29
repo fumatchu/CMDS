@@ -1,5 +1,4 @@
 #!/bin/bash
-#Set the command ip name-server
 TEXTRESET=$(tput sgr0)
 RED=$(tput setaf 1)
 YELLOW=$(tput setaf 3)
@@ -40,15 +39,15 @@ This is the Serial Number of the WLC Directly.
 All AP's that are supported, will be onboarded automatically into the Dashboard
 
 If needed, please review the documentation (and supported AP's) at:
-https://documentation.meraki.com/Cloud_Monitoring_for_Catalyst/Getting_Started/Cloud_Monitoring_for_Catalyst_Wireless
-_Requirements
+https://documentation.meraki.com/Cloud_Monitoring_for_Catalyst/Getting_Started/Cloud_Monitoring_for_Catalyst_Wireless_Requir
+ements
 
 
 The Next screen will provide a list of Organizations (if your API key is associated to more than one)
 and allow you to join the serial number to the Organitzation of your choice.
 
-${YELLOW}After claiming is complete, You Must Move the WLC from General inventory to the Network you wish to service 
-for itself and the AP's.${TEXTRESET}
+${YELLOW}After claiming is complete, You Must Move the WLC from General inventory to the Network you wish to service for its
+elf and the AP's.${TEXTRESET}
 
 EOF
 read -p "Press Enter"
