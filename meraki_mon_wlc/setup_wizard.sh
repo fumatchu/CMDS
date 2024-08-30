@@ -276,12 +276,10 @@ sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_wlc/update_ntp_server
 sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_wlc/update_ip_name-server_single.exp
 sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_wlc/update_config_single.exp
 
-cat <<EOF
 ${GREEN}Update Complete${TEXTRESET}
-
 clear
-
-Please provde the IP address of your WLC in the following window.
+cat <<EOF
+Please provde the IP address of your WLC(s) in the following window.
 The list must be dotted decimal notation, no spaces or carriage returns
 Example:
 192.168.210.10
