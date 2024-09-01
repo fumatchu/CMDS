@@ -1,6 +1,6 @@
 #!/bin/bash
 #Meraki-Mig.sh
-#This script installs the Meraki migration server for conversion of c9300 switches to the Meraki dashboard
+#This script installs the Meraki migration server 
 clear
 dnf -y install net-tools dmidecode
 TEXTRESET=$(tput sgr0)
@@ -17,7 +17,6 @@ REVERSE=$(echo "$IP" | {
   IFS=. read q1 q2 q3 q4
   echo "$q3.$q2.$q1"
 })
-MOCKSMBVER=$(dnf provides samba | grep samba | sed '2,4d' | cut -d: -f1 | cut -dx -f1)
 MAJOROS=$(cat /etc/redhat-release | grep -Eo "[0-9]" | sed '$d')
 MINOROS=$(cat /etc/redhat-release | grep -Eo "[0-9]" | sed '1d')
 USER=$(whoami)
