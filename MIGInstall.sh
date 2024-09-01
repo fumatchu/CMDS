@@ -366,7 +366,7 @@ dnf -y install epel-release
 dnf -y install dnf-plugins-core
 dnf config-manager --set-enabled crb
 dnf -y update
-dnf -y install iptraf-ng expect cockpit cockpit-navigator cockpit-storaged dialog bc python python3-pip ntsysv at nano tftp-server
+dnf -y install iptraf-ng expect nmap cockpit cockpit-navigator cockpit-storaged dialog bc python python3-pip ntsysv at nano tftp-server
 pip install meraki
 pip install requests
 
