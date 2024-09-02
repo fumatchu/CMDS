@@ -38,3 +38,4 @@ sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mon_switch/upd
 sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mon_switch/update_iprouting_config_single.exp
 sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mon_switch/network_test.exp
 sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mon_switch/get_ios_ver.exp
+sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mon_switch/discovery.exp
