@@ -8,7 +8,10 @@ GREEN=$(tput setaf 2)
 sed -i '/^/d' /root/.meraki_mon_switch/ip_list
 
 touch /root/.meraki_mon_switch/network_collection.tmp
+cat << EOF
+${GREEN}Network Discovery${TEXTRESET}
 
+EOF
 read -p "Please provide the subnet to scan in CIDR notation (i.e. 192.168.240.0/24): " SUBNET
 while [ -z "$SUBNET" ]; do
   echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
