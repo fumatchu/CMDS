@@ -41,4 +41,5 @@ fi
 done <"$INPUT"
 echo " "
 echo " "
+sleep 1
 read -p "Press Enter to Continue"
