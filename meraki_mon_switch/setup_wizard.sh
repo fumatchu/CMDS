@@ -112,7 +112,6 @@ sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mon_switch/upd
 sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mon_switch/update_iprouting_config_single.exp
 sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mon_switch/network_test.exp
 sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mon_switch/get_ios_ver.exp
-sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mon_switch/discovery.exp
 clear
 
 cat <<EOF
@@ -152,7 +151,6 @@ sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_switch/upd
 sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_switch/update_iprouting_config_single.exp
 sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_switch/network_test.exp
 sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_switch/get_ios_ver.exp
-sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mon_switch/discovery.exp
 clear
 cat <<EOF
 ${GREEN}Update Server IP${TEXTRESET}
@@ -184,7 +182,6 @@ sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/up
 sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/update_iprouting_config_single.exp
 sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/network_test.exp
 sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/get_ios_ver.exp
-sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_switch/discovery.exp
 clear
 
 cat <<EOF
@@ -285,19 +282,7 @@ sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_switch/get_ios_ver.ex
 clear
 cat <<EOF
 ${GREEN}Update Complete${TEXTRESET}
-
-
-Please provde a list of IP addresses, one per line, in the following window.
-The list must be dotted decimal notation, one per line, no spaces or carriage returns
-Here is an example:
-
-192.168.1.1
-192.168.1.2
-192.168.1.3
 EOF
-read -p "Press Enter When Ready"
-
-nano /root/.meraki_mon_switch/ip_list
 clear
 echo "${GREEN}Provide an NTP Server IP address${TEXTRESET}"
 read -p "Please provide the NTP IP address you would like to use for time syncronization (If Needed): " NTP
@@ -360,10 +345,66 @@ sleep 1
 sed -i "/set def_gw/c\set def_gw ${GWLR}" /root/.meraki_mon_switch/update_defgw.exp
 sed -i "/set def_gw/c\set def_gw ${GWLR}" /root/.meraki_mon_switch/update_defgw_single.exp
 clear
+cat <<EOF
+${GREEN}Adding Management IP Addresses to the Server for Collection${TEXTRESET}
+
+There are two ways to collect the IP addresses of the Catalyst Switches that are eligible for onboarding. 
+
+You can:
+
+Manually enter the IP addresses one by one, or
+
+You can use the Network Discovery component.
+
+Network Discovery will login via the subnet you specify, find all devices,
+Then whittle them down to qualified 92/3/5/00 Series switches.
+
+EOF
+
+echo "1. Enter the IP addresses Manually (I already have a list of IP Addresses with qualified devices)"
+echo "2. Network Discovery"
+
+read -p "Select option 1 or 2 " OPTION
+
+while :
+do
+while [ -z "$OPTION" ]; do
+  echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+  read -p "Select option 1 or 2 " OPTION
+done
+# Check for the presence of numbers
+  if ! [[ "$OPTION" =~ [1-2] ]]; then
+    echo "${RED}Please select option 1 or 2 on your keyboard${TEXTRESET} "
+   read -p "Select option 1 or 2: " OPTION
+  fi
+break;
+done
+
+
+if [ "$OPTION" = "1" ]; then
+    clear
+    echo "${GREEN}Manually Adding IP addresses${TEXTRESET}"
+    echo ""
+           echo "Please provde a list of IP addresses, one per line, in the following window."
+       echo "The list must be dotted decimal notation, one per line, no spaces or carriage returns"
+       echo "Here is an example:"
+       echo " "
+       echo "192.168.1.1"
+       echo "192.168.1.2"
+       echo "192.168.1.3"
+       echo " "
+       echo "The Wizard will continue shortly"
+       sleep 10
+       nano /root/.meraki_mon_switch/ip_list
+  else
+    echo "${GREEN}Network Discovery${TEXTRESET}"
+       clear
+        /root/.meraki_mon_switch/network_discovery.sh
+  fi
 
 
 
-
+clear
 cat <<EOF
 The Wizard is complete!
 
