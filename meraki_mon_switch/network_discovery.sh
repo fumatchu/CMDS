@@ -44,3 +44,4 @@ echo "The total timtimated time  to upgrade and install/reboot IOS-XE is:"
 /root/.meraki_mon_switch/time.sh
 
 rm -r -f /root/.meraki_mon_switch/network_collection.tmp
+read -p "Press Enter"
