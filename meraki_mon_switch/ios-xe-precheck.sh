@@ -40,4 +40,5 @@ echo "IOS-XE Version is ${YELLOW}$x${TEXTRESET}"
 fi
 done <"$INPUT"
 echo " "
+echo " "
 read -p "Press Enter to Continue"
