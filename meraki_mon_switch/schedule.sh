@@ -20,7 +20,7 @@ while choice=$(dialog --title "$TITLE" \
   1) /root/.meraki_mon_switch/schedule_clean.sh ;;
   2) /root/.meraki_mon_switch/schedule_deploy_img.sh ;;
   3) /root/.meraki_mon_switch/schedule_deploy.sh ;;
-  4)
+  4) /root/.meraki_mon_switch/schedule_up_and_deploy.sh ;;
   esac
 done
 clear # clear after user pressed Cancel
