@@ -40,7 +40,7 @@ cat_num_devices=$(< /root/.meraki_mon_switch/network_collection.tmp wc -l)
 
 echo "Total Eligible Catalyst Devices (9K): ${cat_num_devices}"
 echo "Adding Eligible Switches to IP Batch List"
-echo "The total timtimated time  to upgrade and install/reboot IOS-XE is:"
+echo "The total timtimated time to upgrade and install/reboot IOS-XE is:"
 /root/.meraki_mon_switch/time.sh
 
 rm -r -f /root/.meraki_mon_switch/network_collection.tmp
