@@ -10,7 +10,8 @@ items=(1 "Active Logging"
   2 "Show Full Log"
   3 "IOS-XE PreCheck"
   4 "Meraki PreCheck"
-  5 "Search Log files"
+  5 "Network Discovery"
+  6 "Search Log files"
 )
 
 while choice=$(dialog --title "$TITLE" \
@@ -22,7 +23,8 @@ while choice=$(dialog --title "$TITLE" \
   2) /root/.meraki_mon_switch/full_log.sh ;;
   3) /root/.meraki_mon_switch/show_ios-xe_pre-log.sh ;;
   4) /root/.meraki_mon_switch/show_pre_log.sh ;;
-  5) /root/.meraki_mon_switch/log_search.sh ;;
+  5) /root/.meraki_mon_switch/network_discovery_log.sh ;;
+  6) /root/.meraki_mon_switch/log_search.sh ;;
   esac
 done
 clear # clear after user pressed Cancel
