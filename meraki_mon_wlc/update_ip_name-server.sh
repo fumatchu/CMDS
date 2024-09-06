@@ -33,8 +33,8 @@ sleep 1
 
 sed -i "/set nameserver1/c\set nameserver1 ${NSIP}" /root/.meraki_mon_wlc/update_ip_name-server.exp
 sed -i "/set nameserver1/c\set nameserver1 ${NSIP}" /root/.meraki_mon_wlc/update_ip_name-server_single.exp
-sed -i "/set nameserver2/c\set nameserver2 ${NSIP}" /root/.meraki_mon_wlc/update_ip_name-server.exp
-sed -i "/set nameserver2/c\set nameserver2 ${NSIP}" /root/.meraki_mon_wlc/update_ip_name-server_single.exp
+sed -i "/set nameserver2/c\set nameserver2 ${NSIP2}" /root/.meraki_mon_wlc/update_ip_name-server.exp
+sed -i "/set nameserver2/c\set nameserver2 ${NSIP2}" /root/.meraki_mon_wlc/update_ip_name-server_single.exp
 
 /root/.meraki_mon_wlc/update_ip_name-server.exp
 clear
