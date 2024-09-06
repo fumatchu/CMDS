@@ -3,7 +3,8 @@ set timeout -1
 set server_ip default_server
 set switch_user default_user
 set switch_pass default_pass
-set nameserver default_ns
+set nameserver1 default_ns
+set nameserver2 default_server
 set image default_ios_image
 set DATE [timestamp -format %Y%m%d]
 log_file /root/.meraki_mon_wlc/logs/$DATE.log
@@ -68,7 +69,9 @@ send "conf t\r"
 expect "*#"
 send -- "file prompt quiet\r"
 expect "*#"
-send -- "ip name-server $nameserver\r"
+send -- "ip name-server $nameserver1\r"
+expect "*#"
+send -- "ip name-server $nameserver2\r"
 expect "*#"
 send -- "ip domain lookup\r"
 expect "*#"
