@@ -13,7 +13,7 @@ ${GREEN}WLC Monitoring Setup${TEXTRESET}
 This script will analyze your current configuration and setup your WLC for Monitoring in the Meraki Dashboard
 
 ${YELLOW}
-*If you have just upgraded the IOS-XE version on an SSO pair, please wait at leat 5 minutes before proceeding
+*If you have just upgraded the IOS-XE version on an SSO pair, please wait at least 5 minutes before proceeding
 The WLC's may still be syncing
 ${TEXTRESET}
 EOF
