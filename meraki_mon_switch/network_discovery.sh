@@ -19,7 +19,9 @@ while [ -z "$SUBNET" ]; do
 done
 
 echo "Running Scan"
-nmap -sn ${SUBNET} -oG /root/.meraki_mon_switch/nmap_output | grep "Nmap scan report for" |cut -c22- > /root/.meraki_mon_switch/discovered_ip
+echo " "
+
+nmap -sn ${SUBNET} -oG nmap_output | grep "Nmap scan report for" |cut -c22- > /root/.meraki_mon_switch/discovered_ip
 
 num_devices=$(< /root/.meraki_mon_switch/discovered_ip wc -l)
 echo "Total IP Based Devices found: ${num_devices}"
@@ -31,18 +33,16 @@ Please Wait...
 EOF
 
 /root/.meraki_mon_switch/discovery.exp > /dev/null 2>&1
-
 /root/.meraki_mon_switch/network_discovery_collection.sh > /dev/null 2>&1
 
 more /root/.meraki_mon_switch/network_collection.tmp
 
-cat_num_devices=$(< /root/.meraki_mon_switch/network_collection.tmp wc -l)
-
+cat_num_devices=$(< /root/.meraki_mon_switch/ip_list wc -l)
+echo " "
 echo "Total Eligible Catalyst Devices (9K): ${cat_num_devices}"
 echo "Adding Eligible Switches to IP Batch List"
-echo "The total timtimated time to upgrade and install/reboot IOS-XE is:"
+echo "The total estimated time to upgrade and install/reboot IOS-XE is:"
 /root/.meraki_mon_switch/time.sh
 
 rm -r -f /root/.meraki_mon_switch/network_collection.tmp
-rm -r -f /root/.meraki_mon_switch/nmap_output
 read -p "Press Enter"
