@@ -329,6 +329,7 @@ ${GREEN}Updating ip name server with IP address ${NSIP} ${TEXTRESET}
 ${GREEN}Updating ip name server with IP address ${NSIP2} ${TEXTRESET}
 EOF
 sleep 1
+clear
 cat << EOF 
 ${GREEN}Provide Default Gateway IP address${TEXTRESET}
 For each subnet of switches you modify, you must provide the corresponding Default-Gateway for the network segment
