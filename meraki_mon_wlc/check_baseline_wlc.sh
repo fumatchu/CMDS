@@ -89,8 +89,7 @@ while read -r IP; do
     echo "${GREEN}No Meraki User found${TEXTRESET}"
     echo " "
   else
-    echo ${RED}"ERROR: Found an instance of Meraki User in the username DB on the WLC. This must be resolved before proceeding${TEX
-TRESET}"
+    echo ${RED}"ERROR: Found an instance of Meraki User in the username DB on the WLC. This must be resolved before proceeding${TEXTRESET}"
     echo "The usernames meraki-user and meraki-tdluser cannot pre-exist on the WLC when onboarding for Catalyst management"
     echo "Please review the requirements and remediation at:"
     echo "https://documentation.meraki.com/Cloud_Monitoring_for_Catalyst/Onboarding/Adding_Catalyst_9800_Wireless_Controller_and_Ac
