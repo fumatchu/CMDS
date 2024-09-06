@@ -21,7 +21,7 @@ done
 echo "Running Scan"
 echo " "
 
-nmap -sn ${SUBNET} -oG nmap_output | grep "Nmap scan report for" |cut -c22- > /root/.meraki_mon_switch/discovered_ip
+nmap -sn ${SUBNET} -oG /root/.meraki_mon_switch/nmap_output | grep "Nmap scan report for" |cut -c22- > /root/.meraki_mon_switch/discovered_ip
 
 num_devices=$(< /root/.meraki_mon_switch/discovered_ip wc -l)
 echo "Total IP Based Devices found: ${num_devices}"
@@ -46,4 +46,5 @@ echo "The total estimated time to upgrade and install/reboot IOS-XE is:"
 
 rm -r -f /root/.meraki_mon_switch/network_collection.tmp
 rm -r -f /var/lib/tftpboot/mon_switch/nwd*
+
 read -p "Press Enter"
