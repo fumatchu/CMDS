@@ -4,7 +4,8 @@ set server_ip default_server
 set switch_user default_user
 set switch_pass default_pass
 set image default_ios_image
-set nameserver default_ip_name_server
+set nameserver1 default_ip_name_server
+set nameserver2 default_ip_name_server
 
 set DATE [timestamp -format %Y%m%d]
 log_file /root/.meraki_mon_switch/logs/$DATE.log
@@ -69,7 +70,11 @@ send "conf t\r"
 expect "*#"
 send -- "file prompt quiet\r"
 expect "*#"
-send -- "ip name-server $nameserver\r"
+send -- "no ip name-server\r"
+expect "*#"
+send -- "ip name-server $nameserver1\r"
+expect "*#"
+send -- "ip name-server $nameserver2\r"
 expect "*#"
 send -- "ip domain lookup\r"
 expect "*#"
