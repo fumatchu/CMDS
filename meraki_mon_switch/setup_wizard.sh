@@ -427,6 +427,7 @@ Password to login to the switches: ${GREEN}${PASS}${TEXTRESET}
 Active IOS-XE Images to Use: ${GREEN}${IMAGE}${TEXTRESET}
 NTP Server: ${GREEN}${NTP}${TEXTRESET}
 DNS IP Address: ${GREEN}${NSIP}${TEXTRESET}
+DNS IP Address: ${GREEN}${NSIP2}${TEXTRESET}
 Routing Default Gateway: ${GREEN}${GWLR}${TEXTRESET}
 
 Start your first collection by selecting
