@@ -35,7 +35,7 @@ EOF
 /root/.meraki_mon_switch/discovery.exp > /dev/null 2>&1
 /root/.meraki_mon_switch/network_discovery_collection.sh > /dev/null 2>&1
 
-more /root/.meraki_mon_switch/network_collection.tmp
+more /root/.meraki_mon_switch/network_collection.tmp | tee -a /root/.meraki_mon_switch/logs/network_discovery
 
 cat_num_devices=$(< /root/.meraki_mon_switch/ip_list wc -l)
 echo " "
@@ -47,5 +47,5 @@ echo "The total estimated time to upgrade and install/reboot IOS-XE is:"
 rm -r -f /root/.meraki_mon_switch/network_collection.tmp
 rm -r -f /var/lib/tftpboot/mon_switch/nwd*
 rm -r -f /root/.meraki_mon_switch/discovered_ip
-rm -r -f /root/.meraki_mon_switch/nmap_output
+
 read -p "Press Enter"
