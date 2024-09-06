@@ -15,4 +15,4 @@ EOF
 sleep 4
 
 clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mon_wlc/deploy_img.sh
-clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mon_wlc/deploy.sh
+clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mon_wlc/deploy.exp
