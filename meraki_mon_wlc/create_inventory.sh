@@ -17,7 +17,6 @@ read -p "Press Enter to Continue"
 clear
 echo "Creating the CSV File"
 echo "Please Wait"
-sleep 1
 
 /root/.meraki_mon_wlc/sh_ap_meraki_mon_summ.exp > /dev/null 2>&1
 
@@ -25,9 +24,19 @@ sleep 1
 #Remove the Trash at the TOP of Each file
 sed -i 1,6d /var/lib/tftpboot/wlc/*-ap_mon_summ
 
-#Remove spaces
+Add a space
+#sed -i '1s/.*/ &/' /var/lib/tftpboot/wlc/*-ap_mon_summ
+
+
+while read -r IP; do
+sed -i '1s/^/'"$IP"' \n/' /var/lib/tftpboot/wlc/${IP}-ap_mon_summ
+done <"$INPUT"
+
+
 # Read file line-by-line to get an IP address
 while read -r IP; do
+echo "$IP"
+
 
 tr -s ' ' </var/lib/tftpboot/wlc/${IP}-ap_mon_summ >>/root/.meraki_mon_wlc/ap_mon_clean
 done <"$INPUT"
