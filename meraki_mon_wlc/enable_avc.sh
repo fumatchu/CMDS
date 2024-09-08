@@ -22,12 +22,12 @@ while true; do
 
 read -p "Do you want to proceed? (y/n) " yn
 
-case $yn in 
-	[yY] ) " ";
-		break;;
-	[nN] ) echo exiting...;
-		exit;;
-	* ) echo invalid response;;
+case $yn in
+        [yY] ) " ";
+                break;;
+        [nN] ) echo exiting...;
+                exit;;
+        * ) echo invalid response;;
 esac
 
 done
@@ -47,13 +47,6 @@ while read -r IP; do
     echo " "
     echo "Please make sure that you have the correct QTY of DNA-A licenses to accomodate the AP's for AVC"
     sleep 5
-  else
-    echo "${RED}ERROR:The License Level does not allow for enabling AVC analytics."${TEXTRESET}
-    echo "${RED}Please Validate that you have DNA Advantage licenses before enabling this feature"${TEXTRESET}
-    echo "Exiting..."
-    sleep 10
-    exit
-  fi
 
 #Get Each WLC Config
 echo $IP >> /root/.meraki_mon_wlc/ip_list_single
@@ -96,9 +89,14 @@ while IFS= read -r line; do
 
 done <"$file"
 
+else
+    echo "${RED}ERROR:The License Level does not allow for enabling AVC analytics."${TEXTRESET}
+    echo "${RED}Please Validate that you have DNA Advantage licenses before enabling this feature"${TEXTRESET}
+    echo "${YELLOW}Skipping"${TEXTRESET}
+    sleep 8
+  fi
+
 done <"$INPUT"
+
 rm -r -f /root/.meraki_mon_wlc/*-wireless_profile.tmp
 rm -r -f /root/.meraki_mon_wlc/ip_list_single
-echo "${IP} Complete"
-sleep 3
-clear
