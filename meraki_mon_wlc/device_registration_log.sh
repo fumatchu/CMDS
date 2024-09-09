@@ -10,7 +10,7 @@ cat <<EOF
 ${GREEN}Log Search${TEXTRESET}
 EOF
 
-more /root/.meraki_mon_wlc/logs/device_registration.log
+more /root/.meraki_mon_wlc/logs/registration.log
 
 cat <<EOF
 #########
