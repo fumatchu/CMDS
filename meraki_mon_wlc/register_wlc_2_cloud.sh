@@ -95,5 +95,5 @@ if grep -q '[^[:space:]]' "/root/.meraki_mon_wlc/check.tmp"; then
     sleep 5
   fi
 
-/root/.meraki_mon_wlc/enable_avc.sh
+/root/.meraki_mon_wlc/enable_avc.sh |  | tee -a /root/.meraki_mon_wlc/logs/avc_enable.log ;;
 /root/.meraki_mon_wlc/claim_devices.sh
