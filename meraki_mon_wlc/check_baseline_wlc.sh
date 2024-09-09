@@ -126,7 +126,7 @@ cess_Points_to_Dashboard"
   echo "Checking for DNS Name server"
   STATICNAMESERVER=$(cat /var/lib/tftpboot/wlc/${IP}-shipnm | grep 255.255.255.255)
   if [ "$STATICNAMESERVER" = "255.255.255.255" ]; then
-    echo ${RED}"ERROR: A "name-server" entry  was not found on the switch"
+    echo ${RED}"ERROR: A "name-server" entry  was not found"
     echo ${YELLOW}"This can be manually corrected with Main Menu-->Utilities-->Deploy Global Command for DNS${TEXTRESET}"
     echo " "
     echo "1" >> /root/.meraki_mon_wlc/check.tmp
@@ -206,16 +206,16 @@ done <"$INPUT"
 CHECK=$(cat /root/.meraki_mon_wlc/check.tmp | grep 1)
 if grep -q '[^[:space:]]' "/root/.meraki_mon_wlc/check.tmp"; then
     echo "${RED}The WLC did not pass all checks. Please review the Pre-Check Log (If Needed)${TEXTRESET}"
-    echo "${YELLOW}Main Menu --> Logs --> Meraki Pre Check"
+    echo "${YELLOW}Main Menu --> Logs --> Meraki Pre_check"
     echo "CMDS has attempted to correct the issues, please re-run this script"
-    echo "Main Menu--> Meraki Pre-Check Collection"
+    echo "Main Menu--> Onboard WLC to MEraki Dashboard"
     echo " "
     echo "Exiting...."
     rm -r -f /root/.meraki_mon_wlc/check.tmp
     rm -r -f /root/.meraki_mon_wlc/ip_list_single
     rm -r -f /root/.meraki_mon_wlc/network_test_wlan.tmp
     rm -r -f /root/.meraki_mon_wlc/network_test.tmp
-    sleep 3
+    sleep 5
     exit
   else
     echo ${GREEN}"All requirements met for Meraki Onboarding ${TEXTRESET}"
