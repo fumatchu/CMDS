@@ -18,20 +18,9 @@ APs must REJOIN (Not reboot) to the WLC after the profile update${TEXTRESET}
 
 EOF
 
-while true; do
 
-read -p "Do you want to proceed? (y/n) " yn
+sleep 4
 
-case $yn in
-        [yY] ) " ";
-                break;;
-        [nN] ) echo exiting...;
-                exit;;
-        * ) echo invalid response;;
-esac
-
-done
-clear
 # Read file line-by-line to get an IP address
 while read -r IP; do
   # Print the IP address to the console
