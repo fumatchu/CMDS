@@ -41,3 +41,4 @@ for serial in serial_numbers:
 
 print("Finished updating device addresses.")
 time.sleep(4)
+print("Exiting")
