@@ -10,7 +10,7 @@ rm -r -f /root/.meraki_mon_wlc/logs/registration.log
 touch /root/.meraki_mon_wlc/check.tmp
 cat <<EOF
 ${GREEN}Register WLC to Cloud${TEXTRESET}
-This will register the WLC to the Cloud
+Registering the WLC to the Cloud
 
 EOF
 
