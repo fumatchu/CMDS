@@ -107,7 +107,7 @@ cess_Points_to_Dashboard"
     echo "${GREEN}NTP is synchronized${TEXTRESET}"
     echo " "
   else
-    echo ${RED}"ERROR: NTP is not syncronized. Please validate that your NTP is configured correctly${TEXTRESET}"
+    echo ${RED}"ERROR: NTP is not synchronized. Please validate that your NTP is configured correctly${TEXTRESET}"
     echo ${YELLOW}"This can be manually corrected with Main Menu --> Utilities --> Deploy Global NTP Removal and Update${TEXTRESET}
 "
     echo " "
