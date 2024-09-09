@@ -13,7 +13,7 @@ ${GREEN}WLC Monitoring Setup${TEXTRESET}
 This script will analyze your current configuration and setup your WLC for Monitoring in the Meraki Dashboard
 
 ${YELLOW}
-*If you have just upgraded the IOS-XE version on an SSO pair, please wait at least 5 minutes before proceeding
+*If you have just upgraded the IOS-XE version on an SSO pair, please wait at leat 5 minutes before proceeding
 The WLC's may still be syncing
 ${TEXTRESET}
 EOF
@@ -210,16 +210,21 @@ if grep -q '[^[:space:]]' "/root/.meraki_mon_wlc/check.tmp"; then
     echo "CMDS has attempted to correct the issues, please re-run this script"
     echo "Main Menu--> Meraki Pre-Check Collection"
     echo " "
+    echo "Exiting...."
+    rm -r -f /root/.meraki_mon_wlc/check.tmp
+    rm -r -f /root/.meraki_mon_wlc/ip_list_single
+    rm -r -f /root/.meraki_mon_wlc/network_test_wlan.tmp
+    rm -r -f /root/.meraki_mon_wlc/network_test.tmp
+    sleep 3
+    exit
   else
     echo ${GREEN}"All requirements met for Meraki Onboarding ${TEXTRESET}"
     echo " "
+    rm -r -f /root/.meraki_mon_wlc/check.tmp
+    rm -r -f /root/.meraki_mon_wlc/ip_list_single
+    rm -r -f /root/.meraki_mon_wlc/network_test_wlan.tmp
+    rm -r -f /root/.meraki_mon_wlc/network_test.tmp
     sleep 5
   fi
 
-rm -r -f /root/.meraki_mon_wlc/check.tmp
-rm -r -f /root/.meraki_mon_wlc/ip_list_single
-rm -r -f /root/.meraki_mon_wlc/network_test_wlan.tmp
-rm -r -f /root/.meraki_mon_wlc/network_test.tmp
-echo "${GREEN}Script Complete${TEXTRESET}"
-echo "Returning to the main menu shortly"
-sleep 10
+/root/.meraki_mon_wlc/register_wlc_2_cloud.sh
