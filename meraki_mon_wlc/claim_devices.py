@@ -79,4 +79,6 @@ if organizations:
 
 print("Claiming process complete!")
 
-time.sleep(5)
+time.sleep(2)
+
+print("Exiting")
