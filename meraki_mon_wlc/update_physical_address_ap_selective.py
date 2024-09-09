@@ -39,3 +39,5 @@ for serial in serial_numbers:
   update_device_address(serial, new_address, MOVE_MAP_MARKER, UPDATE_LOCATION)
 
 print("Finished updating device addresses.")
+time.sleep(4)
+print("Exiting")
