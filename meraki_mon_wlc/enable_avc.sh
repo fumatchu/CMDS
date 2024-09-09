@@ -18,8 +18,9 @@ APs must REJOIN (Not reboot) to the WLC after the profile update${TEXTRESET}
 
 EOF
 
+echo "The Script will continue momentarily"
+sleep 10
 
-sleep 4
 
 # Read file line-by-line to get an IP address
 while read -r IP; do
