@@ -4,7 +4,7 @@ TEXTRESET=$(tput sgr0)
 RED=$(tput setaf 1)
 YELLOW=$(tput setaf 3)
 GREEN=$(tput setaf 2)
-IP=$(hostname -I)
+HOSTNAME=$(hostname -I)
 INPUT="/root/.meraki_mon_wlc/ip_list"
 clear
 cat <<EOF
@@ -63,7 +63,8 @@ Please use the Navigator plugin or SCP to download the file for review
 
 EOF
 
-echo "https://$IP:9090/=$IP/navigator" | tr -d '[:blank:]'
+echo "https://${HOSTNAME}:9090/=${HOSTNAME}/navigator" | tr -d '[:blank:]'
+
 echo " "
 
 read -p "Press Enter to Exit"
