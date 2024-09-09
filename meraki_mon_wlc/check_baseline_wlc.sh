@@ -208,7 +208,7 @@ if grep -q '[^[:space:]]' "/root/.meraki_mon_wlc/check.tmp"; then
     echo "${RED}The WLC did not pass all checks. Please review the Pre-Check Log (If Needed)${TEXTRESET}"
     echo "${YELLOW}Main Menu --> Logs --> Meraki Precheck${TEXTRESET}"
     echo "CMDS has attempted to correct the issues, please re-run this script"
-    echo "Main Menu--> Onboard WLC to MEraki Dashboard"
+    echo "Main Menu--> Onboard WLC to Meraki Dashboard"
     echo " "
     echo "Exiting...."
     rm -r -f /root/.meraki_mon_wlc/check.tmp
