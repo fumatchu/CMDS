@@ -215,7 +215,7 @@ if grep -q '[^[:space:]]' "/root/.meraki_mon_wlc/check.tmp"; then
     rm -r -f /root/.meraki_mon_wlc/ip_list_single
     rm -r -f /root/.meraki_mon_wlc/network_test_wlan.tmp
     rm -r -f /root/.meraki_mon_wlc/network_test.tmp
-    sleep 5
+    sleep 10
     exit
   else
     echo ${GREEN}"All requirements met for Meraki Onboarding ${TEXTRESET}"
