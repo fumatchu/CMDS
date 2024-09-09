@@ -41,8 +41,7 @@ This is the Serial Number of the WLC Directly.
 All AP's that are supported, will be onboarded automatically into the Dashboard
 
 If needed, please review the documentation (and supported AP's) at:
-https://documentation.meraki.com/Cloud_Monitoring_for_Catalyst/Getting_Started/Cloud_Monitoring_for_Catalyst_Wireless_Requir
-ements
+https://documentation.meraki.com/Cloud_Monitoring_for_Catalyst/Getting_Started/Cloud_Monitoring_for_Catalyst_Wireless_Requirements
 
 
 The Next screen will provide a list of Organizations (if your API key is associated to more than one)
