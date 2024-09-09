@@ -9,9 +9,10 @@ USER=$(whoami)
 items=(1 "Active Logging"
   2 "Show Full Log"
   3 "Monitoring Setup Log"
-  4 "WLC Registration Log"
-  5 "Physical Address Updates"
-  6 "AVC Enablement"
+  4 "Hostnames to Serial Mappings"
+  5 "WLC Registration Log"
+  6 "Physical Address Updates"
+  7 "AVC Enablement"
 )
 
 while choice=$(dialog --title "$TITLE" \
@@ -22,9 +23,10 @@ while choice=$(dialog --title "$TITLE" \
   1) /root/.meraki_mon_wlc/log_tail ;;
   2) /root/.meraki_mon_wlc/full_log.sh ;;
   3) /root/.meraki_mon_wlc/pre_check_log.sh ;;
-  4) /root/.meraki_mon_wlc/device_registration_log.sh ;;
-  5) /root/.meraki_mon_wlc/physical_address_log.sh ;;
-  6) /root/.meraki_mon_wlc/avc_enable_log.sh ;;
+  4) /root/.meraki_mon_wlc/hostnames2serial.log.sh ;;
+  5) /root/.meraki_mon_wlc/device_registration_log.sh ;;
+  6) /root/.meraki_mon_wlc/physical_address_log.sh ;;
+  7) /root/.meraki_mon_wlc/avc_enable_log.sh ;;
   esac
 done
 clear # clear after user pressed Cancel
