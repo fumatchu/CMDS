@@ -6,8 +6,8 @@ YELLOW=$(tput setaf 3)
 GREEN=$(tput setaf 2)
 
 num_switches=$(< /root/.meraki_mon_wlc/ip_list wc -l)
-upgrade_time=600
-reboot_time=200
+upgrade_time=630
+reboot_time=300
 
 #a=$(( 1+2*k ))
 
