@@ -9,8 +9,8 @@ clear
 rm -r -f /root/.meraki_mon_wlc/logs/registration.log
 touch /root/.meraki_mon_wlc/check.tmp
 cat <<EOF
-${GREEN}Register WLC to Cloud${TEXTRESET}
-Registering the WLC to the Cloud
+${GREEN}Registering the WLC to the Cloud${TEXTRESET}
+
 
 EOF
 
