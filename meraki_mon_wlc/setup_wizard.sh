@@ -281,18 +281,6 @@ sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mon_wlc/update_config_sin
 
 ${GREEN}Update Complete${TEXTRESET}
 clear
-cat <<EOF
-Please provde the IP address of your WLC(s) in the following window.
-The list must be dotted decimal notation, no spaces or carriage returns
-Example:
-192.168.210.10
-
-EOF
-read -p "Press Enter When Ready"
-
-nano /root/.meraki_mon_wlc/ip_list
-clear
-clear
 echo "${GREEN}Provide an NTP Server IP address${TEXTRESET}"
 read -p "Please provide the NTP IP address you would like to use for time syncronization (If Needed): " NTP
 while [ -z "$NTP" ]; do
@@ -336,7 +324,66 @@ sed -i "/set nameserver2/c\set nameserver2 ${NSIP2}" /root/.meraki_mon_wlc/updat
 sed -i "/set nameserver2/c\set nameserver2 ${NSIP2}" /root/.meraki_mon_wlc/update_ip_name-server_single.exp
 
 clear
+cat <<EOF
+${GREEN}Adding Management IP Addresses to the Server for Collection${TEXTRESET}
 
+There are two ways to collect the IP addresses of the Catalyst Switches that are eligible for onboarding. 
+
+You can:
+
+Manually enter the IP addresses one by one, or
+
+You can use the Network Discovery component.
+
+Network Discovery will login via the subnet you specify, find all devices,
+Then whittle them down to qualified WLC Models.
+
+EOF
+
+echo "1. Enter the IP addresses Manually (I already have a list of IP Addresses with qualified devices)"
+echo "2. Network Discovery"
+
+read -p "Select option 1 or 2 " OPTION
+
+while :
+do
+while [ -z "$OPTION" ]; do
+  echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+  read -p "Select option 1 or 2 " OPTION
+done
+# Check for the presence of numbers
+  if ! [[ "$OPTION" =~ [1-2] ]]; then
+    echo "${RED}Please select option 1 or 2 on your keyboard${TEXTRESET} "
+   read -p "Select option 1 or 2: " OPTION
+  fi
+break;
+done
+
+
+if [ "$OPTION" = "1" ]; then
+    clear
+    echo "${GREEN}Manually Adding IP addresses${TEXTRESET}"
+    echo ""
+           echo "Please provde a list of IP addresses, one per line, in the following window."
+       echo "The list must be dotted decimal notation, one per line, no spaces or carriage returns"
+       echo "Here is an example:"
+       echo " "
+       echo "192.168.1.1"
+       echo "192.168.1.2"
+       echo "192.168.1.3"
+       echo " "
+       echo "The Wizard will continue shortly"
+       sleep 10
+       nano /root/.meraki_mon_wlc/ip_list
+  else
+    echo "${GREEN}Network Discovery${TEXTRESET}"
+       clear
+        /root/.meraki_mon_wlc/network_discovery.sh
+  fi
+
+
+
+clear
 cat <<EOF
 The Wizard is complete!
 
