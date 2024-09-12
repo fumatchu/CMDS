@@ -13,6 +13,7 @@ items=(1 "Active Logging"
   5 "WLC Registration Log"
   6 "Physical Address Updates"
   7 "AVC Enablement"
+  8 "Network Discovery"
 )
 
 while choice=$(dialog --title "$TITLE" \
@@ -27,6 +28,7 @@ while choice=$(dialog --title "$TITLE" \
   5) /root/.meraki_mon_wlc/device_registration_log.sh ;;
   6) /root/.meraki_mon_wlc/physical_address_log.sh ;;
   7) /root/.meraki_mon_wlc/avc_enable_log.sh ;;
+  8)   5) /root/.meraki_mon_wlc/network_discovery_log.sh ;;
   esac
 done
 clear # clear after user pressed Cancel
