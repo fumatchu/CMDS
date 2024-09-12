@@ -378,6 +378,7 @@ sed -i '/ExecStart/c\ExecStart=/usr/sbin/in.tftpd -c -p -s /var/lib/tftpboot' /e
 mkdir /var/lib/tftpboot/images
 mkdir /var/lib/tftpboot/wlc
 mkdir /var/lib/tftpboot/mon_switch
+mkdir /var/lib/tftpboot/mig_switch
 
 chmod 777 -R /var/lib/tftpboot
 firewall-cmd --permanent --add-service tftp
