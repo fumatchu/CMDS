@@ -18,12 +18,17 @@ At Any time, you can type ${YELLOW}meraki_migration${TEXTRESET} from the cli to 
 "
 sleep 4
 
-items=(1 "--------Catalyst Switching Tools--------" 
+items=(1 "--------Catalyst Switching Tools--------"
   2 "Catalyst Migration for c9300 Series Switches"
   3 "Catalyst Monitoring for Switching Prep Tool"
   4 " "
   5 "--------Catalyst Wireless Tools--------"
   6 "Catalyst Monitoring for Wireless"
+  7 " "
+  8 "------------Server Tools-----------"
+  9 "Server Configuration"
+
+
 )
 
 while choice=$(dialog --title "$TITLE" \
@@ -37,6 +42,9 @@ while choice=$(dialog --title "$TITLE" \
   4) clear ;;
   5) clear ;;
   6) clear & /root/.meraki_mon_wlc/menu.sh ;;
+  7) clear ;;
+  8) clear ;;
+  9) clear & /root/.meraki_mig/server-tools.sh ;;
 esac
 done
 clear # clear after user pressed Cancel
