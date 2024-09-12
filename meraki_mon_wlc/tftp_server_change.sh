@@ -28,4 +28,5 @@ if [[ "$REPLY" =~ ^[Yy]$ ]]; then
   sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_wlc/register_wlc_2_cloud_check.exp
   sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_wlc/register_wlc_2_cloud.exp
   sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_wlc/update_config_single.exp
+  sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mon_wlc/discovery.exp
 fi
