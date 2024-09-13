@@ -21,7 +21,7 @@ while choice=$(dialog --title "$TITLE" \
   case $choice in
   1) clear & /root/.meraki_mig/ping_now.sh ;;
   2) clear & iptraf-ng -i all ;;
-  3) clear & /root/.meraki_mig/dynamic_set_ns.sh ;;
+  3) clear & /root/.meraki_mig/update_ip_name-server.sh ;;
   4) clear & /root/.meraki_mig/dynamic_set_httpclient.sh ;;
   5) clear & /root/.servman/DHCPMan ;;
   6) clear & /root/.meraki_mig/factory_default.sh ;;
