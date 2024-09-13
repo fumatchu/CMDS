@@ -84,6 +84,7 @@ sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mig/dynamic_se
 sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mig/discovery.exp
 sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mig/get_ios_ver.exp
 sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mig/hardware_compat.exp
+sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mig/network_test.exp
 clear
 
 cat <<EOF
@@ -111,6 +112,7 @@ sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mig/dynamic_se
 sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mig/discovery.exp
 sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mig/get_ios_ver.exp
 sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mig/hardware_compat.exp
+sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mig/network_test.exp
 clear
 cat <<EOF
 ${GREEN}Update Server IP${TEXTRESET}
@@ -130,6 +132,7 @@ sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mig/dynamic_s
 sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mig/discovery.exp
 sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mig/get_ios_ver.exp
 sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mig/hardware_compat.exp
+sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mig/network_test.exp
 clear
 
 cat <<EOF
