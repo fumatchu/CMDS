@@ -10,7 +10,11 @@ SINT="ip http client source-interface"
 DATE=$(date)
 clear
 #Sanitize config files first
-
+clear
+/root/.meraki_mon_switch/clean.exp
+rm -r -f /root/.meraki_mig/ip_list_single
+sed -i '/^/d' /root/.meraki_mig/ip_list_single
+touch /root/.meraki_mig/ip_list_single
 clear
 echo "############################Collection time ${DATE}######################################"
 cat <<EOF
