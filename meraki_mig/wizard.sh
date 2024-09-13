@@ -74,7 +74,7 @@ ${GREEN}Updating User Credentials${TEXTRESET}
 EOF
 sleep 1
 
-sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mig/clean
+sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mig/clean.exp
 sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mig/deploy.exp
 sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mig/deploy_img.exp
 sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mig/meraki_register.exp
@@ -99,7 +99,7 @@ ${GREEN}Updating Password Credential${TEXTRESET}
 EOF
 sleep 1
 
-sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mig/clean
+sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mig/clean.exp
 sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mig/deploy.exp
 sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mig/deploy_img.exp
 sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mig/meraki_register.exp
@@ -115,7 +115,7 @@ echo "The current IP Address of the server is: ${SERVER_IP}"
 sleep 2
 echo ${GREEN}"Updating Server IP for TFTP ${TEXTRESET}"
 sleep 1
-sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mig/clean
+sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mig/clean.exp
 sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mig/deploy.exp
 sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mig/deploy_img.exp
 sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mig/meraki_register.exp
@@ -195,7 +195,7 @@ ${GREEN}Updating Preference${TEXTRESET}
 EOF
 sleep 1
 
-sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mig/clean
+sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mig/clean.exp
 sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mig/deploy_img.exp
 sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mig/deploy.exp
 sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mig/meraki_register.exp
