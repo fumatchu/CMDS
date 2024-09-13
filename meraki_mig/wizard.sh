@@ -87,6 +87,8 @@ sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mig/update_htt
 sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mig/update_httpclient.exp
 sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mig/update_ip_name-server_single.exp
 sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mig/update_ip_name-server.exp
+sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mig/update_ip_domain_lookup.exp
+sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mig/update_ip_domain_lookup_single.exp
 clear
 
 cat <<EOF
@@ -117,7 +119,8 @@ sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mig/update_htt
 sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mig/update_httpclient.exp
 sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mig/update_ip_name-server_single.exp
 sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mig/update_ip_name-server.exp
-
+sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mig/update_ip_domain_lookup.exp
+sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mig/update_ip_domain_lookup_single.exp
 clear
 cat <<EOF
 ${GREEN}Update Server IP${TEXTRESET}
@@ -140,6 +143,8 @@ sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mig/update_ht
 sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mig/update_httpclient.exp
 sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mig/update_ip_name-server_single.exp
 sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mig/update_ip_name-server.exp
+sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mig/update_ip_domain_lookup.exp
+sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mig/update_ip_domain_lookup_single.exp
 clear
 
 cat <<EOF
