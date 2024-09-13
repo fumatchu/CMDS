@@ -1,0 +1,31 @@
+#!/usr/bin/expect -f
+set timeout -1
+set server_ip default_server
+set switch_user default_user
+set switch_pass default_pass
+set image default_ios_image
+set DATE [timestamp -format %Y%m%d]
+log_file /root/.meraki_mig/logs/$DATE.log
+set fh [open /root/.meraki_mig/ip_list_single r]
+while {[gets $fh ip] != -1} {
+
+spawn rm /root/.ssh/known_hosts
+spawn clear
+spawn ssh $switch_user@$ip
+expect "])? "
+send -- "yes\r"
+
+expect "Password: "
+send -- "$switch_pass\r"
+expect "*#"
+send -- "logout\r"
+spawn ssh $switch_user@$ip
+expect "Password: "
+send -- "$switch_pass\r"
+expect "*#"
+send "conf t\r"
+expect "*#"
+send -- "do ping google.com\r"
+expect "*#"
+}
+close $fh
