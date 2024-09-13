@@ -57,6 +57,5 @@ send -- "do show version | redirect tftp://$server_ip/mig_switch/nwd-$ip-shver\r
 expect "*#"
 send -- "do show runn | redirect tftp://$server_ip/mig_switch/nwd-$ip-shrunn\r"
 expect "*#"
-
 }
 close $fh
