@@ -1,0 +1,62 @@
+#!/usr/bin/expect -f
+set timeout 1
+set server_ip default_server
+set switch_user default_user
+set switch_pass default_pass
+set DATE [timestamp -format %Y%m%d]
+log_file /root/.meraki_mig/logs/$DATE.log
+set fh [open /root/.meraki_mig/discovered_ip r]
+
+set expected_value_user "default_user"
+spawn echo "$switch_user"
+expect -re expect -re "$expected_value_user"
+if { $expect_out(buffer) eq $expected_value_user } {
+  puts "The variable $switch_user is the set default. Did you modify Global Environment Settings?"
+  exit
+} else {
+  puts " "
+}
+
+set expected_value_pass "default_pass"
+spawn echo "$switch_pass"
+expect -re expect -re "$expected_value_pass"
+if { $expect_out(buffer) eq $expected_value_pass } {
+  puts "The variable $switch_pass is the set default. Did you modify Global Environment Settings?"
+  exit
+} else {
+  puts " "
+}
+
+set expected_value_server "default_server"
+spawn echo "$server_ip"
+expect -re expect -re "$expected_value_server"
+if { $expect_out(buffer) eq $expected_value_server } {
+  puts "The variable $server_ip is the set default. Did you modify Global Environment Settings?"
+  exit
+} else {
+  puts " "
+}
+while {[gets $fh ip] != -1} {
+spawn rm /root/.ssh/known_hosts
+spawn ssh $switch_user@$ip
+expect "])? "
+send -- "yes\r"
+expect "Password: "
+send -- "$switch_pass\r"
+expect "*#"
+send -- "logout\r"
+spawn ssh $switch_user@$ip
+expect "Password: "
+send -- "$switch_pass\r"
+expect "*#"
+send "conf t\r"
+expect "*#"
+send -- "file prompt quiet\r"
+expect "*#"
+send -- "do show version | redirect tftp://$server_ip/mig_switch/nwd-$ip-shver\r"
+expect "*#"
+send -- "do show runn | redirect tftp://$server_ip/mig_switch/nwd-$ip-shrunn\r"
+expect "*#"
+
+}
+close $fh
