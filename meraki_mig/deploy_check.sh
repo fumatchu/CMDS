@@ -11,7 +11,7 @@ DATE=$(date)
 clear
 #Sanitize config files first
 clear
-/root/.meraki_mon_switch/clean.exp
+/root/.meraki_mig/clean.exp
 rm -r -f /root/.meraki_mig/ip_list_single
 sed -i '/^/d' /root/.meraki_mig/ip_list_single
 touch /root/.meraki_mig/ip_list_single
@@ -41,6 +41,7 @@ echo "Checking IOS Version is 17.09.03m3 "
     echo " "
   else
     echo "${RED}ERROR:IOS-XE Needs Updating - The Version should be 17.09.03m3${TEXTRESET}"
+    echo "1" >> /root/.meraki_mig/check.tmp
     sleep 3
   fi
 
@@ -52,27 +53,24 @@ echo "Checking IOS Version is 17.09.03m3 "
     echo "${GREEN}Switch is in INSTALL Mode${TEXTRESET}"
     echo " "
   else
-    echo ${RED}"ERROR: The Switch is in BUNDLE mode. It must be converted to INSTALL Mode First${TEXTRESET}"
-    sleep 3
-  fi
-
-  #Is the Switch presenting at least a GW of Last resort?
-  echo "Checking for Default Gateway"
-  ROUTE=$(cat /var/lib/tftpboot/mig_switch/${IP}-shroute | grep 0.0.0.0/0 | cut -c7- | sed 's/\(.*\)........................../\1/')
-  if [ "$ROUTE" = "0.0.0.0" ]; then
-    echo "${GREEN}Found GW of Last Resort${TEXTRESET}"
+   echo ${RED}"ERROR: The Switch is in BUNDLE mode. It must be converted to INSTALL Mode First${TEXTRESET}"
     echo " "
-  else
-    echo ${RED}"The switch requires a configuration of a default gateway${TEXTRESET}"
-    sleep 3
+    echo "1" >> /root/.meraki_mig/check.tmp
+    echo "Please refer to this document for further information:"
+    echo "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-9300-series-switches/216231-upgrade-guide-for-cisco-catalyst-9000-sw.html"
+    sleep 5
+    echo "Exiting the Check"
+    sleep 2
+    exit
   fi
-
-  #Does the Switch have compatible Hardware?
+  
+ #Does the Switch have compatible Hardware?
   echo "Checking for Hardware compatability"
   HW=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | grep Incompatible | cut -c94-)
   if [ "$HW" = "Incompatible" ]; then
     echo ${RED}"ERROR: The Switch HW is not compatible. Please correct this issue first${TEXTRESET}"
     echo ${YELLOW}"If this is a Network Module incompatibility, you can unscrew and remove it. They are hot insertion ready.${TEXTRESET}"
+    echo "1" >> /root/.meraki_mig/check.tmp
     more /var/lib/tftpboot/mig_switch/*shmrcompat | grep Incompatible -B9 -C1
   else
     echo "${GREEN}No Hardware Incompatabilities Found${TEXTRESET}"
@@ -90,6 +88,18 @@ echo "Checking IOS Version is 17.09.03m3 "
     sleep 3
   fi
 
+ #Is the Switch presenting at least a GW of Last resort?
+  echo "Checking for Default Gateway"
+  ROUTE=$(cat /var/lib/tftpboot/mig_switch/${IP}-shroute | grep 0.0.0.0/0 | cut -c7- | sed 's/\(.*\)........................../\1/')
+  if [ "$ROUTE" = "0.0.0.0" ]; then
+    echo "${GREEN}Found GW of Last Resort${TEXTRESET}"
+    echo " "
+  else
+    echo ${RED}"The switch requires a configuration of a default gateway${TEXTRESET}"
+    echo "1" >> /root/.meraki_mig/check.tmp
+    sleep 3
+  fi
+  
   #Does the Switch have ip http client-source command?
   echo "Checking for ip http client source-interface"
   SOURCEINTERFACE=$(cat /var/lib/tftpboot/mig_switch/${IP} | grep -o "ip http client source-interface")
@@ -100,6 +110,7 @@ echo "Checking IOS Version is 17.09.03m3 "
     echo ${RED}"ERROR: An entry on the switch with ip http client source-interface was not found${TEXTRESET}"
     echo "Per the Documentation, Please make sure the switch has this command on the internet facing vlan"
     echo ${YELLOW}"This can be corrected with Main Menu --> Utilities --> Global command for http client${TEXTRESET}"
+    echo "1" >> /root/.meraki_mig/check.tmp
     sleep 3
   fi
 
@@ -111,6 +122,7 @@ echo "Checking IOS Version is 17.09.03m3 "
   else
     echo ${RED}"ERROR: A "name-server" entry  was not found on the switch please add one before continuing ${TEXTRESET}"
     echo ${YELLOW}"This can be corrected with Main Menu --> Utilities --> Global command for DNS${TEXTRESET}"
+     echo "1" >> /root/.meraki_mig/check.tmp
     sleep 3
   fi
 
@@ -120,6 +132,7 @@ echo "Checking IOS Version is 17.09.03m3 "
   if [ "$NAMESERVER" = "255.255.255.255" ]; then
     echo ${RED}"ERROR: A "name-server" entry  was not found on the switch please add one before continuing ${TEXTRESET}"
     echo ${YELLOW}"This can be corrected with Main Menu --> Utilities --> Global command for DNS${TEXTRESET}"
+    echo "1" >> /root/.meraki_mig/check.tmp
     sleep 3
   else
     echo "${GREEN}No Errors${TEXTRESET}"
@@ -129,16 +142,39 @@ cat <<EOF
 
 EOF
 done <"$INPUT"
+
+#Can we ping outside the Network with name resolution?
+  echo "Pinging google.com"
+  echo $IP >> /root/.meraki_mig/ip_list_single
+  /root/.meraki_mig/network_test.exp > /root/.meraki_mig/network_test.tmp
+  sed -i '/^/d' /root/.meraki_mig/ip_list_single
+  PING=$(cat /root/.meraki_mig/network_test.tmp | grep Success |grep 100 | sed 's/(...........................................//')
+  if [ "$PING" = "Success rate is 100 percent " ]; then
+    echo "${GREEN}Success rate is 100 percent${TEXTRESET}"
+    rm -r -f /root/.meraki_mig/network_test.tmp
+    sed -i '/^/d' /root/.meraki_mig/ip_list_single
+    echo " "
+  else
+    echo "${YELLOW}WARNING: Expected 5 replies from google.com${TEXTRESET}"
+    echo " "
+    echo "1" >> /root/.meraki_mig/check.tmp
+    echo "The response was:"
+    cat /root/.meraki_mig/network_test.tmp | grep Success
+    rm -r -f /root/.meraki_mig/network_test.tmp
+    sed -i '/^/d' /root/.meraki_mig/ip_list_single
+    echo " "
+    sleep 2
+ fi
 #Committing Changes to Switches
 cat << EOF
 Committing Switch Changes- This may take some time depending on the number of switches..
 Please wait...
 
 EOF
-/root/.meraki_mon_switch/clean.exp > /dev/null 2>&1
+/root/.meraki_mig/clean.exp > /dev/null 2>&1
 
 CHECK=$(cat /root/.meraki_mig/check.tmp | grep 1)
-if grep -q '[^[:space:]]' "/root/.meraki_mon_switch/check.tmp"; then
+if grep -q '[^[:space:]]' "/root/.meraki_mig/check.tmp"; then
     echo "${RED}The Switches did not pass all checks. Please review the Pre-Check Log (If Needed)${TEXTRESET}"
     echo "${YELLOW}Main Menu --> Logs --> Meraki Pre Check"
     echo "CMDS has attempted to correct the issues, please re-run this script"
@@ -152,8 +188,8 @@ if grep -q '[^[:space:]]' "/root/.meraki_mon_switch/check.tmp"; then
   fi
 
 
-rm -r -f /root/.meraki_mon_switch/check.tmp
-rm -r -f /root/.meraki_mon_switch/ip_list_single
+rm -r -f /root/.meraki_mig/check.tmp
+rm -r -f /root/.meraki_mig/ip_list_single
 echo "${GREEN}Script Complete${TEXTRESET}"
 echo "Returning to the main menu shortly"
 sleep 10
