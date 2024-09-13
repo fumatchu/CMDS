@@ -35,7 +35,7 @@ while choice=$(dialog --title "$TITLE" \
   --menu "Please select" 30 65 3 "${items[@]}" \
   2>&1 >/dev/tty); do
   case $choice in
-  1) clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mig/clean ;;
+  1) clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mig/clean.exp ;;
   2) clear & /root/.meraki_mig/pre-check_IOS-XE.sh | tee -a /root/.meraki_mig/logs/ios-xe_pre_check_deployment.log ;;
   3) clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mig/deploy_img.exp ;;
   4) clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mig/deploy.exp ;;
