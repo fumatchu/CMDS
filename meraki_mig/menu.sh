@@ -42,23 +42,23 @@ while choice=$(dialog --title "$TITLE" \
   4) clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mig/deploy.exp ;;
   5) clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mig/deploy_all.sh ;;
   6) clear ;;
-  6) clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mig/meraki_compat_check.sh | tee -a /root/.meraki_mig/logs/pre_check_deployment.log ;;
-  7) clear & /root/.meraki_mig/deploy_check.sh | tee -a /root/.meraki_mig/logs/soft_hard_check_deployment.log ;;
-  8) clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mig/meraki_register.exp ;;
-  9) /root/.meraki_mig/show_meraki_id.sh ;;
- 10) /root/.meraki_mig/show_inv.sh ;;
- 11) /root/.meraki_mig/hostname_collection.sh | tee -a /root/.meraki_mig/logs/hostname_deployment.log ;;
- 12) clear & /root/.meraki_mig/update_physical_address_switch.sh ;;
- 13) /root/.meraki_mig/port_deploy.sh ;;
- 14) /root/.meraki_mig/adv_template.sh ;;
- 15) /root/.meraki_mig/batch_clean.sh ;;
- 16) /root/.meraki_mig/.logo ;;
- 17) /root/.meraki_mig/global_environment.sh ;;
- 18) /root/.meraki_mig/schedule.sh ;;
- 19) /root/.meraki_mig/logging_environment.sh ;;
- 20) /root/.meraki_mig/utilities.sh ;;
- 21) /root/.meraki_mig/wizard.sh ;;
- 22) /root/.meraki_mig/welcome.readme | more ;;
+  7) clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mig/meraki_compat_check.sh | tee -a /root/.meraki_mig/logs/pre_check_deployment.log ;;
+  8) clear & /root/.meraki_mig/deploy_check.sh | tee -a /root/.meraki_mig/logs/soft_hard_check_deployment.log ;;
+  9) clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mig/meraki_register.exp ;;
+ 10) /root/.meraki_mig/show_meraki_id.sh ;;
+ 11) /root/.meraki_mig/show_inv.sh ;;
+ 12) /root/.meraki_mig/hostname_collection.sh | tee -a /root/.meraki_mig/logs/hostname_deployment.log ;;
+ 13) clear & /root/.meraki_mig/update_physical_address_switch.sh ;;
+ 14) /root/.meraki_mig/port_deploy.sh ;;
+ 15) /root/.meraki_mig/adv_template.sh ;;
+ 16) /root/.meraki_mig/batch_clean.sh ;;
+ 17) /root/.meraki_mig/.logo ;;
+ 18) /root/.meraki_mig/global_environment.sh ;;
+ 19) /root/.meraki_mig/schedule.sh ;;
+ 20) /root/.meraki_mig/logging_environment.sh ;;
+ 21) /root/.meraki_mig/utilities.sh ;;
+ 22) /root/.meraki_mig/wizard.sh ;;
+ 23) /root/.meraki_mig/welcome.readme | more ;;
   esac
 done
 clear # clear after user pressed Cancel
