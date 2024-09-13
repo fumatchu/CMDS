@@ -17,7 +17,7 @@ echo # (optional) move to a new line
 if [[ "$REPLY" =~ ^[Yy]$ ]]; then
   echo ${GREEN}"Updating Server IP${TEXTRESET}"
   sleep 1
-  sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mig/clean
+  sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mig/clean.exp
   sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mig/deploy.exp
   sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mig/deploy_img.exp
   sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mig/meraki_register.exp
