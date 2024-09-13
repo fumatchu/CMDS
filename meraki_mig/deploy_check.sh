@@ -11,7 +11,6 @@ DATE=$(date)
 clear
 #Sanitize config files first
 clear
-/root/.meraki_mig/clean.exp
 rm -r -f /root/.meraki_mig/ip_list_single
 sed -i '/^/d' /root/.meraki_mig/ip_list_single
 touch /root/.meraki_mig/ip_list_single
@@ -20,15 +19,24 @@ echo "############################Collection time ${DATE}#######################
 cat <<EOF
 ${YELLOW}Checking current Switch Config${TEXTRESET}
 
+Collecting the current configuration
+Please Wait...
 EOF
-#!/bin/bash
 
-# Set the input file name here
-INPUT="/root/.meraki_mig/ip_list"
+/root/.meraki_mig/clean.exp > /dev/null 2>&1
+
+cat <<EOF
+
+Collecting Hardware Information
+Please Wait...
+EOF
+
+/root/.meraki_mig/hardware_compat.exp > /dev/null 2>&1
 
 # Read file line-by-line to get an IP address
 while read -r IP; do
   # Print the IP address to the console
+  echo " "
   echo ${YELLOW}"$IP"${TEXTRESET}
 echo "Checking IOS Version is 17.09.03m3 "
   #VERSION=$(cat /var/lib/tftpboot/mig_switch/${IP}-shver | grep "Cisco IOS Software" | cut -c84- | cut -d, -f1 | sed 's/\(.*\)..../\1/')
@@ -42,6 +50,7 @@ echo "Checking IOS Version is 17.09.03m3 "
   else
     echo "${RED}ERROR:IOS-XE Needs Updating - The Version should be 17.09.03m3${TEXTRESET}"
     echo "1" >> /root/.meraki_mig/check.tmp
+    echo " "
     sleep 3
   fi
 
@@ -63,7 +72,7 @@ echo "Checking IOS Version is 17.09.03m3 "
     sleep 2
     exit
   fi
-  
+
  #Does the Switch have compatible Hardware?
   echo "Checking for Hardware compatability"
   HW=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | grep Incompatible | cut -c94-)
@@ -74,6 +83,7 @@ echo "Checking IOS Version is 17.09.03m3 "
     more /var/lib/tftpboot/mig_switch/*shmrcompat | grep Incompatible -B9 -C1
   else
     echo "${GREEN}No Hardware Incompatabilities Found${TEXTRESET}"
+    echo " "
   fi
 
   #Does the Switch have DHCP on at Least one interface?
@@ -85,6 +95,7 @@ echo "Checking IOS Version is 17.09.03m3 "
   else
     echo ${YELLOW}"CAUTION: A DHCP entry was not found on the switch${TEXTRESET}"
     echo "Per the Documentation, Please make sure DHCP will be available after the migration"
+    echo " "
     sleep 3
   fi
 
@@ -97,9 +108,10 @@ echo "Checking IOS Version is 17.09.03m3 "
   else
     echo ${RED}"The switch requires a configuration of a default gateway${TEXTRESET}"
     echo "1" >> /root/.meraki_mig/check.tmp
+    echo " "
     sleep 3
   fi
-  
+
   #Does the Switch have ip http client-source command?
   echo "Checking for ip http client source-interface"
   SOURCEINTERFACE=$(cat /var/lib/tftpboot/mig_switch/${IP} | grep -o "ip http client source-interface")
@@ -111,6 +123,7 @@ echo "Checking IOS Version is 17.09.03m3 "
     echo "Per the Documentation, Please make sure the switch has this command on the internet facing vlan"
     echo ${YELLOW}"This can be corrected with Main Menu --> Utilities --> Global command for http client${TEXTRESET}"
     echo "1" >> /root/.meraki_mig/check.tmp
+    echo " "
     sleep 3
   fi
 
@@ -122,7 +135,8 @@ echo "Checking IOS Version is 17.09.03m3 "
   else
     echo ${RED}"ERROR: A "name-server" entry  was not found on the switch please add one before continuing ${TEXTRESET}"
     echo ${YELLOW}"This can be corrected with Main Menu --> Utilities --> Global command for DNS${TEXTRESET}"
-     echo "1" >> /root/.meraki_mig/check.tmp
+    echo "1" >> /root/.meraki_mig/check.tmp
+    echo " "
     sleep 3
   fi
 
@@ -133,15 +147,36 @@ echo "Checking IOS Version is 17.09.03m3 "
     echo ${RED}"ERROR: A "name-server" entry  was not found on the switch please add one before continuing ${TEXTRESET}"
     echo ${YELLOW}"This can be corrected with Main Menu --> Utilities --> Global command for DNS${TEXTRESET}"
     echo "1" >> /root/.meraki_mig/check.tmp
+    echo " "
     sleep 3
   else
     echo "${GREEN}No Errors${TEXTRESET}"
     echo " "
   fi
+
+#Check if we have domain lookup configured
+  echo "Checking for ip domain lookup Entry"
+  LOOKUP=$(cat /var/lib/tftpboot/mig_switch/${IP}-lookup | head -6 | grep "Domain lookup" | cut -c20-)
+  if [ "$LOOKUP" = "enabled" ]; then
+    echo "${GREEN}No Errors${TEXTRESET}"
+    echo " "
+  else
+    echo "${RED}ERROR: ip domain lookup was not found${TEXTRESET}"
+    echo " "
+    echo "1" >> /root/.meraki_mig/check.tmp
+    echo ${YELLOW}"Attemping to Correct Issue"${TEXTRESET}
+    echo " "
+    sleep 1
+    echo $IP >> /root/.meraki_mig/ip_list_single
+    /root/.meraki_mig/update_ip_domain_lookup_single.exp > /dev/null 2>&1
+    sed -i '/^/d' /root/.meraki_mon_switch/ip_list_single
+    sleep 2
+  fi
+
+
 cat <<EOF
 
 EOF
-done <"$INPUT"
 
 #Can we ping outside the Network with name resolution?
   echo "Pinging google.com"
@@ -159,12 +194,15 @@ done <"$INPUT"
     echo " "
     echo "1" >> /root/.meraki_mig/check.tmp
     echo "The response was:"
-    cat /root/.meraki_mig/network_test.tmp | grep Success
+    cat /root/.meraki_mig/network_test.tmp | tail -4
+    echo " "
     rm -r -f /root/.meraki_mig/network_test.tmp
     sed -i '/^/d' /root/.meraki_mig/ip_list_single
     echo " "
     sleep 2
  fi
+
+done <"$INPUT"
 #Committing Changes to Switches
 cat << EOF
 Committing Switch Changes- This may take some time depending on the number of switches..
