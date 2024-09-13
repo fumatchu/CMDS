@@ -13,12 +13,12 @@ This Wizard will allow you to configure this server for IOS-XE deployment and Me
 You must upload the IOS-XE image(s) that you need into the images directory of this tftp server.
 
 The current, supported IOS-XE image for Meraki migration is:
-${YELLOW}17.9.3m3${TEXTRESET} 
+${YELLOW}17.9.3m3${TEXTRESET}
 
 And can be downloaded at:
 https://software.cisco.com/download/specialrelease/b53558e8586d98df4e9e7860c7692e75
 
-${YELLOW}*A Valid CCO ID is required to download this code*${TEXTRESET} 
+${YELLOW}*A Valid CCO ID is required to download this code*${TEXTRESET}
 
 Once you have downloaded the image, you must place it into:
 
@@ -173,16 +173,12 @@ echo " "
 read -p "Press Enter When Ready"
 clear
 
-cat <<EOF
 
-${GREEN}Change Image to download to the switch${TEXTRESET}
+cd /var/lib/tftpboot/images
+echo ${GREEN}"Current MD5 Checksums and Image Names"${TEXTRESET}
 
-These are the current images on the Server
-
-EOF
-
-ls -al /var/lib/tftpboot/images
-
+#md5sum ./cat* | sed -e 's/\.\///'
+md5sum cat9k_iosxe.17.09.03m3.SPA.bin
 echo " "
 read -p "Please specify the image you would like to use: " IMAGE
 while [ -z "$IMAGE" ]; do
