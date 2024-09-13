@@ -258,7 +258,8 @@ fi
     echo " "
     echo "1" >> /root/.meraki_mon_switch/check.tmp
     echo "The response was:"
-    cat /root/.meraki_mon_switch/network_test.tmp | grep Success
+    cat /root/.meraki_mon_switch/network_test.tmp | tail -4 
+    echo " "
     rm -r -f /root/.meraki_mon_switch/network_test.tmp
     sed -i '/^/d' /root/.meraki_mon_switch/ip_list_single
     echo " "
