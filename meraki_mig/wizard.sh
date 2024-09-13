@@ -81,6 +81,7 @@ sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mig/meraki_reg
 sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mig/meraki_compat_check.exp
 sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mig/dynamic_set_httpclient.exp
 sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mig/dynamic_set_ns.exp
+sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mig/discovery.exp
 
 clear
 
@@ -106,6 +107,7 @@ sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mig/meraki_reg
 sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mig/meraki_compat_check.exp
 sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mig/dynamic_set_httpclient.exp
 sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mig/dynamic_set_ns.exp
+sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mig/discovery.exp
 clear
 cat <<EOF
 ${GREEN}Update Server IP${TEXTRESET}
@@ -122,6 +124,7 @@ sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mig/meraki_re
 sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mig/meraki_compat_check.exp
 sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mig/dynamic_set_httpclient.exp
 sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mig/dynamic_set_ns.exp
+sed -i "/set server_ip/c\set server_ip ${SERVER_IP}" /root/.meraki_mig/discovery.exp
 clear
 
 cat <<EOF
@@ -195,6 +198,7 @@ sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mig/clean.exp
 sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mig/deploy_img.exp
 sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mig/deploy.exp
 sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mig/meraki_register.exp
+sed -i "/set image/c\set image ${IMAGE}" /root/.meraki_mig/discovery.exp
 clear
 cat <<EOF
 ${GREEN}Update Complete${TEXTRESET}
