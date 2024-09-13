@@ -3,7 +3,6 @@ set timeout -1
 set server_ip default_server 
 set switch_user default_user
 set switch_pass default_pass
-set image default_ios_image
 set nameserver1 default_ip_name_server
 set nameserver2 default_ip_name_server
 
@@ -40,15 +39,6 @@ if { $expect_out(buffer) eq $expected_value_server } {
   puts " "
 }
 
-set expected_value_ios_image "default_ios_image"
-spawn echo "$image"
-expect -re expect -re "$expected_value_ios_image"
-if { $expect_out(buffer) eq $expected_value_ios_image } {
-  puts "The variable $image is the set default. Did you modify Global Environment Settings?"
-  exit
-} else {
-  puts " "
-}
 
 while {[gets $fh ip] != -1} {
 
