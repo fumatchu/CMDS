@@ -125,17 +125,31 @@ cat <<EOF
 
 EOF
 done <"$INPUT"
-cat <<EOF
-Please review the logs at MainMenu --> Logs --> Meraki Software/Hardware Log
-${RED}If there are any errors, Please correct before proceeding${TEXTRESET}
-
-${YELLOW}
-###########################################################################################
-After the Errors have been corrected (if any), Please Re-run the Meraki PreCheck Collection
-###########################################################################################
-${TEXTRESET}
-
-The script will quit momentarily
+#Committing Changes to Switches
+cat << EOF
+Committing Switch Changes- This may take some time depending on the number of switches..
+Please wait...
 
 EOF
+/root/.meraki_mon_switch/clean.exp > /dev/null 2>&1
+
+CHECK=$(cat /root/.meraki_mig/check.tmp | grep 1)
+if grep -q '[^[:space:]]' "/root/.meraki_mon_switch/check.tmp"; then
+    echo "${RED}The Switches did not pass all checks. Please review the Pre-Check Log (If Needed)${TEXTRESET}"
+    echo "${YELLOW}Main Menu --> Logs --> Meraki Pre Check"
+    echo "CMDS has attempted to correct the issues, please re-run this script"
+    echo "Main Menu--> Meraki Pre-Check Collection"
+    echo " "
+  else
+    echo " "
+    echo ${GREEN}"All requirements met for Meraki Onboarding ${TEXTRESET}"
+    echo " "
+    sleep 5
+  fi
+
+
+rm -r -f /root/.meraki_mon_switch/check.tmp
+rm -r -f /root/.meraki_mon_switch/ip_list_single
+echo "${GREEN}Script Complete${TEXTRESET}"
+echo "Returning to the main menu shortly"
 sleep 10
