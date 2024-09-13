@@ -72,7 +72,7 @@ expect {
     "*no]:" {send -- "yes\r"
       exp_continue
     }
-    "*#" {send -- "do show meraki | redirect tftp://$server_ip/$ip-shmr\r"
+    "*#" {send -- "do show meraki | redirect tftp://$server_ip/mig_switch/$ip-shmr\r"
 expect {
     "*#" {send -- "do service meraki start\r"
       exp_continue
