@@ -4,7 +4,7 @@ TEXTRESET=$(tput sgr0)
 RED=$(tput setaf 1)
 YELLOW=$(tput setaf 3)
 GREEN=$(tput setaf 2)
-
+clear
 sed -i '/^/d' /root/.meraki_mig/ip_list
 
 touch /root/.meraki_mig/network_collection.tmp
