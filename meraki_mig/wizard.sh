@@ -110,7 +110,7 @@ sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mig/deploy_img
 sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mig/meraki_register.exp
 sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mig/meraki_compat_check.exp
 sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mig/discovery.exp
-sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mig/get_ios_ver.exp
+sed -i "/set switch_pass/c\set switch_pass ${PASS}" /root/.meraki_mig//get_ios_ver.exp
 sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mig/hardware_compat.exp
 sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mig/network_test.exp
 sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mig/update_httpclient_single.exp
