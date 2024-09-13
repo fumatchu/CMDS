@@ -14,10 +14,10 @@ clear
 rm -r -f /root/.meraki_mig/ip_list_single
 sed -i '/^/d' /root/.meraki_mig/ip_list_single
 touch /root/.meraki_mig/ip_list_single
+touch /root/.meraki_mig/check.tmp
 clear
 echo "############################Collection time ${DATE}######################################"
 cat <<EOF
-${YELLOW}Checking current Switch Config${TEXTRESET}
 
 Collecting the current configuration
 Please Wait...
@@ -123,8 +123,12 @@ echo "Checking IOS Version is 17.09.03m3 "
     echo "Per the Documentation, Please make sure the switch has this command on the internet facing vlan"
     echo ${YELLOW}"This can be corrected with Main Menu --> Utilities --> Global command for http client${TEXTRESET}"
     echo "1" >> /root/.meraki_mig/check.tmp
+    echo ${YELLOW}"Attemping to Correct Issue${TEXTRESET}"
     echo " "
-    sleep 3
+    echo $IP >> /root/.meraki_mig/ip_list_single
+    /root/.meraki_mig/update_httpclient_single.exp > /dev/null 2>&1
+    sed -i '/^/d' /root/.meraki_mig/ip_list_single
+    sleep 2
   fi
 
   echo "Checking for DNS Entry if DHCP"
@@ -135,9 +139,15 @@ echo "Checking IOS Version is 17.09.03m3 "
   else
     echo ${RED}"ERROR: A "name-server" entry  was not found on the switch please add one before continuing ${TEXTRESET}"
     echo ${YELLOW}"This can be corrected with Main Menu --> Utilities --> Global command for DNS${TEXTRESET}"
-    echo "1" >> /root/.meraki_mig/check.tmp
     echo " "
-    sleep 3
+    echo "1" >> /root/.meraki_mig/check.tmp
+    echo ${YELLOW}"Attemping to Correct Issue"${TEXTRESET}
+    echo " "
+    sleep 1
+    echo $IP >> /root/.meraki_mig/ip_list_single
+    /root/.meraki_mig/update_ip_name-server_single.exp > /dev/null 2>&1
+    sed -i '/^/d' /root/.meraki_mig/ip_list_single
+    sleep 2
   fi
 
   #Does the Switch report at least one DNS entry?
@@ -146,9 +156,15 @@ echo "Checking IOS Version is 17.09.03m3 "
   if [ "$NAMESERVER" = "255.255.255.255" ]; then
     echo ${RED}"ERROR: A "name-server" entry  was not found on the switch please add one before continuing ${TEXTRESET}"
     echo ${YELLOW}"This can be corrected with Main Menu --> Utilities --> Global command for DNS${TEXTRESET}"
-    echo "1" >> /root/.meraki_mig/check.tmp
     echo " "
-    sleep 3
+    echo "1" >> /root/.meraki_mig/check.tmp
+    echo ${YELLOW}"Attemping to Correct Issue"${TEXTRESET}
+    echo " "
+    sleep 1
+    echo $IP >> /root/.meraki_mig/ip_list_single
+    /root/.meraki_mig/update_ip_name-server_single.exp > /dev/null 2>&1
+    sed -i '/^/d' /root/.meraki_mig/ip_list_single
+    sleep 2
   else
     echo "${GREEN}No Errors${TEXTRESET}"
     echo " "
