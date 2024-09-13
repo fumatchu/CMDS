@@ -156,7 +156,7 @@ ${GREEN}This will Install CMDS (Catalyst to Meraki Deployment Server)${TEXTRESET
 Checklist:
 Before the Installer starts, please make sure you have the following information
 
-    1. ${YELLOW}An NTP Subnet${TEXTRESET} (Optional) for your clients. This server will provide syncronized time
+    1. ${YELLOW}An NTP Subnet${TEXTRESET} (Optional) for your clients. This server will provide synchronized time
     2. The ${YELLOW}beginning and ending lease range${TEXTRESET} for DHCP (optional)
     3. The ${YELLOW}client default gateway IP Address${TEXTRESET} for the DHCP Scope (optional)
     4. A ${YELLOW}Friendly name${TEXTRESET} as a description to the DHCP scope created (optional)
@@ -328,7 +328,7 @@ clear
 sed -i '/server /c\pool 2.rocky.pool.ntp.org iburst' /etc/chrony.conf
 systemctl restart chronyd
 clear
-echo ${RED}"Syncronizing time, Please wait${TEXTRESET}"
+echo ${RED}"Synchronizing time, Please wait${TEXTRESET}"
 sleep 10s
 clear
 chronyc tracking
