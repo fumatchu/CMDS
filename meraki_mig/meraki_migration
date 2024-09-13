@@ -37,7 +37,8 @@ while choice=$(dialog --title "$TITLE" \
   2>&1 >/dev/tty); do
   case $choice in
   1) clear ;;
-  2) clear & /root/.meraki_mig/menu.sh ;;
+#  2) clear & /root/.meraki_mig/menu.sh ;;
+  2) clear ;;
   3) clear & /root/.meraki_mon_switch/menu.sh ;;
   4) clear ;;
   5) clear ;;
