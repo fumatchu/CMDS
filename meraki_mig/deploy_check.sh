@@ -27,9 +27,9 @@ while read -r IP; do
   # Print the IP address to the console
   echo ${YELLOW}"$IP"${TEXTRESET}
 echo "Checking IOS Version is 17.09.03m3 "
-  #VERSION=$(cat /var/lib/tftpboot/${IP}-shver | grep "Cisco IOS Software" | cut -c84- | cut -d, -f1 | sed 's/\(.*\)..../\1/')
-  #VERSIONFULL=$(cat /var/lib/tftpboot/${IP}-shver | grep "Cisco IOS XE Software, Version" | sed -e 's/\.//g')
-  VERSIONFULL=$(cat /var/lib/tftpboot/${IP}-shver | grep "Cisco IOS XE Software, Version")
+  #VERSION=$(cat /var/lib/tftpboot/mig_switch/${IP}-shver | grep "Cisco IOS Software" | cut -c84- | cut -d, -f1 | sed 's/\(.*\)..../\1/')
+  #VERSIONFULL=$(cat /var/lib/tftpboot/mig_switch/${IP}-shver | grep "Cisco IOS XE Software, Version" | sed -e 's/\.//g')
+  VERSIONFULL=$(cat /var/lib/tftpboot/mig_switch/${IP}-shver | grep "Cisco IOS XE Software, Version")
   echo "The switch Version is:"
   echo "${VERSIONFULL}"
   if [ "$VERSIONFULL" == "Cisco IOS XE Software, Version 17.09.03m3" ]; then
@@ -42,8 +42,8 @@ echo "Checking IOS Version is 17.09.03m3 "
 
   #Is the Switch in INSTALL Mode?
   echo "Checking INSTALL or BUNDLE Mode"
-  #INSTALLBUNDLE=$(cat /var/lib/tftpboot/${IP}-shver | grep INSTALL | cut -c73-)
-  INSTALLBUNDLE=$(cat /var/lib/tftpboot/${IP}-shver | sed '/INSTALL/q' | grep INSTALL | cut -c73-)
+  #INSTALLBUNDLE=$(cat /var/lib/tftpboot/mig_switch/${IP}-shver | grep INSTALL | cut -c73-)
+  INSTALLBUNDLE=$(cat /var/lib/tftpboot/mig_switch/${IP}-shver | sed '/INSTALL/q' | grep INSTALL | cut -c73-)
   if [ "$INSTALLBUNDLE" = "INSTALL" ]; then
     echo "${GREEN}Switch is in INSTALL Mode${TEXTRESET}"
     echo " "
@@ -54,7 +54,7 @@ echo "Checking IOS Version is 17.09.03m3 "
 
   #Is the Switch presenting at least a GW of Last resort?
   echo "Checking for Default Gateway"
-  ROUTE=$(cat /var/lib/tftpboot/${IP}-shroute | grep 0.0.0.0/0 | cut -c7- | sed 's/\(.*\)........................../\1/')
+  ROUTE=$(cat /var/lib/tftpboot/mig_switch/${IP}-shroute | grep 0.0.0.0/0 | cut -c7- | sed 's/\(.*\)........................../\1/')
   if [ "$ROUTE" = "0.0.0.0" ]; then
     echo "${GREEN}Found GW of Last Resort${TEXTRESET}"
     echo " "
@@ -65,18 +65,18 @@ echo "Checking IOS Version is 17.09.03m3 "
 
   #Does the Switch have compatible Hardware?
   echo "Checking for Hardware compatability"
-  HW=$(cat /var/lib/tftpboot/${IP}-shmrcompat | grep Incompatible | cut -c94-)
+  HW=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | grep Incompatible | cut -c94-)
   if [ "$HW" = "Incompatible" ]; then
     echo ${RED}"ERROR: The Switch HW is not compatible. Please correct this issue first${TEXTRESET}"
     echo ${YELLOW}"If this is a Network Module incompatibility, you can unscrew and remove it. They are hot insertion ready.${TEXTRESET}"
-    more /var/lib/tftpboot/*shmrcompat | grep Incompatible -B9 -C1
+    more /var/lib/tftpboot/mig_switch/*shmrcompat | grep Incompatible -B9 -C1
   else
     echo "${GREEN}No Hardware Incompatabilities Found${TEXTRESET}"
   fi
 
   #Does the Switch have DHCP on at Least one interface?
   echo "Checking for DHCP Interface"
-  DHCP=$(cat /var/lib/tftpboot/${IP}-shipintbr | grep DHCP | cut -c44- | sed 's/\(.*\)................................./\1/')
+  DHCP=$(cat /var/lib/tftpboot/mig_switch/${IP}-shipintbr | grep DHCP | cut -c44- | sed 's/\(.*\)................................./\1/')
   if [ "$DHCP" = "DHCP" ]; then
     echo "${GREEN}We found an interface with DHCP${TEXTRESET}"
     echo " "
@@ -88,7 +88,7 @@ echo "Checking IOS Version is 17.09.03m3 "
 
   #Does the Switch have ip http client-source command?
   echo "Checking for ip http client source-interface"
-  SOURCEINTERFACE=$(cat /var/lib/tftpboot/${IP} | grep -o "ip http client source-interface")
+  SOURCEINTERFACE=$(cat /var/lib/tftpboot/mig_switch/${IP} | grep -o "ip http client source-interface")
   if [ "$SOURCEINTERFACE" = "ip http client source-interface" ]; then
     echo "${GREEN}We found an interface with http client${TEXTRESET}"
     echo " "
@@ -100,7 +100,7 @@ echo "Checking IOS Version is 17.09.03m3 "
   fi
 
   echo "Checking for DNS Entry if DHCP"
-  NAMESERVER=$(grep . /var/lib/tftpboot/${IP}-shipnm)
+  NAMESERVER=$(grep . /var/lib/tftpboot/mig_switch/${IP}-shipnm)
   if [ "$NAMESERVER" != "" ]; then
     echo "${GREEN}No Errors${TEXTRESET}"
     echo " "
@@ -112,7 +112,7 @@ echo "Checking IOS Version is 17.09.03m3 "
 
   #Does the Switch report at least one DNS entry?
   echo "Checking for DNS Entry if statically assigned"
-  STATICNAMESERVER=$(cat /var/lib/tftpboot/${IP}-shipnm | grep 255.255.255.255)
+  STATICNAMESERVER=$(cat /var/lib/tftpboot/mig_switch/${IP}-shipnm | grep 255.255.255.255)
   if [ "$NAMESERVER" = "255.255.255.255" ]; then
     echo ${RED}"ERROR: A "name-server" entry  was not found on the switch please add one before continuing ${TEXTRESET}"
     echo ${YELLOW}"This can be corrected with Main Menu --> Utilities --> Global command for DNS${TEXTRESET}"
