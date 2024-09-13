@@ -17,7 +17,7 @@ ${GREEN}Updating User Credentials${TEXTRESET}
 EOF
 sleep 1
 
-sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mig/clean
+sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mig/clean.exp
 sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mig/deploy.exp
 sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mig/deploy_img.exp
 sed -i "/set switch_user/c\set switch_user ${USER}" /root/.meraki_mig/meraki_register.exp
