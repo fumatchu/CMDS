@@ -67,3 +67,5 @@ echo "The total estimated time to upgrade and install/reboot IOS-XE is:"
 rm -r -f /root/.meraki_mig/network_collection.tmp
 rm -r -f /var/lib/tftpboot/mig_switch/nwd*
 rm -r -f /root/.meraki_mig/discovered_ip
+
+read -p "Press Enter"
