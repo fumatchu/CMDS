@@ -10,24 +10,25 @@ items=(1 "Data Collection and Clean File System Flash"
   2 "IOS-XE Pre-Check"
   3 "Deploy IOS-XE Image to Switch"
   4 "Install IOS-XE Update"
-  5 "-----------------------------------------------"
-  6 "Meraki Pre-Check Collection"
-  7 "Validate Switch Software/Hardware Configuration"
-  8 "Register Catalyst Switch to Meraki Dashboard"
-  9 "Show converted Meraki ID"
- 10 "Claim Inventory/Serials to Organization"
- 11 "Migrate Hostnames"
- 12 "Update Physical Address and Move Map Marker"
- 13 "Deploy Access Template to Downlink Ports (Quick Deploy)"
- 14 "Template Deployment"
- 15 "Batch Cleanup"
- 16 "-----------------------------------------------"
- 17 "Global Environment Settings"
- 18 "Schedule Deployment"
- 19 "Logs"
- 20 "Utilities"
- 21 "Setup Wizard"
- 22 "Welcome to CMDS"
+  5 "Deploy and Install Update"
+  6 "-----------------------------------------------"
+  7 "Meraki Pre-Check Collection"
+  8 "Validate Switch Software/Hardware Configuration"
+  9 "Register Catalyst Switch to Meraki Dashboard"
+ 10 "Show converted Meraki ID"
+ 11 "Claim Inventory/Serials to Organization"
+ 12 "Migrate Hostnames"
+ 13 "Update Physical Address and Move Map Marker"
+ 14 "Deploy Access Template to Downlink Ports (Quick Deploy)"
+ 15 "Template Deployment"
+ 16 "Batch Cleanup"
+ 17 "-----------------------------------------------"
+ 18 "Global Environment Settings"
+ 19 "Schedule Deployment"
+ 20 "Logs"
+ 21 "Utilities"
+ 22 "Setup Wizard"
+ 23 "Welcome to CMDS"
 )
 
 while choice=$(dialog --title "$TITLE" \
@@ -39,7 +40,8 @@ while choice=$(dialog --title "$TITLE" \
   2) clear & /root/.meraki_mig/pre-check_IOS-XE.sh | tee -a /root/.meraki_mig/logs/ios-xe_pre_check_deployment.log ;;
   3) clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mig/deploy_img.exp ;;
   4) clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mig/deploy.exp ;;
-  5) clear ;;
+  5) clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mig/deploy_all.sh ;;
+  6) clear ;;
   6) clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mig/meraki_compat_check.sh | tee -a /root/.meraki_mig/logs/pre_check_deployment.log ;;
   7) clear & /root/.meraki_mig/deploy_check.sh | tee -a /root/.meraki_mig/logs/soft_hard_check_deployment.log ;;
   8) clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mig/meraki_register.exp ;;
