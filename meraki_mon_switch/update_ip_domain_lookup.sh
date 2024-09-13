@@ -19,6 +19,7 @@ if [[ "$REPLY" =~ ^[Yy]$ ]]; then
   echo ${GREEN}"Updating domain lookup command${TEXTRESET}"
   sleep 1
   /root/.meraki_mon_switch/update_ip_domain_lookup.exp
+  /root/.meraki_mon_switch/update_ip_domain_lookup_single.exp
 fi
 echo ${GREEN}"Script Complete"${TEXTRESET}
 sleep 2
