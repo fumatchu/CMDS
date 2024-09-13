@@ -41,7 +41,7 @@ EOF
   #Does the Switch Base IOS Provide a High enough version number for IOS-XE?
   echo "Checking base IOS-XE Version to migrate to 17.09.03m3 "
   VERSION=$(cat /var/lib/tftpboot/mig_switch/${IP}-shver | grep "Cisco IOS Software" | cut -c84- | cut -d, -f1 | sed 's/\(.*\)..../\1/')
-  VERSIONFULL=$(cat /var/lib/tftpboot/${IP}-shver | grep "Cisco IOS XE Software, Version")
+  VERSIONFULL=$(cat /var/lib/tftpboot/mig_switch/${IP}-shver | grep "Cisco IOS XE Software, Version")
   echo "The switch Version is:"
   echo "${VERSIONFULL}"
   check=$(echo "$VERSION>$switch_minimum" | bc -l)
