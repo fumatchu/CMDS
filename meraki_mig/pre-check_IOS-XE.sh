@@ -93,7 +93,7 @@ done <"$INPUT"
 #If the minimum Base requirement has been met, please proceed to Deploy IOS-XE Image to switch
 #############################################################################################
 #${TEXTRESET}
-Please review the logs at MainMenu --> Logs --> IOS-XE PreCheck Log
-The script will terminate shortly
-EOF
+#Please review the logs at MainMenu --> Logs --> IOS-XE PreCheck Log
+#The script will terminate shortly
+#EOF
 read -p "Press Enter"
