@@ -26,6 +26,53 @@ INPUT="/root/.meraki_mig/ip_list"
 while read -r IP; do
   # Print the IP address to the console
   echo ${YELLOW}"$IP"${TEXTRESET}
+echo "Checking IOS Version is 17.09.03m3 "
+  #VERSION=$(cat /var/lib/tftpboot/${IP}-shver | grep "Cisco IOS Software" | cut -c84- | cut -d, -f1 | sed 's/\(.*\)..../\1/')
+  #VERSIONFULL=$(cat /var/lib/tftpboot/${IP}-shver | grep "Cisco IOS XE Software, Version" | sed -e 's/\.//g')
+  VERSIONFULL=$(cat /var/lib/tftpboot/${IP}-shver | grep "Cisco IOS XE Software, Version")
+  echo "The switch Version is:"
+  echo "${VERSIONFULL}"
+  if [ "$VERSIONFULL" == "Cisco IOS XE Software, Version 17.09.03m3" ]; then
+    echo "${GREEN}IOS-XE Version Matches Requirement${TEXTRESET}"
+    echo " "
+  else
+    echo "${RED}ERROR:IOS-XE Needs Updating - The Version should be 17.09.03m3${TEXTRESET}"
+    sleep 3
+  fi
+
+  #Is the Switch in INSTALL Mode?
+  echo "Checking INSTALL or BUNDLE Mode"
+  #INSTALLBUNDLE=$(cat /var/lib/tftpboot/${IP}-shver | grep INSTALL | cut -c73-)
+  INSTALLBUNDLE=$(cat /var/lib/tftpboot/${IP}-shver | sed '/INSTALL/q' | grep INSTALL | cut -c73-)
+  if [ "$INSTALLBUNDLE" = "INSTALL" ]; then
+    echo "${GREEN}Switch is in INSTALL Mode${TEXTRESET}"
+    echo " "
+  else
+    echo ${RED}"ERROR: The Switch is in BUNDLE mode. It must be converted to INSTALL Mode First${TEXTRESET}"
+    sleep 3
+  fi
+
+  #Is the Switch presenting at least a GW of Last resort?
+  echo "Checking for Default Gateway"
+  ROUTE=$(cat /var/lib/tftpboot/${IP}-shroute | grep 0.0.0.0/0 | cut -c7- | sed 's/\(.*\)........................../\1/')
+  if [ "$ROUTE" = "0.0.0.0" ]; then
+    echo "${GREEN}Found GW of Last Resort${TEXTRESET}"
+    echo " "
+  else
+    echo ${RED}"The switch requires a configuration of a default gateway${TEXTRESET}"
+    sleep 3
+  fi
+
+  #Does the Switch have compatible Hardware?
+  echo "Checking for Hardware compatability"
+  HW=$(cat /var/lib/tftpboot/${IP}-shmrcompat | grep Incompatible | cut -c94-)
+  if [ "$HW" = "Incompatible" ]; then
+    echo ${RED}"ERROR: The Switch HW is not compatible. Please correct this issue first${TEXTRESET}"
+    echo ${YELLOW}"If this is a Network Module incompatibility, you can unscrew and remove it. They are hot insertion ready.${TEXTRESET}"
+    more /var/lib/tftpboot/*shmrcompat | grep Incompatible -B9 -C1
+  else
+    echo "${GREEN}No Hardware Incompatabilities Found${TEXTRESET}"
+  fi
 
   #Does the Switch have DHCP on at Least one interface?
   echo "Checking for DHCP Interface"
@@ -52,11 +99,6 @@ while read -r IP; do
     sleep 3
   fi
 
-  # Read file line-by-line to get an IP address
-  #while read -r IP; do
-  # Print the IP address to the console
-  #  echo "$IP"
-  #Does the Switch report at least one DNS entry?
   echo "Checking for DNS Entry if DHCP"
   NAMESERVER=$(grep . /var/lib/tftpboot/${IP}-shipnm)
   if [ "$NAMESERVER" != "" ]; then
@@ -79,69 +121,7 @@ while read -r IP; do
     echo "${GREEN}No Errors${TEXTRESET}"
     echo " "
   fi
-
-  echo "Checking IOS Version is 17.09.03m3 "
-  #VERSION=$(cat /var/lib/tftpboot/${IP}-shver | grep "Cisco IOS Software" | cut -c84- | cut -d, -f1 | sed 's/\(.*\)..../\1/')
-  #VERSIONFULL=$(cat /var/lib/tftpboot/${IP}-shver | grep "Cisco IOS XE Software, Version" | sed -e 's/\.//g')
-  VERSIONFULL=$(cat /var/lib/tftpboot/${IP}-shver | grep "Cisco IOS XE Software, Version")
-  echo "The switch Version is:"
-  echo "${VERSIONFULL}"
-  if [ "$VERSIONFULL" == "Cisco IOS XE Software, Version 17.09.03m3" ]; then
-    echo "${GREEN}IOS-XE Version Matches Requirement${TEXTRESET}"
-    echo " "
-  else
-    echo "${RED}ERROR:IOS-XE Needs Updating - The Version should be 17.09.03m3${TEXTRESET}"
-    sleep 3
-  fi
-
-  # Read file line-by-line to get an IP address
-  #while read -r IP; do
-  # Print the IP address to the console
-  #  echo "$IP"
-
-  #Is the Switch in INSTALL Mode?
-  echo "Checking INSTALL or BUNDLE Mode"
-  #INSTALLBUNDLE=$(cat /var/lib/tftpboot/${IP}-shver | grep INSTALL | cut -c73-)
-  INSTALLBUNDLE=$(cat /var/lib/tftpboot/${IP}-shver | sed '/INSTALL/q' | grep INSTALL | cut -c73-)
-  if [ "$INSTALLBUNDLE" = "INSTALL" ]; then
-    echo "${GREEN}Switch is in INSTALL Mode${TEXTRESET}"
-    echo " "
-  else
-    echo ${RED}"ERROR: The Switch is in BUNDLE mode. It must be converted to INSTALL Mode First${TEXTRESET}"
-    sleep 3
-  fi
-  #cat <<EOF
-
-  #EOF
-  #done < "$INPUT"
-
-  # Read file line-by-line to get an IP address
-  #while read -r IP; do
-  # Print the IP address to the console
-  #  echo "$IP"
-
-  #Is the Switch presenting at least a GW of Last resort?
-  echo "Checking for Default Gateway"
-  ROUTE=$(cat /var/lib/tftpboot/${IP}-shroute | grep 0.0.0.0/0 | cut -c7- | sed 's/\(.*\)........................../\1/')
-  if [ "$ROUTE" = "0.0.0.0" ]; then
-    echo "${GREEN}Found GW of Last Resort${TEXTRESET}"
-    echo " "
-  else
-    echo ${RED}"The switch requires a configuration of a default gateway${TEXTRESET}"
-    sleep 3
-  fi
-
-  #Does the Switch have compatible Hardware?
-  echo "Checking for Hardware compatability"
-  HW=$(cat /var/lib/tftpboot/${IP}-shmrcompat | grep Incompatible | cut -c94-)
-  if [ "$HW" = "Incompatible" ]; then
-    echo ${RED}"ERROR: The Switch HW is not compatible. Please correct this issue first${TEXTRESET}"
-    echo ${YELLOW}"If this is a Network Module incompatibility, you can unscrew and remove it. They are hot insertion ready.${TEXTRESET}"
-    more /var/lib/tftpboot/*shmrcompat | grep Incompatible -B9 -C1
-  else
-    echo "${GREEN}No Hardware Incompatabilities Found${TEXTRESET}"
-  fi
-  cat <<EOF
+cat <<EOF
 
 EOF
 done <"$INPUT"
