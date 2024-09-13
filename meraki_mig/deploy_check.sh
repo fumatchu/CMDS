@@ -122,6 +122,7 @@ echo "Checking IOS Version is 17.09.03m3 "
     echo ${RED}"ERROR: An entry on the switch with ip http client source-interface was not found${TEXTRESET}"
     echo "Per the Documentation, Please make sure the switch has this command on the internet facing vlan"
     echo ${YELLOW}"This can be corrected with Main Menu --> Utilities --> Global command for http client${TEXTRESET}"
+    echo " "
     echo "1" >> /root/.meraki_mig/check.tmp
     echo ${YELLOW}"Attemping to Correct Issue${TEXTRESET}"
     echo " "
