@@ -224,26 +224,135 @@ clear
 cat <<EOF
 ${GREEN}Update Complete${TEXTRESET}
 
-
-Please provde a list of IP addresses, one per line, in the following window.
-The list must be dotted decimal notation, one per line, no spaces or carriage returns
-Here is an example:
-
-192.168.1.1
-192.168.1.2
-192.168.1.3
 EOF
-read -p "Press Enter When Ready"
 
-nano /root/.meraki_mig/ip_list
 clear
 cat <<EOF
+${GREEN}Provide VLAN for ip http client${TEXTRESET}
+
+This will allow you deploy the command ${YELLOW}"ip http client source-interface vlan (number)"${TEXTRESET}
+This should be applied to the Internet facing VLAN
+EOF
+
+read -p "Please provide the Vlan Number in which you want to bind: " VLAN
+while [ -z "$VLAN" ]; do
+    echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+    read -p "Please provide the Vlan Number in which you want to bind: " VLAN
+done
+
+
+sed -i "/set vlan_num/c\set vlan_num ${VLAN}" /root/.meraki_mig/update_httpclient.exp
+sed -i "/set vlan_num/c\set vlan_num ${VLAN}" /root/.meraki_mig/update_httpclient_single.exp
+
+cat <<EOF
+${GREEN}Updating VLAN ${TEXTRESET}
+
+EOF
+
+
+clear
+
+read -p "Please provide the DNS IP address you would like to use for name resolution: " NSIP
+while [ -z "$USER" ]; do
+  echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+  read -p "Please provide the DNS IP address you would like to use for name resolution: " NSIP
+done
+
+sed -i "/set nameserver1/c\set nameserver1 ${NSIP}" /root/.meraki_mig/update_ip_name-server.exp
+sed -i "/set nameserver1/c\set nameserver1 ${NSIP}" /root/.meraki_mig/update_ip_name-server_single.exp
+
+
+read -p "Please provide the secondary DNS IP address you would like to use for name resolution: " NSIP2
+while [ -z "$USER" ]; do
+  echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+  read -p "Please provide the secondary DNS IP address you would like to use for name resolution: " NSIP2
+done
+
+sed -i "/set nameserver2/c\set nameserver2 ${NSIP2}" /root/.meraki_mig/update_ip_name-server.exp
+sed -i "/set nameserver2/c\set nameserver2 ${NSIP2}" /root/.meraki_mig/update_ip_name-server_single.exp
+clear
+cat <<EOF
+${GREEN}Updating ip name server with IP address ${NSIP} ${TEXTRESET}
+${GREEN}Updating ip name server with IP address ${NSIP2} ${TEXTRESET}
+EOF
+sleep 1
+clear
+
+clear
+cat <<EOF
+${GREEN}Adding Management IP Addresses to the Server for Collection${TEXTRESET}
+
+There are two ways to collect the IP addresses of the Catalyst Switches that are eligible for onboarding. 
+
+You can:
+
+Manually enter the IP addresses one by one, or
+
+You can use the Network Discovery component.
+
+Network Discovery will login via the subnet you specify, find all devices,
+Then whittle them down to qualified 9300 series switches.
+
+EOF
+
+echo "1. Enter the IP addresses Manually (I already have a list of IP Addresses with qualified devices)"
+echo "2. Network Discovery"
+
+read -p "Select option 1 or 2 " OPTION
+
+while :
+do
+while [ -z "$OPTION" ]; do
+  echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+  read -p "Select option 1 or 2 " OPTION
+done
+# Check for the presence of numbers
+  if ! [[ "$OPTION" =~ [1-2] ]]; then
+    echo "${RED}Please select option 1 or 2 on your keyboard${TEXTRESET} "
+   read -p "Select option 1 or 2: " OPTION
+  fi
+break;
+done
+
+
+if [ "$OPTION" = "1" ]; then
+    clear
+    echo "${GREEN}Manually Adding IP addresses${TEXTRESET}"
+    echo ""
+           echo "Please provde a list of IP addresses, one per line, in the following window."
+       echo "The list must be dotted decimal notation, one per line, no spaces or carriage returns"
+       echo "Here is an example:"
+       echo " "
+       echo "192.168.1.1"
+       echo "192.168.1.2"
+       echo "192.168.1.3"
+       echo " "
+       echo "The Wizard will continue shortly"
+       sleep 10
+       nano /root/.meraki_mig/ip_list
+  else
+    echo "${GREEN}Network Discovery${TEXTRESET}"
+       clear
+        /root/.meraki_mig/network_discovery.sh
+  fi
+
+
+
+clear
+
+cat <<EOF
 The Wizard is complete!
+
+The following information has ben set:
+Username to login to the switches: ${GREEN}${USER}${TEXTRESET}
+Password to login to the switches: ${GREEN}${PASS}${TEXTRESET}
+Active IOS-XE Images to Use: ${GREEN}${IMAGE}${TEXTRESET}
+IP HTTP source interface VLAN number: ${GREEN}${VLAN}${TEXTRESET}
+DNS IP Address: ${GREEN}${NSIP}${TEXTRESET}
+DNS IP Address: ${GREEN}${NSIP2}${TEXTRESET}
 
 Start your first collection by selecting
 ${GREEN}Data Collection and Clean File System Flash${TEXTRESET} from the Main Menu
 
-
-This will return to the Main Menu shortly
 EOF
-sleep 5
+read -p "Press Enter When Ready"
