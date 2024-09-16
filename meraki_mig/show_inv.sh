@@ -12,8 +12,8 @@ ${GREEN}Current converted Switches${TEXTRESET}
 The following serial numbers are going to be claimed and put into general inventory
 
 EOF
-cat /var/lib/tftpboot/*-shmr | grep -E -o "Q.{0,13}"
-cat /var/lib/tftpboot/*-shmr | grep -E -o "Q.{0,13}" >/root/.meraki_mig/switch_serials.txt
+cat /var/lib/tftpboot/mig_switch/*-shmr | grep -E -o "Q.{0,13}"
+cat /var/lib/tftpboot/mig_switch/*-shmr | grep -E -o "Q.{0,13}" >/root/.meraki_mig/switch_serials.txt
 cat <<EOF
 
 You will be presented with an organizational list, if more than one organization is associated to your API Key.
