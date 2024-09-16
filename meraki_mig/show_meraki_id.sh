@@ -13,7 +13,7 @@ Current Batch Registered Devices
 
 EOF
 
-more /var/lib/tftpboot/*-shmr
+more /var/lib/tftpboot/mig_switch/*-shmr
 
 read -p "Press Enter"
 
