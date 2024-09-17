@@ -234,6 +234,8 @@ if grep -q '[^[:space:]]' "/root/.meraki_mig/check.tmp"; then
     echo "${YELLOW}Main Menu --> Logs --> Meraki Pre Check"
     echo "CMDS has attempted to correct the issues, please re-run this script"
     echo "Main Menu--> Meraki Pre-Check Collection"
+    rm -r -f /root/.meraki_mig/check.tmp
+    rm -r -f /root/.meraki_mig/ip_list_single
     echo " "
   else
     echo " "
