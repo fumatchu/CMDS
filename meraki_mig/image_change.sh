@@ -13,7 +13,8 @@ These are the current images on the Server
 
 EOF
 
-ls -al /var/lib/tftpboot/images
+cd /var/lib/tftpboot/images
+md5sum cat9k_iosxe.17.09.03m3.SPA.bin
 
 echo " "
 read -p "Please specify the image you would like to use: " IMAGE
