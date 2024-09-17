@@ -24,7 +24,7 @@ the FULL IOS image that is used on 9300/9500 and the "Lite" image that is used f
 EOF
 echo ${GREEN}"Current MD5 Checksums and Image Names"${TEXTRESET}
 cd /var/lib/tftpboot/images
-md5sum ./* | sed -e 's/\.\///'
+md5sum ./cat* | sed -e 's/\.\///'
 echo " "
 
 echo " "
