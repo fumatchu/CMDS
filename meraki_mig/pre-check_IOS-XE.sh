@@ -23,11 +23,14 @@ ${YELLOW}Current IOS Version${TEXTRESET}
 
 EOF
 cat <<EOF
+
 Getting Latest Data
+
 Please Wait
+
 EOF
 
-/root/.meraki_mig/get_ios_ver.exp
+/root/.meraki_mig/get_ios_ver.exp > /dev/null 2>&1
 
 # Read file line-by-line to get an IP address
 while read -r IP; do
