@@ -19,12 +19,15 @@ while [ -z "$SUBNET" ]; do
 done
 
 echo "Running Scan"
+echo "This may take several minutes depending on the subnet size"
+echo "Please Wait..."
 echo " "
 
 #nmap -sn ${SUBNET} -oG /root/.meraki_mig/nmap_output | grep "Nmap scan report for" |cut -c22- > /root/.meraki_mig/discovered_ip
 
 nmap -p 22 ${SUBNET} -oG /root/.meraki_mig/nmap_output > /dev/null 2>&1
-cat /root/.meraki_mig/nmap_output | grep "22/open" | cut -c7- | cut -d "(" -f1 | sed -e 's/[\t ]//g;/^$/d'  > /root/.meraki_mig/discovered_ip
+cat /root/.meraki_mig/nmap_output | grep "22/open" | cut -c7- | cut -d "(" -f1 | sed -e 's/[\t ]//g;/^$/d'  > /root/.meraki_mig/dis
+covered_ip
 
 
 num_devices=$(< /root/.meraki_mig/discovered_ip wc -l)
