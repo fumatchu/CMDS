@@ -17,6 +17,7 @@ cat /root/.meraki_mig/clean.exp | grep "set image"
 cat /root/.meraki_mig/claim_devices.py | grep -m 1 "API_KEY"
 cat /root/.meraki_mig/update_ip_name-server.exp | grep "set nameserver1"
 cat /root/.meraki_mig/update_ip_name-server.exp | grep "set nameserver2"
+cat /root/.meraki_mig/update_httpclient.exp | grep "set vlan_num"
 echo " "
 echo "Batch IP List"
 more /root/.meraki_mig/ip_list
