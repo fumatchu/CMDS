@@ -10,12 +10,12 @@ cat <<EOF
 ${GREEN}Change Image to download to the switch${TEXTRESET}
 
 These are the current images on the Server
+${YELLOW}*You Should be selecting cat9k_iosxe.17.09.03m3.SPA.bin{$TEXTRESET}
 
 EOF
 
 cd /var/lib/tftpboot/images
-md5sum cat9k_iosxe.17.09.03m3.SPA.bin
-
+md5sum ./cat* | sed -e 's/\.\///'
 echo " "
 read -p "Please specify the image you would like to use: " IMAGE
 
