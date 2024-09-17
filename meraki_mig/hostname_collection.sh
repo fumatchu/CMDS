@@ -9,6 +9,7 @@ clear
 cat <<EOF
 ${GREEN}Hostname Migration${TEXTRESET}
 
+EOF
 
 # Set the input file name here
 INPUT="/root/.meraki_mig/ip_list"
