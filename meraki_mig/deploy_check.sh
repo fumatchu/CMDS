@@ -238,11 +238,11 @@ if grep -q '[^[:space:]]' "/root/.meraki_mig/check.tmp"; then
   else
     echo " "
     echo ${GREEN}"All requirements met for Meraki Onboarding ${TEXTRESET}"
+    echo "Continuing deployment"
+    sleep 2
     clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mig/meraki_register.exp
     clear & /root/.meraki_mig/show_inv.sh
-    echo " "
-    sleep 5
-  fi
+    fi
 
 
 rm -r -f /root/.meraki_mig/check.tmp
