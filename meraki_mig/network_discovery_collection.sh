@@ -13,7 +13,8 @@ while read -r IP; do
 
 #What model is the Switch?
 #  MODEL9200=$(cat /var/lib/tftpboot/mig_switch/nwd-${IP}-shver | grep "Model Number" | grep C9200 | tr -cd 'C9200' | sed 's/.$//')
-#  MODEL9200L=$(cat /var/lib/tftpboot/mig_switch/nwd-${IP}-shver | grep "Model Number" | grep C9200L | tr -cd 'C9200L' | sed 's/.$//')
+#  MODEL9200L=$(cat /var/lib/tftpboot/mig_switch/nwd-${IP}-shver | grep "Model Number" | grep C9200L | tr -cd 'C9200L' | sed 's/.$/
+/')
 #  MODELDESC9200=$(cat /var/lib/tftpboot/mig_switch/nwd-${IP}-shver | grep "Model Number" | tr -d "[:blank:]")
 #if [ "$MODEL9200" == "C9200" ] || [ "$MODEL9200L" == "C9200L" ]; then
 #    echo "${GREEN}$IP is a 9200 series switch"${TEXTRESET} >> /root/.meraki_mig/network_collection.tmp
