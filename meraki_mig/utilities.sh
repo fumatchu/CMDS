@@ -10,8 +10,9 @@ items=(1 "Ping Sweep Active Switches"
   2 "Monitor TFTP "
   3 "Deploy Global command for DNS"
   4 "Deploy Global command for http client"
-  5 "DHCP Server"
-  6 "Factory Default"
+  5 "Show converted Meraki ID"
+  6 "DHCP Server"
+  7 "Factory Default"
 )
 
 while choice=$(dialog --title "$TITLE" \
@@ -23,8 +24,9 @@ while choice=$(dialog --title "$TITLE" \
   2) clear & iptraf-ng -i all ;;
   3) clear & /root/.meraki_mig/update_ip_name-server.sh ;;
   4) clear & /root/.meraki_mig/update_httpclient.sh ;;
-  5) clear & /root/.servman/DHCPMan ;;
-  6) clear & /root/.meraki_mig/factory_default.sh ;;
+  5) clear & /root/.meraki_mig/show_meraki_id.sh ;;
+  6) clear & /root/.servman/DHCPMan ;;
+  7) clear & /root/.meraki_mig/factory_default.sh ;;
   esac
 done
 clear # clear after user pressed Cancel
