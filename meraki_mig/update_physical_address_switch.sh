@@ -37,7 +37,7 @@ clear
 echo "${GREEN}Deploying Script${TEXTRESET}"
 sleep 1
 
-python3 /root/.meraki_mig/update_physical_address_switch.py
+python3.10 /root/.meraki_mig/update_physical_address_switch.py
 
 echo "${GREEN}Script Complete${TEXTRESET}"
 rm -r /root/.meraki_mig/address.txt
