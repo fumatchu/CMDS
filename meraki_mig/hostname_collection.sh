@@ -35,7 +35,7 @@ done <"$INPUT"
 
 
 echo ${GREEN}"Deploying Update"${TEXTRESET}
-unbuffer python3 /root/.meraki_mig/deploy_hostnames.py
+unbuffer python3.10 /root/.meraki_mig/deploy_hostnames.py
 echo ${GREEN}"Script Complete"${TEXTRESET}
 #cleanup
 rm -f /root/.meraki_mig/hostnames.txt
