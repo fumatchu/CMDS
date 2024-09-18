@@ -365,9 +365,29 @@ dnf -y install epel-release
 dnf -y install dnf-plugins-core
 dnf config-manager --set-enabled crb
 dnf -y update
-dnf -y install iptraf-ng expect nmap cockpit cockpit-navigator cockpit-storaged dialog bc python python3-pip ntsysv at nano tftp-server
-pip install meraki
-pip install requests
+dnf -y install iptraf-ng expect tar nmap cockpit cockpit-navigator cockpit-storaged dialog bc ntsysv at nano tftp-server gcc openssl-devel bzip2-devel libffi-devel zlib-devel wget make
+#Install Python 3.10
+clear
+cat << EOF
+${YELLOW}Installing Required Python Elements${TEXTRESET}
+Please wait...
+EOF
+sleep 2
+clear
+cd /root
+wget https://www.python.org/ftp/python/3.10.5/Python-3.10.5.tgz 
+tar xzf Python-3.10.5.tgz 
+cd Python-3.10.5
+./configure --enable-optimizations 
+make -j 4
+nproc
+make altinstall 
+mv /root/Python-3.10.5/ /opt/
+rm -f /root/Python*
+alias python3=/opt/Python-3.10.5/python
+clear
+pip3.10 install meraki
+pip3.10 install requests
 
 #Build tftp-server
 \cp -f /usr/lib/systemd/system/tftp.service /etc/systemd/system/tftp-server.service
@@ -450,10 +470,15 @@ mkdir /root/archive/CatalystConfigurations
 
 echo "/usr/sbin/meraki_migration" >>/root/.bash_profile
 
+#Add Python 3.10 to path
+echo "alias python3=/opt/Python-3.10.5/python" >>/root/.bash_profile
+
 #Cleanup Install Files
 sed -i '/MIGInstall.sh/d' /root/.bash_profile
 rm -r -f /root/MIG*
 rm -r -f /root/mig*
+rm -r -f *.tgz
+dnf clean all
 clear
 cat <<EOF
 ${GREEN}
@@ -469,4 +494,3 @@ read -p "Press Enter to Continue"
 echo ${RED}"Rebooting${TEXTRESET}"
 sleep 1
 reboot
-
