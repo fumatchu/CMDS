@@ -231,9 +231,9 @@ EOF
 CHECK=$(cat /root/.meraki_mig/check.tmp | grep 1)
 if grep -q '[^[:space:]]' "/root/.meraki_mig/check.tmp"; then
     echo "${RED}The Switches did not pass all checks. Please review the Pre-Check Log (If Needed)${TEXTRESET}"
-    echo "${YELLOW}Main Menu --> Logs --> Meraki Pre Check"
+    echo "${YELLOW}Main Menu --> Logs --> Deployment Log${TEXTRESET}"
     echo "CMDS has attempted to correct the issues, please re-run this script"
-    echo "Main Menu--> Meraki Pre-Check Collection"
+    echo "Main Menu--> Validate Switch/Deploy"
     rm -r -f /root/.meraki_mig/check.tmp
     rm -r -f /root/.meraki_mig/ip_list_single
     echo " "
@@ -245,12 +245,13 @@ if grep -q '[^[:space:]]' "/root/.meraki_mig/check.tmp"; then
     clear
     echo "Starting the Meraki Service on the Switches"
     echo "This may take a couple of minutes depending on the numbers of switches"
-    echo  Please wait...
+    echo  "Please wait..."
+    sleep 2
     clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mig/meraki_register.exp > /dev/null 2>&1
     clear
-    echo "You will now be presented with a list of ORGS associated to the API key"
-    echo "Select the ORG, then the pre-existing Network you would like to deploy into"
-    sleep 10
+    echo "Choose the ORG/Network in which to place these switches"
+    echo "The installer will continue shortly"
+    sleep 6
     clear & /root/.meraki_mig/show_inv.sh
     clear & /root/.meraki_mig/hostname_collection.sh | tee -a /root/.meraki_mig/logs/hostname_deployment.log
     fi
