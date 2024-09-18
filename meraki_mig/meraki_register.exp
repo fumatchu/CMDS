@@ -65,8 +65,6 @@ send "conf t\r"
 expect "*#"
 send -- "file prompt quiet\r"
 expect "*#"
-send -- "do show meraki compatibility\r"
-expect "*#"
 send -- "do service meraki register\r"
 expect {
     "*no]:" {send -- "yes\r"
