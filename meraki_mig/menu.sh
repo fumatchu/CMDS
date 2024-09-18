@@ -12,8 +12,8 @@ items=(1 "Data Collection and Clean File System Flash"
   4 "Install IOS-XE Update"
   5 "Deploy and Install Update"
   6 "-----------------------------------------------"
-  7 "Validate Switch Software/Hardware Configuration"
-  8 "Migrate Hostnames and Update Physical Address"
+  7 "Validate Switch Software/Hardware Configuration/Deploy"
+  8 "Update Physical Address"
   9 "Deploy Access Template to Downlink Ports (Quick Deploy)"
  10 "Template Deployment"
  11 "Batch Cleanup"
@@ -38,7 +38,7 @@ while choice=$(dialog --title "$TITLE" \
   5) clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mig/deploy_all.sh ;;
   6) clear ;;
   7) clear & /root/.meraki_mig/deploy_check.sh | tee -a /root/.meraki_mig/logs/soft_hard_check_deployment.log ;;
-  8) /root/.meraki_mig/update_hostname_phy_loc.sh | tee -a /root/.meraki_mig/logs/hostname_deployment.log ;;
+  8) clear &/root/.meraki_mig/update_physical_address_switch.sh
   9) /root/.meraki_mig/port_deploy.sh ;;
  10) /root/.meraki_mig/adv_template.sh ;;
  11) /root/.meraki_mig/batch_clean.sh ;;
