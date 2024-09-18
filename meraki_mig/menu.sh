@@ -38,7 +38,7 @@ while choice=$(dialog --title "$TITLE" \
   5) clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mig/deploy_all.sh ;;
   6) clear ;;
   7) clear & /root/.meraki_mig/deploy_check.sh | tee -a /root/.meraki_mig/logs/soft_hard_check_deployment.log ;;
-  8) clear &/root/.meraki_mig/update_physical_address_switch.sh
+  8) clear &/root/.meraki_mig/update_physical_address_switch.sh ;;
   9) /root/.meraki_mig/port_deploy.sh ;;
  10) /root/.meraki_mig/adv_template.sh ;;
  11) /root/.meraki_mig/batch_clean.sh ;;
