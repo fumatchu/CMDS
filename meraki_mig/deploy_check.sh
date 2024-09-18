@@ -242,7 +242,15 @@ if grep -q '[^[:space:]]' "/root/.meraki_mig/check.tmp"; then
     echo ${GREEN}"All requirements met for Meraki Onboarding ${TEXTRESET}"
     echo "Continuing deployment"
     sleep 2
-    clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mig/meraki_register.exp
+    clear
+    echo "Starting the Meraki Service on the Switches"
+    echo "This may take a couple of minutes depending on the numbers of switches"
+    echo  Please wait...
+    clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mig/meraki_register.exp > /dev/null 2>&1
+    clear
+    echo "You will now be presented with a list of ORGS associated to the API key"
+    echo "Select the ORG, then the pre-existing Network you would like to deploy into"
+    sleep 10
     clear & /root/.meraki_mig/show_inv.sh
     clear & /root/.meraki_mig/hostname_collection.sh | tee -a /root/.meraki_mig/logs/hostname_deployment.log
     fi
