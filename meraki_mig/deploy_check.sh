@@ -251,7 +251,7 @@ if grep -q '[^[:space:]]' "/root/.meraki_mig/check.tmp"; then
     clear
     echo "Choose the ORG/Network in which to place these switches"
     echo "The installer will continue shortly"
-    sleep 6
+    sleep 2
     clear & /root/.meraki_mig/show_inv.sh
     clear & /root/.meraki_mig/hostname_collection.sh | tee -a /root/.meraki_mig/logs/hostname_deployment.log
     fi
