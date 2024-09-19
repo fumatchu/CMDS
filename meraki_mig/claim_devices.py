@@ -1,5 +1,3 @@
-GOOD Claim Devices.py
-
 import meraki
 import os
 
