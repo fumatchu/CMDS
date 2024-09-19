@@ -16,7 +16,7 @@ while choice=$(dialog --title "$TITLE" \
   2>&1 >/dev/tty); do
   case $choice in
   1) /root/.meraki_mon_wlc/schedule_deploy_img.sh ;;
-  2) /root/.meraki_mon_wlc/schedule_deploy_all.sh ;;
+  2) /root/.meraki_mon_wlc/schedule_deploy_all_action.sh ;;
   esac
 done
 clear # clear after user pressed Cancel
