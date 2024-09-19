@@ -7,6 +7,7 @@ GREEN=$(tput setaf 2)
 USER=$(whoami)
 
 items=(1 "Schedule IOS-XE Image Deployment"
+       2 "Schedule IOS-XE Image Deployment and Upgrade"
 )
 
 while choice=$(dialog --title "$TITLE" \
@@ -15,6 +16,7 @@ while choice=$(dialog --title "$TITLE" \
   2>&1 >/dev/tty); do
   case $choice in
   1) /root/.meraki_mon_wlc/schedule_deploy_img.sh ;;
+  2) /root/.meraki_mon_wlc/schedule_deploy_all.sh ;;
   esac
 done
 clear # clear after user pressed Cancel
