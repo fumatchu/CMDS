@@ -11,8 +11,8 @@ items=(1 "Ping Sweep Active Switches"
   3 "Deploy Global command for DNS"
   4 "Deploy Global command for http client"
   5 "Show converted Meraki ID"
-  6 "DHCP Server"
-  7 "Factory Default"
+  6 "Network Discovery"
+  7 "DHCP Server"
 )
 
 while choice=$(dialog --title "$TITLE" \
@@ -25,8 +25,8 @@ while choice=$(dialog --title "$TITLE" \
   3) clear & /root/.meraki_mig/update_ip_name-server.sh ;;
   4) clear & /root/.meraki_mig/update_httpclient.sh ;;
   5) clear & /root/.meraki_mig/show_meraki_id.sh ;;
-  6) clear & /root/.servman/DHCPMan ;;
-  7) clear & /root/.meraki_mig/factory_default.sh ;;
+  6) clear & /root/.meraki_mig/network_discovery.sh ;;
+  7) clear & /root/.servman/DHCPMan ;;
   esac
 done
 clear # clear after user pressed Cancel
