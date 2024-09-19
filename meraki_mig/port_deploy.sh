@@ -47,7 +47,7 @@ sed -i "s/NEW_VOICE_VLAN =/NEW_VOICE_VLAN = ${VOICE_VLAN}/" /root/.meraki_mig/mo
 
 echo "Gathering Data"
 
-cat /var/lib/tftpboot/*-shmr >/root/.meraki_mig/build_port.tmp
+cat /var/lib/tftpboot/mig_switch/*-shmr >/root/.meraki_mig/build_port.tmp
 
 echo "Splitting Port Densities"
 
