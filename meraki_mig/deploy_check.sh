@@ -247,7 +247,7 @@ if grep -q '[^[:space:]]' "/root/.meraki_mig/check.tmp"; then
     echo "This may take a couple of minutes depending on the numbers of switches"
     echo  "Please wait..."
     sleep 2
-    clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mig/meraki_register.exp > /dev/null 2>&1
+    clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mig/meraki_register.exp
     clear
     echo "Choose the ORG/Network in which to place these switches"
     echo "The installer will continue shortly"
