@@ -20,7 +20,7 @@ clear
 rm -r -f /root/.meraki_mon_switch/ip_list_single
 sed -i '/^/d' /root/.meraki_mon_switch/ip_list_single
 touch /root/.meraki_mon_switch/ip_list_single
-
+touch /root/.meraki_mon_switch/check.tmp
 
 clear
 cat <<EOF
@@ -51,7 +51,8 @@ echo "IOS-XE Version is ${YELLOW}$x${TEXTRESET}"
     echo "Supported versions are IOS-XE 17.3 - 17.10.1, and 17.12.3"
     echo "Please see the following link to download:"
     echo "https://software.cisco.com/download/home"
-    echo "A CCO ID is required"  
+    echo "A CCO ID is required" 
+    echo "1" >> /root/.meraki_mon_switch/check.tmp
     sleep 5
     echo "Exiting the Check"
     sleep 2
@@ -287,7 +288,8 @@ if grep -q '[^[:space:]]' "/root/.meraki_mon_switch/check.tmp"; then
     echo " "
     echo ${GREEN}"All requirements met for Meraki Onboarding ${TEXTRESET}"
     echo " "
-    sleep 5
+    echo "Continuing"
+    clear & /root/.meraki_mon_switch/download_client.sh
   fi
 
 
@@ -295,4 +297,4 @@ rm -r -f /root/.meraki_mon_switch/check.tmp
 rm -r -f /root/.meraki_mon_switch/ip_list_single
 echo "${GREEN}Script Complete${TEXTRESET}"
 echo "Returning to the main menu shortly"
-sleep 10
+sleep 4
