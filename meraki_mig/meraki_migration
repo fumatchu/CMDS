@@ -23,10 +23,11 @@ items=(1 "--------Catalyst Switching Tools--------"
   3 "Catalyst Monitoring for Switching Prep Tool"
   4 " "
   5 "--------Catalyst Wireless Tools--------"
-  6 "Catalyst Monitoring for Wireless"
+  6 "   Catalyst Monitoring for Wireless"
   7 " "
   8 "-------------Server Tools-------------"
-  9 "Server Configuration"
+  9 "        Server Configuration"
+ 10 "      DHCP Server Configuration"
 
 
 )
@@ -45,6 +46,7 @@ while choice=$(dialog --title "$TITLE" \
   7) clear ;;
   8) clear ;;
   9) clear & /root/.meraki_mig/server-tools.sh ;;
+ 10) clear & /root/.servman/DHCPMan ;;
 esac
 done
 clear # clear after user pressed Cancel
