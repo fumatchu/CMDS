@@ -1,5 +1,4 @@
 #!/bin/bash
-#Meraki C9300 Migration Menu
 TEXTRESET=$(tput sgr0)
 RED=$(tput setaf 1)
 YELLOW=$(tput setaf 3)
@@ -13,15 +12,13 @@ items=(1 "Data Collection and Clean File System Flash"
   5 "Deploy IOS-XE and Install Update"
   6 "-----------------------------------------------"
   7 "Meraki Pre-Check Collection"
-  8 "Download Cloud Monitoring for Catalyst Application"
-  9 "Batch Cleanup"
- 10 "-----------------------------------------------"
- 11 "Global Environment Settings"
- 12 "Schedule Deployment"
- 13 "Logs"
- 14 "Utilities"
- 15 "Setup Wizard"
- 16 "Welcome to CMDS"
+  8 "Batch Cleanup"
+  9 "-----------------------------------------------"
+ 10 "Global Environment Settings"
+ 11 "Schedule Deployment"
+ 12 "Logs"
+ 13 "Utilities"
+ 14 "Setup Wizard"
 )
 
 while choice=$(dialog --title "$TITLE" \
@@ -36,15 +33,13 @@ while choice=$(dialog --title "$TITLE" \
   5) clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mon_switch/deploy_all.sh ;;
   6) clear ;;
   7) clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mon_switch/check_baseline_switch.sh | tee -a /root/.meraki_mon_switch/logs/pre_check_deployment.log ;;
-  8) clear & /root/.meraki_mon_switch/download_client.sh ;;
-  9) /root/.meraki_mon_switch/batch_clean.sh ;;
- 10) /root/.meraki_mon_switch/.logo ;;
- 11) /root/.meraki_mon_switch/global_environment.sh ;;
- 12) /root/.meraki_mon_switch/schedule.sh ;;
- 13) /root/.meraki_mon_switch/logging_environment.sh ;;
- 14) /root/.meraki_mon_switch/utilities.sh ;;
- 15) /root/.meraki_mon_switch/setup_wizard.sh ;;
- 16) /root/.meraki_mon_switch/welcome.readme | more ;;
+  8) /root/.meraki_mon_switch/batch_clean.sh ;;
+  9) /root/.meraki_mon_switch/.logo ;;
+ 10) /root/.meraki_mon_switch/global_environment.sh ;;
+ 11) /root/.meraki_mon_switch/schedule.sh ;;
+ 12) /root/.meraki_mon_switch/logging_environment.sh ;;
+ 13) /root/.meraki_mon_switch/utilities.sh ;;
+ 14) /root/.meraki_mon_switch/setup_wizard.sh ;;
   esac
 done
 clear # clear after user pressed Cancel
