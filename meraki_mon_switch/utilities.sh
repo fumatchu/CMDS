@@ -15,7 +15,8 @@ items=(1 "Ping Sweep Active Switches"
   7 "Deploy Global NTP removal and update"
   8 "Deploy Global ip routing command"
   9 "Deploy Global Default Route" 
- 10 "DHCP Server"
+ 10 "Download Cloud Monitoring for Catalyst Application"
+ 11 "DHCP Server"
 )
 
 while choice=$(dialog --title "$TITLE" \
@@ -32,7 +33,8 @@ while choice=$(dialog --title "$TITLE" \
   7) clear & /root/.meraki_mon_switch/update_ntp_server.sh ;;
   8) clear & /root/.meraki_mon_switch/update_iprouting_config.sh ;;
   9) clear & /root/.meraki_mon_switch/update_defgw.sh ;;
- 10) clear & /root/.servman/DHCPMan ;;
+ 10) clear & /root/.meraki_mon_switch/download_client.sh ;;
+ 11) clear & /root/.servman/DHCPMan ;;
 
   esac
 done
