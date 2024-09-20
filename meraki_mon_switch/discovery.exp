@@ -55,5 +55,7 @@ send -- "file prompt quiet\r"
 expect "*#"
 send -- "do show version | redirect tftp://$server_ip/mon_switch/nwd-$ip-shver\r"
 expect "*#"
+send -- "do show runn | redirect tftp://$server_ip/mon_switch/nwd-$ip-shrunn\r"
+expect "*#"
 }
 close $fh
