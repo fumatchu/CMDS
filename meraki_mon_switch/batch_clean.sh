@@ -46,20 +46,7 @@ if [[ "$REPLY" =~ ^[Yy]$ ]]; then
 fi
 cat <<EOF
 
-Please make sure that you update the IP Batch list with new addresses before running a new batch of WLC's
-
-This can be accomplished by navigating to:
-${YELLOW}
-Main Menu --> Global Environment Settings --> Update Batch IP Address(es)
-${TEXTRESET}
-
-Or you can start a New Subnet Network Discovery
-
-This can be accomplished by navigating to:
-${YELLOW}
-Main Menu --> Utilities --> Network Discovery
-${TEXTRESET}
-EOF
+Please make sure that you update the IP Batch list with new addresses before running a new batch of switches
 
 cat <<EOF
 If you are starting a new Subnet Batch, you will also need to update the Default Gateway setting
@@ -73,7 +60,12 @@ if [[ "$REPLY" =~ ^[Yy]$ ]]; then
   /root/.meraki_mon_switch/batch_gwlr.sh
 fi
 
-
+read -r -p "Would you Like to re-run the wizard for a new batch of Switches? [y/N]" -n 1
+echo # (optional) move to a new line
+if [[ "$REPLY" =~ ^[Yy]$ ]]; then
+        clear
+        /root/.meraki_mon_switch/setup_wizard.sh
+fi
 echo "${GREEN}Cleanup Complete!${TEXTRESET}"
 
 read -p "Press Enter"
