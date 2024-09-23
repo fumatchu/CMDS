@@ -73,8 +73,8 @@ echo "Adding Eligible WLC to IP Batch List"
 echo "The total estimated time to upgrade and install/reboot IOS-XE is:"
 /root/.meraki_mon_wlc/time.sh
 
-#rm -r -f /root/.meraki_mon_wlc/network_collection.tmp
-#rm -r -f /var/lib/tftpboot/wlc/nwd*
-#rm -r -f /root/.meraki_mon_wlc/discovered_ip
-#rm -r -f /root/.meraki_mon_wlc/nmap_output
+rm -r -f /root/.meraki_mon_wlc/network_collection.tmp
+rm -r -f /var/lib/tftpboot/wlc/nwd*
+rm -r -f /root/.meraki_mon_wlc/discovered_ip
+rm -r -f /root/.meraki_mon_wlc/nmap_output
 read -p "Press Enter"
