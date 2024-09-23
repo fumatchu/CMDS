@@ -57,5 +57,7 @@ send -- "do show version | redirect tftp://$server_ip/wlc/nwd-$ip-shver\r"
 expect "*#"
 send -- "do copy running-config tftp://$server_ip/wlc/nwd-$ip-hostname\r"
 expect "*#"
+send -- "do show runn | redirect tftp://$server_ip/wlc/nwd-$ip-shrunn\r"
+expect "*#"
 }
 close $fh
