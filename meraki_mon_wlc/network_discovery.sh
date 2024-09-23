@@ -46,7 +46,25 @@ EOF
 more /root/.meraki_mon_wlc/network_collection.tmp | tee -a /root/.meraki_mon_wlc/logs/network_discovery
 echo "Actual Provisioned WLC" | tee -a /root/.meraki_mig/logs/network_discovery > /dev/null 2>&1
 
+INPUT="/root/.meraki_mon_wlc/ip_list"
 
+# Read file line-by-line to get an IP address
+while read -r IP; do
+
+
+  MERAKI_USER=$(cat /var/lib/tftpboot/wlc/nwd-${IP}-shrunn | grep username | grep meraki)
+  if [ "$MERAKI_USER" = "" ]; then
+    echo " "
+  else
+    echo "${YELLOW}It looks like ${IP} is already provisioned for Catalyst Monitoring"${TEXTRESET}
+    echo "${RED}Skipping..."${TEXTRESET}
+    sed -i "0,/${IP}/d" /root/.meraki_mon_wlc/ip_list
+
+fi
+
+
+
+done <"$INPUT"
 
 cat /root/.meraki_mon_wlc/ip_list >> /root/.meraki_mon_wlc/logs/network_discovery
 cat_num_devices=$(< /root/.meraki_mon_wlc/ip_list wc -l)
@@ -56,8 +74,8 @@ echo "Adding Eligible WLC to IP Batch List"
 echo "The total estimated time to upgrade and install/reboot IOS-XE is:"
 /root/.meraki_mon_wlc/time.sh
 
-rm -r -f /root/.meraki_mon_wlc/network_collection.tmp
-rm -r -f /var/lib/tftpboot/wlc/nwd*
-rm -r -f /root/.meraki_mon_wlc/discovered_ip
-rm -r -f /root/.meraki_mon_wlc/nmap_output
+#rm -r -f /root/.meraki_mon_wlc/network_collection.tmp
+#rm -r -f /var/lib/tftpboot/wlc/nwd*
+#rm -r -f /root/.meraki_mon_wlc/discovered_ip
+#rm -r -f /root/.meraki_mon_wlc/nmap_output
 read -p "Press Enter"
