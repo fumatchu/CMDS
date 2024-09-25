@@ -66,4 +66,4 @@ echo "${GREEN}Script Complete${TEXTRESET}"
 sleep 1
 rm -r /root/.meraki_mon_wlc/address.txt
 rm -r /root/.meraki_mon_wlc/phys_ap_serials.txt
-sleep 1
+read -p "Press Enter"
