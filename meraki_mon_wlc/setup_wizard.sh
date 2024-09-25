@@ -204,6 +204,7 @@ sed -i '0,/API_KEY/{/API_KEY/d;}' /root/.meraki_mon_wlc/deploy_hostnames.py
 sed -i '0,/API_KEY/{/API_KEY/d;}' /root/.meraki_mon_wlc/update_physical_address_ap.py
 sed -i '0,/API_KEY/{/API_KEY/d;}' /root/.meraki_mon_wlc/update_physical_address_ap_selective.py
 sed -i '0,/API_KEY/{/API_KEY/d;}' /root/.meraki_mon_wlc/update_physical_address_wlc.py
+sed -i '0,/API_KEY/{/API_KEY/d;}' /root/.meraki_mon_wlc/update_physical_address_wlc.py/make_network_wlc.py
 
 echo API_KEY = "\"${API_KEY}\"" >/root/.meraki_mon_wlc/api_key.key
 
@@ -212,6 +213,7 @@ sed -i '5 r /root/.meraki_mon_wlc/api_key.key' /root/.meraki_mon_wlc/deploy_host
 sed -i '5 r /root/.meraki_mon_wlc/api_key.key' /root/.meraki_mon_wlc/update_physical_address_ap.py
 sed -i '5 r /root/.meraki_mon_wlc/api_key.key' /root/.meraki_mon_wlc/update_physical_address_ap_selective.py
 sed -i '5 r /root/.meraki_mon_wlc/api_key.key' /root/.meraki_mon_wlc/update_physical_address_wlc.py
+sed -i '5 r /root/.meraki_mon_wlc/api_key.key' /root/.meraki_mon_wlc/make_network_wlc.py
 
 cat <<EOF
 ${GREEN}Update Complete${TEXTRESET}
