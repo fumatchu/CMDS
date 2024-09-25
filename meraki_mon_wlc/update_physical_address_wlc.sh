@@ -9,11 +9,11 @@ clear
 cat << EOF
 ${GREEN}Update Physical Address on WLC${TEXTRESET}
 
-This will allow you to update Physical Address of the AP and Move the Map Marker 
+This will allow you to update Physical Address of the AP and Move the Map Marker
 
 ${YELLOW}
 #######################################################################
-Please make sure that you have moved the WLC from the general inventory 
+Please make sure that you have moved the WLC from the general inventory
 to the selected network you would like to deploy.
 #######################################################################
 ${TEXTRESET}
@@ -54,3 +54,5 @@ python3 /root/.meraki_mon_wlc/update_physical_address_wlc.py
 
 rm -r /root/.meraki_mon_wlc/address.txt
 rm -r /root/.meraki_mon_wlc/wlc_serials.txt
+
+read -p "Press Enter"
