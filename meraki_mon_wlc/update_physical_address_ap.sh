@@ -55,6 +55,6 @@ sleep 1
 python3 /root/.meraki_mon_wlc/update_physical_address_ap.py
 
 echo "${GREEN}Script Complete${TEXTRESET}"
+read -p "Press Enter"
 rm -r /root/.meraki_mon_wlc/address.txt
 rm -r /root/.meraki_mon_wlc/ap_serials.txt
-sleep 1
