@@ -201,11 +201,12 @@ done
 #remove the instance of API Key first
 
 #sed -i '0,/API_KEY/{/API_KEY/d;}' /root/.meraki_mon_switch/update_physical_address_switch.py
+sed -i '0,/API_KEY/{/API_KEY/d;}' /root/.meraki_mon_switch/make_network_switch.py
 
 echo API_KEY = "\"${API_KEY}\"" >/root/.meraki_mon_switch/api_key.key
 
 #sed -i '5 r /root/.meraki_mon_switch/api_key.key' /root/.meraki_mon_switch/update_physical_address_switch.py
-
+sed -i '5 r /root/.meraki_mon_switch/api_key.key' /root/.meraki_mon_switch/make_network_switch.py
 cat <<EOF
 ${GREEN}Update Complete${TEXTRESET}
 EOF
