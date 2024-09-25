@@ -260,5 +260,4 @@ if grep -q '[^[:space:]]' "/root/.meraki_mig/check.tmp"; then
 rm -r -f /root/.meraki_mig/check.tmp
 rm -r -f /root/.meraki_mig/ip_list_single
 echo "${GREEN}Script Complete${TEXTRESET}"
-echo "Returning to the main menu shortly"
-sleep 10
+read -p "Press Enter"
