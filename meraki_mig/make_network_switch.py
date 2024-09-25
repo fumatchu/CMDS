@@ -18,6 +18,8 @@ def select_organization():
 # Function to create a new network
 def create_network(org_id):
     name = input("Enter the name of the new network: ")
+    print ("Please see the following link for approved Timezones")
+    print ("https://en.wikipedia.org/wiki/List_of_tz_database_time_zones")
     time_zone = input("Enter the time zone (e.g., 'America/Los_Angeles'): ")
 
     try:
