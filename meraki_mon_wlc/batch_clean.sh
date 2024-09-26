@@ -44,16 +44,13 @@ if [[ "$REPLY" =~ ^[Yy]$ ]]; then
         sleep 2
 
 fi
-cat <<EOF
-${GREEN}
-Cleanup Complete!
-${TEXTRESET}
 
-Please make sure that you update the IP Batch list with new addresses before running a new batch of WLC's
+read -r -p "Would you Like to re-run the wizard for a new batch of WLC? [y/N]" -n 1
+echo # (optional) move to a new line
+if [[ "$REPLY" =~ ^[Yy]$ ]]; then
+        clear
+        /root/.meraki_mon_wlc/setup_wizard.sh
+fi
+echo "${GREEN}Cleanup Complete!${TEXTRESET}"
 
-This can be accomplished by navigating to:
-${YELLOW}
-Main Menu --> Global Environment Settings --> Update Batch IP Address(es)
-${TEXTRESET}
-EOF
 read -p "Press Enter"
