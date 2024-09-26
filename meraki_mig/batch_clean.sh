@@ -31,14 +31,14 @@ if [[ "$REPLY" =~ ^[Yy]$ ]]; then
         echo ${YELLOW}"Archiving the logs files"${TEXTRESET}
         mkdir /root/.meraki_mig/logs/"archive-logs-${DATE}"
         mv -v /root/.meraki_mig/logs/*.log /root/.meraki_mig/logs/"archive-logs-${DATE}"/
-        mkdir /root/archive/c9300_migration
-        \cp -R /root/.meraki_mig/logs/"archive-logs-${DATE}"/ /root/archive/c9300_migration
-        echo ${YELLOW}"Dumping Device information to /root/archive/Catalyst_c9300_Meraki_Inventory_${DATE}.log"${TEXTRESET}
-        more /var/lib/tftpboot/mig_switch/*-shmr >>/root/archive/"Catalyst_c9300_Meraki_Inventory_${DATE}.log"
+        mkdir /root/archive/switch_migration_logs
+        \cp -R /root/.meraki_mig/logs/"archive-logs-${DATE}"/ /root/archive/switch_migration_logs
+        echo ${YELLOW}"Dumping Device information to /root/archive/switch_migrations_logs/Catalyst_c9300_Meraki_Inventory_${DATE}.log"${TEXTRESET}
+        more /var/lib/tftpboot/mig_switch/*-shmr >>/root/archive/switch_migration_logs/"Catalyst_c9300_Meraki_Inventory_${DATE}.log"
         echo ${YELLOW}"Moving all Catalyst configs to the root folder"${TEXTRESET}
-       # find /var/lib/tftpboot/. -name . -o -type d -prune -o -exec sh -c 'mv "$@" "$0"' /root/archive/CatalystConfigurations/ {} +
-        mkdir /root/archive/CatalystConfigurations/"${DATEDAY}"
-        mv -v /var/lib/tftpboot/mig_switch/* /root/archive/CatalystConfigurations/"${DATEDAY}"/
+        find /var/lib/tftpboot/mig_switch/. -name . -o -type d -prune -o -exec sh -c 'mv "$@" "$0"' /root/archive/CatalystConfigurations/ {} +
+        mkdir /root/archive/CatalystConfigurations/CatalystSwitchMigration
+        mv -v /var/lib/tftpboot/mig_switch/* /root/archive/CatalystConfigurations/CatalystSwitchMigration/
         rm -f /root/.meraki_mig/switch_serials*
         echo ${YELLOW}"Cleaning the Batch IP List"${TEXTRESET}
         rm -f /root/.meraki_mig/ip_list
