@@ -52,14 +52,6 @@ cat <<EOF
 If you are starting a new Subnet Batch, you will also need to update the Default Gateway setting
 EOF
 
-read -r -p "Would you like to update the Gateway of Last resort for your next batch? [y/N]" -n 1
-echo # (optional) move to a new line
-if [[ "$REPLY" =~ ^[Yy]$ ]]; then
-  echo ${GREEN}"Updating Gateway of last resort${TEXTRESET}"
-  sleep 1
-  /root/.meraki_mon_switch/batch_gwlr.sh
-fi
-
 read -r -p "Would you Like to re-run the wizard for a new batch of Switches? [y/N]" -n 1
 echo # (optional) move to a new line
 if [[ "$REPLY" =~ ^[Yy]$ ]]; then
