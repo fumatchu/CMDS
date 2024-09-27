@@ -6,7 +6,7 @@ YELLOW=$(tput setaf 3)
 GREEN=$(tput setaf 2)
 
 
-INPUT="/root/ip_list"
+INPUT="/root/.meraki_port_mig/ip_list"
 
 # Read file line-by-line to get an IP address
 while read -r IP; do
@@ -35,6 +35,6 @@ sed -i -e 's/\bGigabitEthernet1\/0\/1\b/GigabitEthernet1\/0\/25/g' \
 -e 's/\bGigabitEthernet1\/0\/21\b/GigabitEthernet1\/0\/45/g' \
 -e 's/\bGigabitEthernet1\/0\/22\b/GigabitEthernet1\/0\/46/g' \
 -e 's/\bGigabitEthernet1\/0\/23\b/GigabitEthernet1\/0\/47/g' \
--e 's/\bGigabitEthernet1\/0\/24\b/GigabitEthernet1\/0\/48/g' ./${IP}
+-e 's/\bGigabitEthernet1\/0\/24\b/GigabitEthernet1\/0\/48/g' /root/.meraki_port_mig/${IP}
 
 done <"$INPUT"
