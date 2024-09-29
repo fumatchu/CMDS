@@ -1,5 +1,5 @@
 #!/bin/bash
-#Batch Clean for Server
+#Create csv of collected switches
 TEXTRESET=$(tput sgr0)
 RED=$(tput setaf 1)
 YELLOW=$(tput setaf 3)
