@@ -426,6 +426,8 @@ mv /root/MIGInstaller/meraki_mig /root/.meraki_mig
 mv /root/MIGInstaller/meraki_mon_wlc /root/.meraki_mon_wlc
 #Catalyst Wireless Monitoring
 mv /root/MIGInstaller/meraki_mon_switch /root/.meraki_mon_switch
+#Catalyst Port Migration
+mv /root/MIGInstaller/meraki_port_mig /root/.meraki_port_mig
 mkdir /root/.meraki_mig/logs
 mkdir /root/.meraki_mon_wlc/logs
 mkdir /root/.meraki_mon_switch/logs
