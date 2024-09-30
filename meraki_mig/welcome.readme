@@ -9,17 +9,6 @@ cat <<EOF
 ${GREEN}Catalyst to Meraki Deployment Server v1.0(01)${TEXTRESET}
 
 EOF
-cat << EOF
-
-${GREEN}Features/Additions to Version:${VERSION}${TEXTRESET}
-
-Added Nested templates to port template deployment
-Added Capability to deploy templates (port or nested) to ANY (migrated Catalsyt or "regular" Meraki)
-24 or 48 port switch in the dashboard
-
-${GREEN}Bug Fixes${TEXTRESET}
-None
-
 
 Welcome to ${GREEN}CMDS${TEXTRESET}. This is a dialog based driven GUI menu system backed by smaller scripts
 to help you get things done efficiently for your Meraki Migration.
@@ -34,7 +23,7 @@ clear
 cat <<EOF
 Starting your first migration is simple.
 
-From the main menu, you wil select the type of migration/monitoring you want:
+From the main menu, you will select the type of migration/monitoring you want:
          -Catalyst Migration for C9300 Series Switches (This will replace the IOS-XE in the switch and migrate the switch to Meraki Native code
                 -The Server will then use the logic to migrate and register the switch to the Meraki Dashboard as a FULLY Managed Device
 
@@ -62,9 +51,10 @@ The setup wizard will walk you through a fresh install of a CMDS server. It will
                -Technically, the server will scan the subnet for anything with port 22 open, Login, and validate that the device is eligible.
                -Even if the device is eligible, the server will chak to make sure that it is not already monitered by the dashboard, otherwise it skips it
         -Prompts you to upload (at a minimum) (1) IOS-XE image
+               -When you download the images from Cisco, make sure you are retaining the file names. Do not change them
         -This can be accomplished by SCP, or using the Navigator component in cockpit that is running at the (IP address of the server):9090
 
-After the Setup wizard completes, you are ready to start migrating your switches
+After the Setup wizard completes, you are ready to start migrating your devices
 
 EOF
 read -p "Press Enter"
@@ -88,7 +78,10 @@ ${GREEN}Install the IOS-XE Update${TEXTRESET}
         -Connects to each batch switch and runs the command “activate commit prompt-level none”
         -Looks for the switch response of “*Finished Commit*” and moves on the next switch in the batch until all switches are initiated for upgrade
 
-${YELLOW}Steps Above may need to be executed multiples times to get to the desired image of 17.09.03.m3 (the approved version to migrate IOS-XE to Meraki${TEXTRESET}
+${YELLOW}Steps Above may need to be executed multiples times to get to the desired, suggested image (the approved version to migrate/monitor IOS-XE to Meraki
+         The server will specify the image versions for you in the setup wizard. The ONLY exception is Catalyst MONITORING. WLC Monitoring and Switch MIGRATION
+         MUST use the specified files the server provides to you during setup${TEXTRESET}
+
 
 
 Next we start the Meraki migration components
@@ -173,6 +166,19 @@ ${GREEN}Batch Cleanup${TEXTRESET}
 
 Run the Setup Wizard again (per subnet)
 Rinse, repeat
+
+EOF
+
+cat << EOF
+
+${GREEN}Features/Additions to Version:${VERSION}${TEXTRESET}
+
+Added Nested templates to port template deployment
+Added Capability to deploy templates (port or nested) to ANY (migrated Catalsyt or "regular" Meraki)
+24 or 48 port switch in the dashboard
+
+${GREEN}Bug Fixes${TEXTRESET}
+None
 
 EOF
 read -p "Press Enter"
