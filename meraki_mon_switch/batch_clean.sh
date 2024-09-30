@@ -48,8 +48,6 @@ cat <<EOF
 
 Please make sure that you update the IP Batch list with new addresses before running a new batch of switches
 
-cat <<EOF
-If you are starting a new Subnet Batch, you will also need to update the Default Gateway setting
 EOF
 
 read -r -p "Would you Like to re-run the wizard for a new batch of Switches? [y/N]" -n 1
