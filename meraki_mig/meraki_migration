@@ -5,10 +5,11 @@ RED=$(tput setaf 1)
 YELLOW=$(tput setaf 3)
 GREEN=$(tput setaf 2)
 SERVERIP=$(hostname -I)
+VERSION=$(cat /root/.meraki_mig/version)
 clear
-echo "
+echo "VERSION=${VERSION}
 ${GREEN}
-v1.02(1)
+
 ****************************************************************
                     Welcome to CMDS
 ****************************************************************
