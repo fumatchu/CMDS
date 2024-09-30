@@ -76,6 +76,10 @@ EOF
  touch /root/.meraki_mig/templates/already_installed/switch_serials_24.txt
  touch /root/.meraki_mig/templates/already_installed/switch_serials_48.txt
 
+ #Create archives
+ mkdir /root/archive
+ mkdir /root/archive/CatalystConfigurations
+
 
 
   # Mr. M
