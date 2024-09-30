@@ -9,27 +9,24 @@ clear
 cat <<EOF
 ${GREEN}Factory Default/Cleanup${TEXTRESET}
 
-This will archive all logs to an archive folder in the logs and root directory
-It will also move the Registered Meraki Device (Serial and Hardware) to the root directory (for historical purposes)
-All Configuration data, like Switch usernames, passwords, and the Meraki API key
-will be destroyed. The application will be removed, and reinstalled from Git.
+This will destory all data for any batches and remove the Images files, creating an OOB experience
+The application will be removed, and reinstalled from Git.
 Upon reinstall, the server will prompt you to reboot.
 
-${YELLOW}Use this process if you want to destroy all personal data, minus logs, or you want to start working in a different org${TEXTRESET}
+${YELLOW}Use this process if you want to destroy all personal data, and re-install from Github${TEXTRESET}
 EOF
 
 read -r -p "Would you Like to run the factory reset now? [y/N]" -n 1
 echo # (optional) move to a new line
 if [[ "$REPLY" =~ ^[Yy]$ ]]; then
-  echo "Archiving the logs files"
-  mkdir /root/.meraki_mig/logs/"archive-logs-${DATE}"
-  mv -v /root/.meraki_mig/logs/*.log /root/.meraki_mig/logs/"archive-logs-${DATE}"/
-  \cp -R /root/.meraki_mig/logs/"archive-logs-${DATE}"/ /root/archive
-  echo "Dumping Device information to /root/archive/Catalyst_Meraki_Inventory_${DATE}.log"
-  more /var/lib/tftpboot/*-shmr >>/root/archive/"Catalyst_Meraki_Inventory_${DATE}.log"
-  echo "Moving all Catalyst configs to the root folder"
-  find /var/lib/tftpboot/. -name . -o -type d -prune -o -exec sh -c 'mv "$@" "$0"' /root/archive/CatalystConfigurations/ {} +
-  rm -f /root/.meraki_mig/switch_serials*
+  echo "Deleting all data and Archives"
+  rm -f -r /root/archive/
+  rm -r -f /var/log/tftpboot/images/*
+  rm -r -f /var/log/tftpboot/mon_switch/*
+  rm -r -f /var/log/tftpboot/mig_switch/*
+  rm -r -f rm -r -f /var/log/tftpboot/wlc/*
+  rm -r -f /root/.meraki*
+  rm -f /usr/sbin/meraki_migration
   sleep 2
   cat <<EOF
 ${YELLOW}
@@ -49,24 +46,38 @@ EOF
 
   #Move scripts
   #Put meraki_migration in the path
-  rm -r -f /root/.meraki_mig/
-  mv -v /root/MIGInstaller/meraki_mig /root/.meraki_mig
+  mv /root/MIGInstaller/meraki_mig /root/.meraki_mig
+  #Catalyst Wireless Monitoring
+  mv /root/MIGInstaller/meraki_mon_wlc /root/.meraki_mon_wlc
+  #Catalyst Wireless Monitoring
+  mv /root/MIGInstaller/meraki_mon_switch /root/.meraki_mon_switch
+  #Catalyst Port Migration
+  mv /root/MIGInstaller/meraki_port_mig /root/.meraki_port_mig
   mkdir /root/.meraki_mig/logs
+  mkdir /root/.meraki_mon_wlc/logs
+  mkdir /root/.meraki_mon_switch/logs
+  mkdir /root/.meraki_port_mig/logs
   chmod 700 -R /root/.meraki_mig
-  rm -f /usr/sbin/meraki_migration
+  chmod 700 -R /root/.meraki_mon_wlc
+  chmod 700 -R /root/.meraki_mon_switch
+  mv /root/.meraki_mig/meraki_migration /usr/sbin/
+  mv -v /root/MIGInstaller/meraki_mig /root/.meraki_mig
+  chmod 700 -R /root/.meraki*
   mv /root/.meraki_mig/meraki_migration /usr/sbin/
   #Create Directory for Active Templates
   mkdir /root/.meraki_mig/templates/active
   #Create Linked Dircetory
   mkdir /root/.meraki_mig/templates/linked
-#Create Folder for imported port configurations into templates for pre-existing switches
-mkdir /root/.meraki_mig/templates/already_installed
-mkdir /root/.meraki_mig/templates/already_installed/active
-mkdir /root/.meraki_mig/templates/already_installed/linked
+ #Create Folder for imported port configurations into templates for pre-existing switches
+ mkdir /root/.meraki_mig/templates/already_installed
+ mkdir /root/.meraki_mig/templates/already_installed/active
+ mkdir /root/.meraki_mig/templates/already_installed/linked
 
-#Create Switch files to modify for already configured switches
-touch /root/.meraki_mig/templates/already_installed/switch_serials_24.txt
-touch /root/.meraki_mig/templates/already_installed/switch_serials_48.txt
+ #Create Switch files to modify for already configured switches
+ touch /root/.meraki_mig/templates/already_installed/switch_serials_24.txt
+ touch /root/.meraki_mig/templates/already_installed/switch_serials_48.txt
+
+
 
   # Mr. M
   chmod 700 /root/.meraki_mig/.logo
