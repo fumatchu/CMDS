@@ -37,12 +37,12 @@ while choice=$(dialog --title "$TITLE" \
   7) clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mon_switch/deploy_all.sh ;;
   8) clear ;;
   9) clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mon_switch/check_baseline_switch.sh | tee -a /root/.meraki_mon_switch/logs/pre_check_deployment.log ;;
- 10) /root/.meraki_mon_switch/batch_clean.sh ;;
- 11) /root/.meraki_mon_switch/.logo ;;
- 12) /root/.meraki_mon_switch/global_environment.sh ;;
- 13) /root/.meraki_mon_switch/schedule.sh ;;
- 14) /root/.meraki_mon_switch/logging_environment.sh ;;
- 15) /root/.meraki_mon_switch/utilities.sh ;;
+ 10) clear & /root/.meraki_mon_switch/batch_clean.sh ;;
+ 11) clear & /root/.meraki_mon_switch/.logo ;;
+ 12) clear & /root/.meraki_mon_switch/global_environment.sh ;;
+ 13) clear & /root/.meraki_mon_switch/schedule.sh ;;
+ 14) clear & /root/.meraki_mon_switch/logging_environment.sh ;;
+ 15) clear & /root/.meraki_mon_switch/utilities.sh ;;
   esac
 done
 clear # clear after user pressed Cancel
