@@ -18,18 +18,20 @@ At Any time, you can type ${YELLOW}meraki_migration${TEXTRESET} from the cli to 
 "
 sleep 4
 
-items=(1 "--------Catalyst Switching Tools--------"
+items=(1 "-----------Catalyst Switching Tools-----------"
   2 "Catalyst Migration for c9300 Series Switches"
   3 "Catalyst Monitoring for Switching Prep Tool"
   4 " "
-  5 "--------Catalyst Wireless Tools--------"
-  6 "   Catalyst Monitoring for Wireless"
+  5 "-----------Catalyst Wireless Tools-----------"
+  6 "      Catalyst Monitoring for Wireless"
   7 " "
-  8 "-------------Server Tools-------------"
-  9 "        Server Configuration"
- 10 "      DHCP Server Configuration"
-
-
+  8 "----------------Server Tools-----------------"
+  9 "             Server Configuration"
+ 10 "          DHCP Server Configuration"
+ 11 "             Factory Default"
+ 12 " "
+ 13 "---------------------------------------------"
+ 14 "             Welcome to CMDS"
 )
 
 while choice=$(dialog --title "$TITLE" \
@@ -47,6 +49,10 @@ while choice=$(dialog --title "$TITLE" \
   8) clear ;;
   9) clear & /root/.meraki_mig/server-tools.sh ;;
  10) clear & /root/.servman/DHCPMan ;;
+ 11) clear & /root/.meraki_mig/factory_default.sh ;;
+ 12) clear ;;
+ 13) clear ;;
+ 14) clear & /root/.meraki_mig/welcome.readme ;;
 esac
 done
 clear # clear after user pressed Cancel
