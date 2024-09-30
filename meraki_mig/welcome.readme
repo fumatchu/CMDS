@@ -3,18 +3,19 @@ TEXTRESET=$(tput sgr0)
 RED=$(tput setaf 1)
 YELLOW=$(tput setaf 3)
 GREEN=$(tput setaf 2)
-
+VERSION=$(cat /root/.meraki_mig/version)
 clear
 cat <<EOF
 ${GREEN}Catalyst to Meraki Deployment Server v1.0(01)${TEXTRESET}
 
+EOF
 cat << EOF
 
-${GREEN}Features/Additions to 1.0 (01)${TEXTRESET}
+${GREEN}Features/Additions to Version:${VERSION}${TEXTRESET}
 
 Added Nested templates to port template deployment
 Added Capability to deploy templates (port or nested) to ANY (migrated Catalsyt or "regular" Meraki)
-24 or 48 port switch in the dashboard 
+24 or 48 port switch in the dashboard
 
 ${GREEN}Bug Fixes${TEXTRESET}
 None
@@ -24,11 +25,27 @@ Welcome to ${GREEN}CMDS${TEXTRESET}. This is a dialog based driven GUI menu syst
 to help you get things done efficiently for your Meraki Migration.
 You can start CMDS at any time by typing ${YELLOW}meraki_migration${TEXTRESET} from the terminal.
 
-There is a walkthrough YT video if you would like to watch:
-https://youtu.be/7m1T3dSq6QE
+There are walk-through videos for each deployment type:
+https://youtube.com/@merakimatt?si=icfH-JdD-53YhelM
+
+EOF
+read -p "Press Enter"
+clear
+cat <<EOF
+Starting your first migration is simple.
+
+From the main menu, you wil select the type of migration/monitoring you want:
+         -Catalyst Migration for C9300 Series Switches (This will replace the IOS-XE in the switch and migrate the switch to Meraki Native code
+                -The Server will then use the logic to migrate and register the switch to the Meraki Dashboard as a FULLY Managed Device
+
+         -Catalyst Monitoring for Wireless
+                -The Server will register the 9800 series in a one or many deployment for Catalyst wireless Monitoring
+
+         -Catalyst Monitoring for Switching Prep tool
+                -The server will validate the configuration of the IOS-XE config to make sure that ALL requirements aremet for onboarding
 
 
-Starting your first migration is simple. You will first run the Setup Wizard from the main menu.
+You will first run the Setup Wizard from the main menu.
 
 
 ${GREEN}Setup Wizard${TEXTRESET}
@@ -39,10 +56,20 @@ The setup wizard will walk you through a fresh install of a CMDS server. It will
         -Sets the IP address of the CMDS for TFTP
         -Prompts for the Meraki API Key
         -Prompts for the IP addresses of the switches (Batch) to migrate (one per line, no crriage returns)
+        ${YELLOW}--OR--${TEXTRESET}
+        -Allows you to leverage Network Discovery
+               -Network discovery has the server scan a subnet of your choice and reports the eligible devices, addint them to the batch IP List for you
+               -Technically, the server will scan the subnet for anything with port 22 open, Login, and validate that the device is eligible.
+               -Even if the device is eligible, the server will chak to make sure that it is not already monitered by the dashboard, otherwise it skips it
         -Prompts you to upload (at a minimum) (1) IOS-XE image
         -This can be accomplished by SCP, or using the Navigator component in cockpit that is running at the (IP address of the server):9090
 
 After the Setup wizard completes, you are ready to start migrating your switches
+
+EOF
+read -p "Press Enter"
+clear
+cat << EOF
 The steps are as follows
 
 ${GREEN}Data Collection and Clean File System Flash${TEXTRESET}
@@ -66,29 +93,35 @@ ${YELLOW}Steps Above may need to be executed multiples times to get to the desir
 
 Next we start the Meraki migration components
 
-
+EOF
+read -p "Press Enter"
+clear
+cat << EOF
 ${GREEN}Meraki Precheck Collection${TEXTRESET}
         -Runs the “show Meraki compatibility”, collects additional metrics and stores them for the validate software hardware option.
         -Also validates the running IOS-XE version for migration, assessed by CMDS
 
-${GREEN}Validate Switch Software/Hardware Configuration${TEXTRESET}
-        -Is there a DHCP interface? If not it will warn yellow, reminding the admin that a DHCP Server is needed after migration
-        -Does the switch have the command ip http client -source-interface?
-        -Does the switch have a DNS entry? (Static or Dynamic)
+${GREEN}Validate Switch/WLC/Software/Hardware Configuration${TEXTRESET}
+        -Does the device in question interoprate as needed to the network requirements?
+        -Does the device have a DNS entry? (Static or Dynamic)
         -Does the IOS-XE version match?
-        -Is the switch in INSTALL mode?
+        -Is the device in INSTALL mode?
         -Is there a GW of last resort?
         -Are there any hardware incompatibilities?
 
+
 All requirements must be met (there are no red warnings). If there are the admin must correct these issues first, then re-run the Meraki PreCheck
+(Keep in mind the server will cattempt to correct the issues as it sees them. In most cases, you can let the make the corrections, and then just run the validation
+once more.
+
 After the Precheck has been re-run, we must validate the configuration again (so Meraki PreCheck, then Validation- again)
 Then we continue with:
 
-${GREEN}Register Catalyst switch to Meraki Dashboard${TEXTRESET}
+${GREEN}Register devices to the  Meraki Dashboard${TEXTRESET}
         -Runs the command service meraki register
         -Collects the serial numbers and stores them locally and historically
 
-${GREEN}Show Converted Meraki ID${TEXTRESET}
+${GREEN}Show Converted Meraki ID (also in Utilities)${TEXTRESET}
         -Provides a sanity check of the serial numbers for the registered switches.
         -Uses this information moving forward for API commands for templates and device claim
 
@@ -96,13 +129,20 @@ ${GREEN}Claim Inventory/Serials to Organization${TEXTRESET}
         -Calls the Meraki API to take the stored serial numbers, allow you to choose the Org (If more than one)
         -Registers these devices to the ORG under the associated API
 
-${YELLOW}After you have claimed the devices to Inventory, You must move these devices to an active Network with a firmware version minimum of 16.6 (Meraki 16.6)
-Please call support if you need assistance with this${TEXTRESET}
+${YELLOW}After you have claimed the devices to Inventory:${TEXTRESET}
+        - Meraki Switch MIGRATIONS Prompt you for the network you deposit them in
+        - Meraki Monitoring  for WLC, you MUST allocate the devices to the proper network via the Dashboard
+        - Meraki Monitoring Prep tool, As of this writing, you will use the Cloud Monitoring for Catalyst Application
 
 ${GREEN}Migrate Hostnames${TEXTRESET}
         -Takes the pre-existing switch names from Catalyst config and uses the serial number to update the batch with the appropriate hostnames
+        -This is applicable for the Migration program
 
-${GREEN}Template Deployment${TEXTRESET}
+${GREEN}Apply Physical Addresses and move the Map Marker in Dashboard${TEXTRESET}
+        -Allows you to specify the Address for the pdevices in their physcial locations
+        - For the WLC monitoring, you can also download a collected .cvs file and modify AP's as needed by physical location/serial
+
+${GREEN}Template Deployment for Switching Migration${TEXTRESET}
         -When deploying new equipment in a network it is always best practice to put a “plan” in place for port allocations on the network.
         -The Template deployment allows the admin to do the following:
                 -Create templates based on physical ports (i.e. port 2-10, 11-20, 21 -24)
@@ -115,7 +155,10 @@ When Templates have been created, they can also be linked. This is the process o
 deploy the next bacth of switches, you do not have to go through the same template selection, it can just be a grouped, pre-selected, set of templates
 already bound together
 
-
+EOF
+read -p "Press Enter"
+clear
+cat << EOF
 ${GREEN}Batch Cleanup${TEXTRESET}
         -Creates an archive in the root directory for historical purposes
         -Archives all expect script transaction between CMDS and the switch
@@ -128,9 +171,8 @@ ${GREEN}Batch Cleanup${TEXTRESET}
         -Resets the IP addresses in the Batch file
                 - Add a New list of of IP addresses to the batch (MainMenu-->Global Environment Settings-->Update Batch IP Address(es)
 
+Run the Setup Wizard again (per subnet)
 Rinse, repeat
 
 EOF
-
-
-sleep 5
+read -p "Press Enter"
