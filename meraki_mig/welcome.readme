@@ -9,7 +9,7 @@ cat <<EOF
 ${GREEN}Catalyst to Meraki Deployment Server v1.0(01)${TEXTRESET}
 
 EOF
-
+cat <<EOF
 Welcome to ${GREEN}CMDS${TEXTRESET}. This is a dialog based driven GUI menu system backed by smaller scripts
 to help you get things done efficiently for your Meraki Migration.
 You can start CMDS at any time by typing ${YELLOW}meraki_migration${TEXTRESET} from the terminal.
