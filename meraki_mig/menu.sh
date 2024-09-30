@@ -41,16 +41,16 @@ while choice=$(dialog --title "$TITLE" \
   7) clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mig/deploy_all.sh ;;
   8) clear ;;
   9) clear & /root/.meraki_mig/deploy_check.sh | tee -a /root/.meraki_mig/logs/soft_hard_check_deployment.log ;;
- 10) clear &/root/.meraki_mig/update_physical_address_switch.sh ;;
- 11) /root/.meraki_mig/port_deploy.sh ;;
- 12) /root/.meraki_mig/adv_template.sh ;;
- 13) /root/.meraki_mig/batch_clean.sh ;;
- 14) /root/.meraki_mig/.logo ;;
- 15) /root/.meraki_mig/global_environment.sh ;;
- 16) /root/.meraki_mig/schedule.sh ;;
- 17) /root/.meraki_mig/logging_environment.sh ;;
- 18) /root/.meraki_mig/utilities.sh ;;
- 19) /root/.meraki_mig/welcome.readme | more ;;
+ 10) clear & /root/.meraki_mig/update_physical_address_switch.sh ;;
+ 11) clear & /root/.meraki_mig/port_deploy.sh ;;
+ 12) clear & /root/.meraki_mig/adv_template.sh ;;
+ 13) clear & /root/.meraki_mig/batch_clean.sh ;;
+ 14) clear & /root/.meraki_mig/.logo ;;
+ 15) clear & /root/.meraki_mig/global_environment.sh ;;
+ 16) clear & /root/.meraki_mig/schedule.sh ;;
+ 17) clear & /root/.meraki_mig/logging_environment.sh ;;
+ 18) clear & /root/.meraki_mig/utilities.sh ;;
+ 19) clear & /root/.meraki_mig/welcome.readme | more ;;
   esac
 done
 clear # clear after user pressed Cancel
