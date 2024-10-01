@@ -56,26 +56,26 @@ chmod 700 /root/MIGInstaller/MIG*
 
 
 clear
-cat <<EOF
- *********************************************
+#cat <<EOF
+# *********************************************
 
- This script was created for ${GREEN}Rocky 9.x${TEXTRESET}
- This will install 
+# This script was created for ${GREEN}Rocky 9.x${TEXTRESET}
+# This will install 
 
- 1. CMDS with C9300 Migration capabilities
- 2. CMDS with Catalyst Wireless Monitoring (setup) capabilities 
+# 1. CMDS with C9300 Migration capabilities
+# 2. CMDS with Catalyst Wireless Monitoring (setup) capabilities 
  
- What this script does:
- 1. Apply appropriate SELinux context and Firewall rules
- 2. Install the REPO(s) needed and dependencies needed
- 3. Configure the system as needed, based on your answers
- 4. Provides an (optional) Name Server
- 5. Provides an (optional) DHCP Server
- 6. Provides a tftp collection server
- 7. Provides all the scripts to migrate the c9300's
- 8. Provides all the scripts to setup Catalyst Monitoring for c9800s
+# What this script does:
+# 1. Apply appropriate SELinux context and Firewall rules
+# 2. Install the REPO(s) needed and dependencies needed
+# 3. Configure the system as needed, based on your answers
+# 4. Provides an (optional) Name Server
+# 5. Provides an (optional) DHCP Server
+# 6. Provides a tftp collection server
+# 7. Provides all the scripts to migrate the c9300's
+# 8. Provides all the scripts to setup Catalyst Monitoring for c9800s
 
- *********************************************
+#*********************************************
  
 
 EOF
