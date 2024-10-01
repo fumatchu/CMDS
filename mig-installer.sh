@@ -81,9 +81,9 @@ clear
 #*********************************************
  
 
-EOF
+#EOF
 
-read -p "Press Enter to Continue"
+#read -p "Press Enter to Continue"
 
 items=(1 "Deploy CMDS"
 )
