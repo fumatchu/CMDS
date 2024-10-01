@@ -13,6 +13,8 @@ if [ "$USER" = "root" ]; then
 else
   echo ${RED}"This program must be run as root ${TEXTRESET}"
   echo "Exiting"
+  sleep 2
+  exit
 fi
 #Checking for version Information
 if [ "$MAJOROS" = "9" ]; then
@@ -21,6 +23,7 @@ else
   echo ${RED}"Sorry, but this installer only works on Rocky 9.X ${TEXTRESET}"
   echo "Please upgrade to ${GREEN}Rocky 9.x${TEXTRESET}"
   echo "Exiting the installer..."
+  sleep 2
   exit
 fi
 
