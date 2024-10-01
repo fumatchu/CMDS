@@ -35,6 +35,7 @@ cat << EOF
 Logging into Devices and Collecting Eligibility
 This may take several minutes based on the subnet size
 Please Wait...
+
 EOF
 
 /root/.meraki_mon_wlc/discovery.exp > /dev/null 2>&1
@@ -45,25 +46,6 @@ EOF
 more /root/.meraki_mon_wlc/network_collection.tmp | tee -a /root/.meraki_mon_wlc/logs/network_discovery
 echo "Actual Provisioned WLC" | tee -a /root/.meraki_mig/logs/network_discovery > /dev/null 2>&1
 
-INPUT="/root/.meraki_mon_wlc/ip_list"
-
-# Read file line-by-line to get an IP address
-while read -r IP; do
-
-
-  MERAKI_USER=$(cat /var/lib/tftpboot/wlc/nwd-${IP}-shrunn | grep username | grep meraki)
-  if [ "$MERAKI_USER" = "" ]; then
-    echo " "
-  else
-    echo "${YELLOW}It looks like ${IP} is already provisioned for Catalyst Monitoring"${TEXTRESET}
-    echo "${RED}Skipping..."${TEXTRESET}
-    sed -i "0,/${IP}/d" /root/.meraki_mon_wlc/ip_list
-
-fi
-
-
-
-done <"$INPUT"
 
 cat /root/.meraki_mon_wlc/ip_list >> /root/.meraki_mon_wlc/logs/network_discovery
 cat_num_devices=$(< /root/.meraki_mon_wlc/ip_list wc -l)
