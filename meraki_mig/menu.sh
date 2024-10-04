@@ -35,7 +35,7 @@ while choice=$(dialog --title "$TITLE" \
   1) clear &/root/.meraki_mig/wizard.sh ;;
   2) clear ;;
   3) clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mig/clean.exp ;;
-  4) clear & /root/.meraki_mig/pre-check_IOS-XE.sh | tee -a /root/.meraki_mig/logs/ios-xe_pre_check_deployment.log ;;
+  4) clear & /root/.meraki_mig/ios-xe-precheck.sh | tee -a /root/.meraki_mig/logs/ios-xe_pre_check_deployment.log ;;
   5) clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mig/deploy_img.exp ;;
   6) clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mig/deploy.exp ;;
   7) clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mig/deploy_all.sh ;;
