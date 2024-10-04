@@ -2,10 +2,10 @@ import meraki
 
 
 
-API_KEY = " "
 
+API_KEY = " "
 # Initialize the Meraki dashboard client
-dashboard = meraki.DashboardAPI(api_key)
+dashboard = meraki.DashboardAPI(API_KEY)
 
 # Function to select an organization
 def select_organization():
