@@ -16,7 +16,6 @@ items=(1 "Ping Sweep Active WLC(s)"
   8 "Deploy Remove and Update NTP"
   9 "Deploy aaa new-model update"
  10 "Enable AVC on WLC"
- 11 "DHCP Server"
 )
 
 while choice=$(dialog --title "$TITLE" \
@@ -34,7 +33,6 @@ while choice=$(dialog --title "$TITLE" \
   8) clear & /root/.meraki_mon_wlc/update_ntp_server.sh ;;
   9) clear & /root/.meraki_mon_wlc/update_aaa_config.sh ;;
  10) clear & /root/.meraki_mon_wlc/enable_avc.sh | tee -a /root/.meraki_mon_wlc/logs/avc_enable.log ;;
- 11) clear & /root/.servman/DHCPMan ;;
   esac
 done
 clear # clear after user pressed Cancel
