@@ -15,6 +15,6 @@ YELLOW=$(tput setaf 3)
 GREEN=$(tput setaf 2)
 DATE=$(date)
 clear
-
+cd /root/
 mv /root/.meraki_mig/factory_default_action.sh /root
 clear & /root/factory_default_action.sh
