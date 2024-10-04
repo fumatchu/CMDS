@@ -29,10 +29,9 @@ items=(1 "-----------Catalyst Switching Tools-----------"
   8 "----------------Server Tools-----------------"
   9 "             Server Configuration"
  10 "          DHCP Server Configuration"
- 11 "             Factory Default"
- 12 " "
- 13 "---------------------------------------------"
- 14 "             Welcome to CMDS"
+ 11 " "
+ 12 "---------------------------------------------"
+ 13 "             Welcome to CMDS"
 )
 
 while choice=$(dialog --title "$TITLE" \
@@ -50,8 +49,7 @@ while choice=$(dialog --title "$TITLE" \
   8) clear ;;
   9) clear & /root/.meraki_mig/server-tools.sh ;;
  10) clear & /root/.servman/DHCPMan ;;
- 11) clear & /root/.meraki_mig/factory_default.sh ;;
- 12) clear ;;
+ 11) clear ;;
  13) clear ;;
  14) clear & /root/.meraki_mig/welcome.readme ;;
 esac
