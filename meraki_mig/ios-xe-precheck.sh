@@ -3,7 +3,7 @@ TEXTRESET=$(tput sgr0)
 RED=$(tput setaf 1)
 YELLOW=$(tput setaf 3)
 GREEN=$(tput setaf 2)
-INPUT="/root/.meraki_mon_switch/ip_list"
+INPUT="/root/.meraki_mig/ip_list"
 cat << EOF
 ${GREEN}
 IOS-XE Version Check
