@@ -8,10 +8,11 @@ USER=$(whoami)
 
 items=(1 "Ping Sweep Active Switches"
   2 "Monitor TFTP "
-  3 "Deploy Global command for DNS"
-  4 "Deploy Global command for http client"
-  5 "Show converted Meraki ID"
-  6 "Network Discovery"
+  3 "Create Switch Network on Dashboard"
+  4 "Deploy Global command for DNS"
+  5 "Deploy Global command for http client"
+  6 "Show converted Meraki ID"
+  7 "Network Discovery"
 )
 
 while choice=$(dialog --title "$TITLE" \
@@ -21,10 +22,11 @@ while choice=$(dialog --title "$TITLE" \
   case $choice in
   1) clear & /root/.meraki_mig/ping_now.sh ;;
   2) clear & iptraf-ng -i all ;;
-  3) clear & /root/.meraki_mig/update_ip_name-server.sh ;;
-  4) clear & /root/.meraki_mig/update_httpclient.sh ;;
-  5) clear & /root/.meraki_mig/show_meraki_id.sh ;;
-  6) clear & /root/.meraki_mig/network_discovery.sh ;;
+  3) clear & python3.10 /root/.meraki_mig/make_network_switch.py ;;
+  4) clear & /root/.meraki_mig/update_ip_name-server.sh ;;
+  5) clear & /root/.meraki_mig/update_httpclient.sh ;;
+  6) clear & /root/.meraki_mig/show_meraki_id.sh ;;
+  7) clear & /root/.meraki_mig/network_discovery.sh ;;
   esac
 done
 clear # clear after user pressed Cancel
