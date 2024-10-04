@@ -17,4 +17,4 @@ DATE=$(date)
 clear
 
 mv /root/.meraki_mig/factory_default_action.sh /root
-/root/factory_default_action.sh
+clear & /root/factory_default_action.sh
