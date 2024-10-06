@@ -9,7 +9,7 @@ clear
 cat <<EOF
 ${GREEN}Factory Default/Cleanup${TEXTRESET}
 
-This will destory all data for any batches and remove the Images files, creating an OOB experience
+This will destory all data (except for the IOS-XW image files), creating a fresh install experience
 The application will be removed, and reinstalled from Git.
 Upon reinstall, the server will prompt you to reboot.
 
