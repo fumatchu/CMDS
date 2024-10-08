@@ -28,6 +28,8 @@ def parse_cisco_config(config_data):
         elif line.strip().startswith("description"):
             description = line.strip().split("description")[1]
             interfaces[current_interface]['name'] = description
+        elif line.strip().startswith("udld port aggressive"):
+            interfaces[current_interface]['udld'] = "Enforce"
         elif line.strip().startswith("switchport access vlan"):
             vlan = int(line.strip().split()[-1])
             interfaces[current_interface]['vlan'] = vlan
