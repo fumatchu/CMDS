@@ -3,7 +3,7 @@ import json
 import re
 
 # Set up Meraki Dashboard API key and base URL
-API_KEY = ''  # Replace with your actual API key
+API_KEY = ' '  # Replace with your actual API key
 BASE_URL = 'https://api.meraki.com/api/v1'
 
 # Headers for the API requests
@@ -45,6 +45,18 @@ def parse_cisco_config(config_data):
         elif line.strip().startswith("switchport voice vlan"):
             voice_vlan = int(line.strip().split()[-1])
             interfaces[current_interface]['voiceVlan'] = voice_vlan
+        elif line.strip().startswith("spanning-tree bpduguard enable"):
+            interfaces[current_interface]['stpGuard'] = 'bpdu Guard'
+        elif line.strip().startswith("spanning-tree guard loop"):
+            interfaces[current_interface]['stpGuard'] = 'loop Guard'
+        elif line.strip().startswith("spanning-tree guard root"):
+            interfaces[current_interface]['stpGuard'] = 'root Guard'
+        elif line.strip().startswith("speed"):
+            speed = line.strip().split("speed")[1]
+            interfaces[current_interface]['speed'] = speed
+        elif line.strip().startswith("duplex"):
+            duplex = line.strip().split("duplex ")[1]
+            interfaces[current_interface]['duplex'] = duplex
 
 
     return interfaces
@@ -63,7 +75,7 @@ def main():
     interfaces = parse_cisco_config(cisco_config)
 
     # Update Meraki switch configuration
-    meraki_serial = ''  # Replace with your actual Meraki switch serial number
+    meraki_serial = ' '  # Replace with your actual Meraki switch serial number
 
     for interface, config in interfaces.items():
         # Extract port number; assumes interface name format like GigabitEthernet1/0/1
