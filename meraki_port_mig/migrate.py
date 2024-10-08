@@ -36,6 +36,10 @@ def parse_cisco_config(config_data):
             vlan = int(line.strip().split()[-1])
             interfaces[current_interface]['vlan'] = vlan
             interfaces[current_interface]['type'] = "trunk"
+        elif line.strip().startswith("switchport trunk allowed vlan"):
+            allowed_vlans = line.strip().split("switchport trunk allowed vlan ")[1]
+            interfaces[current_interface]['allowedVlans'] = allowed_vlans
+            interfaces[current_interface]['type'] = "trunk"
 
     return interfaces
 
@@ -53,7 +57,7 @@ def main():
     interfaces = parse_cisco_config(cisco_config)
 
     # Update Meraki switch configuration
-    meraki_serial = ''  # Replace with your actual Meraki switch serial number
+    meraki_serial = 'Q4CG-3AV5-RZKT'  # Replace with your actual Meraki switch serial number
 
     for interface, config in interfaces.items():
         # Extract port number; assumes interface name format like GigabitEthernet1/0/1
