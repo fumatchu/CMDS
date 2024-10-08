@@ -52,11 +52,8 @@ def parse_cisco_config(config_data):
         elif line.strip().startswith("spanning-tree guard root"):
             interfaces[current_interface]['stpGuard'] = 'root Guard'
         elif line.strip().startswith("speed"):
-            speed = line.strip().split("speed")[1]
-            interfaces[current_interface]['speed'] = speed
-        elif line.strip().startswith("duplex"):
-            duplex = line.strip().split("duplex ")[1]
-            interfaces[current_interface]['duplex'] = duplex
+            speed = line.strip().split("speed 100")[1]
+            interfaces[current_interface]['linkNegotiation'] = '100 Megabit (auto)'
 
 
     return interfaces
