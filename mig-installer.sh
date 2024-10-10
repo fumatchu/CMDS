@@ -17,15 +17,15 @@ else
   exit
 fi
 #Checking for version Information
-if [ "$MAJOROS" = "9" ]; then
-  echo " "
-else
-  echo ${RED}"Sorry, but this installer only works on Rocky 9.X ${TEXTRESET}"
-  echo "Please upgrade to ${GREEN}Rocky 9.x${TEXTRESET}"
-  echo "Exiting the installer..."
-  sleep 2
-  exit
-fi
+#if [ "$MAJOROS" = "9" ]; then
+#  echo " "
+#else
+#  echo ${RED}"Sorry, but this installer only works on Rocky 9.X ${TEXTRESET}"
+#  echo "Please upgrade to ${GREEN}Rocky 9.x${TEXTRESET}"
+#  echo "Exiting the installer..."
+#  sleep 2
+#  exit
+#fi
 
 cat <<EOF
 ${GREEN}
@@ -85,7 +85,8 @@ clear
 
 #read -p "Press Enter to Continue"
 
-items=(1 "Deploy CMDS"
+items=(1 "Deploy CMDS for Rocky 9"
+       2 "DEploy CMDS for Rocky 8 - BETA"
 )
 
 while choice=$(dialog --title "$TITLE" \
@@ -94,6 +95,7 @@ while choice=$(dialog --title "$TITLE" \
   2>&1 >/dev/tty); do
   case $choice in
   1) /root/MIGInstaller/MIGInstall.sh ;;
+  2) /root/MIGInstaller/MIGInstall8.sh ;;
   esac
 done
 clear # clear after user pressed Cancel
