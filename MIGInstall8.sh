@@ -477,7 +477,7 @@ echo "/usr/sbin/meraki_migration" >>/root/.bash_profile
 echo "alias python3=/opt/Python-3.10.5/python" >>/root/.bash_profile
 
 #Cleanup Install Files
-sed -i '/MIGInstall.sh/d' /root/.bash_profile
+sed -i '/MIGInstall8.sh/d' /root/.bash_profile
 rm -r -f /root/MIG*
 rm -r -f /root/mig*
 rm -r -f *.tgz
