@@ -44,8 +44,8 @@ fi
 if [ "$MAJOROS" = "9" ]; then
   echo " "
 else
-  echo ${RED}"Sorry, but this installer only works on Rocky 9.X ${TEXTRESET}"
-  echo "Please upgrade to ${GREEN}Rocky 9.x${TEXTRESET}"
+  echo ${RED}"Sorry, but this installer only works on Rocky 8.X ${TEXTRESET}"
+  echo "Please upgrade to ${GREEN}Rocky 8.x${TEXTRESET}"
   echo "Exiting the installer..."
   exit
 fi
