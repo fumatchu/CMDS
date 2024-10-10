@@ -86,7 +86,7 @@ clear
 #read -p "Press Enter to Continue"
 
 items=(1 "Deploy CMDS for Rocky 9"
-       2 "DEploy CMDS for Rocky 8 - BETA"
+       2 "Deploy CMDS for Rocky 8 - BETA"
 )
 
 while choice=$(dialog --title "$TITLE" \
