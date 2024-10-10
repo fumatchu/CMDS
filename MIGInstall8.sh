@@ -17,7 +17,7 @@ REVERSE=$(echo "$IP" | {
   IFS=. read q1 q2 q3 q4
   echo "$q3.$q2.$q1"
 })
-MAJOROS=$(cat /etc/redhat-release | grep -Eo "[0-9]" | sed '$d')
+MAJOROS=$(cat /etc/redhat-release | grep -Eo "[8]")
 MINOROS=$(cat /etc/redhat-release | grep -Eo "[0-9]" | sed '1d')
 USER=$(whoami)
 DHCPNSNAME=$(hostname | sed 's/^[^.:]*[.:]//')
