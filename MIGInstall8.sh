@@ -363,7 +363,7 @@ sleep 4s
 # Initial build
 dnf -y install epel-release
 dnf -y install dnf-plugins-core
-dnf config-manager --set-enabled crb
+dnf config-manager --set-enabled powertools
 dnf -y update
 dnf -y install iptraf-ng expect tar nmap cockpit cockpit-navigator cockpit-storaged dialog bc ntsysv at nano tftp-server gcc openssl-devel bzip2-devel libffi-devel zlib-devel wget make
 #Install Python 3.10
