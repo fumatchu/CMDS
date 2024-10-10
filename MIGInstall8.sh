@@ -26,7 +26,7 @@ SUBNETNETWORK=$(echo "$IP" | {
   IFS=. read q1 q2 q3 q4
   echo "$q1.$q2.$q3.0"
 })
-NMCLIIP=$(nmcli | grep inet4 | sed '$d'| cut -c7- |cut -d / -f1)
+NMCLIIP=$(nmcli | grep inet4 | cut -c8-)
 HWKVM=$(dmidecode | grep -i -e manufacturer -e product -e vendor | grep KVM | cut -c16-)
 HWVMWARE=$(dmidecode | grep -i -e manufacturer -e product -e vendor | grep Manufacturer | grep "VMware, Inc." | cut -c16-
 | cut -d , -f1)
