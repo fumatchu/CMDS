@@ -2,7 +2,7 @@
 #Meraki-Mig.sh
 #This script installs the Meraki migration server 
 clear
-dnf -y install net-tools dmidecode
+#dnf -y install net-tools dmidecode
 TEXTRESET=$(tput sgr0)
 RED=$(tput setaf 1)
 YELLOW=$(tput setaf 3)
@@ -41,7 +41,7 @@ else
   echo "Exiting"
 fi
 #Checking for version Information
-if [ "$MAJOROS" = "9" ]; then
+if [ "$MAJOROS" = "8" ]; then
   echo " "
 else
   echo ${RED}"Sorry, but this installer only works on Rocky 8.X ${TEXTRESET}"
@@ -365,6 +365,8 @@ dnf -y install epel-release
 dnf -y install dnf-plugins-core
 dnf config-manager --set-enabled powertools
 dnf -y update
+curl -sSL https://repo.45drives.com/setup -o setup-repo.sh
+sudo bash setup-repo.sh
 dnf -y install iptraf-ng expect tar nmap cockpit cockpit-navigator cockpit-storaged dialog bc ntsysv at nano tftp-server gcc openssl-devel bzip2-devel libffi-devel zlib-devel wget make
 #Install Python 3.10
 clear
