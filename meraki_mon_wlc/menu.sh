@@ -27,7 +27,7 @@ items=(1 "Setup Wizard"
 
 while choice=$(dialog --title "$TITLE" \
   --backtitle "Catalyst Wireless Monitoring-->Main Menu" \
-  --menu "Please select" 30 65 3 "${items[@]}" \
+  --menu "Please select" 30 75 30 "${items[@]}" \
   2>&1 >/dev/tty); do
   case $choice in
   1) clear & /root/.meraki_mon_wlc/setup_wizard.sh ;;
