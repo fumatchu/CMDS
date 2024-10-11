@@ -85,8 +85,8 @@ clear
 
 #read -p "Press Enter to Continue"
 
-items=(1 "Deploy CMDS for Rocky 9"
-       2 "Deploy CMDS for Rocky 8 - BETA"
+items=(1 "Deploy CMDS for Rocky 8 - STABLE"
+       2 "Deploy CMDS for Rocky 9 - BETA"
 )
 
 while choice=$(dialog --title "$TITLE" \
@@ -94,8 +94,8 @@ while choice=$(dialog --title "$TITLE" \
   --menu "Please select the install type" 15 65 3 "${items[@]}" \
   2>&1 >/dev/tty); do
   case $choice in
-  1) /root/MIGInstaller/MIGInstall.sh ;;
-  2) /root/MIGInstaller/MIGInstall8.sh ;;
+  1) /root/MIGInstaller/MIGInstall8.sh ;;
+  2) /root/MIGInstaller/MIGInstall.sh ;;
   esac
 done
 clear # clear after user pressed Cancel
