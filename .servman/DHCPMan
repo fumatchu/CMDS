@@ -42,7 +42,7 @@ items=(1 "Create new DHCP Scope"
 
 while choice=$(dialog --title "$TITLE" \
     --backtitle "DHCP Server Management" \
-    --menu "Please select" 20 40 3 "${items[@]}" \
+    --menu "Please select" 30 75 30 "${items[@]}" \
     2>&1 >/dev/tty); do
     case $choice in
       1) /root/.servman/DHCPManager/create-scope ;;
