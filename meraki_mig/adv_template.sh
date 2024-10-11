@@ -19,7 +19,7 @@ items=(1 "Create Port Template"
 
 while choice=$(dialog --title "$TITLE" \
   --backtitle "CMDS-Main Menu -->Template Builder" \
-  --menu "Please select" 18 65 3 "${items[@]}" \
+  --menu "Please select" 30 75 30 "${items[@]}" \
   2>&1 >/dev/tty); do
   case $choice in
   1) /root/.meraki_mig/advanced_template.sh ;;
