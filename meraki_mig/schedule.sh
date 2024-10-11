@@ -13,7 +13,7 @@ items=(1 "Schedule IOS-XE Image Deployment"
 
 while choice=$(dialog --title "$TITLE" \
   --backtitle "Catalyst Migration to Dashboard-->Main Menu-->Scheduler" \
-  --menu "Please select" 15 65 3 "${items[@]}" \
+  --menu "Please select" 30 75 30 "${items[@]}" \
   2>&1 >/dev/tty); do
   case $choice in
   1) /root/.meraki_mig/schedule_deploy_img.exp ;;
