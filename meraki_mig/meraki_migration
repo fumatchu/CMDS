@@ -36,7 +36,7 @@ items=(1 "-----------Catalyst Switching Tools-----------"
 
 while choice=$(dialog --title "$TITLE" \
   --backtitle "CMDS-->Main Menu" \
-  --menu "Please Select" 30 75 3 "${items[@]}" \
+  --menu "Please Select" 30 75 30 "${items[@]}" \
   2>&1 >/dev/tty); do
   case $choice in
   1) clear ;;
