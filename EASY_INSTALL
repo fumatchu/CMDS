@@ -7,4 +7,5 @@
 cd /root/
 dnf -y install wget
 wget https://raw.githubusercontent.com/fumatchu/CMDS/main/mig-installer.sh
+chmod 700 /root/mig-installer.sh
 /root/mig-installer.sh
