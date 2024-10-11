@@ -16,7 +16,7 @@ items=(1 "Change SSH User Login "
 
 while choice=$(dialog --title "$TITLE" \
   --backtitle "Catalyst Migration to Dashboard-->Main Menu-->Global Environment Settings" \
-  --menu "Please select" 15 65 3 "${items[@]}" \
+  --menu "Please select" 30 75 30 "${items[@]}" \
   2>&1 >/dev/tty); do
   case $choice in
   1) /root/.meraki_mig/ssh_user_change.sh ;;
