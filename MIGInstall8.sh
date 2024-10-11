@@ -366,7 +366,7 @@ dnf config-manager --set-enabled powertools
 dnf -y update
 curl -sSL https://repo.45drives.com/setup -o setup-repo.sh
 sudo bash setup-repo.sh
-dnf -y install iptraf-ng expect tar nmap cockpit cockpit-navigator cockpit-storaged dialog bc ntsysv at nano tftp-server gcc openssl-devel bzip2-devel libffi-devel zlib-devel wget make
+dnf -y install iptraf-ng expect tar nmap cockpit cockpit-navigator cockpit-storaged dialog bc ntsysv at nano tftp-server gcc openssl-devel bzip2-devel libffi-devel zlib-devel wget make indent
 #Install Python 3.10
 clear
 cat << EOF
