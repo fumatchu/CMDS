@@ -20,7 +20,7 @@ items=(1 "Ping Sweep Active WLC(s)"
 
 while choice=$(dialog --title "$TITLE" \
   --backtitle "Catalyst Monitoring for Wireless-->Main Menu-->Utilities" \
-  --menu "Please select" 18 65 3 "${items[@]}" \
+  --menu "Please select" 30 75 30 "${items[@]}" \
   2>&1 >/dev/tty); do
   case $choice in
   1) clear & /root/.meraki_mon_wlc/ping_now.sh ;;
