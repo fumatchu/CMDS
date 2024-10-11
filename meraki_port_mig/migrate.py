@@ -65,7 +65,7 @@ def update_meraki_switch(serial, port_id, port_config):
 
 def main():
     # Read Cisco configuration from file
-    cisco_config_file_path = 'cisco_config.txt'  # Replace with your config file path
+    cisco_config_file_path = '/root/.meraki_mig/cisco_config.tmp'  # Replace with your config file path
     cisco_config = read_cisco_config(cisco_config_file_path)
 
     # Parse Cisco configuration
