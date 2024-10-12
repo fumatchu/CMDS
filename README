@@ -85,8 +85,8 @@ The Server can be configured with the following capabilities:
 
 Installing- 
 The requirements for installing are the following:
-  -A minimal install of Rocky Linux with at least 2 GB of RAM (8 preferred) and 20 GB of Disk Space, with root access enabled
-  please download the latest version of version 8 of Rocky linux
+  -A minimal install of Rocky Linux with at least 2 GB of RAM (8 preferred) and 20 GB of Disk Space, with root access enabled (version 8 required for ssh ciphers of older Catalyst switches)
+   https://download.rockylinux.org/pub/rocky/8/isos/x86_64/Rocky-8.10-x86_64-minimal.iso
 
 After the minimal installation of Rocky, in the repository, Click on the EASY_INSTALL file
 Inside of this file, you will see the following lines of Code:
