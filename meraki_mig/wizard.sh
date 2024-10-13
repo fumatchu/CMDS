@@ -166,6 +166,8 @@ sed -i '0,/API_KEY/{/API_KEY/d;}' /root/.meraki_mig/modify_port_48.py
 sed -i '0,/API_KEY/{/API_KEY/d;}' /root/.meraki_mig/deploy_hostnames.py
 sed -i '0,/API_KEY/{/API_KEY/d;}' /root/.meraki_mig/update_physical_address_switch.py
 sed -i '0,/API_KEY/{/API_KEY/d;}' /root/.meraki_mig/make_network_switch.py
+sed -i '0,/API_KEY/{/API_KEY/d;}' /root/.meraki_mig/port_migration.py
+
 
 echo API_KEY = "\"${API_KEY}\"" >/root/.meraki_mig/api_key.key
 
@@ -175,6 +177,7 @@ sed -i '5 r /root/.meraki_mig/api_key.key' /root/.meraki_mig/modify_port_48.py
 sed -i '5 r /root/.meraki_mig/api_key.key' /root/.meraki_mig/deploy_hostnames.py
 sed -i '5 r /root/.meraki_mig/api_key.key' /root/.meraki_mig/update_physical_address_switch.py
 sed -i '5 r /root/.meraki_mig/api_key.key' /root/.meraki_mig/make_network_switch.py
+sed -i '5 r /root/.meraki_mig/api_key.key' /root/.meraki_mig/port_migration.py
 
 cat <<EOF
 ${GREEN}Update Complete${TEXTRESET}
