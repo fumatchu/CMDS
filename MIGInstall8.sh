@@ -2,7 +2,7 @@
 #Meraki-Mig.sh
 #This script installs the Meraki migration server 
 clear
-#dnf -y install net-tools dmidecode
+dnf -y install net-tools dmidecode
 TEXTRESET=$(tput sgr0)
 RED=$(tput setaf 1)
 YELLOW=$(tput setaf 3)
