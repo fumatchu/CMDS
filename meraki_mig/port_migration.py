@@ -2,8 +2,9 @@ import requests
 import json
 import re
 
-# Set up Meraki Dashboard API key and base URL
-API_KEY = ' '  # Replace with your actual API key
+
+API_KEY = ' '
+
 BASE_URL = 'https://api.meraki.com/api/v1'
 
 # Headers for the API requests
