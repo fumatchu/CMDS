@@ -389,6 +389,7 @@ alias python3=/opt/Python-3.10.5/python
 clear
 pip3.10 install meraki
 pip3.10 install requests
+pip3.10 install --upgrade autopep8
 
 #Build tftp-server
 \cp -f /usr/lib/systemd/system/tftp.service /etc/systemd/system/tftp-server.service
