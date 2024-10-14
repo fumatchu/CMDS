@@ -75,7 +75,10 @@ done <"$INPUT"
   else
   echo " "
   fi
+cat << EOF
+"WLC Registration Status"
 
+EOF
 
 CHECK=$(cat /root/.meraki_mon_wlc/check.tmp | grep 1)
 if grep -q '[^[:space:]]' "/root/.meraki_mon_wlc/check.tmp"; then
