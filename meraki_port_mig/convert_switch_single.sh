@@ -1,15 +1,10 @@
 #!/bin/bash
 #This File is used to parse a stack switch and break it into a single switch config
 
-#Cut the confgi down to ports only
-
+#Cut the config down to ports only (remove top portion of config)
 sed -n '/interface GigabitEthernet/,$p' /root/config > /root/config.tmp
 
-
-
-
 #Look at config file and see if it's stacked
-
 #For GigabitEthernet
 awk 'BEGIN {found=0} /interface GigabitEthernet1\/0\/1/ && !found {print "switch 1"; found=1} {print}' config.tmp > temp && mv -f temp config.tmp
 awk 'BEGIN {found=0} /interface GigabitEthernet2\/0\/1/ && !found {print "switch 2"; found=1} {print}' config.tmp > temp && mv -f temp config.tmp
@@ -20,8 +15,6 @@ awk 'BEGIN {found=0} /interface GigabitEthernet6\/0\/1/ && !found {print "switch
 awk 'BEGIN {found=0} /interface GigabitEthernet7\/0\/1/ && !found {print "switch 7"; found=1} {print}' config.tmp > temp && mv -f temp config.tmp
 awk 'BEGIN {found=0} /interface GigabitEthernet8\/0\/1/ && !found {print "switch 8"; found=1} {print}' config.tmp > temp && mv -f temp config.tmp
 awk 'BEGIN {found=0} /interface GigabitEthernet9\/0\/1/ && !found {print "switch 9"; found=1} {print}' config.tmp > temp && mv -f temp config.tmp
-
-
 
 #For TenGigabitEthernet
 awk 'BEGIN {found=0} /interface TenGigabitEthernet1\/0\/1/ && !found {print "switch 1"; found=1} {print}' config.tmp > temp && mv -f temp config.tmp
@@ -36,7 +29,6 @@ awk 'BEGIN {found=0} /interface TenGigabitEthernet9\/0\/1/ && !found {print "swi
 
 
 #For TwoGigabitEthernet
-#For TenGigabitEthernet
 awk 'BEGIN {found=0} /interface TwoGigabitEthernet1\/0\/1/ && !found {print "switch 1"; found=1} {print}' config.tmp > temp && mv -f temp config.tmp
 awk 'BEGIN {found=0} /interface TwoGigabitEthernet2\/0\/1/ && !found {print "switch 2"; found=1} {print}' config.tmp > temp && mv -f temp config.tmp
 awk 'BEGIN {found=0} /interface TwoGigabitEthernet3\/0\/1/ && !found {print "switch 3"; found=1} {print}' config.tmp > temp && mv -f temp config.tmp
@@ -48,7 +40,7 @@ awk 'BEGIN {found=0} /interface TwoGigabitEthernet8\/0\/1/ && !found {print "swi
 awk 'BEGIN {found=0} /interface TwoGigabitEthernet9\/0\/1/ && !found {print "switch 9"; found=1} {print}' config.tmp > temp && mv -f temp config.tmp
 
 
-#Break the config
+#Break the config into smaller files 
 
 # Input switch stack configuration file
 input_file="/root/config.tmp"  # Replace with your config file path
