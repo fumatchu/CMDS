@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#This File is used to parse a stack switch and break it into a single switch config
 
 #Cut the confgi down to ports only
 
