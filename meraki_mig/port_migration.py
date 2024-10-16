@@ -68,7 +68,7 @@ def update_meraki_switch(serial, port_id, port_config):
 
 def main():
     # Read Meraki serial number from file
-    serial_file_path = '/root/serial.txt'  # Replace with your serial file path
+    serial_file_path = '/root/.meraki_mig/serial.txt'  # Replace with your serial file path
     meraki_serial = read_serial(serial_file_path)
 
     # Read Cisco configuration from file
