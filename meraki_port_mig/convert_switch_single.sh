@@ -35,6 +35,19 @@ awk 'BEGIN {found=0} /interface TenGigabitEthernet8\/0\/1/ && !found {print "swi
 awk 'BEGIN {found=0} /interface TenGigabitEthernet9\/0\/1/ && !found {print "switch 9"; found=1} {print}' config.tmp > temp && mv -f temp config.tmp
 
 
+#For TwoGigabitEthernet
+#For TenGigabitEthernet
+awk 'BEGIN {found=0} /interface TwoGigabitEthernet1\/0\/1/ && !found {print "switch 1"; found=1} {print}' config.tmp > temp && mv -f temp config.tmp
+awk 'BEGIN {found=0} /interface TwoGigabitEthernet2\/0\/1/ && !found {print "switch 2"; found=1} {print}' config.tmp > temp && mv -f temp config.tmp
+awk 'BEGIN {found=0} /interface TwoGigabitEthernet3\/0\/1/ && !found {print "switch 3"; found=1} {print}' config.tmp > temp && mv -f temp config.tmp
+awk 'BEGIN {found=0} /interface TwoGigabitEthernet4\/0\/1/ && !found {print "switch 4"; found=1} {print}' config.tmp > temp && mv -f temp config.tmp
+awk 'BEGIN {found=0} /interface TwoGigabitEthernet5\/0\/1/ && !found {print "switch 5"; found=1} {print}' config.tmp > temp && mv -f temp config.tmp
+awk 'BEGIN {found=0} /interface TwoGigabitEthernet6\/0\/1/ && !found {print "switch 6"; found=1} {print}' config.tmp > temp && mv -f temp config.tmp
+awk 'BEGIN {found=0} /interface TwoGigabitEthernet7\/0\/1/ && !found {print "switch 7"; found=1} {print}' config.tmp > temp && mv -f temp config.tmp
+awk 'BEGIN {found=0} /interface TwoGigabitEthernet8\/0\/1/ && !found {print "switch 8"; found=1} {print}' config.tmp > temp && mv -f temp config.tmp
+awk 'BEGIN {found=0} /interface TwoGigabitEthernet9\/0\/1/ && !found {print "switch 9"; found=1} {print}' config.tmp > temp && mv -f temp config.tmp
+
+
 #Break the config
 
 # Input switch stack configuration file
