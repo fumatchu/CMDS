@@ -2,9 +2,7 @@ import requests
 import json
 import re
 
-
-API_KEY = ' '
-
+API_KEY = ''  # Replace with your actual API key
 BASE_URL = 'https://api.meraki.com/api/v1'
 
 # Headers for the API requests
@@ -12,6 +10,11 @@ HEADERS = {
     'Content-Type': 'application/json',
     'X-Cisco-Meraki-API-Key': API_KEY
 }
+
+def read_serial(file_path):
+    with open(file_path, 'r') as file:
+        serial = file.read().strip()
+    return serial
 
 def read_cisco_config(file_path):
     with open(file_path, 'r') as file:
@@ -27,7 +30,7 @@ def parse_cisco_config(config_data):
             current_interface = line.split()[1]
             interfaces[current_interface] = {}
         elif line.strip().startswith("description"):
-            description = line.strip().split("description")[1]
+            description = line.strip().split("description ")[1]
             interfaces[current_interface]['name'] = description
         elif line.strip().startswith("udld port aggressive"):
             interfaces[current_interface]['udld'] = "Enforce"
@@ -56,7 +59,6 @@ def parse_cisco_config(config_data):
             speed = line.strip().split("speed 100")[1]
             interfaces[current_interface]['linkNegotiation'] = '100 Megabit (auto)'
 
-
     return interfaces
 
 def update_meraki_switch(serial, port_id, port_config):
@@ -65,6 +67,10 @@ def update_meraki_switch(serial, port_id, port_config):
     return response.status_code, response.text
 
 def main():
+    # Read Meraki serial number from file
+    serial_file_path = '/root/serial.txt'  # Replace with your serial file path
+    meraki_serial = read_serial(serial_file_path)
+
     # Read Cisco configuration from file
     cisco_config_file_path = '/root/.meraki_mig/cisco_config.tmp'  # Replace with your config file path
     cisco_config = read_cisco_config(cisco_config_file_path)
@@ -73,8 +79,6 @@ def main():
     interfaces = parse_cisco_config(cisco_config)
 
     # Update Meraki switch configuration
-    meraki_serial = ' '  # Replace with your actual Meraki switch serial number
-
     for interface, config in interfaces.items():
         # Extract port number; assumes interface name format like GigabitEthernet1/0/1
         port_match = re.search(r'(\d+)/(\d+)/(\d+)', interface)
