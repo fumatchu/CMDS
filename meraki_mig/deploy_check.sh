@@ -231,7 +231,6 @@ EOF
 CHECK=$(cat /root/.meraki_mig/check.tmp | grep 1)
 if grep -q '[^[:space:]]' "/root/.meraki_mig/check.tmp"; then
     echo "${RED}The Switches did not pass all checks. Please review the Pre-Check Log (If Needed)${TEXTRESET}"
-    echo "${RED}If there are switch stacks and you just upgraded IOS-XE Software, you may need to re-run this script after 1 minute${TEXTRESET}"
     echo "${YELLOW}Main Menu --> Logs --> Deployment Log${TEXTRESET}"
     echo "CMDS has attempted to correct the issues, please re-run this script"
     echo "Main Menu--> Validate Switch/Deploy"
