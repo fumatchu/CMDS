@@ -20,24 +20,23 @@ while read -r IP; do
   echo " "
   echo "${GREEN}$IP${TEXTRESET}"
 
-
-
-x=$(cat /var/lib/tftpboot/mig_switch/$IP-shver |grep "Cisco IOS XE Software, Version" | cut -c32-)
-first=${x%%.*}          # Delete first dot and what follows.
-last=${x##*.}           # Delete up to last dot.
-mid=${x##$first.}       # Delete first number and dot.
-mid=${mid%%.$last}      # Delete dot and last number.
-#echo $first $mid $last
-echo "IOS-XE Version is ${YELLOW}$x${TEXTRESET}"
- if [ $first -ge 17 ] && [ $mid -ge 3 ] && [ $last -gt 1 ]; then
-    echo "${GREEN}IOS-XE Version Meets Requirement to upgrade${TEXTRESET}"
+echo "Checking IOS Version is 17.09.03m3 "
+  #VERSION=$(cat /var/lib/tftpboot/mig_switch/${IP}-shver | grep "Cisco IOS Software" | cut -c84- | cut -d, -f1 | sed 's/\(.*\)..../\1/')
+  #VERSIONFULL=$(cat /var/lib/tftpboot/mig_switch/${IP}-shver | grep "Cisco IOS XE Software, Version" | sed -e 's/\.//g')
+  VERSIONFULL=$(cat /var/lib/tftpboot/mig_switch/${IP}-shver | grep "Cisco IOS XE Software, Version")
+  echo "The switch Version is:"
+  echo "${VERSIONFULL}"
+  if [ "$VERSIONFULL" == "Cisco IOS XE Software, Version 17.09.03m3" ]; then
+    echo "${GREEN}IOS-XE Version Matches Requirement${TEXTRESET}"
+    echo " "
   else
-    echo "${RED}ERROR: IOS-XE version does not meet the requirement${TEXTRESET}"
-    echo "Supported versions are IOS-XE 17.3 - 17.10.1, and 17.12.3 to upgrade to 17.12.03m3"
-    echo "Please see the following link to download:"
-    echo "https://software.cisco.com/download/home"
-    echo "A CCO ID is required"
-fi
+    echo "${RED}ERROR:IOS-XE Needs Updating - The Version should be 17.09.03m3${TEXTRESET}"
+    echo "1" >> /root/.meraki_mig/check.tmp
+    echo " "
+    sleep 3
+  fi
+
+
 done <"$INPUT"
 echo " "
 echo " "
