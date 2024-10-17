@@ -33,7 +33,10 @@ echo "Checking IOS Version is 17.09.03m3 "
     echo "${RED}ERROR:IOS-XE Needs Updating - The Version should be 17.09.03m3${TEXTRESET}"
     echo "1" >> /root/.meraki_mig/check.tmp
     echo " "
-    sleep 3
+    echo "Download this code: https://software.cisco.com/download/specialrelease/b53558e8586d98df4e9e7860c7692e75"
+    echo "Valid CCO ID is required"
+    sleep 10
+    
   fi
 
 
