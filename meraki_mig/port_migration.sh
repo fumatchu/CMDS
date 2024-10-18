@@ -1,33 +1,81 @@
 #!/bin/bash
-
-
+TEXTRESET=$(tput sgr0)
+RED=$(tput setaf 1)
+YELLOW=$(tput setaf 3)
+GREEN=$(tput setaf 2)
 INPUT="/root/.meraki_mig/ip_list"
 
 while read -r IP; do
   # Print the IP address to the console
   echo "Migrating ports for $IP"
   sleep 2
-SERIAL=$(cat /var/lib/tftpboot/mig_switch/$IP-shmr | grep '1 \ C9300' | grep -E -o "Q.{0,13}")
+CONFIGSTACK=$(cat /var/lib/tftpboot/mig_switch/$IP | grep -m 1 -o '2/0/1')
+INTGI=$(cat /var/lib/tftpboot/mig_switch/$IP | grep -m 1 -o 'interface GigabitEthernet1/0/1')
+INTTWO=$(cat /var/lib/tftpboot/mig_switch/$IP | grep -m 1 -o 'interface TwoGigabitEthernet1/0/1')
+INTTEN=$(cat /var/lib/tftpboot/mig_switch/$IP | grep -m 1 -o 'interface TenGigabitEthernet1/0/1')
+#Determine if this switch is a stack or a single switch
+#Stacked Switch
+if [[ "$CONFIGSTACK" == "2/0/1" && "$INTGI" == "interface GigabitEthernet1/0/1" ]]; then
+    echo "${GREEN}This looks to be a stack of switches with Gigabit Interfaces${TEXTRESET}"
+    cat /var/lib/tftpboot/mig_switch/${IP}-shmr | grep C9300 |grep -E -o "Q.{0,13}" >> /root/.meraki_mig/serial.tmp
+    sed -n '1p' "/root/.meraki_mig/serial.tmp" >> "/root/.meraki_mig/serial.txt"
+    else
+    echo " "
+fi
 
 
+if [[ "$CONFIGSTACK" == "2/0/1" && "$INTTWO" == "interface TwoGigabitEthernet1/0/1" ]]; then
+    echo "${GREEN}This looks to be a stack of switches with (2.5) MultiGigabit Interfaces${TEXTRESET}"
+    cat /var/lib/tftpboot/mig_switch/${IP}-shmr | grep C9300 |grep -E -o "Q.{0,13}" >> /root/.meraki_mig/serial.tmp
+    else
+    echo " "
+fi
+
+if [[ "$CONFIGSTACK" == "2/0/1" && "$INTTEN" == "interface TenGigabitEthernet1/0/1" ]]; then
+    echo "${GREEN}This looks to be a stack of switches with TenMultiGigabit Interfaces${TEXTRESET}"
+    cat /var/lib/tftpboot/mig_switch/${IP}-shmr | grep C9300 |grep -E -o "Q.{0,13}" >> /root/.meraki_mig/serial.tmp
+    else
+    echo " "
+fi
+
+##Single Switch
+if [[ "$CONFIGSTACK" == "" && "$INTGI" == "interface GigabitEthernet1/0/1" ]]; then
+    echo "${GREEN}${IP} looks to be a single switch with Gigabit Interfaces${TEXTRESET}"
+    sed -n '/interface GigabitEthernet/,$p' /var/lib/tftpboot/mig_switch/$IP > /root/.meraki_mig/cisco_config.tmp
+    cat /var/lib/tftpboot/mig_switch/${IP}-shmr | grep C9300 |grep -E -o "Q.{0,13}" >> /root/.meraki_mig/serial.txt
+    echo "Deploying port configurations into dashboard"
+    python3.10 /root/.meraki_mig/port_migration.py
+    rm -r -f /root/.meraki_mig/serial.txt
+    rm -r -f /root/.meraki_mig/cisco_config.tmp
+    else
+    echo " "
+fi
 
 
+if [[ "$CONFIGSTACK" == "" && "$INTTWO" == "interface TwoGigabitEthernet1/0/1" ]]; then
+    echo "${GREEN}${IP} looks to be a single switch with (2.5) MultiGigabit Interfaces${TEXTRESET}"
+    sed -n '/interface TwoGigabitEthernet/,$p' /var/lib/tftpboot/mig_switch/$IP > /root/.meraki_mig/cisco_config.tmp
+    cat /var/lib/tftpboot/mig_switch/${IP}-shmr | grep C9300 |grep -E -o "Q.{0,13}" >> /root/.meraki_mig/serial.txt
+    echo "Deploying port configurations into dashboard"
+    python3.10 /root/.meraki_mig/port_migration.py
+    rm -r -f /root/.meraki_mig/serial.txt
+    rm -r -f /root/.meraki_mig/cisco_config.tmp
+    else
+    echo " "
+fi
 
-#sed -i '0,/meraki_serial/{/meraki_serial/d;}' /root/.meraki_mig/port_migration.py
+if [[ "$CONFIGSTACK" == "" && "$INTTEN" == "interface TenGigabitEthernet1/0/1" ]]; then
+    echo "${GREEN}${IP} looks to be a single switch with TenMultiGigabit Interfaces${TEXTRESET}"
+    sed -n '/interface TenGigabitEthernet/,$p' /var/lib/tftpboot/mig_switch/$IP > /root/.meraki_mig/cisco_config.tmp
+    cat /var/lib/tftpboot/mig_switch/${IP}-shmr | grep C9300 |grep -E -o "Q.{0,13}" >> /root/.meraki_mig/serial.txt
+    echo "Deploying port configurations into dashboard"
+    python3.10 /root/.meraki_mig/port_migration.py
+    rm -r -f /root/.meraki_mig/serial.txt
+    rm -r -f /root/.meraki_mig/cisco_config.tmp
+    else
+    echo " "
+fi
 
-#echo meraki_serial = "'${SERIAL}'" >/root/.meraki_mig/serial.tmp
-#sed -i '1s/^/    /' /root/.meraki_mig/serial.tmp
-#sed -i '74 r /root/.meraki_mig/serial.tmp' /root/.meraki_mig/port_migration.py
-
-#sed -n '/interface GigabitEthernet/,$p' /var/lib/tftpboot/mig_switch/${IP} > /root/.meraki_mig/cisco_config.tmp
-#sleep 2
-
-#autopep8 --in-place --aggressive --aggressive /root/.meraki_mig/port_migration.py
-unbuffer python3.10 /root/.meraki_mig/port_migration.py
-
-
-
-echo "complete"
-sleep 1
-rm -r -f /root/.meraki_mig/serial.tmp
 done <"$INPUT"
+echo "Script Complete"
+sleep 2
