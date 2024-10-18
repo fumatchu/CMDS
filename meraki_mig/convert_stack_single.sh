@@ -102,3 +102,6 @@ while IFS= read -r line; do
     file_counter=$((file_counter + 1))
 
 done < "$input_file"
+
+#Check the directories for the number of available configs to migrate- if switch 1, then run command, if switch2, etc
+
