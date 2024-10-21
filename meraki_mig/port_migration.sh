@@ -17,8 +17,11 @@ INTTEN=$(cat /var/lib/tftpboot/mig_switch/$IP | grep -m 1 -o 'interface TenGigab
 #Stacked Switch
 if [[ "$CONFIGSTACK" == "2/0/1" && "$INTGI" == "interface GigabitEthernet1/0/1" ]]; then
     echo "${GREEN}This looks to be a stack of switches with Gigabit Interfaces${TEXTRESET}"
-    cat /var/lib/tftpboot/mig_switch/${IP}-shmr | grep C9300 |grep -E -o "Q.{0,13}" >> /root/.meraki_mig/serial.tmp
-    sed -n '1p' "/root/.meraki_mig/serial.tmp" >> "/root/.meraki_mig/serial.txt"
+    sed -i '/^IP=/c\IP=' /root/.meraki_mig/convert_stack_single.sh
+    sed -i "s/IP=/IP=${IP}/g" /root/.meraki_mig/convert_stack_single.sh
+    /root/.meraki_mig/convert_stack_single.sh
+    rm -r -f /root/.meraki_mig/serial.txt
+    rm -r -f /root/.meraki_mig/cisco_config.tmp
     else
     echo " "
 fi
@@ -26,14 +29,22 @@ fi
 
 if [[ "$CONFIGSTACK" == "2/0/1" && "$INTTWO" == "interface TwoGigabitEthernet1/0/1" ]]; then
     echo "${GREEN}This looks to be a stack of switches with (2.5) MultiGigabit Interfaces${TEXTRESET}"
-    cat /var/lib/tftpboot/mig_switch/${IP}-shmr | grep C9300 |grep -E -o "Q.{0,13}" >> /root/.meraki_mig/serial.tmp
+    sed -i '/^IP=/c\IP=' /root/.meraki_mig/convert_stack_single.sh
+    sed -i "s/IP=/IP=${IP}/g" /root/.meraki_mig/convert_stack_single.sh
+    /root/.meraki_mig/convert_stack_single.sh
+    rm -r -f /root/.meraki_mig/serial.txt
+    rm -r -f /root/.meraki_mig/cisco_config.tmp
     else
     echo " "
 fi
 
 if [[ "$CONFIGSTACK" == "2/0/1" && "$INTTEN" == "interface TenGigabitEthernet1/0/1" ]]; then
     echo "${GREEN}This looks to be a stack of switches with TenMultiGigabit Interfaces${TEXTRESET}"
-    cat /var/lib/tftpboot/mig_switch/${IP}-shmr | grep C9300 |grep -E -o "Q.{0,13}" >> /root/.meraki_mig/serial.tmp
+    sed -i '/^IP=/c\IP=' /root/.meraki_mig/convert_stack_single.sh
+    sed -i "s/IP=/IP=${IP}/g" /root/.meraki_mig/convert_stack_single.sh
+    /root/.meraki_mig/convert_stack_single.sh
+    rm -r -f /root/.meraki_mig/serial.txt
+    rm -r -f /root/.meraki_mig/cisco_config.tmp
     else
     echo " "
 fi
