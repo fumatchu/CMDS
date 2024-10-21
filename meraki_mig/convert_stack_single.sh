@@ -9,7 +9,7 @@ IP=
 
 #Get Serials for stack
 cat /var/lib/tftpboot/mig_switch/${IP}-shmr | grep C9300 |grep -E -o "Q.{0,13}" >> /root/.meraki_mig/serial.txt
-
+sleep 1
 #Cut the config down to ports only (remove top portion of config)
 sed -n '/interface GigabitEthernet/,$p' /var/lib/tftpboot/mig_switch/${IP} > /root/.meraki_mig/cisco_config.tmp
 
@@ -236,7 +236,7 @@ if [[ "$CONFIG9" == "/root/.meraki_mig/tmp/switch9.txt" && "$SERIAL9" == "/root/
     echo " "
 fi
 
-rm -f /root.meraki_mig/serial.txt
+rm -f /root/.meraki_mig/serial.txt
 
 echo "Script Complete"
 
