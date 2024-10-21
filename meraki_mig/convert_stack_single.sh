@@ -5,7 +5,10 @@ YELLOW=$(tput setaf 3)
 GREEN=$(tput setaf 2)
 #This File is used to parse a stack switch and break it into a single switch config
 
-IP=192.168.210.153
+IP=
+
+#Get Serials for stack
+cat /var/lib/tftpboot/mig_switch/${IP}-shmr | grep C9300 |grep -E -o "Q.{0,13}" >> /root/.meraki_mig/serial.txt
 
 #Cut the config down to ports only (remove top portion of config)
 sed -n '/interface GigabitEthernet/,$p' /var/lib/tftpboot/mig_switch/${IP} > /root/.meraki_mig/cisco_config.tmp
@@ -233,5 +236,9 @@ if [[ "$CONFIG9" == "/root/.meraki_mig/tmp/switch9.txt" && "$SERIAL9" == "/root/
     echo " "
 fi
 
+rm -f /root.meraki_mig/serial.txt
+
 echo "Script Complete"
+
+
 sleep 1
