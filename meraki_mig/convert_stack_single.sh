@@ -1,4 +1,8 @@
 #!/bin/bash
+TEXTRESET=$(tput sgr0)
+RED=$(tput setaf 1)
+YELLOW=$(tput setaf 3)
+GREEN=$(tput setaf 2)
 #This File is used to parse a stack switch and break it into a single switch config
 
 IP=192.168.210.153
@@ -43,7 +47,7 @@ awk 'BEGIN {found=0} /interface TwoGigabitEthernet9\/0\/1/ && !found {print "swi
 input_file="/root/.meraki_mig/cisco_config.tmp"  # Replace with your config file path
 
 # Directory to store the output files for each switch
-output_dir="switch_configs"
+output_dir="tmp"
 mkdir -p "$output_dir"
 
 # Parse the configuration file and create a new file for each switch
@@ -103,5 +107,131 @@ while IFS= read -r line; do
 
 done < "$input_file"
 
-#Check the directories for the number of available configs to migrate- if switch 1, then run command, if switch2, etc
 
+##Determine the number of switches in the stack and convert them one by one
+
+#Stacked Switch Config 1
+CONFIG1=$(ls /root/.meraki_mig/tmp/switch1.txt 2>/dev/null)
+SERIAL1=$(ls /root/.meraki_mig/tmp/serial1.txt 2>/dev/null)
+if [[ "$CONFIG1" == "/root/.meraki_mig/tmp/switch1.txt" && "$SERIAL1" == "/root/.meraki_mig/tmp/serial1.txt" ]]; then
+    echo "${GREEN}${IP}-Found switch 1 in stack${TEXTRESET}"
+    mv /root/.meraki_mig/tmp/switch1.txt /root/.meraki_mig/cisco_config.tmp
+    mv /root/.meraki_mig/tmp/serial1.txt /root/.meraki_mig/serial.txt
+    python3.10 /root/.meraki_mig/port_migration.py
+#    cat /var/lib/tftpboot/mig_switch/${IP}-shmr | grep C9300 |grep -E -o "Q.{0,13}" >> /root/.meraki_mig/serial.tmp
+#    sed -n '1p' "/root/.meraki_mig/serial.tmp" >> "/root/.meraki_mig/serial.txt"
+    else
+    echo " "
+fi
+
+#Stacked Switch Config 2
+CONFIG2=$(ls /root/.meraki_mig/tmp/switch2.txt 2>/dev/null)
+SERIAL2=$(ls /root/.meraki_mig/tmp/serial2.txt 2>/dev/null)
+if [[ "$CONFIG2" == "/root/.meraki_mig/tmp/switch2.txt" && "$SERIAL2" == "/root/.meraki_mig/tmp/serial2.txt" ]]; then
+    echo "${GREEN}${IP}-Found switch 2 in stack${TEXTRESET}"
+    mv /root/.meraki_mig/tmp/switch2.txt /root/.meraki_mig/cisco_config.tmp
+    mv /root/.meraki_mig/tmp/serial2.txt /root/.meraki_mig/serial.txt
+    python3.10 /root/.meraki_mig/port_migration.py
+#    cat /var/lib/tftpboot/mig_switch/${IP}-shmr | grep C9300 |grep -E -o "Q.{0,13}" >> /root/.meraki_mig/serial.tmp
+#    sed -n '1p' "/root/.meraki_mig/serial.tmp" >> "/root/.meraki_mig/serial.txt"
+    else
+    echo " "
+fi
+
+#Stacked Switch Config 3
+CONFIG3=$(ls /root/.meraki_mig/tmp/switch3.txt 2>/dev/null)
+SERIAL3=$(ls /root/.meraki_mig/tmp/serial3.txt 2>/dev/null)
+if [[ "$CONFIG3" == "/root/.meraki_mig/tmp/switch3.txt" && "$SERIAL3" == "/root/.meraki_mig/tmp/serial3.txt" ]]; then
+    echo "${GREEN}${IP}-Found switch 3 in stack${TEXTRESET}"
+    mv /root/.meraki_mig/tmp/switch3.txt /root/.meraki_mig/cisco_config.tmp
+    mv /root/.meraki_mig/tmp/serial3.txt /root/.meraki_mig/serial.txt
+    python3.10 /root/.meraki_mig/port_migration.py
+#    cat /var/lib/tftpboot/mig_switch/${IP}-shmr | grep C9300 |grep -E -o "Q.{0,13}" >> /root/.meraki_mig/serial.tmp
+#    sed -n '1p' "/root/.meraki_mig/serial.tmp" >> "/root/.meraki_mig/serial.txt"
+    else
+    echo " "
+fi
+
+#Stacked Switch Config 4
+CONFIG4=$(ls /root/.meraki_mig/tmp/switch4.txt 2>/dev/null)
+SERIAL4=$(ls /root/.meraki_mig/tmp/serial4.txt 2>/dev/null)
+if [[ "$CONFIG4" == "/root/.meraki_mig/tmp/switch4.txt" && "$SERIAL4" == "/root/.meraki_mig/tmp/serial4.txt" ]]; then
+    echo "${GREEN}${IP}-Found switch 4 in stack${TEXTRESET}"
+    mv /root/.meraki_mig/tmp/switch4.txt /root/.meraki_mig/cisco_config.tmp
+    mv /root/.meraki_mig/tmp/serial4.txt /root/.meraki_mig/serial.txt
+    python3.10 /root/.meraki_mig/port_migration.py
+#    cat /var/lib/tftpboot/mig_switch/${IP}-shmr | grep C9300 |grep -E -o "Q.{0,13}" >> /root/.meraki_mig/serial.tmp
+#    sed -n '1p' "/root/.meraki_mig/serial.tmp" >> "/root/.meraki_mig/serial.txt"
+    else
+    echo " "
+fi
+
+#Stacked Switch Config 5
+CONFIG5=$(ls /root/.meraki_mig/tmp/switch5.txt 2>/dev/null)
+SERIAL5=$(ls /root/.meraki_mig/tmp/serial5.txt 2>/dev/null)
+if [[ "$CONFIG5" == "/root/.meraki_mig/tmp/switch5.txt" && "$SERIAL5" == "/root/.meraki_mig/tmp/serial5.txt" ]]; then
+    echo "${GREEN}${IP}-Found switch 5 in stack${TEXTRESET}"
+    mv /root/.meraki_mig/tmp/switch5.txt /root/.meraki_mig/cisco_config.tmp
+    mv /root/.meraki_mig/tmp/serial5.txt /root/.meraki_mig/serial.txt
+    python3.10 /root/.meraki_mig/port_migration.py
+#    cat /var/lib/tftpboot/mig_switch/${IP}-shmr | grep C9300 |grep -E -o "Q.{0,13}" >> /root/.meraki_mig/serial.tmp
+#    sed -n '1p' "/root/.meraki_mig/serial.tmp" >> "/root/.meraki_mig/serial.txt"
+    else
+    echo " "
+fi
+
+#Stacked Switch Config 6
+CONFIG6=$(ls /root/.meraki_mig/tmp/switch6.txt 2>/dev/null)
+SERIAL6=$(ls /root/.meraki_mig/tmp/serial6.txt 2>/dev/null)
+if [[ "$CONFIG6" == "/root/.meraki_mig/tmp/switch6.txt" && "$SERIAL6" == "/root/.meraki_mig/tmp/serial6.txt" ]]; then
+    echo "${GREEN}${IP}-Found switch 6 in stack${TEXTRESET}"
+    mv /root/.meraki_mig/tmp/switch6.txt /root/.meraki_mig/cisco_config.tmp
+    mv /root/.meraki_mig/tmp/serial6.txt /root/.meraki_mig/serial.txt
+    python3.10 /root/.meraki_mig/port_migration.py
+#    cat /var/lib/tftpboot/mig_switch/${IP}-shmr | grep C9300 |grep -E -o "Q.{0,13}" >> /root/.meraki_mig/serial.tmp
+#    sed -n '1p' "/root/.meraki_mig/serial.tmp" >> "/root/.meraki_mig/serial.txt"
+    else
+    echo " "
+fi
+
+#Stacked Switch Config 7
+CONFIG7=$(ls /root/.meraki_mig/tmp/switch7.txt 2>/dev/null)
+SERIAL7=$(ls /root/.meraki_mig/tmp/serial7.txt 2>/dev/null)
+if [[ "$CONFIG7" == "/root/.meraki_mig/tmp/switch7.txt" && "$SERIAL7" == "/root/.meraki_mig/tmp/serial7.txt" ]]; then
+    echo "${GREEN}${IP}-Found switch 7 in stack${TEXTRESET}"
+    mv /root/.meraki_mig/tmp/switch7.txt /root/.meraki_mig/cisco_config.tmp
+    mv /root/.meraki_mig/tmp/serial7.txt /root/.meraki_mig/serial.txt
+    python3.10 /root/.meraki_mig/port_migration.py
+#    cat /var/lib/tftpboot/mig_switch/${IP}-shmr | grep C9300 |grep -E -o "Q.{0,13}" >> /root/.meraki_mig/serial.tmp
+#    sed -n '1p' "/root/.meraki_mig/serial.tmp" >> "/root/.meraki_mig/serial.txt"
+    else
+    echo " "
+fi
+
+#Stacked Switch Config 8
+CONFIG8=$(ls /root/.meraki_mig/tmp/switch8.txt 2>/dev/null)
+SERIAL8=$(ls /root/.meraki_mig/tmp/serial8.txt 2>/dev/null)
+if [[ "$CONFIG8" == "/root/.meraki_mig/tmp/switch8.txt" && "$SERIAL8" == "/root/.meraki_mig/tmp/serial8.txt" ]]; then
+    echo "${GREEN}${IP}-Found switch 8 in stack${TEXTRESET}"
+    mv /root/.meraki_mig/tmp/switch8.txt /root/.meraki_mig/cisco_config.tmp
+    mv /root/.meraki_mig/tmp/serial8.txt /root/.meraki_mig/serial.txt
+    python3.10 /root/.meraki_mig/port_migration.py
+#    cat /var/lib/tftpboot/mig_switch/${IP}-shmr | grep C9300 |grep -E -o "Q.{0,13}" >> /root/.meraki_mig/serial.tmp
+#    sed -n '1p' "/root/.meraki_mig/serial.tmp" >> "/root/.meraki_mig/serial.txt"
+    else
+    echo " "
+fi
+
+#Stacked Switch Config 9
+CONFIG9=$(ls /root/.meraki_mig/tmp/switch9.txt 2>/dev/null)
+SERIAL9=$(ls /root/.meraki_mig/tmp/serial9.txt 2>/dev/null)
+if [[ "$CONFIG9" == "/root/.meraki_mig/tmp/switch9.txt" && "$SERIAL9" == "/root/.meraki_mig/tmp/serial9.txt" ]]; then
+    echo "${GREEN}${IP}-Found switch 9 in stack${TEXTRESET}"
+#    cat /var/lib/tftpboot/mig_switch/${IP}-shmr | grep C9300 |grep -E -o "Q.{0,13}" >> /root/.meraki_mig/serial.tmp
+#    sed -n '1p' "/root/.meraki_mig/serial.tmp" >> "/root/.meraki_mig/serial.txt"
+    else
+    echo " "
+fi
+
+echo "Script Complete"
+sleep 1
