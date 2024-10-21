@@ -64,7 +64,7 @@ fi
 
 
 if [[ "$CONFIGSTACK" == "" && "$INTTWO" == "interface TwoGigabitEthernet1/0/1" ]]; then
-    echo "${GREEN}${IP} looks to be a single switch with (2.5) MultiGigabit Interfaces${TEXTRESET}"
+    echo "${GREEN}${IP} looks to be a single switch with MultiGigabit Interfaces${TEXTRESET}"
     sed -n '/interface TwoGigabitEthernet/,$p' /var/lib/tftpboot/mig_switch/$IP > /root/.meraki_mig/cisco_config.tmp
     cat /var/lib/tftpboot/mig_switch/${IP}-shmr | grep C9300 |grep -E -o "Q.{0,13}" >> /root/.meraki_mig/serial.txt
     echo "Deploying port configurations into dashboard"
@@ -76,7 +76,7 @@ if [[ "$CONFIGSTACK" == "" && "$INTTWO" == "interface TwoGigabitEthernet1/0/1" ]
 fi
 
 if [[ "$CONFIGSTACK" == "" && "$INTTEN" == "interface TenGigabitEthernet1/0/1" ]]; then
-    echo "${GREEN}${IP} looks to be a single switch with TenMultiGigabit Interfaces${TEXTRESET}"
+    echo "${GREEN}${IP} looks to be a single switch with MultiGigabit Interfaces${TEXTRESET}"
     sed -n '/interface TenGigabitEthernet/,$p' /var/lib/tftpboot/mig_switch/$IP > /root/.meraki_mig/cisco_config.tmp
     cat /var/lib/tftpboot/mig_switch/${IP}-shmr | grep C9300 |grep -E -o "Q.{0,13}" >> /root/.meraki_mig/serial.txt
     echo "Deploying port configurations into dashboard"
