@@ -35,6 +35,7 @@ echo "Checking IOS Version is 17.09.03m3 "
     echo " "
     echo "Download this code: https://software.cisco.com/download/specialrelease/b53558e8586d98df4e9e7860c7692e75"
     echo "Valid CCO ID is required"
+    echo "The Script will continue momentarily"
     sleep 10
     
   fi
