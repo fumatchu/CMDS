@@ -5,7 +5,8 @@ RED=$(tput setaf 1)
 YELLOW=$(tput setaf 3)
 GREEN=$(tput setaf 2)
 SERVERIP=$(hostname -I)
-
+echo "THIS IS BETA"
+sleep 5
 items=(1 "Setup Wizard"
   2 "-----------------------------------------------"
   3 "Data Collection"
