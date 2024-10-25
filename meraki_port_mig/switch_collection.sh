@@ -126,7 +126,7 @@ echo "Files have been merged into $output_file."
 
 
 
-#mkdir /root/port_migration/
+mkdir /root/port_migration/
 #Remove Carriage returns
 grep -v '^[[:space:]]*$' "/root/.meraki_port_mig/switch_collection.final" > "/root/.meraki_port_mig/switch_collection.final.tmp"
 sed -e "s/ /,/g" </root/.meraki_port_mig/switch_collection.final.tmp >>/root/.meraki_port_mig/switch_collection.csv
