@@ -6,7 +6,6 @@ YELLOW=$(tput setaf 3)
 GREEN=$(tput setaf 2)
 SERVER_IP=$(hostname -I)
 
-mkdir /root/.meraki_port_mig/tmp
 
 INPUT="/root/.meraki_port_mig/ip_list"
 
