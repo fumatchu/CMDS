@@ -402,6 +402,7 @@ mkdir /var/lib/tftpboot/images
 mkdir /var/lib/tftpboot/wlc
 mkdir /var/lib/tftpboot/mon_switch
 mkdir /var/lib/tftpboot/mig_switch
+mkdir /var/lib/tftpboot/port_switch
 
 chmod 777 -R /var/lib/tftpboot
 firewall-cmd --permanent --add-service tftp
@@ -434,9 +435,14 @@ mv /root/MIGInstaller/meraki_port_mig /root/.meraki_port_mig
 mkdir /root/.meraki_mig/logs
 mkdir /root/.meraki_mon_wlc/logs
 mkdir /root/.meraki_mon_switch/logs
+mkdir /root/.meraki_port_mig/logs
+mkdir /root/.meraki_port_mig/tmp
+
 chmod 700 -R /root/.meraki_mig
 chmod 700 -R /root/.meraki_mon_wlc
 chmod 700 -R /root/.meraki_mon_switch
+chmod 700 -R /root/.meraki_port_mig
+
 mv /root/.meraki_mig/meraki_migration /usr/sbin/
 
 
