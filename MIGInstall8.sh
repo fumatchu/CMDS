@@ -390,6 +390,7 @@ clear
 pip3.10 install meraki
 pip3.10 install requests
 pip3.10 install --upgrade autopep8
+pip3.10 install pandas
 
 #Build tftp-server
 \cp -f /usr/lib/systemd/system/tftp.service /etc/systemd/system/tftp-server.service
