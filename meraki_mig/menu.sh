@@ -16,14 +16,15 @@ items=(1 "Setup Wizard"
   8 "-----------------------------------------------"
   9 "Validate Switch/Deploy"
  10 "Update Physical Address"
- 11 "Template Deployment"
- 12 "Batch Cleanup"
- 13 "-----------------------------------------------"
- 14 "Global Environment Settings"
- 15 "Schedule Deployment"
- 16 "Logs"
- 17 "Utilities"
- 18 "Welcome to CMDS"
+ 11 "Migrate Port conifgurations"
+ 12 "Template Deployment"
+ 13 "Batch Cleanup"
+ 14 "-----------------------------------------------"
+ 15 "Global Environment Settings"
+ 16 "Schedule Deployment"
+ 17 "Logs"
+ 18 "Utilities"
+ 19 "Welcome to CMDS"
 )
 
 while choice=$(dialog --title "$TITLE" \
@@ -41,14 +42,15 @@ while choice=$(dialog --title "$TITLE" \
   8) clear ;;
   9) clear & /root/.meraki_mig/deploy_check.sh | tee -a /root/.meraki_mig/logs/soft_hard_check_deployment.log ;;
  10) clear & /root/.meraki_mig/update_physical_address_switch.sh ;;
- 11) clear & /root/.meraki_mig/adv_template.sh ;;
- 12) clear & /root/.meraki_mig/batch_clean.sh ;;
- 13) clear & /root/.meraki_mig/.logo ;;
- 14) clear & /root/.meraki_mig/global_environment.sh ;;
- 15) clear & /root/.meraki_mig/schedule.sh ;;
- 16) clear & /root/.meraki_mig/logging_environment.sh ;;
- 17) clear & /root/.meraki_mig/utilities.sh ;;
- 18) clear & /root/.meraki_mig/welcome.readme | more ;;
+ 11) clear & /root/.meraki_mig/port_migration.sh ;;
+ 12) clear & /root/.meraki_mig/adv_template.sh ;;
+ 13) clear & /root/.meraki_mig/batch_clean.sh ;;
+ 14) clear & /root/.meraki_mig/.logo ;;
+ 15) clear & /root/.meraki_mig/global_environment.sh ;;
+ 16) clear & /root/.meraki_mig/schedule.sh ;;
+ 17) clear & /root/.meraki_mig/logging_environment.sh ;;
+ 18) clear & /root/.meraki_mig/utilities.sh ;;
+ 19) clear & /root/.meraki_mig/welcome.readme | more ;;
   esac
 done
 clear # clear after user pressed Cancel
