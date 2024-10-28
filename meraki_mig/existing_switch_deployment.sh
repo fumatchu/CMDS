@@ -16,7 +16,7 @@ items=(1 "Deploy Port Template"
 
 while choice=$(dialog --title "$TITLE" \
   --backtitle "CMDS-Main Menu -->Template Builder -->Modify Existing Switches in Dashboard" \
-  --menu "Please select" 18 65 3 "${items[@]}" \
+  --menu "Please select" 30 75 30 "${items[@]}" \
   2>&1 >/dev/tty); do
   case $choice in
   1) /root/.meraki_mig/deploy_existing_template.sh | tee -a /root/.meraki_mig/logs/template_deployment.log ;;
