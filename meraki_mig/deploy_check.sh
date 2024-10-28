@@ -254,7 +254,6 @@ if grep -q '[^[:space:]]' "/root/.meraki_mig/check.tmp"; then
     sleep 2
     clear & /root/.meraki_mig/show_inv.sh
     clear & /root/.meraki_mig/hostname_collection.sh | tee -a /root/.meraki_mig/logs/hostname_deployment.log
-    clear & /root/.meraki_mig/port_migration.sh | tee -a /root/.meraki_mig/logs/port_migration.log
     fi
 
 
