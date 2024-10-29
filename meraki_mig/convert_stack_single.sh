@@ -120,9 +120,13 @@ if [[ "$CONFIG1" == "/root/.meraki_mig/tmp/switch1.txt" && "$SERIAL1" == "/root/
     echo "${GREEN}${IP}-Found switch 1 in stack${TEXTRESET}"
     mv /root/.meraki_mig/tmp/switch1.txt /root/.meraki_mig/cisco_config.tmp
     mv /root/.meraki_mig/tmp/serial1.txt /root/.meraki_mig/serial.txt
+    #Move the Uplink ports to a separate file
+    awk '/interface GigabitEthernet1\/1\/1/ {start = NR; flag = 1} flag {lines[NR] = $0} /interface AppGigabitEthernet1\/0\/1/ {end = NR; flag = 0} END {if (start && end) {for (i=start; i<=end; i++) print lines[i]}}' /root/.meraki_mig/cisco_config.tmp > /root/.meraki_mig/cisco_config_up.tmp
+    #Remove the uplinks from the file
+    awk '/interface GigabitEthernet1\/1\/1/,/interface AppGigabitEthernet1\/0\/1/{next}1' /root/.meraki_mig/cisco_config.tmp > temp_file && mv -f temp_file /root/.meraki_mig/cisco_config.tmp
     python3.10 /root/.meraki_mig/port_migration.py
-#    cat /var/lib/tftpboot/mig_switch/${IP}-shmr | grep C9300 |grep -E -o "Q.{0,13}" >> /root/.meraki_mig/serial.tmp
-#    sed -n '1p' "/root/.meraki_mig/serial.tmp" >> "/root/.meraki_mig/serial.txt"
+    rm -f /root/.meraki_mig/cisco_config.tmp
+    rm -f /root/.meraki_mig/cisco_config_up.tmp
     else
     echo " "
 fi
@@ -134,9 +138,13 @@ if [[ "$CONFIG2" == "/root/.meraki_mig/tmp/switch2.txt" && "$SERIAL2" == "/root/
     echo "${GREEN}${IP}-Found switch 2 in stack${TEXTRESET}"
     mv /root/.meraki_mig/tmp/switch2.txt /root/.meraki_mig/cisco_config.tmp
     mv /root/.meraki_mig/tmp/serial2.txt /root/.meraki_mig/serial.txt
+    #Move the Uplink ports to a separate file
+    awk '/interface GigabitEthernet1\/1\/1/ {start = NR; flag = 1} flag {lines[NR] = $0} /interface AppGigabitEthernet1\/0\/1/ {end = NR; flag = 0} END {if (start && end) {for (i=start; i<=end; i++) print lines[i]}}' /root/.meraki_mig/cisco_config.tmp > /root/.meraki_mig/cisco_config_up.tmp
+    #Remove the uplinks from the file
+    awk '/interface GigabitEthernet1\/1\/1/,/interface AppGigabitEthernet1\/0\/1/{next}1' /root/.meraki_mig/cisco_config.tmp > temp_file && mv -f temp_file /root/.meraki_mig/cisco_config.tmp
     python3.10 /root/.meraki_mig/port_migration.py
-#    cat /var/lib/tftpboot/mig_switch/${IP}-shmr | grep C9300 |grep -E -o "Q.{0,13}" >> /root/.meraki_mig/serial.tmp
-#    sed -n '1p' "/root/.meraki_mig/serial.tmp" >> "/root/.meraki_mig/serial.txt"
+    rm -f /root/.meraki_mig/cisco_config.tmp
+    rm -f /root/.meraki_mig/cisco_config_up.tmp
     else
     echo " "
 fi
@@ -148,9 +156,13 @@ if [[ "$CONFIG3" == "/root/.meraki_mig/tmp/switch3.txt" && "$SERIAL3" == "/root/
     echo "${GREEN}${IP}-Found switch 3 in stack${TEXTRESET}"
     mv /root/.meraki_mig/tmp/switch3.txt /root/.meraki_mig/cisco_config.tmp
     mv /root/.meraki_mig/tmp/serial3.txt /root/.meraki_mig/serial.txt
+    #Move the Uplink ports to a separate file
+    awk '/interface GigabitEthernet1\/1\/1/ {start = NR; flag = 1} flag {lines[NR] = $0} /interface AppGigabitEthernet1\/0\/1/ {end = NR; flag = 0} END {if (start && end) {for (i=start; i<=end; i++) print lines[i]}}' /root/.meraki_mig/cisco_config.tmp > /root/.meraki_mig/cisco_config_up.tmp
+    #Remove the uplinks from the file
+    awk '/interface GigabitEthernet1\/1\/1/,/interface AppGigabitEthernet1\/0\/1/{next}1' /root/.meraki_mig/cisco_config.tmp > temp_file && mv -f temp_file /root/.meraki_mig/cisco_config.tmp
     python3.10 /root/.meraki_mig/port_migration.py
-#    cat /var/lib/tftpboot/mig_switch/${IP}-shmr | grep C9300 |grep -E -o "Q.{0,13}" >> /root/.meraki_mig/serial.tmp
-#    sed -n '1p' "/root/.meraki_mig/serial.tmp" >> "/root/.meraki_mig/serial.txt"
+    rm -f /root/.meraki_mig/cisco_config.tmp
+    rm -f /root/.meraki_mig/cisco_config_up.tmp
     else
     echo " "
 fi
@@ -162,9 +174,13 @@ if [[ "$CONFIG4" == "/root/.meraki_mig/tmp/switch4.txt" && "$SERIAL4" == "/root/
     echo "${GREEN}${IP}-Found switch 4 in stack${TEXTRESET}"
     mv /root/.meraki_mig/tmp/switch4.txt /root/.meraki_mig/cisco_config.tmp
     mv /root/.meraki_mig/tmp/serial4.txt /root/.meraki_mig/serial.txt
+    #Move the Uplink ports to a separate file
+    awk '/interface GigabitEthernet1\/1\/1/ {start = NR; flag = 1} flag {lines[NR] = $0} /interface AppGigabitEthernet1\/0\/1/ {end = NR; flag = 0} END {if (start && end) {for (i=start; i<=end; i++) print lines[i]}}' /root/.meraki_mig/cisco_config.tmp > /root/.meraki_mig/cisco_config_up.tmp
+    #Remove the uplinks from the file
+    awk '/interface GigabitEthernet1\/1\/1/,/interface AppGigabitEthernet1\/0\/1/{next}1' /root/.meraki_mig/cisco_config.tmp > temp_file && mv -f temp_file /root/.meraki_mig/cisco_config.tmp
     python3.10 /root/.meraki_mig/port_migration.py
-#    cat /var/lib/tftpboot/mig_switch/${IP}-shmr | grep C9300 |grep -E -o "Q.{0,13}" >> /root/.meraki_mig/serial.tmp
-#    sed -n '1p' "/root/.meraki_mig/serial.tmp" >> "/root/.meraki_mig/serial.txt"
+    rm -f /root/.meraki_mig/cisco_config.tmp
+    rm -f /root/.meraki_mig/cisco_config_up.tmp
     else
     echo " "
 fi
@@ -176,9 +192,13 @@ if [[ "$CONFIG5" == "/root/.meraki_mig/tmp/switch5.txt" && "$SERIAL5" == "/root/
     echo "${GREEN}${IP}-Found switch 5 in stack${TEXTRESET}"
     mv /root/.meraki_mig/tmp/switch5.txt /root/.meraki_mig/cisco_config.tmp
     mv /root/.meraki_mig/tmp/serial5.txt /root/.meraki_mig/serial.txt
+    #Move the Uplink ports to a separate file
+    awk '/interface GigabitEthernet1\/1\/1/ {start = NR; flag = 1} flag {lines[NR] = $0} /interface AppGigabitEthernet1\/0\/1/ {end = NR; flag = 0} END {if (start && end) {for (i=start; i<=end; i++) print lines[i]}}' /root/.meraki_mig/cisco_config.tmp > /root/.meraki_mig/cisco_config_up.tmp
+    #Remove the uplinks from the file
+    awk '/interface GigabitEthernet1\/1\/1/,/interface AppGigabitEthernet1\/0\/1/{next}1' /root/.meraki_mig/cisco_config.tmp > temp_file && mv -f temp_file /root/.meraki_mig/cisco_config.tmp
     python3.10 /root/.meraki_mig/port_migration.py
-#    cat /var/lib/tftpboot/mig_switch/${IP}-shmr | grep C9300 |grep -E -o "Q.{0,13}" >> /root/.meraki_mig/serial.tmp
-#    sed -n '1p' "/root/.meraki_mig/serial.tmp" >> "/root/.meraki_mig/serial.txt"
+    rm -f /root/.meraki_mig/cisco_config.tmp
+    rm -f /root/.meraki_mig/cisco_config_up.tmp
     else
     echo " "
 fi
@@ -190,9 +210,13 @@ if [[ "$CONFIG6" == "/root/.meraki_mig/tmp/switch6.txt" && "$SERIAL6" == "/root/
     echo "${GREEN}${IP}-Found switch 6 in stack${TEXTRESET}"
     mv /root/.meraki_mig/tmp/switch6.txt /root/.meraki_mig/cisco_config.tmp
     mv /root/.meraki_mig/tmp/serial6.txt /root/.meraki_mig/serial.txt
+    #Move the Uplink ports to a separate file
+    awk '/interface GigabitEthernet1\/1\/1/ {start = NR; flag = 1} flag {lines[NR] = $0} /interface AppGigabitEthernet1\/0\/1/ {end = NR; flag = 0} END {if (start && end) {for (i=start; i<=end; i++) print lines[i]}}' /root/.meraki_mig/cisco_config.tmp > /root/.meraki_mig/cisco_config_up.tmp
+    #Remove the uplinks from the file
+    awk '/interface GigabitEthernet1\/1\/1/,/interface AppGigabitEthernet1\/0\/1/{next}1' /root/.meraki_mig/cisco_config.tmp > temp_file && mv -f temp_file /root/.meraki_mig/cisco_config.tmp
     python3.10 /root/.meraki_mig/port_migration.py
-#    cat /var/lib/tftpboot/mig_switch/${IP}-shmr | grep C9300 |grep -E -o "Q.{0,13}" >> /root/.meraki_mig/serial.tmp
-#    sed -n '1p' "/root/.meraki_mig/serial.tmp" >> "/root/.meraki_mig/serial.txt"
+    rm -f /root/.meraki_mig/cisco_config.tmp
+    rm -f /root/.meraki_mig/cisco_config_up.tmp
     else
     echo " "
 fi
@@ -204,9 +228,13 @@ if [[ "$CONFIG7" == "/root/.meraki_mig/tmp/switch7.txt" && "$SERIAL7" == "/root/
     echo "${GREEN}${IP}-Found switch 7 in stack${TEXTRESET}"
     mv /root/.meraki_mig/tmp/switch7.txt /root/.meraki_mig/cisco_config.tmp
     mv /root/.meraki_mig/tmp/serial7.txt /root/.meraki_mig/serial.txt
+    #Move the Uplink ports to a separate file
+    awk '/interface GigabitEthernet1\/1\/1/ {start = NR; flag = 1} flag {lines[NR] = $0} /interface AppGigabitEthernet1\/0\/1/ {end = NR; flag = 0} END {if (start && end) {for (i=start; i<=end; i++) print lines[i]}}' /root/.meraki_mig/cisco_config.tmp > /root/.meraki_mig/cisco_config_up.tmp
+    #Remove the uplinks from the file
+    awk '/interface GigabitEthernet1\/1\/1/,/interface AppGigabitEthernet1\/0\/1/{next}1' /root/.meraki_mig/cisco_config.tmp > temp_file && mv -f temp_file /root/.meraki_mig/cisco_config.tmp
     python3.10 /root/.meraki_mig/port_migration.py
-#    cat /var/lib/tftpboot/mig_switch/${IP}-shmr | grep C9300 |grep -E -o "Q.{0,13}" >> /root/.meraki_mig/serial.tmp
-#    sed -n '1p' "/root/.meraki_mig/serial.tmp" >> "/root/.meraki_mig/serial.txt"
+    rm -f /root/.meraki_mig/cisco_config.tmp
+    rm -f /root/.meraki_mig/cisco_config_up.tmp
     else
     echo " "
 fi
@@ -218,9 +246,13 @@ if [[ "$CONFIG8" == "/root/.meraki_mig/tmp/switch8.txt" && "$SERIAL8" == "/root/
     echo "${GREEN}${IP}-Found switch 8 in stack${TEXTRESET}"
     mv /root/.meraki_mig/tmp/switch8.txt /root/.meraki_mig/cisco_config.tmp
     mv /root/.meraki_mig/tmp/serial8.txt /root/.meraki_mig/serial.txt
+    #Move the Uplink ports to a separate file
+    awk '/interface GigabitEthernet1\/1\/1/ {start = NR; flag = 1} flag {lines[NR] = $0} /interface AppGigabitEthernet1\/0\/1/ {end = NR; flag = 0} END {if (start && end) {for (i=start; i<=end; i++) print lines[i]}}' /root/.meraki_mig/cisco_config.tmp > /root/.meraki_mig/cisco_config_up.tmp
+    #Remove the uplinks from the file
+    awk '/interface GigabitEthernet1\/1\/1/,/interface AppGigabitEthernet1\/0\/1/{next}1' /root/.meraki_mig/cisco_config.tmp > temp_file && mv -f temp_file /root/.meraki_mig/cisco_config.tmp
     python3.10 /root/.meraki_mig/port_migration.py
-#    cat /var/lib/tftpboot/mig_switch/${IP}-shmr | grep C9300 |grep -E -o "Q.{0,13}" >> /root/.meraki_mig/serial.tmp
-#    sed -n '1p' "/root/.meraki_mig/serial.tmp" >> "/root/.meraki_mig/serial.txt"
+    rm -f /root/.meraki_mig/cisco_config.tmp
+    rm -f /root/.meraki_mig/cisco_config_up.tmp
     else
     echo " "
 fi
@@ -230,8 +262,15 @@ CONFIG9=$(ls /root/.meraki_mig/tmp/switch9.txt 2>/dev/null)
 SERIAL9=$(ls /root/.meraki_mig/tmp/serial9.txt 2>/dev/null)
 if [[ "$CONFIG9" == "/root/.meraki_mig/tmp/switch9.txt" && "$SERIAL9" == "/root/.meraki_mig/tmp/serial9.txt" ]]; then
     echo "${GREEN}${IP}-Found switch 9 in stack${TEXTRESET}"
-#    cat /var/lib/tftpboot/mig_switch/${IP}-shmr | grep C9300 |grep -E -o "Q.{0,13}" >> /root/.meraki_mig/serial.tmp
-#    sed -n '1p' "/root/.meraki_mig/serial.tmp" >> "/root/.meraki_mig/serial.txt"
+    mv /root/.meraki_mig/tmp/switch9.txt /root/.meraki_mig/cisco_config.tmp
+    mv /root/.meraki_mig/tmp/serial9.txt /root/.meraki_mig/serial.txt
+    #Move the Uplink ports to a separate file
+    awk '/interface GigabitEthernet1\/1\/1/ {start = NR; flag = 1} flag {lines[NR] = $0} /interface AppGigabitEthernet1\/0\/1/ {end = NR; flag = 0} END {if (start && end) {for (i=start; i<=end; i++) print lines[i]}}' /root/.meraki_mig/cisco_config.tmp > /root/.meraki_mig/cisco_config_up.tmp
+    #Remove the uplinks from the file
+    awk '/interface GigabitEthernet1\/1\/1/,/interface AppGigabitEthernet1\/0\/1/{next}1' /root/.meraki_mig/cisco_config.tmp > temp_file && mv -f temp_file /root/.meraki_mig/cisco_config.tmp
+    python3.10 /root/.meraki_mig/port_migration.py
+    rm -f /root/.meraki_mig/cisco_config.tmp
+    rm -f /root/.meraki_mig/cisco_config_up.tmp
     else
     echo " "
 fi
