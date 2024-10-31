@@ -36,8 +36,8 @@ if [[ "$CONFIGSTACK" == "2/0/1" && "$INTTWO" == "interface TwoGigabitEthernet1/0
     sed -i "s/IP=/IP=${IP}/g" /root/.meraki_mig/convert_stack_single.sh
     /root/.meraki_mig/convert_stack_single.sh
     rm -r -f /root/.meraki_mig/serial.txt
-    rm -r -f /root/.meraki_mig/cisco_config.tmp
-    rm -r -f /root/.meraki_mig/cisco_config_up.tmp
+   rm -r -f /root/.meraki_mig/cisco_config.tmp
+   rm -r -f /root/.meraki_mig/cisco_config_up.tmp
     else
     echo " "
 fi
@@ -49,8 +49,8 @@ if [[ "$CONFIGSTACK" == "2/0/1" && "$INTTEN" == "interface TenGigabitEthernet1/0
     sed -i "s/IP=/IP=${IP}/g" /root/.meraki_mig/convert_stack_single.sh
     /root/.meraki_mig/convert_stack_single.sh
     rm -r -f /root/.meraki_mig/serial.txt
-    rm -r -f /root/.meraki_mig/cisco_config.tmp
-    rm -r -f /root/.meraki_mig/cisco_config_up.tmp
+#    rm -r -f /root/.meraki_mig/cisco_config.tmp
+#    rm -r -f /root/.meraki_mig/cisco_config_up.tmp
     else
     echo " "
 fi
@@ -115,5 +115,5 @@ if [[ "$CONFIGSTACK" == "" && "$INTTEN" == "interface TenGigabitEthernet1/0/1" ]
 fi
 
 done <"$INPUT"
-echo "Script Complete"
+echo "Migration Script Complete"
 sleep 2
