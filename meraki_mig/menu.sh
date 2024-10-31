@@ -42,7 +42,7 @@ while choice=$(dialog --title "$TITLE" \
   8) clear ;;
   9) clear & /root/.meraki_mig/deploy_check.sh | tee -a /root/.meraki_mig/logs/soft_hard_check_deployment.log ;;
  10) clear & /root/.meraki_mig/update_physical_address_switch.sh ;;
- 11) clear & /root/.meraki_mig/port_migration.sh | tee -a /root/.meraki_mig/logs/port_migration.log ;;
+ 11) clear & unbuffer /root/.meraki_mig/port_migration.sh | tee -a /root/.meraki_mig/logs/port_migration.log ;;
  12) clear & /root/.meraki_mig/adv_template.sh ;;
  13) clear & /root/.meraki_mig/batch_clean.sh ;;
  14) clear & /root/.meraki_mig/.logo ;;
