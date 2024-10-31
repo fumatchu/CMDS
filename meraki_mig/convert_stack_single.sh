@@ -50,7 +50,7 @@ awk 'BEGIN {found=0} /interface TwoGigabitEthernet9\/0\/1/ && !found {print "swi
 input_file="/root/.meraki_mig/cisco_config.tmp"  # Replace with your config file path
 
 # Directory to store the output files for each switch
-output_dir="tmp"
+output_dir="/root/.meraki_mig/tmp"
 mkdir -p "$output_dir"
 
 # Parse the configuration file and create a new file for each switch
