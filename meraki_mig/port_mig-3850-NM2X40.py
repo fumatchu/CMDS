@@ -55,7 +55,7 @@ def update_uplink_port(serial, port_id, port_config):
 
 def main():
     # Path to the Cisco configuration file
-    cisco_config_file_path = "cisco_config.txt"  # Replace with your config file path
+    cisco_config_file_path = "/root/.meraki_mig/cisco_config_up.tmp"  # Replace with your config file path
 
     # Read Cisco configuration from file
     try:
