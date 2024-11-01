@@ -72,8 +72,9 @@ def main():
     # Parse the Cisco configuration
     interfaces = parse_cisco_config(cisco_config)
 
-    # Meraki Network ID and Device Serial Number
-    serial = "Q5TD-2CTZ-PNSF"  # Replace with your actual switch serial number
+    # Read Meraki serial number from file
+    serial_file_path = '/root/.meraki_mig/serial.txt'  # Replace with your serial file path
+    serial = read_serial(serial_file_path)
 
     # Port IDs of the 3850-2X40 ports to update (assuming ports 1 to 2)
     uplink_ports = [
