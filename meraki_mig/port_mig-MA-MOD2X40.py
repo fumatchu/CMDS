@@ -9,6 +9,10 @@ BASE_URL = "https://api.meraki.com/api/v1"
 # Headers for the API requests
 HEADERS = {"Content-Type": "application/json", "X-Cisco-Meraki-API-Key": API_KEY}
 
+def read_serial(file_path):
+    with open(file_path, 'r') as file:
+        serial = file.read().strip()
+    return serial
 
 def parse_cisco_config(config_data):
     interfaces = {}
