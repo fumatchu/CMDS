@@ -77,7 +77,7 @@ def main():
     serial = read_serial(serial_file_path)
 
 
-    # Port IDs of the 1_C9300-NM-4M ports to update (assuming ports 1 to 4)
+    # Port IDs of the C9300-NM-4M ports to update (assuming ports 1 to 4)
     uplink_ports = [
         "1_C9300-NM-4M_1",
         "1_C9300-NM-4M_2",
