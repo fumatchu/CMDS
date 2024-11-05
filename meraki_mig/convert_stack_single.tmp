@@ -5,7 +5,7 @@ YELLOW=$(tput setaf 3)
 GREEN=$(tput setaf 2)
 #This File is used to parse a stack switch and break it into a single switch config
 
-IP=192.168.210.153
+IP=
 
 #Get Serials for stack
 cat /var/lib/tftpboot/mig_switch/${IP}-shmr | grep C9300 |grep -E -o "Q.{0,13}" >> /root/.meraki_mig/serial.txt
