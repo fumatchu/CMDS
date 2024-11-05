@@ -387,6 +387,7 @@ mv /root/Python-3.10.5/ /opt/
 rm -f /root/Python*
 alias python3=/opt/Python-3.10.5/python
 clear
+/usr/local/bin/python3.10 -m pip install --upgrade pip
 pip3.10 install meraki
 pip3.10 install requests
 pip3.10 install --upgrade autopep8
@@ -451,10 +452,6 @@ mv /root/.meraki_mig/meraki_migration /usr/sbin/
 mv /root/MIGInstaller/.servman /root
 chmod 700 -R /root/.servman
 
-# Mr. M
-chmod 700 /root/.meraki_mig/.logo
-chmod 700 /root/.meraki_mon_wlc/.logo
-chmod 700 /root/.meraki_mon_switch/.logo
 
 #Create Directory for Active Templates
 mkdir /root/.meraki_mig/templates/active
