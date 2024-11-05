@@ -386,6 +386,20 @@ if [ "$C9300_NM_2Y" = "C9300-NM-2Y-Compatible" ]; then
     echo " "
 fi
 
+if [ "$MA_MOD_2X40G" = "MA_MOD_2X40G-Compatible" ]; then
+    echo "${GREEN}${IP}-Found Network Module MA_MOD_2X40G${TEXTRESET}"
+    echo "${GREEN}Migrating Gigabit/TenGigabit Information to Uplink${TEXTRESET}"
+    #Remove unneeded interfaces
+    sed -i '/^interface Ten\|^interface Gigabit\|^interface TwentyFive/d' /root/.meraki_mig/cisco_config_up1.tmp
+    mv /root/.meraki_mig/cisco_config_up1.tmp /root/.meraki_mig/cisco_config_up.tmp
+    python3.10 /root/.meraki_mig/port_mig-port_mig-MA-MOD2x40.py
+    rm -f /root/.meraki_mig/cisco_config_up.tmp
+    rm -f /root/.meraki_mig/cisco_config_up1.tmp
+    echo "${GREEN}Uplink conversion for Switch 1 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
+    else
+    echo " "
+fi
+
 if [ "$MA_MOD_4X10G" = "MA-MOD-4X10G-Compatible" ]; then
     echo "${GREEN}${IP}-Found Network Module MA-MOD-4X10G${TEXTRESET}"
     echo "${GREEN}Migrating Gigabit/TenGigabit Information to Uplink${TEXTRESET}"
@@ -416,6 +430,19 @@ if [ "$C9300_NM_8X" = "C9300-NM-8X-Compatible" ]; then
     echo " "
 fi
 
+if [ "$MA_MOD_4X10G" = "MA_MOD_4X10G-Compatible" ]; then
+    echo "${GREEN}${IP}-Found Network Module MA_MOD_4X10G${TEXTRESET}"
+    echo "${GREEN}Migrating Gigabit/TenGigabit Information to Uplink${TEXTRESET}"
+    #Remove unneeded interfaces
+    sed -i '/interface FortyGigabitEthernet1\/1\/1/,$d' /root/.meraki_mig/cisco_config_up1.tmp
+    mv /root/.meraki_mig/cisco_config_up1.tmp /root/.meraki_mig/cisco_config_up.tmp
+    python3.10 /root/.meraki_mig/port_mig-port_mig-MA-MOD4x10.py
+    rm -f /root/.meraki_mig/cisco_config_up.tmp
+    rm -f /root/.meraki_mig/cisco_config_up1.tmp
+    echo "${GREEN}Uplink conversion for Switch 1 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
+    else
+    echo " "
+fi
 if [ "$MA_MOD_8X10G" = "MA_MOD_8X10G-Compatible" ]; then
     echo "${GREEN}${IP}-Found Network Module MA_MOD_8X10G${TEXTRESET}"
     echo "${GREEN}Migrating Gigabit/TenGigabit Information to Uplink${TEXTRESET}"
