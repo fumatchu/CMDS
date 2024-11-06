@@ -26,7 +26,7 @@ cat <<EOF
 ${GREEN}Updating the Switch(es) Physical address with: ${ADDR} ${TEXTRESET}
 
 EOF
-sleep 1
+sleep 2
 
 sed -i '0,/new_address = /{/new_address = /d;}' /root/.meraki_mig/update_physical_address_switch.py
 echo new_address = "\"${ADDR}\"" >/root/.meraki_mig/address.txt
@@ -35,7 +35,6 @@ sed -i '32 r /root/.meraki_mig/address.txt' /root/.meraki_mig/update_physical_ad
 
 clear
 echo "${GREEN}Deploying Script${TEXTRESET}"
-sleep 1
 
 python3.10 /root/.meraki_mig/update_physical_address_switch.py
 
