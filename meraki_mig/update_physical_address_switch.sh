@@ -23,7 +23,7 @@ done
 clear
 sleep 1
 cat <<EOF
-${GREEN}Updating the Switch(es) Physical address with: ${ADDR} ${TEXTRESET}
+${GREEN}Updating the Switch(es) Physical address with:${TEXTRESET} ${ADDR} 
 
 EOF
 sleep 2
