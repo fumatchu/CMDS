@@ -116,4 +116,4 @@ fi
 
 done <"$INPUT"
 echo "Migration Script Complete"
-read -p "Press Enter"
+sleep 2
