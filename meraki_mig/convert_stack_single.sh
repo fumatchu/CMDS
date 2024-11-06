@@ -117,7 +117,7 @@ done < "$input_file"
 CONFIG1=$(ls /root/.meraki_mig/tmp/switch1.txt 2>/dev/null)
 SERIAL1=$(ls /root/.meraki_mig/tmp/serial1.txt 2>/dev/null)
 if [[ "$CONFIG1" == "/root/.meraki_mig/tmp/switch1.txt" && "$SERIAL1" == "/root/.meraki_mig/tmp/serial1.txt" ]]; then
-    echo "${GREEN}${IP}-Found switch 1 in stack${TEXTRESET}"
+    echo "${GREEN}${IP}-Found switch 1${TEXTRESET}"
     \cp -f /root/.meraki_mig/tmp/switch1.txt /root/.meraki_mig/cisco_config.tmp
     \cp -f /root/.meraki_mig/tmp/serial1.txt /root/.meraki_mig/serial.txt
     #Move the Uplink ports to a separate file
@@ -134,7 +134,7 @@ fi
 CONFIG2=$(ls /root/.meraki_mig/tmp/switch2.txt 2>/dev/null)
 SERIAL2=$(ls /root/.meraki_mig/tmp/serial2.txt 2>/dev/null)
 if [[ "$CONFIG2" == "/root/.meraki_mig/tmp/switch2.txt" && "$SERIAL2" == "/root/.meraki_mig/tmp/serial2.txt" ]]; then
-    echo "${GREEN}${IP}-Found switch 2 in stack${TEXTRESET}"
+    echo "${GREEN}${IP}-Found switch 2${TEXTRESET}"
     \cp -f /root/.meraki_mig/tmp/switch2.txt /root/.meraki_mig/cisco_config.tmp
     \cp -f /root/.meraki_mig/tmp/serial2.txt /root/.meraki_mig/serial.txt
     #Move the Uplink ports to a separate file
@@ -151,7 +151,7 @@ fi
 CONFIG3=$(ls /root/.meraki_mig/tmp/switch3.txt 2>/dev/null)
 SERIAL3=$(ls /root/.meraki_mig/tmp/serial3.txt 2>/dev/null)
 if [[ "$CONFIG3" == "/root/.meraki_mig/tmp/switch3.txt" && "$SERIAL3" == "/root/.meraki_mig/tmp/serial3.txt" ]]; then
-    echo "${GREEN}${IP}-Found switch 3 in stack${TEXTRESET}"
+    echo "${GREEN}${IP}-Found switch 3${TEXTRESET}"
     \cp -f /root/.meraki_mig/tmp/switch3.txt /root/.meraki_mig/cisco_config.tmp
     \cp -f /root/.meraki_mig/tmp/serial3.txt /root/.meraki_mig/serial.txt
     #Move the Uplink ports to a separate file
@@ -168,7 +168,7 @@ fi
 CONFIG4=$(ls /root/.meraki_mig/tmp/switch4.txt 2>/dev/null)
 SERIAL4=$(ls /root/.meraki_mig/tmp/serial4.txt 2>/dev/null)
 if [[ "$CONFIG4" == "/root/.meraki_mig/tmp/switch4.txt" && "$SERIAL4" == "/root/.meraki_mig/tmp/serial4.txt" ]]; then
-    echo "${GREEN}${IP}-Found switch 4 in stack${TEXTRESET}"
+    echo "${GREEN}${IP}-Found switch 4${TEXTRESET}"
     \cp -f /root/.meraki_mig/tmp/switch4.txt /root/.meraki_mig/cisco_config.tmp
     \cp -f /root/.meraki_mig/tmp/serial4.txt /root/.meraki_mig/serial.txt
     #Move the Uplink ports to a separate file
@@ -185,7 +185,7 @@ fi
 CONFIG5=$(ls /root/.meraki_mig/tmp/switch5.txt 2>/dev/null)
 SERIAL5=$(ls /root/.meraki_mig/tmp/serial5.txt 2>/dev/null)
 if [[ "$CONFIG5" == "/root/.meraki_mig/tmp/switch5.txt" && "$SERIAL5" == "/root/.meraki_mig/tmp/serial5.txt" ]]; then
-    echo "${GREEN}${IP}-Found switch 5 in stack${TEXTRESET}"
+    echo "${GREEN}${IP}-Found switch 5${TEXTRESET}"
     \cp -f /root/.meraki_mig/tmp/switch5.txt /root/.meraki_mig/cisco_config.tmp
     \cp -f /root/.meraki_mig/tmp/serial5.txt /root/.meraki_mig/serial.txt
     #Move the Uplink ports to a separate file
@@ -202,7 +202,7 @@ fi
 CONFIG6=$(ls /root/.meraki_mig/tmp/switch6.txt 2>/dev/null)
 SERIAL6=$(ls /root/.meraki_mig/tmp/serial6.txt 2>/dev/null)
 if [[ "$CONFIG6" == "/root/.meraki_mig/tmp/switch6.txt" && "$SERIAL6" == "/root/.meraki_mig/tmp/serial6.txt" ]]; then
-    echo "${GREEN}${IP}-Found switch 6 in stack${TEXTRESET}"
+    echo "${GREEN}${IP}-Found switch 6${TEXTRESET}"
     \cp -f /root/.meraki_mig/tmp/switch6.txt /root/.meraki_mig/cisco_config.tmp
     \cp -f /root/.meraki_mig/tmp/serial6.txt /root/.meraki_mig/serial.txt
     #Move the Uplink ports to a separate file
@@ -219,7 +219,7 @@ fi
 CONFIG7=$(ls /root/.meraki_mig/tmp/switch7.txt 2>/dev/null)
 SERIAL7=$(ls /root/.meraki_mig/tmp/serial7.txt 2>/dev/null)
 if [[ "$CONFIG7" == "/root/.meraki_mig/tmp/switch7.txt" && "$SERIAL7" == "/root/.meraki_mig/tmp/serial7.txt" ]]; then
-    echo "${GREEN}${IP}-Found switch 7 in stack${TEXTRESET}"
+    echo "${GREEN}${IP}-Found switch 7${TEXTRESET}"
     \cp -f /root/.meraki_mig/tmp/switch7.txt /root/.meraki_mig/cisco_config.tmp
     \cp -f /root/.meraki_mig/tmp/serial7.txt /root/.meraki_mig/serial.txt
     #Move the Uplink ports to a separate file
@@ -236,7 +236,7 @@ fi
 CONFIG8=$(ls /root/.meraki_mig/tmp/switch8.txt 2>/dev/null)
 SERIAL8=$(ls /root/.meraki_mig/tmp/serial8.txt 2>/dev/null)
 if [[ "$CONFIG8" == "/root/.meraki_mig/tmp/switch8.txt" && "$SERIAL8" == "/root/.meraki_mig/tmp/serial8.txt" ]]; then
-    echo "${GREEN}${IP}-Found switch 8 in stack${TEXTRESET}"
+    echo "${GREEN}${IP}-Found switch 8${TEXTRESET}"
     \cp -f /root/.meraki_mig/tmp/switch8.txt /root/.meraki_mig/cisco_config.tmp
     \cp -f /root/.meraki_mig/tmp/serial8.txt /root/.meraki_mig/serial.txt
     #Move the Uplink ports to a separate file
@@ -253,7 +253,7 @@ fi
 CONFIG9=$(ls /root/.meraki_mig/tmp/switch9.txt 2>/dev/null)
 SERIAL9=$(ls /root/.meraki_mig/tmp/serial9.txt 2>/dev/null)
 if [[ "$CONFIG9" == "/root/.meraki_mig/tmp/switch9.txt" && "$SERIAL9" == "/root/.meraki_mig/tmp/serial9.txt" ]]; then
-    echo "${GREEN}${IP}-Found switch 9 in stack${TEXTRESET}"
+    echo "${GREEN}${IP}-Found switch 9${TEXTRESET}"
     \cp -f /root/.meraki_mig/tmp/switch9.txt /root/.meraki_mig/cisco_config.tmp
     \cp -f /root/.meraki_mig/tmp/serial9.txt /root/.meraki_mig/serial.txt
     #Move the Uplink ports to a separate file
@@ -287,34 +287,24 @@ fi
 #SWITCH1
 #C3850-NM-2-40G 2 x 40
 C3850_NM_2_40G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^1.*C3850-NM-2-40G    - Compatible/s/^1.*\(C3850-NM-2-40G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C3850-NM-4-10G 4X10
 C3850_NM_4_10G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^1.*C3850-NM-4-10G    - Compatible/s/^1.*\(C3850-NM-4-10G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C3850-NM-8-10G 8X10
 C3850_NM_8_10G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^1.*C3850-NM-8-10G    - Compatible/s/^1.*\(C3850-NM-8-10G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300-NM-2Q Catalyst 9300 Series 2x 40G Network Module
 C9300_NM_2Q=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^1.*C9300-NM-2Q    - Compatible/s/^1.*\(C9300-NM-2Q    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300-NM-8X Catalyst 9300 Series 8x 10G/1G Network Module
 C9300_NM_8X=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^1.*C9300-NM-8X    - Compatible/s/^1.*\(C9300-NM-8X    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #MA-MOD-2X40G 2X40
 MA_MOD_2X40G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^1.*MA-MOD-2X40G    - Compatible/s/^1.*\(MA-MOD-2X40G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #MA-MOD-4X10G 4X10
 MA_MOD_4X10G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^1.*MA-MOD-4X10G    - Compatible/s/^1.*\(MA-MOD-4X10G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #MA-MOD-8X10G
 MA_MOD_8X10G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^1.*MA-MOD-8X10G    - Compatible/s/^1.*\(MA-MOD-8X10G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300X-NM-8Y Catalyst 9300X 8x 25G/10G/1G Network Module
 C9300X_NM_8Y=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^1.*C9300X-NM-8Y    - Compatible/s/^1.*\(C9300X-NM-8Y    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300X-NM-2C Catalyst 9300X 2x 100G/40G Network Module
 C9300X_NM_2C=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^1.*C9300X-NM-2C    - Compatible/s/^1.*\(C9300X-NM-2C    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300-NM-2Y Catalyst 9300 Series 2x 25G/10G/1G Network Module
 C9300_NM_2Y=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^1.*C9300X-NM-2Y    - Compatible/s/^1.*\(C9300X-NM-2Y    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
 
@@ -507,34 +497,24 @@ fi
 
 #C3850-NM-2-40G 2 x 40
 C3850_NM_2_40G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^2.*C3850-NM-2-40G    - Compatible/s/^2.*\(C3850-NM-2-40G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C3850-NM-4-10G 4X10
 C3850_NM_4_10G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^2.*C3850-NM-4-10G    - Compatible/s/^2.*\(C3850-NM-4-10G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C3850-NM-8-10G 8X10
 C3850_NM_8_10G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^2.*C3850-NM-8-10G    - Compatible/s/^2.*\(C3850-NM-8-10G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300-NM-2Q Catalyst 9300 Series 2x 40G Network Module
 C9300_NM_2Q=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^2.*C9300-NM-2Q    - Compatible/s/^2.*\(C9300-NM-2Q    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300-NM-8X Catalyst 9300 Series 8x 10G/1G Network Module
 C9300_NM_8X=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^2.*C9300-NM-8X    - Compatible/s/^2.*\(C9300-NM-8X    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #MA-MOD-2X40G 2X40
 MA_MOD_2X40G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^2.*MA-MOD-2X40G    - Compatible/s/^2.*\(MA-MOD-2X40G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #MA-MOD-4X10G 4X10
 MA_MOD_4X10G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^2.*MA-MOD-4X10G    - Compatible/s/^2.*\(MA-MOD-4X10G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #MA-MOD-8X10G
 MA_MOD_8X10G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^2.*MA-MOD-8X10G    - Compatible/s/^2.*\(MA-MOD-8X10G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300X-NM-8Y Catalyst 9300X 8x 25G/10G/1G Network Module
 C9300X_NM_8Y=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^2.*C9300X-NM-8Y    - Compatible/s/^2.*\(C9300X-NM-8Y    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300X-NM-2C Catalyst 9300X 2x 100G/40G Network Module
 C9300X_NM_2C=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^2.*C9300X-NM-2C    - Compatible/s/^2.*\(C9300X-NM-2C    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300-NM-2Y Catalyst 9300 Series 2x 25G/10G/1G Network Module
 C9300_NM_2Y=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^2.*C9300X-NM-2Y    - Compatible/s/^2.*\(C9300X-NM-2Y    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
 
@@ -727,34 +707,24 @@ fi
 
 #C3850-NM-2-40G 2 x 40
 C3850_NM_2_40G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^3.*C3850-NM-2-40G    - Compatible/s/^3.*\(C3850-NM-2-40G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C3850-NM-4-10G 4X10
 C3850_NM_4_10G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^3.*C3850-NM-4-10G    - Compatible/s/^3.*\(C3850-NM-4-10G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C3850-NM-8-10G 8X10
 C3850_NM_8_10G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^3.*C3850-NM-8-10G    - Compatible/s/^3.*\(C3850-NM-8-10G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300-NM-2Q Catalyst 9300 Series 2x 40G Network Module
 C9300_NM_2Q=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^3.*C9300-NM-2Q    - Compatible/s/^3.*\(C9300-NM-2Q    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300-NM-8X Catalyst 9300 Series 8x 10G/1G Network Module
 C9300_NM_8X=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^3.*C9300-NM-8X    - Compatible/s/^3.*\(C9300-NM-8X    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #MA-MOD-2X40G 2X40
 MA_MOD_2X40G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^3.*MA-MOD-2X40G    - Compatible/s/^3.*\(MA-MOD-2X40G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #MA-MOD-4X10G 4X10
 MA_MOD_4X10G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^3.*MA-MOD-4X10G    - Compatible/s/^3.*\(MA-MOD-4X10G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #MA-MOD-8X10G
 MA_MOD_8X10G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^3.*MA-MOD-8X10G    - Compatible/s/^3.*\(MA-MOD-8X10G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300X-NM-8Y Catalyst 9300X 8x 25G/10G/1G Network Module
 C9300X_NM_8Y=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^3.*C9300X-NM-8Y    - Compatible/s/^3.*\(C9300X-NM-8Y    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300X-NM-2C Catalyst 9300X 2x 100G/40G Network Module
 C9300X_NM_2C=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^3.*C9300X-NM-2C    - Compatible/s/^3.*\(C9300X-NM-2C    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300-NM-2Y Catalyst 9300 Series 2x 25G/10G/1G Network Module
 C9300_NM_2Y=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^3.*C9300X-NM-2Y    - Compatible/s/^3.*\(C9300X-NM-2Y    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
 
@@ -945,34 +915,24 @@ fi
 
 #C3850-NM-2-40G 2 x 40
 C3850_NM_2_40G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^4.*C3850-NM-2-40G    - Compatible/s/^4.*\(C3850-NM-2-40G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C3850-NM-4-10G 4X10
 C3850_NM_4_10G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^4.*C3850-NM-4-10G    - Compatible/s/^4.*\(C3850-NM-4-10G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C3850-NM-8-10G 8X10
 C3850_NM_8_10G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^4.*C3850-NM-8-10G    - Compatible/s/^4.*\(C3850-NM-8-10G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300-NM-2Q Catalyst 9300 Series 2x 40G Network Module
 C9300_NM_2Q=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^4.*C9300-NM-2Q    - Compatible/s/^4.*\(C9300-NM-2Q    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300-NM-8X Catalyst 9300 Series 8x 10G/1G Network Module
 C9300_NM_8X=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^4.*C9300-NM-8X    - Compatible/s/^4.*\(C9300-NM-8X    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #MA-MOD-2X40G 2X40
 MA_MOD_2X40G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^4.*MA-MOD-2X40G    - Compatible/s/^4.*\(MA-MOD-2X40G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #MA-MOD-4X10G 4X10
 MA_MOD_4X10G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^4.*MA-MOD-4X10G    - Compatible/s/^4.*\(MA-MOD-4X10G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #MA-MOD-8X10G
 MA_MOD_8X10G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^4.*MA-MOD-8X10G    - Compatible/s/^4.*\(MA-MOD-8X10G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300X-NM-8Y Catalyst 9300X 8x 25G/10G/1G Network Module
 C9300X_NM_8Y=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^4.*C9300X-NM-8Y    - Compatible/s/^4.*\(C9300X-NM-8Y    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300X-NM-2C Catalyst 9300X 2x 100G/40G Network Module
 C9300X_NM_2C=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^4.*C9300X-NM-2C    - Compatible/s/^4.*\(C9300X-NM-2C    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300-NM-2Y Catalyst 9300 Series 2x 25G/10G/1G Network Module
 C9300_NM_2Y=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^4.*C9300X-NM-2Y    - Compatible/s/^4.*\(C9300X-NM-2Y    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
 
@@ -1163,34 +1123,24 @@ fi
 
 #C3850-NM-2-40G 2 x 40
 C3850_NM_2_40G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^5.*C3850-NM-2-40G    - Compatible/s/^5.*\(C3850-NM-2-40G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C3850-NM-4-10G 4X10
 C3850_NM_4_10G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^5.*C3850-NM-4-10G    - Compatible/s/^5.*\(C3850-NM-4-10G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C3850-NM-8-10G 8X10
 C3850_NM_8_10G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^5.*C3850-NM-8-10G    - Compatible/s/^5.*\(C3850-NM-8-10G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300-NM-2Q Catalyst 9300 Series 2x 40G Network Module
 C9300_NM_2Q=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^5.*C9300-NM-2Q    - Compatible/s/^5.*\(C9300-NM-2Q    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300-NM-8X Catalyst 9300 Series 8x 10G/1G Network Module
 C9300_NM_8X=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^5.*C9300-NM-8X    - Compatible/s/^5.*\(C9300-NM-8X    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #MA-MOD-2X40G 2X40
 MA_MOD_2X40G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^5.*MA-MOD-2X40G    - Compatible/s/^5.*\(MA-MOD-2X40G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #MA-MOD-4X10G 4X10
 MA_MOD_4X10G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^5.*MA-MOD-4X10G    - Compatible/s/^5.*\(MA-MOD-4X10G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #MA-MOD-8X10G
 MA_MOD_8X10G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^5.*MA-MOD-8X10G    - Compatible/s/^5.*\(MA-MOD-8X10G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300X-NM-8Y Catalyst 9300X 8x 25G/10G/1G Network Module
 C9300X_NM_8Y=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^5.*C9300X-NM-8Y    - Compatible/s/^5.*\(C9300X-NM-8Y    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300X-NM-2C Catalyst 9300X 2x 100G/40G Network Module
 C9300X_NM_2C=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^5.*C9300X-NM-2C    - Compatible/s/^5.*\(C9300X-NM-2C    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300-NM-2Y Catalyst 9300 Series 2x 25G/10G/1G Network Module
 C9300_NM_2Y=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^5.*C9300X-NM-2Y    - Compatible/s/^5.*\(C9300X-NM-2Y    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
 
@@ -1381,34 +1331,24 @@ fi
 
 #C3850-NM-2-40G 2 x 40
 C3850_NM_2_40G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^6.*C3850-NM-2-40G    - Compatible/s/^6.*\(C3850-NM-2-40G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C3850-NM-4-10G 4X10
 C3850_NM_4_10G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^6.*C3850-NM-4-10G    - Compatible/s/^6.*\(C3850-NM-4-10G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C3850-NM-8-10G 8X10
 C3850_NM_8_10G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^6.*C3850-NM-8-10G    - Compatible/s/^6.*\(C3850-NM-8-10G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300-NM-2Q Catalyst 9300 Series 2x 40G Network Module
 C9300_NM_2Q=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^6.*C9300-NM-2Q    - Compatible/s/^6.*\(C9300-NM-2Q    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300-NM-8X Catalyst 9300 Series 8x 10G/1G Network Module
 C9300_NM_8X=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^6.*C9300-NM-8X    - Compatible/s/^6.*\(C9300-NM-8X    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #MA-MOD-2X40G 2X40
 MA_MOD_2X40G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^6.*MA-MOD-2X40G    - Compatible/s/^6.*\(MA-MOD-2X40G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #MA-MOD-4X10G 4X10
 MA_MOD_4X10G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^6.*MA-MOD-4X10G    - Compatible/s/^6.*\(MA-MOD-4X10G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #MA-MOD-8X10G
 MA_MOD_8X10G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^6.*MA-MOD-8X10G    - Compatible/s/^6.*\(MA-MOD-8X10G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300X-NM-8Y Catalyst 9300X 8x 25G/10G/1G Network Module
 C9300X_NM_8Y=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^6.*C9300X-NM-8Y    - Compatible/s/^6.*\(C9300X-NM-8Y    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300X-NM-2C Catalyst 9300X 2x 100G/40G Network Module
 C9300X_NM_2C=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^6.*C9300X-NM-2C    - Compatible/s/^6.*\(C9300X-NM-2C    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300-NM-2Y Catalyst 9300 Series 2x 25G/10G/1G Network Module
 C9300_NM_2Y=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^6.*C9300X-NM-2Y    - Compatible/s/^6.*\(C9300X-NM-2Y    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
 
@@ -1599,34 +1539,24 @@ fi
 
 #C3850-NM-2-40G 2 x 40
 C3850_NM_2_40G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^7.*C3850-NM-2-40G    - Compatible/s/^7.*\(C3850-NM-2-40G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C3850-NM-4-10G 4X10
 C3850_NM_4_10G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^7.*C3850-NM-4-10G    - Compatible/s/^7.*\(C3850-NM-4-10G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C3850-NM-8-10G 8X10
 C3850_NM_8_10G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^7.*C3850-NM-8-10G    - Compatible/s/^7.*\(C3850-NM-8-10G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300-NM-2Q Catalyst 9300 Series 2x 40G Network Module
 C9300_NM_2Q=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^7.*C9300-NM-2Q    - Compatible/s/^7.*\(C9300-NM-2Q    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300-NM-8X Catalyst 9300 Series 8x 10G/1G Network Module
 C9300_NM_8X=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^7.*C9300-NM-8X    - Compatible/s/^7.*\(C9300-NM-8X    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #MA-MOD-2X40G 2X40
 MA_MOD_2X40G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^7.*MA-MOD-2X40G    - Compatible/s/^7.*\(MA-MOD-2X40G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #MA-MOD-4X10G 4X10
 MA_MOD_4X10G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^7.*MA-MOD-4X10G    - Compatible/s/^7.*\(MA-MOD-4X10G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #MA-MOD-8X10G
 MA_MOD_8X10G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^7.*MA-MOD-8X10G    - Compatible/s/^7.*\(MA-MOD-8X10G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300X-NM-8Y Catalyst 9300X 8x 25G/10G/1G Network Module
 C9300X_NM_8Y=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^7.*C9300X-NM-8Y    - Compatible/s/^7.*\(C9300X-NM-8Y    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300X-NM-2C Catalyst 9300X 2x 100G/40G Network Module
 C9300X_NM_2C=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^7.*C9300X-NM-2C    - Compatible/s/^7.*\(C9300X-NM-2C    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300-NM-2Y Catalyst 9300 Series 2x 25G/10G/1G Network Module
 C9300_NM_2Y=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^7.*C9300X-NM-2Y    - Compatible/s/^7.*\(C9300X-NM-2Y    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
 
@@ -1817,34 +1747,24 @@ fi
 
 #C3850-NM-2-40G 2 x 40
 C3850_NM_2_40G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^8.*C3850-NM-2-40G    - Compatible/s/^8.*\(C3850-NM-2-40G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C3850-NM-4-10G 4X10
 C3850_NM_4_10G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^8.*C3850-NM-4-10G    - Compatible/s/^8.*\(C3850-NM-4-10G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C3850-NM-8-10G 8X10
 C3850_NM_8_10G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^8.*C3850-NM-8-10G    - Compatible/s/^8.*\(C3850-NM-8-10G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300-NM-2Q Catalyst 9300 Series 2x 40G Network Module
 C9300_NM_2Q=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^8.*C9300-NM-2Q    - Compatible/s/^8.*\(C9300-NM-2Q    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300-NM-8X Catalyst 9300 Series 8x 10G/1G Network Module
 C9300_NM_8X=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^8.*C9300-NM-8X    - Compatible/s/^8.*\(C9300-NM-8X    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #MA-MOD-2X40G 2X40
 MA_MOD_2X40G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^8.*MA-MOD-2X40G    - Compatible/s/^8.*\(MA-MOD-2X40G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #MA-MOD-4X10G 4X10
 MA_MOD_4X10G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^8.*MA-MOD-4X10G    - Compatible/s/^8.*\(MA-MOD-4X10G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #MA-MOD-8X10G
 MA_MOD_8X10G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^8.*MA-MOD-8X10G    - Compatible/s/^8.*\(MA-MOD-8X10G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300X-NM-8Y Catalyst 9300X 8x 25G/10G/1G Network Module
 C9300X_NM_8Y=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^8.*C9300X-NM-8Y    - Compatible/s/^8.*\(C9300X-NM-8Y    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300X-NM-2C Catalyst 9300X 2x 100G/40G Network Module
 C9300X_NM_2C=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^8.*C9300X-NM-2C    - Compatible/s/^8.*\(C9300X-NM-2C    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
-
 #C9300-NM-2Y Catalyst 9300 Series 2x 25G/10G/1G Network Module
 C9300_NM_2Y=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^8.*C9300X-NM-2Y    - Compatible/s/^8.*\(C9300X-NM-2Y    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
 
