@@ -716,7 +716,7 @@ fi
 #Stacked Switch Config 3
 CONFIG3=$(ls /root/.meraki_mig/tmp/switch3.txt 2>/dev/null)
 SERIAL3=$(ls /root/.meraki_mig/tmp/serial3.txt 2>/dev/null)
-CATSERIAL=$(cat /root/.meraki_mig/tmp/serial3.txt)
+CATSERIAL=$(cat /root/.meraki_mig/tmp/serial3.txt 2>/dev/null)
 if [[ "$CONFIG3" == "/root/.meraki_mig/tmp/switch3.txt" && "$SERIAL3" == "/root/.meraki_mig/tmp/serial3.txt" ]]; then
     \cp -f /root/.meraki_mig/tmp/switch3.txt /root/.meraki_mig/cisco_config.tmp
     \cp -f /root/.meraki_mig/tmp/serial3.txt /root/.meraki_mig/serial.txt
@@ -934,7 +934,7 @@ fi
 #Stacked Switch Config 4
 CONFIG4=$(ls /root/.meraki_mig/tmp/switch4.txt 2>/dev/null)
 SERIAL4=$(ls /root/.meraki_mig/tmp/serial4.txt 2>/dev/null)
-CATSERIAL=$(cat /root/.meraki_mig/tmp/serial4.txt)
+CATSERIAL=$(cat /root/.meraki_mig/tmp/serial4.txt 2>/dev/null)
 if [[ "$CONFIG4" == "/root/.meraki_mig/tmp/switch4.txt" && "$SERIAL4" == "/root/.meraki_mig/tmp/serial4.txt" ]]; then
     \cp -f /root/.meraki_mig/tmp/switch4.txt /root/.meraki_mig/cisco_config.tmp
     \cp -f /root/.meraki_mig/tmp/serial4.txt /root/.meraki_mig/serial.txt
@@ -1152,7 +1152,7 @@ fi
 #Stacked Switch Config 5
 CONFIG5=$(ls /root/.meraki_mig/tmp/switch5.txt 2>/dev/null)
 SERIAL5=$(ls /root/.meraki_mig/tmp/serial5.txt 2>/dev/null)
-CATSERIAL=$(cat /root/.meraki_mig/tmp/serial5.txt)
+CATSERIAL=$(cat /root/.meraki_mig/tmp/serial5.txt 2>/dev/null)
 if [[ "$CONFIG5" == "/root/.meraki_mig/tmp/switch5.txt" && "$SERIAL5" == "/root/.meraki_mig/tmp/serial5.txt" ]]; then
     \cp -f /root/.meraki_mig/tmp/switch5.txt /root/.meraki_mig/cisco_config.tmp
     \cp -f /root/.meraki_mig/tmp/serial5.txt /root/.meraki_mig/serial.txt
@@ -1370,7 +1370,7 @@ fi
 #Stacked Switch Config 6
 CONFIG6=$(ls /root/.meraki_mig/tmp/switch6.txt 2>/dev/null)
 SERIAL6=$(ls /root/.meraki_mig/tmp/serial6.txt 2>/dev/null)
-CATSERIAL=$(cat /root/.meraki_mig/tmp/serial6.txt)
+CATSERIAL=$(cat /root/.meraki_mig/tmp/serial6.txt 2>/dev/null)
 if [[ "$CONFIG6" == "/root/.meraki_mig/tmp/switch6.txt" && "$SERIAL6" == "/root/.meraki_mig/tmp/serial6.txt" ]]; then
     \cp -f /root/.meraki_mig/tmp/switch6.txt /root/.meraki_mig/cisco_config.tmp
     \cp -f /root/.meraki_mig/tmp/serial6.txt /root/.meraki_mig/serial.txt
@@ -1588,7 +1588,7 @@ fi
 #Stacked Switch Config 7
 CONFIG7=$(ls /root/.meraki_mig/tmp/switch7.txt 2>/dev/null)
 SERIAL7=$(ls /root/.meraki_mig/tmp/serial7.txt 2>/dev/null)
-CATSERIAL=$(cat /root/.meraki_mig/tmp/serial7.txt)
+CATSERIAL=$(cat /root/.meraki_mig/tmp/serial7.txt 2>/dev/null)
 if [[ "$CONFIG7" == "/root/.meraki_mig/tmp/switch7.txt" && "$SERIAL7" == "/root/.meraki_mig/tmp/serial7.txt" ]]; then
     \cp -f /root/.meraki_mig/tmp/switch7.txt /root/.meraki_mig/cisco_config.tmp
     \cp -f /root/.meraki_mig/tmp/serial7.txt /root/.meraki_mig/serial.txt
@@ -1806,7 +1806,7 @@ fi
 #Stacked Switch Config 8
 CONFIG8=$(ls /root/.meraki_mig/tmp/switch8.txt 2>/dev/null)
 SERIAL8=$(ls /root/.meraki_mig/tmp/serial8.txt 2>/dev/null)
-CATSERIAL=$(cat /root/.meraki_mig/tmp/serial8.txt)
+CATSERIAL=$(cat /root/.meraki_mig/tmp/serial8.txt 2>/dev/null)
 if [[ "$CONFIG8" == "/root/.meraki_mig/tmp/switch8.txt" && "$SERIAL8" == "/root/.meraki_mig/tmp/serial8.txt" ]]; then
     \cp -f /root/.meraki_mig/tmp/switch8.txt /root/.meraki_mig/cisco_config.tmp
     \cp -f /root/.meraki_mig/tmp/serial8.txt /root/.meraki_mig/serial.txt
