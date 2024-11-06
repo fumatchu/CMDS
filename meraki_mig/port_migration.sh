@@ -45,7 +45,7 @@ fi
 if [[ "$CONFIGSTACK" == "2/0/1" && "$INTTEN" == "interface TenGigabitEthernet1/0/1" ]]; then
     echo "${GREEN}This looks to be a stack of switches with MultiGigabit Interfaces${TEXTRESET}"
     sleep 2
-    sed -i '/^IP=/c\IP=' /root/.meraki_mig/convert_stack_single.tmp
+    sed -i '/^IP=/c\IP=' /root/.meraki_mig/convert_stack_single.sh
     sed -i "s/IP=/IP=${IP}/g" /root/.meraki_mig/convert_stack_single.sh
     /root/.meraki_mig/convert_stack_single.sh
     rm -r -f /root/.meraki_mig/serial.txt
