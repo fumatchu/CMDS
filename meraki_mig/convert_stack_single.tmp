@@ -5,7 +5,7 @@ YELLOW=$(tput setaf 3)
 GREEN=$(tput setaf 2)
 #This File is used to parse a stack switch and break it into a single switch config
 
-IP=
+IP=192.168.210.153
 
 #Get Serials for stack
 cat /var/lib/tftpboot/mig_switch/${IP}-shmr | grep C9300 |grep -E -o "Q.{0,13}" >> /root/.meraki_mig/serial.txt
@@ -501,7 +501,7 @@ CATSERIAL=$(cat /root/.meraki_mig/tmp/serial2.txt)
 if [[ "$CONFIG2" == "/root/.meraki_mig/tmp/switch2.txt" && "$SERIAL2" == "/root/.meraki_mig/tmp/serial2.txt" ]]; then
     echo "${GREEN}${IP}-Found switch 2 in stack${TEXTRESET}"
     \cp -f /root/.meraki_mig/tmp/switch2.txt /root/.meraki_mig/cisco_config.tmp
-    \cp -f /root/.meraki_mig/tmp/serial2.txt /root/.meraki_mig/seria2.txt
+    \cp -f /root/.meraki_mig/tmp/serial2.txt /root/.meraki_mig/serial.txt
      else
     echo " "
 fi
@@ -719,7 +719,8 @@ fi
 
 
 rm -f /root/.meraki_mig/serial.txt
-
+rm -f /root/.meraki_mig/cisco_config.tmp
+rm -f /root/.meraki_mig/tmp/*
 echo "Conversion Script Complete"
 
 
