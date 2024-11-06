@@ -1802,6 +1802,224 @@ if [ "$MA_MOD_8X10G" = "MA_MOD_8X10G-Compatible" ]; then
     echo " "
 fi
 
+#SWITCH8
+#Stacked Switch Config 8
+CONFIG8=$(ls /root/.meraki_mig/tmp/switch8.txt 2>/dev/null)
+SERIAL8=$(ls /root/.meraki_mig/tmp/serial8.txt 2>/dev/null)
+CATSERIAL=$(cat /root/.meraki_mig/tmp/serial8.txt)
+if [[ "$CONFIG8" == "/root/.meraki_mig/tmp/switch8.txt" && "$SERIAL8" == "/root/.meraki_mig/tmp/serial8.txt" ]]; then
+    \cp -f /root/.meraki_mig/tmp/switch8.txt /root/.meraki_mig/cisco_config.tmp
+    \cp -f /root/.meraki_mig/tmp/serial8.txt /root/.meraki_mig/serial.txt
+     else
+    echo " "
+fi
+
+
+#C3850-NM-2-40G 2 x 40
+C3850_NM_2_40G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^8.*C3850-NM-2-40G    - Compatible/s/^8.*\(C3850-NM-2-40G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
+
+#C3850-NM-4-10G 4X10
+C3850_NM_4_10G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^8.*C3850-NM-4-10G    - Compatible/s/^8.*\(C3850-NM-4-10G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
+
+#C3850-NM-8-10G 8X10
+C3850_NM_8_10G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^8.*C3850-NM-8-10G    - Compatible/s/^8.*\(C3850-NM-8-10G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
+
+#C9300-NM-2Q Catalyst 9300 Series 2x 40G Network Module
+C9300_NM_2Q=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^8.*C9300-NM-2Q    - Compatible/s/^8.*\(C9300-NM-2Q    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
+
+#C9300-NM-8X Catalyst 9300 Series 8x 10G/1G Network Module
+C9300_NM_8X=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^8.*C9300-NM-8X    - Compatible/s/^8.*\(C9300-NM-8X    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
+
+#MA-MOD-2X40G 2X40
+MA_MOD_2X40G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^8.*MA-MOD-2X40G    - Compatible/s/^8.*\(MA-MOD-2X40G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
+
+#MA-MOD-4X10G 4X10
+MA_MOD_4X10G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^8.*MA-MOD-4X10G    - Compatible/s/^8.*\(MA-MOD-4X10G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
+
+#MA-MOD-8X10G
+MA_MOD_8X10G=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^8.*MA-MOD-8X10G    - Compatible/s/^8.*\(MA-MOD-8X10G    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
+
+#C9300X-NM-8Y Catalyst 9300X 8x 25G/10G/1G Network Module
+C9300X_NM_8Y=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^8.*C9300X-NM-8Y    - Compatible/s/^8.*\(C9300X-NM-8Y    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
+
+#C9300X-NM-2C Catalyst 9300X 2x 100G/40G Network Module
+C9300X_NM_2C=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^8.*C9300X-NM-2C    - Compatible/s/^8.*\(C9300X-NM-2C    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
+
+#C9300-NM-2Y Catalyst 9300 Series 2x 25G/10G/1G Network Module
+C9300_NM_2Y=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | sed -n '/^8.*C9300X-NM-2Y    - Compatible/s/^8.*\(C9300X-NM-2Y    - Compatible\).*$/\1/p' | tr -d ' ' 2>/dev/null)
+
+
+
+
+if [ "$C3850_NM_2_40G" = "C3850-NM-2-40G-Compatible" ]; then
+    echo "${GREEN}${IP}-Found Network Module C3850-NM-2-40G${TEXTRESET}"
+    echo "${GREEN}Migrating FortyGigabit Information to Uplink${TEXTRESET}"
+    #Remove unneeded interfaces
+    sed -i '/^interface Ten\|^interface Gigabit\|^interface TwentyFive/d' /root/.meraki_mig/cisco_config_up8.tmp
+    mv /root/.meraki_mig/cisco_config_up8.tmp /root/.meraki_mig/cisco_config_up.tmp
+    python3.10 /root/.meraki_mig/port_mig-3850-NM2X40.py
+    rm -f /root/.meraki_mig/cisco_config_up.tmp
+    rm -f /root/.meraki_mig/cisco_config_up8.tmp
+    echo "${GREEN}Uplink conversion for Switch 8 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
+    else
+    echo " "
+fi
+
+if [ "$C3850_NM_4_10G" = "C3850-NM-4-10G-Compatible" ]; then
+    echo "${GREEN}${IP}-Found Network Module C3850-NM-4-10G${TEXTRESET}"
+    echo "${GREEN}Migrating Gigabit/TenGigabit Information to Uplink${TEXTRESET}"
+    #Remove unneeded interfaces
+    sed -i '/interface FortyGigabitEthernet1\/1\/1/,$d' /root/.meraki_mig/cisco_config_up8.tmp
+    mv /root/.meraki_mig/cisco_config_up8.tmp /root/.meraki_mig/cisco_config_up.tmp
+    python3.10 /root/.meraki_mig/port_mig-3850-NM4X10.py
+    rm -f /root/.meraki_mig/cisco_config_up.tmp
+    rm -f /root/.meraki_mig/cisco_config_up8.tmp
+    echo "${GREEN}Uplink conversion for Switch 8 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
+    else
+    echo " "
+fi
+
+if [ "$C3850_NM_8_10G" = "C3850-NM-8-10G-Compatible" ]; then
+    echo "${GREEN}${IP}-Found Network Module C3850-NM-8-10G${TEXTRESET}"
+    echo "${GREEN}Migrating Gigabit/TenGigabit Information to Uplink${TEXTRESET}"
+    #Remove unneeded interfaces
+    sed -i '/interface FortyGigabitEthernet1\/1\/1/,$d' /root/.meraki_mig/cisco_config_up8.tmp
+    mv /root/.meraki_mig/cisco_config_up8.tmp /root/.meraki_mig/cisco_config_up.tmp
+    python3.10 /root/.meraki_mig/port_mig-3850-NM8X10.py
+    rm -f /root/.meraki_mig/cisco_config_up.tmp
+    rm -f /root/.meraki_mig/cisco_config_up8.tmp
+    echo "${GREEN}Uplink conversion for Switch 8 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
+    else
+    echo " "
+fi
+
+if [ "$C9300_NM_2Q" = "C9300-NM-2Q-Compatible" ]; then
+    echo "${GREEN}${IP}-Found Network Module C9300-NM-2Q${TEXTRESET}"
+    echo "${GREEN}Migrating FortyGigabit Information to Uplink${TEXTRESET}"
+    #Remove unneeded interfaces
+    sed -i '/^interface Ten\|^interface Gigabit\|^interface TwentyFive/d' /root/.meraki_mig/cisco_config_up8.tmp
+    mv /root/.meraki_mig/cisco_config_up8.tmp /root/.meraki_mig/cisco_config_up.tmp
+    python3.10 /root/.meraki_mig/port_mig-C9300-NM-2Q.py
+    rm -f /root/.meraki_mig/cisco_config_up.tmp
+    rm -f /root/.meraki_mig/cisco_config_up8.tmp
+    echo "${GREEN}Uplink conversion for Switch 8 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
+    else
+    echo " "
+fi
+
+if [ "$C9300_NM_2Y" = "C9300-NM-2Y-Compatible" ]; then
+    echo "${GREEN}${IP}-Found Network Module C9300-NM-2Y${TEXTRESET}"
+    echo "${GREEN}Migrating FortyGigabit Information to Uplink${TEXTRESET}"
+    #Remove unneeded interfaces
+    sed -i '/^interface Ten\|^interface Gigabit\|^interface TwentyFive/d' /root/.meraki_mig/cisco_config_up8.tmp
+    mv /root/.meraki_mig/cisco_config_up8.tmp /root/.meraki_mig/cisco_config_up.tmp
+    python3.10 /root/.meraki_mig/port_mig-C9300-NM-2Y.py
+    rm -f /root/.meraki_mig/cisco_config_up.tmp
+    rm -f /root/.meraki_mig/cisco_config_up8.tmp
+    echo "${GREEN}Uplink conversion for Switch 8 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
+    else
+    echo " "
+fi
+
+if [ "$C9300_NM_2C" = "C9300-NM-2C-Compatible" ]; then
+    echo "${GREEN}${IP}-Found Network Module C9300-NM-2C${TEXTRESET}"
+    echo "${GREEN}Migrating Gigabit/TenGigabit Information to Uplink${TEXTRESET}"
+    #Remove unneeded interfaces
+    sed -i '/^interface Ten\|^interface Gigabit\|^interface TwentyFive/d' /root/.meraki_mig/cisco_config_up8.tmp
+    mv /root/.meraki_mig/cisco_config_up8.tmp /root/.meraki_mig/cisco_config_up.tmp
+    python3.10 /root/.meraki_mig/port_mig-C9300-NM-2C.py
+    rm -f /root/.meraki_mig/cisco_config_up.tmp
+    rm -f /root/.meraki_mig/cisco_config_up8.tmp
+    echo "${GREEN}Uplink conversion for Switch 8 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
+    else
+    echo " "
+fi
+
+if [ "$MA_MOD_2X40G" = "MA_MOD_2X40G-Compatible" ]; then
+    echo "${GREEN}${IP}-Found Network Module MA_MOD_2X40G${TEXTRESET}"
+    echo "${GREEN}Migrating Gigabit/TenGigabit Information to Uplink${TEXTRESET}"
+    #Remove unneeded interfaces
+    sed -i '/^interface Ten\|^interface Gigabit\|^interface TwentyFive/d' /root/.meraki_mig/cisco_config_up8.tmp
+    mv /root/.meraki_mig/cisco_config_up8.tmp /root/.meraki_mig/cisco_config_up.tmp
+    python3.10 /root/.meraki_mig/port_mig-port_mig-MA-MOD2x40.py
+    rm -f /root/.meraki_mig/cisco_config_up.tmp
+    rm -f /root/.meraki_mig/cisco_config_up8.tmp
+    echo "${GREEN}Uplink conversion for Switch 8 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
+    else
+    echo " "
+fi
+
+if [ "$MA_MOD_4X10G" = "MA-MOD-4X10G-Compatible" ]; then
+    echo "${GREEN}${IP}-Found Network Module MA-MOD-4X10G${TEXTRESET}"
+    echo "${GREEN}Migrating Gigabit/TenGigabit Information to Uplink${TEXTRESET}"
+    #Remove unneeded interfaces
+    sed -i '/interface FortyGigabitEthernet1\/1\/1/,$d' /root/.meraki_mig/cisco_config_up8.tmp
+    mv /root/.meraki_mig/cisco_config_up8.tmp /root/.meraki_mig/cisco_config_up.tmp
+    python3.10 /root/.meraki_mig/port_mig-MA-MOD4x10.py
+    rm -f /root/.meraki_mig/cisco_config_up.tmp
+    rm -f /root/.meraki_mig/cisco_config_up8.tmp
+    echo "${GREEN}Uplink conversion for Switch 8 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
+    else
+    echo " "
+fi
+
+
+
+if [ "$C9300_NM_8X" = "C9300-NM-8X-Compatible" ]; then
+    echo "${GREEN}${IP}-Found Network Module C9300-NM-8X${TEXTRESET}"
+    echo "${GREEN}Migrating Gigabit/TenGigabit Information to Uplink${TEXTRESET}"
+    #Remove unneeded interfaces
+    sed -i '/interface FortyGigabitEthernet1\/1\/1/,$d' /root/.meraki_mig/cisco_config_up8.tmp
+    mv /root/.meraki_mig/cisco_config_up8.tmp /root/.meraki_mig/cisco_config_up.tmp
+    python3.10 /root/.meraki_mig/port_mig-C9300-NM-8X.py
+    rm -f /root/.meraki_mig/cisco_config_up.tmp
+    rm -f /root/.meraki_mig/cisco_config_up8.tmp
+    echo "${GREEN}Uplink conversion for Switch 8 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
+    else
+    echo " "
+fi
+
+if [ "$C9300_NM_8Y" = "C9300-NM-8Y-Compatible" ]; then
+    echo "${GREEN}${IP}-Found Network Module C9300-NM-8Y${TEXTRESET}"
+    echo "${GREEN}Migrating Gigabit/TenGigabit Information to Uplink${TEXTRESET}"
+    #Remove unneeded interfaces
+    sed -i '/interface FortyGigabitEthernet1\/1\/1/,$d' /root/.meraki_mig/cisco_config_up8.tmp
+    mv /root/.meraki_mig/cisco_config_up8.tmp /root/.meraki_mig/cisco_config_up.tmp
+    python3.10 /root/.meraki_mig/port_mig-C9300-NM-8Y.py
+    rm -f /root/.meraki_mig/cisco_config_up.tmp
+    rm -f /root/.meraki_mig/cisco_config_up8.tmp
+    echo "${GREEN}Uplink conversion for Switch 8 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
+    else
+    echo " "
+fi
+
+if [ "$MA_MOD_4X10G" = "MA_MOD_4X10G-Compatible" ]; then
+    echo "${GREEN}${IP}-Found Network Module MA_MOD_4X10G${TEXTRESET}"
+    echo "${GREEN}Migrating Gigabit/TenGigabit Information to Uplink${TEXTRESET}"
+    #Remove unneeded interfaces
+    sed -i '/interface FortyGigabitEthernet1\/1\/1/,$d' /root/.meraki_mig/cisco_config_up8.tmp
+    mv /root/.meraki_mig/cisco_config_up8.tmp /root/.meraki_mig/cisco_config_up.tmp
+    python3.10 /root/.meraki_mig/port_mig-port_mig-MA-MOD4x10.py
+    rm -f /root/.meraki_mig/cisco_config_up.tmp
+    rm -f /root/.meraki_mig/cisco_config_up8.tmp
+    echo "${GREEN}Uplink conversion for Switch 8 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
+    else
+    echo " "
+fi
+if [ "$MA_MOD_8X10G" = "MA_MOD_8X10G-Compatible" ]; then
+    echo "${GREEN}${IP}-Found Network Module MA_MOD_8X10G${TEXTRESET}"
+    echo "${GREEN}Migrating Gigabit/TenGigabit Information to Uplink${TEXTRESET}"
+    #Remove unneeded interfaces
+    sed -i '/interface FortyGigabitEthernet1\/1\/1/,$d' /root/.meraki_mig/cisco_config_up8.tmp
+    mv /root/.meraki_mig/cisco_config_up8.tmp /root/.meraki_mig/cisco_config_up.tmp
+    python3.10 /root/.meraki_mig/port_mig-port_mig-MA-MOD8x10.py
+    rm -f /root/.meraki_mig/cisco_config_up.tmp
+    rm -f /root/.meraki_mig/cisco_config_up8.tmp
+    echo "${GREEN}Uplink conversion for Switch 8 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
+    else
+    echo " "
+fi
+
 rm -f /root/.meraki_mig/serial.txt
 rm -f /root/.meraki_mig/cisco_config.tmp
 rm -f /root/.meraki_mig/tmp/*
