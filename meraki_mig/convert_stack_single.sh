@@ -24,16 +24,7 @@ awk 'BEGIN {found=0} /interface GigabitEthernet6\/0\/1/ && !found {print "switch
 awk 'BEGIN {found=0} /interface GigabitEthernet7\/0\/1/ && !found {print "switch 7"; found=1} {print}' /root/.meraki_mig/cisco_config.tmp >temp && mv -f temp /root/.meraki_mig/cisco_config.tmp
 awk 'BEGIN {found=0} /interface GigabitEthernet8\/0\/1/ && !found {print "switch 8"; found=1} {print}' /root/.meraki_mig/cisco_config.tmp >temp && mv -f temp /root/.meraki_mig/cisco_config.tmp
 awk 'BEGIN {found=0} /interface GigabitEthernet9\/0\/1/ && !found {print "switch 9"; found=1} {print}' /root/.meraki_mig/cisco_config.tmp >temp && mv -f temp /root/.meraki_mig/cisco_config.tmp
-#For TenGigabitEthernet
-awk 'BEGIN {found=0} /interface TenGigabitEthernet1\/0\/1/ && !found {print "switch 1"; found=1} {print}' /root/.meraki_mig/cisco_config.tmp >temp && mv -f temp /root/.meraki_mig/cisco_config.tmp
-awk 'BEGIN {found=0} /interface TenGigabitEthernet2\/0\/1/ && !found {print "switch 2"; found=1} {print}' /root/.meraki_mig/cisco_config.tmp >temp && mv -f temp /root/.meraki_mig/cisco_config.tmp
-awk 'BEGIN {found=0} /interface TenGigabitEthernet3\/0\/1/ && !found {print "switch 3"; found=1} {print}' /root/.meraki_mig/cisco_config.tmp >temp && mv -f temp /root/.meraki_mig/cisco_config.tmp
-awk 'BEGIN {found=0} /interface TenGigabitEthernet4\/0\/1/ && !found {print "switch 4"; found=1} {print}' /root/.meraki_mig/cisco_config.tmp >temp && mv -f temp /root/.meraki_mig/cisco_config.tmp
-awk 'BEGIN {found=0} /interface TenGigabitEthernet5\/0\/1/ && !found {print "switch 5"; found=1} {print}' /root/.meraki_mig/cisco_config.tmp >temp && mv -f temp /root/.meraki_mig/cisco_config.tmp
-awk 'BEGIN {found=0} /interface TenGigabitEthernet6\/0\/1/ && !found {print "switch 6"; found=1} {print}' /root/.meraki_mig/cisco_config.tmp >temp && mv -f temp /root/.meraki_mig/cisco_config.tmp
-awk 'BEGIN {found=0} /interface TenGigabitEthernet7\/0\/1/ && !found {print "switch 7"; found=1} {print}' /root/.meraki_mig/cisco_config.tmp >temp && mv -f temp /root/.meraki_mig/cisco_config.tmp
-awk 'BEGIN {found=0} /interface TenGigabitEthernet8\/0\/1/ && !found {print "switch 8"; found=1} {print}' /root/.meraki_mig/cisco_config.tmp >temp && mv -f temp /root/.meraki_mig/cisco_config.tmp
-awk 'BEGIN {found=0} /interface TenGigabitEthernet9\/0\/1/ && !found {print "switch 9"; found=1} {print}' /root/.meraki_mig/cisco_config.tmp >temp && mv -f temp /root/.meraki_mig/cisco_config.tmp
+
 #For TwoGigabitEthernet
 awk 'BEGIN {found=0} /interface TwoGigabitEthernet1\/0\/1/ && !found {print "switch 1"; found=1} {print}' /root/.meraki_mig/cisco_config.tmp >temp && mv -f temp /root/.meraki_mig/cisco_config.tmp
 awk 'BEGIN {found=0} /interface TwoGigabitEthernet2\/0\/1/ && !found {print "switch 2"; found=1} {print}' /root/.meraki_mig/cisco_config.tmp >temp && mv -f temp /root/.meraki_mig/cisco_config.tmp
@@ -44,6 +35,29 @@ awk 'BEGIN {found=0} /interface TwoGigabitEthernet6\/0\/1/ && !found {print "swi
 awk 'BEGIN {found=0} /interface TwoGigabitEthernet7\/0\/1/ && !found {print "switch 7"; found=1} {print}' /root/.meraki_mig/cisco_config.tmp >temp && mv -f temp /root/.meraki_mig/cisco_config.tmp
 awk 'BEGIN {found=0} /interface TwoGigabitEthernet8\/0\/1/ && !found {print "switch 8"; found=1} {print}' /root/.meraki_mig/cisco_config.tmp >temp && mv -f temp /root/.meraki_mig/cisco_config.tmp
 awk 'BEGIN {found=0} /interface TwoGigabitEthernet9\/0\/1/ && !found {print "switch 9"; found=1} {print}' /root/.meraki_mig/cisco_config.tmp >temp && mv -f temp /root/.meraki_mig/cisco_config.tmp
+
+#For FiveGigabitEthernet
+awk 'BEGIN {found=0} /interface FiveGigabitEthernet1\/0\/1/ && !found {print "switch 1"; found=1} {print}' /root/.meraki_mig/cisco_config.tmp >temp && mv -f temp /root/.meraki_mig/cisco_config.tmp
+awk 'BEGIN {found=0} /interface FiveGigabitEthernet2\/0\/1/ && !found {print "switch 2"; found=1} {print}' /root/.meraki_mig/cisco_config.tmp >temp && mv -f temp /root/.meraki_mig/cisco_config.tmp
+awk 'BEGIN {found=0} /interface FiveGigabitEthernet3\/0\/1/ && !found {print "switch 3"; found=1} {print}' /root/.meraki_mig/cisco_config.tmp >temp && mv -f temp /root/.meraki_mig/cisco_config.tmp
+awk 'BEGIN {found=0} /interface FiveGigabitEthernet4\/0\/1/ && !found {print "switch 4"; found=1} {print}' /root/.meraki_mig/cisco_config.tmp >temp && mv -f temp /root/.meraki_mig/cisco_config.tmp
+awk 'BEGIN {found=0} /interface FiveGigabitEthernet5\/0\/1/ && !found {print "switch 5"; found=1} {print}' /root/.meraki_mig/cisco_config.tmp >temp && mv -f temp /root/.meraki_mig/cisco_config.tmp
+awk 'BEGIN {found=0} /interface FiveGigabitEthernet6\/0\/1/ && !found {print "switch 6"; found=1} {print}' /root/.meraki_mig/cisco_config.tmp >temp && mv -f temp /root/.meraki_mig/cisco_config.tmp
+awk 'BEGIN {found=0} /interface FiveGigabitEthernet7\/0\/1/ && !found {print "switch 7"; found=1} {print}' /root/.meraki_mig/cisco_config.tmp >temp && mv -f temp /root/.meraki_mig/cisco_config.tmp
+awk 'BEGIN {found=0} /interface FiveGigabitEthernet8\/0\/1/ && !found {print "switch 8"; found=1} {print}' /root/.meraki_mig/cisco_config.tmp >temp && mv -f temp /root/.meraki_mig/cisco_config.tmp
+awk 'BEGIN {found=0} /interface FiveGigabitEthernet9\/0\/1/ && !found {print "switch 9"; found=1} {print}' /root/.meraki_mig/cisco_config.tmp >temp && mv -f temp /root/.meraki_mig/cisco_config.tmp
+
+#For TenGigabitEthernet
+awk 'BEGIN {found=0} /interface TenGigabitEthernet1\/0\/1/ && !found {print "switch 1"; found=1} {print}' /root/.meraki_mig/cisco_config.tmp >temp && mv -f temp /root/.meraki_mig/cisco_config.tmp
+awk 'BEGIN {found=0} /interface TenGigabitEthernet2\/0\/1/ && !found {print "switch 2"; found=1} {print}' /root/.meraki_mig/cisco_config.tmp >temp && mv -f temp /root/.meraki_mig/cisco_config.tmp
+awk 'BEGIN {found=0} /interface TenGigabitEthernet3\/0\/1/ && !found {print "switch 3"; found=1} {print}' /root/.meraki_mig/cisco_config.tmp >temp && mv -f temp /root/.meraki_mig/cisco_config.tmp
+awk 'BEGIN {found=0} /interface TenGigabitEthernet4\/0\/1/ && !found {print "switch 4"; found=1} {print}' /root/.meraki_mig/cisco_config.tmp >temp && mv -f temp /root/.meraki_mig/cisco_config.tmp
+awk 'BEGIN {found=0} /interface TenGigabitEthernet5\/0\/1/ && !found {print "switch 5"; found=1} {print}' /root/.meraki_mig/cisco_config.tmp >temp && mv -f temp /root/.meraki_mig/cisco_config.tmp
+awk 'BEGIN {found=0} /interface TenGigabitEthernet6\/0\/1/ && !found {print "switch 6"; found=1} {print}' /root/.meraki_mig/cisco_config.tmp >temp && mv -f temp /root/.meraki_mig/cisco_config.tmp
+awk 'BEGIN {found=0} /interface TenGigabitEthernet7\/0\/1/ && !found {print "switch 7"; found=1} {print}' /root/.meraki_mig/cisco_config.tmp >temp && mv -f temp /root/.meraki_mig/cisco_config.tmp
+awk 'BEGIN {found=0} /interface TenGigabitEthernet8\/0\/1/ && !found {print "switch 8"; found=1} {print}' /root/.meraki_mig/cisco_config.tmp >temp && mv -f temp /root/.meraki_mig/cisco_config.tmp
+awk 'BEGIN {found=0} /interface TenGigabitEthernet9\/0\/1/ && !found {print "switch 9"; found=1} {print}' /root/.meraki_mig/cisco_config.tmp >temp && mv -f temp /root/.meraki_mig/cisco_config.tmp
+
 
 # Input switch stack configuration file
 input_file="/root/.meraki_mig/cisco_config.tmp" # Replace with your config file path
