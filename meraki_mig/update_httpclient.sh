@@ -19,7 +19,6 @@ while [ -z "$VLAN" ]; do
     read -p "Please provide the Vlan Number in which you want to bind: " VLAN
 done
 
-
 sed -i "/set vlan_num/c\set vlan_num ${VLAN}" /root/.meraki_mig/update_httpclient.exp
 sed -i "/set vlan_num/c\set vlan_num ${VLAN}" /root/.meraki_mig/update_httpclient_single.exp
 
@@ -32,10 +31,10 @@ sleep 1
 read -r -p "Would you Like to deploy this change now across the switches? [y/N]" -n 1
 echo # (optional) move to a new line
 if [[ "$REPLY" =~ ^[Yy]$ ]]; then
-        echo "Deploying the command:"
-        echo "ip http client source-interface vlan ${VLAN}"
-        sleep 3
-        /root/.meraki_mig/update_httpclient.exp
+    echo "Deploying the command:"
+    echo "ip http client source-interface vlan ${VLAN}"
+    sleep 3
+    /root/.meraki_mig/update_httpclient.exp
 fi
 cat <<EOF
 
