@@ -23,7 +23,7 @@ Collecting the current configuration
 Please Wait...
 EOF
 
-/root/.meraki_mig/clean.exp > /dev/null 2>&1
+/root/.meraki_mig/clean.exp >/dev/null 2>&1
 
 cat <<EOF
 
@@ -31,14 +31,14 @@ Collecting Hardware Information
 Please Wait...
 EOF
 
-/root/.meraki_mig/hardware_compat.exp > /dev/null 2>&1
+/root/.meraki_mig/hardware_compat.exp >/dev/null 2>&1
 
 # Read file line-by-line to get an IP address
 while read -r IP; do
   # Print the IP address to the console
   echo " "
   echo ${YELLOW}"$IP"${TEXTRESET}
-echo "Checking IOS Version is 17.09.03m3 "
+  echo "Checking IOS Version is 17.09.03m3 "
   #VERSION=$(cat /var/lib/tftpboot/mig_switch/${IP}-shver | grep "Cisco IOS Software" | cut -c84- | cut -d, -f1 | sed 's/\(.*\)..../\1/')
   #VERSIONFULL=$(cat /var/lib/tftpboot/mig_switch/${IP}-shver | grep "Cisco IOS XE Software, Version" | sed -e 's/\.//g')
   VERSIONFULL=$(cat /var/lib/tftpboot/mig_switch/${IP}-shver | grep "Cisco IOS XE Software, Version")
@@ -49,7 +49,7 @@ echo "Checking IOS Version is 17.09.03m3 "
     echo " "
   else
     echo "${RED}ERROR:IOS-XE Needs Updating - The Version should be 17.09.03m3${TEXTRESET}"
-    echo "1" >> /root/.meraki_mig/check.tmp
+    echo "1" >>/root/.meraki_mig/check.tmp
     echo " "
     sleep 3
   fi
@@ -62,9 +62,9 @@ echo "Checking IOS Version is 17.09.03m3 "
     echo "${GREEN}Switch is in INSTALL Mode${TEXTRESET}"
     echo " "
   else
-   echo ${RED}"ERROR: The Switch is in BUNDLE mode. It must be converted to INSTALL Mode First${TEXTRESET}"
+    echo ${RED}"ERROR: The Switch is in BUNDLE mode. It must be converted to INSTALL Mode First${TEXTRESET}"
     echo " "
-    echo "1" >> /root/.meraki_mig/check.tmp
+    echo "1" >>/root/.meraki_mig/check.tmp
     echo "Please refer to this document for further information:"
     echo "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-9300-series-switches/216231-upgrade-guide-for-cisco-catalyst-9000-sw.html"
     sleep 5
@@ -73,13 +73,13 @@ echo "Checking IOS Version is 17.09.03m3 "
     exit
   fi
 
- #Does the Switch have compatible Hardware?
+  #Does the Switch have compatible Hardware?
   echo "Checking for Hardware compatability"
   HW=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmrcompat | grep Incompatible | cut -c94-)
   if [ "$HW" = "Incompatible" ]; then
     echo ${RED}"ERROR: The Switch HW is not compatible. Please correct this issue first${TEXTRESET}"
     echo ${YELLOW}"If this is a Network Module incompatibility, you can unscrew and remove it. They are hot insertion ready.${TEXTRESET}"
-    echo "1" >> /root/.meraki_mig/check.tmp
+    echo "1" >>/root/.meraki_mig/check.tmp
     more /var/lib/tftpboot/mig_switch/*shmrcompat | grep Incompatible -B9 -C1
   else
     echo "${GREEN}No Hardware Incompatabilities Found${TEXTRESET}"
@@ -99,7 +99,7 @@ echo "Checking IOS Version is 17.09.03m3 "
     sleep 3
   fi
 
- #Is the Switch presenting at least a GW of Last resort?
+  #Is the Switch presenting at least a GW of Last resort?
   echo "Checking for Default Gateway"
   ROUTE=$(cat /var/lib/tftpboot/mig_switch/${IP}-shroute | grep 0.0.0.0/0 | cut -c7- | sed 's/\(.*\)........................../\1/')
   if [ "$ROUTE" = "0.0.0.0" ]; then
@@ -107,7 +107,7 @@ echo "Checking IOS Version is 17.09.03m3 "
     echo " "
   else
     echo ${RED}"The switch requires a configuration of a default gateway${TEXTRESET}"
-    echo "1" >> /root/.meraki_mig/check.tmp
+    echo "1" >>/root/.meraki_mig/check.tmp
     echo " "
     sleep 3
   fi
@@ -123,11 +123,11 @@ echo "Checking IOS Version is 17.09.03m3 "
     echo "Per the Documentation, Please make sure the switch has this command on the internet facing vlan"
     echo ${YELLOW}"This can be corrected with Main Menu --> Utilities --> Global command for http client${TEXTRESET}"
     echo " "
-    echo "1" >> /root/.meraki_mig/check.tmp
+    echo "1" >>/root/.meraki_mig/check.tmp
     echo ${YELLOW}"Attemping to Correct Issue${TEXTRESET}"
     echo " "
-    echo $IP >> /root/.meraki_mig/ip_list_single
-    /root/.meraki_mig/update_httpclient_single.exp > /dev/null 2>&1
+    echo $IP >>/root/.meraki_mig/ip_list_single
+    /root/.meraki_mig/update_httpclient_single.exp >/dev/null 2>&1
     sed -i '/^/d' /root/.meraki_mig/ip_list_single
     sleep 2
   fi
@@ -141,12 +141,12 @@ echo "Checking IOS Version is 17.09.03m3 "
     echo ${RED}"ERROR: A "name-server" entry  was not found on the switch please add one before continuing ${TEXTRESET}"
     echo ${YELLOW}"This can be corrected with Main Menu --> Utilities --> Global command for DNS${TEXTRESET}"
     echo " "
-    echo "1" >> /root/.meraki_mig/check.tmp
+    echo "1" >>/root/.meraki_mig/check.tmp
     echo ${YELLOW}"Attemping to Correct Issue"${TEXTRESET}
     echo " "
     sleep 1
-    echo $IP >> /root/.meraki_mig/ip_list_single
-    /root/.meraki_mig/update_ip_name-server_single.exp > /dev/null 2>&1
+    echo $IP >>/root/.meraki_mig/ip_list_single
+    /root/.meraki_mig/update_ip_name-server_single.exp >/dev/null 2>&1
     sed -i '/^/d' /root/.meraki_mig/ip_list_single
     sleep 2
   fi
@@ -158,12 +158,12 @@ echo "Checking IOS Version is 17.09.03m3 "
     echo ${RED}"ERROR: A "name-server" entry  was not found on the switch please add one before continuing ${TEXTRESET}"
     echo ${YELLOW}"This can be corrected with Main Menu --> Utilities --> Global command for DNS${TEXTRESET}"
     echo " "
-    echo "1" >> /root/.meraki_mig/check.tmp
+    echo "1" >>/root/.meraki_mig/check.tmp
     echo ${YELLOW}"Attemping to Correct Issue"${TEXTRESET}
     echo " "
     sleep 1
-    echo $IP >> /root/.meraki_mig/ip_list_single
-    /root/.meraki_mig/update_ip_name-server_single.exp > /dev/null 2>&1
+    echo $IP >>/root/.meraki_mig/ip_list_single
+    /root/.meraki_mig/update_ip_name-server_single.exp >/dev/null 2>&1
     sed -i '/^/d' /root/.meraki_mig/ip_list_single
     sleep 2
   else
@@ -171,7 +171,7 @@ echo "Checking IOS Version is 17.09.03m3 "
     echo " "
   fi
 
-#Check if we have domain lookup configured
+  #Check if we have domain lookup configured
   echo "Checking for ip domain lookup Entry"
   LOOKUP=$(cat /var/lib/tftpboot/mig_switch/${IP}-lookup | head -6 | grep "Domain lookup" | cut -c20-)
   if [ "$LOOKUP" = "enabled" ]; then
@@ -180,27 +180,26 @@ echo "Checking IOS Version is 17.09.03m3 "
   else
     echo "${RED}ERROR: ip domain lookup was not found${TEXTRESET}"
     echo " "
-    echo "1" >> /root/.meraki_mig/check.tmp
+    echo "1" >>/root/.meraki_mig/check.tmp
     echo ${YELLOW}"Attemping to Correct Issue"${TEXTRESET}
     echo " "
     sleep 1
-    echo $IP >> /root/.meraki_mig/ip_list_single
-    /root/.meraki_mig/update_ip_domain_lookup_single.exp > /dev/null 2>&1
+    echo $IP >>/root/.meraki_mig/ip_list_single
+    /root/.meraki_mig/update_ip_domain_lookup_single.exp >/dev/null 2>&1
     sed -i '/^/d' /root/.meraki_mon_switch/ip_list_single
     sleep 2
   fi
 
-
-cat <<EOF
+  cat <<EOF
 
 EOF
 
-#Can we ping outside the Network with name resolution?
+  #Can we ping outside the Network with name resolution?
   echo "Pinging google.com"
-  echo $IP >> /root/.meraki_mig/ip_list_single
-  /root/.meraki_mig/network_test.exp > /root/.meraki_mig/network_test.tmp
+  echo $IP >>/root/.meraki_mig/ip_list_single
+  /root/.meraki_mig/network_test.exp >/root/.meraki_mig/network_test.tmp
   sed -i '/^/d' /root/.meraki_mig/ip_list_single
-  PING=$(cat /root/.meraki_mig/network_test.tmp | grep Success |grep 100 | sed 's/(...........................................//')
+  PING=$(cat /root/.meraki_mig/network_test.tmp | grep Success | grep 100 | sed 's/(...........................................//')
   if [ "$PING" = "Success rate is 100 percent " ]; then
     echo "${GREEN}Success rate is 100 percent${TEXTRESET}"
     rm -r -f /root/.meraki_mig/network_test.tmp
@@ -209,7 +208,7 @@ EOF
   else
     echo "${YELLOW}WARNING: Expected 5 replies from google.com${TEXTRESET}"
     echo " "
-    echo "1" >> /root/.meraki_mig/check.tmp
+    echo "1" >>/root/.meraki_mig/check.tmp
     echo "The response was:"
     cat /root/.meraki_mig/network_test.tmp | tail -4
     echo " "
@@ -217,45 +216,48 @@ EOF
     sed -i '/^/d' /root/.meraki_mig/ip_list_single
     echo " "
     sleep 2
- fi
+  fi
 
 done <"$INPUT"
 #Committing Changes to Switches
-cat << EOF
+cat <<EOF
 Committing Switch Changes- This may take some time depending on the number of switches..
 Please wait...
 
 EOF
-/root/.meraki_mig/clean.exp > /dev/null 2>&1
+/root/.meraki_mig/clean.exp >/dev/null 2>&1
 
 CHECK=$(cat /root/.meraki_mig/check.tmp | grep 1)
 if grep -q '[^[:space:]]' "/root/.meraki_mig/check.tmp"; then
-    echo "${RED}The Switches did not pass all checks. Please review the Pre-Check Log (If Needed)${TEXTRESET}"
-    echo "${YELLOW}Main Menu --> Logs --> Deployment Log${TEXTRESET}"
-    echo "CMDS has attempted to correct the issues, please re-run this script"
-    echo "Main Menu--> Validate Switch/Deploy"
-    rm -r -f /root/.meraki_mig/check.tmp
-    rm -r -f /root/.meraki_mig/ip_list_single
-    echo " "
-  else
-    echo " "
-    echo ${GREEN}"All requirements met for Meraki Onboarding ${TEXTRESET}"
-    echo "Continuing deployment"
-    sleep 2
-    clear
-    echo "Starting the Meraki Service on the Switches"
-    echo "This may take a couple of minutes depending on the numbers of switches"
-    echo  "Please wait..."
-    sleep 2
-    clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_mig/meraki_register.exp
-    clear
-    echo "Choose the ORG/Network in which to place these switches"
-    echo "The installer will continue shortly"
-    sleep 2
-    clear & /root/.meraki_mig/show_inv.sh
-    clear & /root/.meraki_mig/hostname_collection.sh | tee -a /root/.meraki_mig/logs/hostname_deployment.log
-    fi
-
+  echo "${RED}The Switches did not pass all checks. Please review the Pre-Check Log (If Needed)${TEXTRESET}"
+  echo "${YELLOW}Main Menu --> Logs --> Deployment Log${TEXTRESET}"
+  echo "CMDS has attempted to correct the issues, please re-run this script"
+  echo "Main Menu--> Validate Switch/Deploy"
+  rm -r -f /root/.meraki_mig/check.tmp
+  rm -r -f /root/.meraki_mig/ip_list_single
+  echo " "
+else
+  echo " "
+  echo ${GREEN}"All requirements met for Meraki Onboarding ${TEXTRESET}"
+  echo "Continuing deployment"
+  sleep 2
+  clear
+  echo "Starting the Meraki Service on the Switches"
+  echo "This may take a couple of minutes depending on the numbers of switches"
+  echo "Please wait..."
+  sleep 2
+  clear &
+  rm -r -f /root/.ssh/known_hosts &
+  /root/.meraki_mig/meraki_register.exp
+  clear
+  echo "Choose the ORG/Network in which to place these switches"
+  echo "The installer will continue shortly"
+  sleep 2
+  clear &
+  /root/.meraki_mig/show_inv.sh
+  clear &
+  /root/.meraki_mig/hostname_collection.sh | tee -a /root/.meraki_mig/logs/hostname_deployment.log
+fi
 
 rm -r -f /root/.meraki_mig/check.tmp
 rm -r -f /root/.meraki_mig/ip_list_single
