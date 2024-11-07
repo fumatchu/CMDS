@@ -1,6 +1,6 @@
 #!/bin/bash
 #Meraki-Mig.sh
-#This script installs the Meraki migration server 
+#This script installs the Meraki migration server
 clear
 dnf -y install net-tools dmidecode
 TEXTRESET=$(tput sgr0)
@@ -62,14 +62,14 @@ fi
 
 if [ "$DETECTIP" = "ipv4.method:                            auto" ]; then
   echo ${RED}"Interface $INTERFACE is using DHCP${TEXTRESET}"
-read -p "Please provide a static IP address in CIDR format (i.e 192.168.24.2/24): " IPADDR
+  read -p "Please provide a static IP address in CIDR format (i.e 192.168.24.2/24): " IPADDR
   while [ -z "$IPADDR" ]; do
     echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
     read -p "Please provide a static IP address in CIDR format (i.e 192.168.24.2/24): " IPADDR
   done
   while [[ ! $IPADDR =~ ^$n(\.$n){3}/$m$ ]]; do
     read -p ${RED}"The entry is not in valid CIDR notation. Please Try again:${TEXTRESET} " IPADDR
-done
+  done
   read -p "Please Provide a Default Gateway Address: " GW
   while [ -z "$GW" ]; do
     echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
@@ -134,7 +134,7 @@ EOF
     read -p "Please provide a valid FQDN for this machine: " HOSTNAME
   done
   hostnamectl set-hostname $HOSTNAME
-   cat <<EOF
+  cat <<EOF
 The System must reboot for the changes to take effect.
 ${RED}Please log back in as root.${TEXTRESET}
 The installer will continue when you log back in.
@@ -186,13 +186,13 @@ if [[ "$REPLY" =~ ^[Yy]$ ]]; then
   read -p "Please provide the appropriate network scope in CIDR format (i.e 192.168.0.0/16) to allow NTP for clients: " NTPCIDR
   while [ -z "$NTPCIDR" ]; do
     echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
-     read -p "Please provide the appropriate network scope in CIDR format (i.e 192.168.0.0/16) to allow NTP for clients: " NTPCIDR
+    read -p "Please provide the appropriate network scope in CIDR format (i.e 192.168.0.0/16) to allow NTP for clients: " NTPCIDR
   done
 
   sed -i "/#allow /c\allow $NTPCIDR" /etc/chrony.conf
 
   systemctl restart chronyd
-  
+
 fi
 
 clear
@@ -228,12 +228,12 @@ if [[ "$REPLY" =~ ^[Yy]$ ]]; then
     read -p "Please provide the ending IP address in the lease range (based on the network $SUBNETNETWORK): " DHCPENDIP
   done
 
- read -p "Please provide the netmask for clients: " DHCPNETMASK
+  read -p "Please provide the netmask for clients: " DHCPNETMASK
   while [ -z "$DHCPNETMASK" ]; do
     echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
     read -p "Please provide the default netmask for clients: " DHCPNETMASK
   done
-  
+
   read -p "Please provide the default gateway for clients: " DHCPDEFGW
   while [ -z "$DHCPDEFGW" ]; do
     echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
@@ -243,7 +243,7 @@ if [[ "$REPLY" =~ ^[Yy]$ ]]; then
   read -p "Please provide a description for this subnet: " SUBNETDESC
   while [ -z "$SUBNETDESC" ]; do
     echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
-     read -p "Please provide a description for this subnet: " SUBNETDESC
+    read -p "Please provide a description for this subnet: " SUBNETDESC
   done
 
   #Configure DHCP
@@ -291,15 +291,14 @@ if [[ "$REPLY" =~ ^[Yy]$ ]]; then
   firewall-cmd --zone=public --add-service dns --permanent
   firewall-cmd --complete-reload
 
-sed -i '/127.0.0.1/c\        listen-on port 53 { 127.0.0.1; any; };' /etc/named.conf
-sed -i '/localhost; /c\        allow-query     { localhost; any; };' /etc/named.conf
+  sed -i '/127.0.0.1/c\        listen-on port 53 { 127.0.0.1; any; };' /etc/named.conf
+  sed -i '/localhost; /c\        allow-query     { localhost; any; };' /etc/named.conf
 
-systemctl enable named
-systemctl start named
+  systemctl enable named
+  systemctl start named
 fi
 
 clear
-
 
 #Checking for VM platform-Install client
 echo ${GREEN}"Installing VMGuest${TEXTRESET}"
@@ -358,7 +357,6 @@ ${YELLOW}This may take approximately 5-10 minutes${TEXTRESET}
 EOF
 sleep 4s
 
-
 # Initial build
 dnf -y install epel-release
 dnf -y install dnf-plugins-core
@@ -369,20 +367,20 @@ sudo bash setup-repo.sh
 dnf -y install iptraf-ng expect tar nmap cockpit cockpit-navigator cockpit-storaged dialog bc ntsysv at nano tftp-server gcc openssl-devel bzip2-devel libffi-devel zlib-devel wget make
 #Install Python 3.10
 clear
-cat << EOF
+cat <<EOF
 ${YELLOW}Installing Required Python Elements${TEXTRESET}
 Please wait...
 EOF
 sleep 2
 clear
 cd /root
-wget https://www.python.org/ftp/python/3.10.5/Python-3.10.5.tgz 
-tar xzf Python-3.10.5.tgz 
+wget https://www.python.org/ftp/python/3.10.5/Python-3.10.5.tgz
+tar xzf Python-3.10.5.tgz
 cd Python-3.10.5
-./configure --enable-optimizations 
+./configure --enable-optimizations
 make -j 4
 nproc
-make altinstall 
+make altinstall
 mv /root/Python-3.10.5/ /opt/
 rm -f /root/Python*
 alias python3=/opt/Python-3.10.5/python
@@ -414,7 +412,6 @@ systemctl enable --now tftp-server.socket
 #Enable cockpit
 systemctl enable --now cockpit.socket
 
-
 #Update /etc/issue so we can see the hostname and IP address Before logging in
 rm -r -f /etc/issue
 touch /etc/issue
@@ -425,7 +422,7 @@ Hostname: \n
 IP Address: \4
 EOF
 
-#Put meraki_migration in the path 
+#Put meraki_migration in the path
 mv /root/MIGInstaller/meraki_mig /root/.meraki_mig
 #Catalyst Wireless Monitoring
 mv /root/MIGInstaller/meraki_mon_wlc /root/.meraki_mon_wlc
@@ -446,12 +443,9 @@ chmod 700 -R /root/.meraki_port_mig
 
 mv /root/.meraki_mig/meraki_migration /usr/sbin/
 
-
-
 #Add DHCP Module
 mv /root/MIGInstaller/.servman /root
 chmod 700 -R /root/.servman
-
 
 #Create Directory for Active Templates
 mkdir /root/.meraki_mig/templates/active
@@ -471,10 +465,10 @@ touch /root/.meraki_mig/templates/already_installed/switch_serials_48.txt
 #Bracketed pasting...yuck!
 sed -i '8i set enable-bracketed-paste off' /etc/inputrc
 
-#Archive Folder in root directory 
+#Archive Folder in root directory
 mkdir /root/archive
 mkdir /root/archive/CatalystConfigurations
-#Add Meraki_migration to root login 
+#Add Meraki_migration to root login
 
 echo "/usr/sbin/meraki_migration" >>/root/.bash_profile
 
