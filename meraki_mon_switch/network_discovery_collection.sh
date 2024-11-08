@@ -13,9 +13,19 @@ while read -r IP; do
 
 #What model is the Switch?
   MODEL9200=$(cat /var/lib/tftpboot/mon_switch/nwd-${IP}-shver | grep "Model Number" | grep C9200 | tr -cd 'C9200' | sed 's/.$//' | sed 's/^\(.....\).*/\1/')
+  MODELC920=$(cat /var/lib/tftpboot/mon_switch/nwd-${IP}-shver | grep "Model Number" | grep C9200 | tr -cd 'C9200' | sed 's/.$//' | sed 's/^\(.....\).*/\1/')
   MODEL9200L=$(cat /var/lib/tftpboot/mon_switch/nwd-${IP}-shver | grep "Model Number" | grep C9200L | tr -cd 'C9200L' | sed 's/.$//' | sed 's/^\(......\).*/\1/')
   MODELDESC9200=$(cat /var/lib/tftpboot/mon_switch/nwd-${IP}-shver | grep "Model Number" | tr -d "[:blank:]")
 if [ "$MODEL9200" == "C9200" ] || [ "$MODEL9200L" == "C9200L" ]; then
+    echo "${GREEN}$IP is a 9200 series switch"${TEXTRESET} >> /root/.meraki_mon_switch/network_collection.tmp
+    echo ${IP} >> /root/.meraki_mon_switch/ip_list
+    echo "${MODELDESC9200}" >> /root/.meraki_mon_switch/network_collection.tmp
+    echo " "
+  else
+    echo " " >> /root/.meraki_mon_switch/network_collection.tmp
+  fi
+
+if [ "$MODELC920" == "C920" ]; then
     echo "${GREEN}$IP is a 9200 series switch"${TEXTRESET} >> /root/.meraki_mon_switch/network_collection.tmp
     echo ${IP} >> /root/.meraki_mon_switch/ip_list
     echo "${MODELDESC9200}" >> /root/.meraki_mon_switch/network_collection.tmp
