@@ -96,5 +96,6 @@ while read -r IP; do
     fi
 
 done <"$INPUT"
+rm -f /root/.meraki_mig/cisco_config*
 echo "Migration Script Complete"
 sleep 2
