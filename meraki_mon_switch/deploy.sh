@@ -25,7 +25,7 @@ while read -r IP; do
 #  echo "$IP"
 
   #What model is the Switch?
-  MODEL9200=$(cat /var/lib/tftpboot/mon_switch/${IP}-shver | grep "Model Number" | grep C9200 -Eo)
+  MODEL9200=$(cat /var/lib/tftpboot/mon_switch/${IP}-shver | grep "Model Number" | grep C9200 -Eo | grep C9200 -m1)
  
 if [ "$MODEL9200" == "C9200" ]; then
     clear
