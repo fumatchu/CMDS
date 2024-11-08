@@ -5,7 +5,7 @@ YELLOW=$(tput setaf 3)
 GREEN=$(tput setaf 2)
 #This File is used to parse a stack switch and break it into a single switch config
 
-IP=
+IP=192.168.210.164
 
 #Get Serials for stack
 cat /var/lib/tftpboot/mig_switch/${IP}-shmr | grep C9300 | grep -E -o "Q.{0,13}" >>/root/.meraki_mig/serial.txt
@@ -127,8 +127,10 @@ done <"$input_file"
 #Stacked Switch Config 1
 CONFIG1=$(ls /root/.meraki_mig/tmp/switch1.txt 2>/dev/null)
 SERIAL1=$(ls /root/.meraki_mig/tmp/serial1.txt 2>/dev/null)
+CATSERIAL=$(cat /root/.meraki_mig/tmp/serial1.txt 2>/dev/null)
 if [[ "$CONFIG1" == "/root/.meraki_mig/tmp/switch1.txt" && "$SERIAL1" == "/root/.meraki_mig/tmp/serial1.txt" ]]; then
-    echo "${GREEN}${IP}-Found switch 1${TEXTRESET}"
+    echo "${GREEN}${IP}-Found switch 1"
+    echo "New CloudID is:${CATSERIAL}${TEXTRESET}"
     \cp -f /root/.meraki_mig/tmp/switch1.txt /root/.meraki_mig/cisco_config.tmp
     \cp -f /root/.meraki_mig/tmp/serial1.txt /root/.meraki_mig/serial.txt
     #Move the Uplink ports to a separate file
@@ -138,14 +140,16 @@ if [[ "$CONFIG1" == "/root/.meraki_mig/tmp/switch1.txt" && "$SERIAL1" == "/root/
     python3.10 /root/.meraki_mig/port_migration.py
     rm -f /root/.meraki_mig/cisco_config.tmp
 else
-    echo " "
+    echo " " > /dev/null
 fi
 
 #Stacked Switch Config 2
 CONFIG2=$(ls /root/.meraki_mig/tmp/switch2.txt 2>/dev/null)
 SERIAL2=$(ls /root/.meraki_mig/tmp/serial2.txt 2>/dev/null)
+CATSERIAL=$(cat /root/.meraki_mig/tmp/serial2.txt 2>/dev/null)
 if [[ "$CONFIG2" == "/root/.meraki_mig/tmp/switch2.txt" && "$SERIAL2" == "/root/.meraki_mig/tmp/serial2.txt" ]]; then
-    echo "${GREEN}${IP}-Found switch 2${TEXTRESET}"
+    echo "${GREEN}${IP}-Found switch 2"
+    echo "New CloudID is:${CATSERIAL}${TEXTRESET}"
     \cp -f /root/.meraki_mig/tmp/switch2.txt /root/.meraki_mig/cisco_config.tmp
     \cp -f /root/.meraki_mig/tmp/serial2.txt /root/.meraki_mig/serial.txt
     #Move the Uplink ports to a separate file
@@ -155,14 +159,16 @@ if [[ "$CONFIG2" == "/root/.meraki_mig/tmp/switch2.txt" && "$SERIAL2" == "/root/
     python3.10 /root/.meraki_mig/port_migration.py
     rm -f /root/.meraki_mig/cisco_config.tmp
 else
-    echo " "
+    echo " " > /dev/null
 fi
 
 #Stacked Switch Config 3
 CONFIG3=$(ls /root/.meraki_mig/tmp/switch3.txt 2>/dev/null)
 SERIAL3=$(ls /root/.meraki_mig/tmp/serial3.txt 2>/dev/null)
+CATSERIAL=$(cat /root/.meraki_mig/tmp/serial3.txt 2>/dev/null)
 if [[ "$CONFIG3" == "/root/.meraki_mig/tmp/switch3.txt" && "$SERIAL3" == "/root/.meraki_mig/tmp/serial3.txt" ]]; then
-    echo "${GREEN}${IP}-Found switch 3${TEXTRESET}"
+    echo "${GREEN}${IP}-Found switch 3"
+    echo "New CloudID is:${CATSERIAL}${TEXTRESET}"
     \cp -f /root/.meraki_mig/tmp/switch3.txt /root/.meraki_mig/cisco_config.tmp
     \cp -f /root/.meraki_mig/tmp/serial3.txt /root/.meraki_mig/serial.txt
     #Move the Uplink ports to a separate file
@@ -172,14 +178,16 @@ if [[ "$CONFIG3" == "/root/.meraki_mig/tmp/switch3.txt" && "$SERIAL3" == "/root/
     python3.10 /root/.meraki_mig/port_migration.py
     rm -f /root/.meraki_mig/cisco_config.tmp
 else
-    echo " "
+    echo " " > /dev/null
 fi
 
 #Stacked Switch Config 4
 CONFIG4=$(ls /root/.meraki_mig/tmp/switch4.txt 2>/dev/null)
 SERIAL4=$(ls /root/.meraki_mig/tmp/serial4.txt 2>/dev/null)
+CATSERIAL=$(cat /root/.meraki_mig/tmp/serial4.txt 2>/dev/null)
 if [[ "$CONFIG4" == "/root/.meraki_mig/tmp/switch4.txt" && "$SERIAL4" == "/root/.meraki_mig/tmp/serial4.txt" ]]; then
-    echo "${GREEN}${IP}-Found switch 4${TEXTRESET}"
+    echo "${GREEN}${IP}-Found switch 4"
+    echo "New CloudID is:${CATSERIAL}${TEXTRESET}"
     \cp -f /root/.meraki_mig/tmp/switch4.txt /root/.meraki_mig/cisco_config.tmp
     \cp -f /root/.meraki_mig/tmp/serial4.txt /root/.meraki_mig/serial.txt
     #Move the Uplink ports to a separate file
@@ -189,14 +197,16 @@ if [[ "$CONFIG4" == "/root/.meraki_mig/tmp/switch4.txt" && "$SERIAL4" == "/root/
     python3.10 /root/.meraki_mig/port_migration.py
     rm -f /root/.meraki_mig/cisco_config.tmp
 else
-    echo " "
+    echo " " > /dev/null
 fi
 
 #Stacked Switch Config 5
 CONFIG5=$(ls /root/.meraki_mig/tmp/switch5.txt 2>/dev/null)
 SERIAL5=$(ls /root/.meraki_mig/tmp/serial5.txt 2>/dev/null)
+CATSERIAL=$(cat /root/.meraki_mig/tmp/serial5.txt 2>/dev/null)
 if [[ "$CONFIG5" == "/root/.meraki_mig/tmp/switch5.txt" && "$SERIAL5" == "/root/.meraki_mig/tmp/serial5.txt" ]]; then
-    echo "${GREEN}${IP}-Found switch 5${TEXTRESET}"
+    echo "${GREEN}${IP}-Found switch 5"
+    echo "New CloudID is:${CATSERIAL}${TEXTRESET}"
     \cp -f /root/.meraki_mig/tmp/switch5.txt /root/.meraki_mig/cisco_config.tmp
     \cp -f /root/.meraki_mig/tmp/serial5.txt /root/.meraki_mig/serial.txt
     #Move the Uplink ports to a separate file
@@ -206,14 +216,16 @@ if [[ "$CONFIG5" == "/root/.meraki_mig/tmp/switch5.txt" && "$SERIAL5" == "/root/
     python3.10 /root/.meraki_mig/port_migration.py
     rm -f /root/.meraki_mig/cisco_config.tmp
 else
-    echo " "
+    echo " " > /dev/null
 fi
 
 #Stacked Switch Config 6
 CONFIG6=$(ls /root/.meraki_mig/tmp/switch6.txt 2>/dev/null)
 SERIAL6=$(ls /root/.meraki_mig/tmp/serial6.txt 2>/dev/null)
+CATSERIAL=$(cat /root/.meraki_mig/tmp/serial6.txt 2>/dev/null)
 if [[ "$CONFIG6" == "/root/.meraki_mig/tmp/switch6.txt" && "$SERIAL6" == "/root/.meraki_mig/tmp/serial6.txt" ]]; then
-    echo "${GREEN}${IP}-Found switch 6${TEXTRESET}"
+    echo "${GREEN}${IP}-Found switch 6"
+    echo "New CloudID is:${CATSERIAL}${TEXTRESET}"
     \cp -f /root/.meraki_mig/tmp/switch6.txt /root/.meraki_mig/cisco_config.tmp
     \cp -f /root/.meraki_mig/tmp/serial6.txt /root/.meraki_mig/serial.txt
     #Move the Uplink ports to a separate file
@@ -223,14 +235,16 @@ if [[ "$CONFIG6" == "/root/.meraki_mig/tmp/switch6.txt" && "$SERIAL6" == "/root/
     python3.10 /root/.meraki_mig/port_migration.py
     rm -f /root/.meraki_mig/cisco_config.tmp
 else
-    echo " "
+    echo " " > /dev/null
 fi
 
 #Stacked Switch Config 7
 CONFIG7=$(ls /root/.meraki_mig/tmp/switch7.txt 2>/dev/null)
 SERIAL7=$(ls /root/.meraki_mig/tmp/serial7.txt 2>/dev/null)
+CATSERIAL=$(cat /root/.meraki_mig/tmp/serial7.txt 2>/dev/null)
 if [[ "$CONFIG7" == "/root/.meraki_mig/tmp/switch7.txt" && "$SERIAL7" == "/root/.meraki_mig/tmp/serial7.txt" ]]; then
-    echo "${GREEN}${IP}-Found switch 7${TEXTRESET}"
+    echo "${GREEN}${IP}-Found switch 7"
+    echo "New CloudID is:${CATSERIAL}${TEXTRESET}"
     \cp -f /root/.meraki_mig/tmp/switch7.txt /root/.meraki_mig/cisco_config.tmp
     \cp -f /root/.meraki_mig/tmp/serial7.txt /root/.meraki_mig/serial.txt
     #Move the Uplink ports to a separate file
@@ -240,14 +254,16 @@ if [[ "$CONFIG7" == "/root/.meraki_mig/tmp/switch7.txt" && "$SERIAL7" == "/root/
     python3.10 /root/.meraki_mig/port_migration.py
     rm -f /root/.meraki_mig/cisco_config.tmp
 else
-    echo " "
+    echo " " > /dev/null
 fi
 
 #Stacked Switch Config 8
 CONFIG8=$(ls /root/.meraki_mig/tmp/switch8.txt 2>/dev/null)
 SERIAL8=$(ls /root/.meraki_mig/tmp/serial8.txt 2>/dev/null)
+CATSERIAL=$(cat /root/.meraki_mig/tmp/serial8.txt 2>/dev/null)
 if [[ "$CONFIG8" == "/root/.meraki_mig/tmp/switch8.txt" && "$SERIAL8" == "/root/.meraki_mig/tmp/serial8.txt" ]]; then
-    echo "${GREEN}${IP}-Found switch 8${TEXTRESET}"
+    echo "${GREEN}${IP}-Found switch 8"
+    echo "New CloudID is:${CATSERIAL}${TEXTRESET}"
     \cp -f /root/.meraki_mig/tmp/switch8.txt /root/.meraki_mig/cisco_config.tmp
     \cp -f /root/.meraki_mig/tmp/serial8.txt /root/.meraki_mig/serial.txt
     #Move the Uplink ports to a separate file
@@ -257,14 +273,16 @@ if [[ "$CONFIG8" == "/root/.meraki_mig/tmp/switch8.txt" && "$SERIAL8" == "/root/
     python3.10 /root/.meraki_mig/port_migration.py
     rm -f /root/.meraki_mig/cisco_config.tmp
 else
-    echo " "
+    echo " " > /dev/null
 fi
 
 #Stacked Switch Config 9
 CONFIG9=$(ls /root/.meraki_mig/tmp/switch9.txt 2>/dev/null)
 SERIAL9=$(ls /root/.meraki_mig/tmp/serial9.txt 2>/dev/null)
+CATSERIAL=$(cat /root/.meraki_mig/tmp/serial9.txt 2>/dev/null)
 if [[ "$CONFIG9" == "/root/.meraki_mig/tmp/switch9.txt" && "$SERIAL9" == "/root/.meraki_mig/tmp/serial9.txt" ]]; then
-    echo "${GREEN}${IP}-Found switch 9${TEXTRESET}"
+    echo "${GREEN}${IP}-Found switch 9"
+    echo "New CloudID is:${CATSERIAL}${TEXTRESET}"
     \cp -f /root/.meraki_mig/tmp/switch9.txt /root/.meraki_mig/cisco_config.tmp
     \cp -f /root/.meraki_mig/tmp/serial9.txt /root/.meraki_mig/serial.txt
     #Move the Uplink ports to a separate file
@@ -274,7 +292,7 @@ if [[ "$CONFIG9" == "/root/.meraki_mig/tmp/switch9.txt" && "$SERIAL9" == "/root/
     python3.10 /root/.meraki_mig/port_migration.py
     rm -f /root/.meraki_mig/cisco_config.tmp
 else
-    echo " "
+    echo " " > /dev/null
 fi
 
 #Determine the Hardware Uplink (NM) for the switch
@@ -282,12 +300,14 @@ fi
 #Stacked Switch Config 1
 CONFIG1=$(ls /root/.meraki_mig/tmp/switch1.txt 2>/dev/null)
 SERIAL1=$(ls /root/.meraki_mig/tmp/serial1.txt 2>/dev/null)
-CATSERIAL=$(cat /root/.meraki_mig/tmp/serial1.txt)
+CATSERIAL=$(cat /root/.meraki_mig/tmp/serial1.txt 2>/dev/null)
 if [[ "$CONFIG1" == "/root/.meraki_mig/tmp/switch1.txt" && "$SERIAL1" == "/root/.meraki_mig/tmp/serial1.txt" ]]; then
     \cp -f /root/.meraki_mig/tmp/switch1.txt /root/.meraki_mig/cisco_config.tmp
     \cp -f /root/.meraki_mig/tmp/serial1.txt /root/.meraki_mig/serial.txt
+    echo "${GREEN}${IP}-Found switch 1-Looking for Uplink Ports"
+    echo "New CloudID is:${CATSERIAL}${TEXTRESET}"
 else
-    echo " "
+    echo " " > /dev/null
 fi
 
 #SWITCH1
@@ -324,8 +344,9 @@ if [ "$C3850_NM_2_40G" = "C3850-NM-2-40G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up1.tmp
     echo "${GREEN}Uplink conversion for Switch 1 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C3850_NM_4_10G" = "C3850-NM-4-10G-Compatible" ]; then
@@ -338,8 +359,9 @@ if [ "$C3850_NM_4_10G" = "C3850-NM-4-10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up1.tmp
     echo "${GREEN}Uplink conversion for Switch 1 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C3850_NM_8_10G" = "C3850-NM-8-10G-Compatible" ]; then
@@ -352,8 +374,9 @@ if [ "$C3850_NM_8_10G" = "C3850-NM-8-10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up1.tmp
     echo "${GREEN}Uplink conversion for Switch 1 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_2Q" = "C9300-NM-2Q-Compatible" ]; then
@@ -366,8 +389,9 @@ if [ "$C9300_NM_2Q" = "C9300-NM-2Q-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up1.tmp
     echo "${GREEN}Uplink conversion for Switch 1 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_2Y" = "C9300-NM-2Y-Compatible" ]; then
@@ -380,8 +404,9 @@ if [ "$C9300_NM_2Y" = "C9300-NM-2Y-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up1.tmp
     echo "${GREEN}Uplink conversion for Switch 1 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_2C" = "C9300-NM-2C-Compatible" ]; then
@@ -394,8 +419,9 @@ if [ "$C9300_NM_2C" = "C9300-NM-2C-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up1.tmp
     echo "${GREEN}Uplink conversion for Switch 1 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$MA_MOD_2X40G" = "MA_MOD_2X40G-Compatible" ]; then
@@ -408,8 +434,9 @@ if [ "$MA_MOD_2X40G" = "MA_MOD_2X40G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up1.tmp
     echo "${GREEN}Uplink conversion for Switch 1 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$MA_MOD_4X10G" = "MA-MOD-4X10G-Compatible" ]; then
@@ -422,8 +449,9 @@ if [ "$MA_MOD_4X10G" = "MA-MOD-4X10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up1.tmp
     echo "${GREEN}Uplink conversion for Switch 1 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_8X" = "C9300-NM-8X-Compatible" ]; then
@@ -436,8 +464,9 @@ if [ "$C9300_NM_8X" = "C9300-NM-8X-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up1.tmp
     echo "${GREEN}Uplink conversion for Switch 1 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_8Y" = "C9300-NM-8Y-Compatible" ]; then
@@ -450,8 +479,9 @@ if [ "$C9300_NM_8Y" = "C9300-NM-8Y-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up1.tmp
     echo "${GREEN}Uplink conversion for Switch 1 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$MA_MOD_4X10G" = "MA_MOD_4X10G-Compatible" ]; then
@@ -464,8 +494,9 @@ if [ "$MA_MOD_4X10G" = "MA_MOD_4X10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up1.tmp
     echo "${GREEN}Uplink conversion for Switch 1 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 if [ "$MA_MOD_8X10G" = "MA_MOD_8X10G-Compatible" ]; then
     echo "${GREEN}${IP}-Found Network Module MA_MOD_8X10G${TEXTRESET}"
@@ -477,18 +508,21 @@ if [ "$MA_MOD_8X10G" = "MA_MOD_8X10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up1.tmp
     echo "${GREEN}Uplink conversion for Switch 1 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 #SWITCH2
 #Stacked Switch Config 2
 CONFIG2=$(ls /root/.meraki_mig/tmp/switch2.txt 2>/dev/null)
 SERIAL2=$(ls /root/.meraki_mig/tmp/serial2.txt 2>/dev/null)
-CATSERIAL=$(cat /root/.meraki_mig/tmp/serial2.txt)
+CATSERIAL=$(cat /root/.meraki_mig/tmp/serial2.txt 2>/dev/null)
 if [[ "$CONFIG2" == "/root/.meraki_mig/tmp/switch2.txt" && "$SERIAL2" == "/root/.meraki_mig/tmp/serial2.txt" ]]; then
     \cp -f /root/.meraki_mig/tmp/switch2.txt /root/.meraki_mig/cisco_config.tmp
     \cp -f /root/.meraki_mig/tmp/serial2.txt /root/.meraki_mig/serial.txt
+    echo "${GREEN}${IP}-Found switch 2-Looking for Uplink Ports"
+    echo "New CloudID is:${CATSERIAL}${TEXTRESET}"
 else
     echo " "
 fi
@@ -526,8 +560,9 @@ if [ "$C3850_NM_2_40G" = "C3850-NM-2-40G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up2.tmp
     echo "${GREEN}Uplink conversion for Switch 2 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C3850_NM_4_10G" = "C3850-NM-4-10G-Compatible" ]; then
@@ -540,8 +575,9 @@ if [ "$C3850_NM_4_10G" = "C3850-NM-4-10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up2.tmp
     echo "${GREEN}Uplink conversion for Switch 2 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C3850_NM_8_10G" = "C3850-NM-8-10G-Compatible" ]; then
@@ -554,8 +590,9 @@ if [ "$C3850_NM_8_10G" = "C3850-NM-8-10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up2.tmp
     echo "${GREEN}Uplink conversion for Switch 2 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_2Q" = "C9300-NM-2Q-Compatible" ]; then
@@ -568,8 +605,9 @@ if [ "$C9300_NM_2Q" = "C9300-NM-2Q-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up2.tmp
     echo "${GREEN}Uplink conversion for Switch 2 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_2Y" = "C9300-NM-2Y-Compatible" ]; then
@@ -582,8 +620,9 @@ if [ "$C9300_NM_2Y" = "C9300-NM-2Y-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up2.tmp
     echo "${GREEN}Uplink conversion for Switch 2 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_2C" = "C9300-NM-2C-Compatible" ]; then
@@ -596,8 +635,9 @@ if [ "$C9300_NM_2C" = "C9300-NM-2C-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up2.tmp
     echo "${GREEN}Uplink conversion for Switch 2 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$MA_MOD_2X40G" = "MA_MOD_2X40G-Compatible" ]; then
@@ -610,8 +650,9 @@ if [ "$MA_MOD_2X40G" = "MA_MOD_2X40G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up2.tmp
     echo "${GREEN}Uplink conversion for Switch 2 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$MA_MOD_4X10G" = "MA-MOD-4X10G-Compatible" ]; then
@@ -624,8 +665,9 @@ if [ "$MA_MOD_4X10G" = "MA-MOD-4X10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up2.tmp
     echo "${GREEN}Uplink conversion for Switch 2 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_8X" = "C9300-NM-8X-Compatible" ]; then
@@ -638,8 +680,9 @@ if [ "$C9300_NM_8X" = "C9300-NM-8X-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up2.tmp
     echo "${GREEN}Uplink conversion for Switch 2 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_8Y" = "C9300-NM-8Y-Compatible" ]; then
@@ -652,8 +695,9 @@ if [ "$C9300_NM_8Y" = "C9300-NM-8Y-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up2.tmp
     echo "${GREEN}Uplink conversion for Switch 2 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$MA_MOD_4X10G" = "MA_MOD_4X10G-Compatible" ]; then
@@ -666,8 +710,9 @@ if [ "$MA_MOD_4X10G" = "MA_MOD_4X10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up2.tmp
     echo "${GREEN}Uplink conversion for Switch 2 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 if [ "$MA_MOD_8X10G" = "MA_MOD_8X10G-Compatible" ]; then
     echo "${GREEN}${IP}-Found Network Module MA_MOD_8X10G${TEXTRESET}"
@@ -679,8 +724,9 @@ if [ "$MA_MOD_8X10G" = "MA_MOD_8X10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up2.tmp
     echo "${GREEN}Uplink conversion for Switch 2 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 #SWITCH3
@@ -691,8 +737,10 @@ CATSERIAL=$(cat /root/.meraki_mig/tmp/serial3.txt 2>/dev/null)
 if [[ "$CONFIG3" == "/root/.meraki_mig/tmp/switch3.txt" && "$SERIAL3" == "/root/.meraki_mig/tmp/serial3.txt" ]]; then
     \cp -f /root/.meraki_mig/tmp/switch3.txt /root/.meraki_mig/cisco_config.tmp
     \cp -f /root/.meraki_mig/tmp/serial3.txt /root/.meraki_mig/serial.txt
+    echo "${GREEN}${IP}-Found switch 3-Looking for Uplink Ports"
+    echo "New CloudID is:${CATSERIAL}${TEXTRESET}"
 else
-    echo " "
+    echo " " > /dev/null
 fi
 
 #C3850-NM-2-40G 2 x 40
@@ -728,8 +776,9 @@ if [ "$C3850_NM_2_40G" = "C3850-NM-2-40G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up3.tmp
     echo "${GREEN}Uplink conversion for Switch 3 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C3850_NM_4_10G" = "C3850-NM-4-10G-Compatible" ]; then
@@ -742,8 +791,9 @@ if [ "$C3850_NM_4_10G" = "C3850-NM-4-10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up3.tmp
     echo "${GREEN}Uplink conversion for Switch 3 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C3850_NM_8_10G" = "C3850-NM-8-10G-Compatible" ]; then
@@ -756,8 +806,9 @@ if [ "$C3850_NM_8_10G" = "C3850-NM-8-10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up3.tmp
     echo "${GREEN}Uplink conversion for Switch 3 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_2Q" = "C9300-NM-2Q-Compatible" ]; then
@@ -770,8 +821,9 @@ if [ "$C9300_NM_2Q" = "C9300-NM-2Q-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up3.tmp
     echo "${GREEN}Uplink conversion for Switch 3 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_2Y" = "C9300-NM-2Y-Compatible" ]; then
@@ -784,8 +836,9 @@ if [ "$C9300_NM_2Y" = "C9300-NM-2Y-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up3.tmp
     echo "${GREEN}Uplink conversion for Switch 3 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_2C" = "C9300-NM-2C-Compatible" ]; then
@@ -798,8 +851,9 @@ if [ "$C9300_NM_2C" = "C9300-NM-2C-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up3.tmp
     echo "${GREEN}Uplink conversion for Switch 3 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$MA_MOD_2X40G" = "MA_MOD_2X40G-Compatible" ]; then
@@ -812,8 +866,9 @@ if [ "$MA_MOD_2X40G" = "MA_MOD_2X40G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up3.tmp
     echo "${GREEN}Uplink conversion for Switch 3 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$MA_MOD_4X10G" = "MA-MOD-4X10G-Compatible" ]; then
@@ -826,8 +881,9 @@ if [ "$MA_MOD_4X10G" = "MA-MOD-4X10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up3.tmp
     echo "${GREEN}Uplink conversion for Switch 3 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_8X" = "C9300-NM-8X-Compatible" ]; then
@@ -840,8 +896,9 @@ if [ "$C9300_NM_8X" = "C9300-NM-8X-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up3.tmp
     echo "${GREEN}Uplink conversion for Switch 3 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_8Y" = "C9300-NM-8Y-Compatible" ]; then
@@ -854,8 +911,9 @@ if [ "$C9300_NM_8Y" = "C9300-NM-8Y-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up3.tmp
     echo "${GREEN}Uplink conversion for Switch 3 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$MA_MOD_4X10G" = "MA_MOD_4X10G-Compatible" ]; then
@@ -868,8 +926,9 @@ if [ "$MA_MOD_4X10G" = "MA_MOD_4X10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up3.tmp
     echo "${GREEN}Uplink conversion for Switch 3 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 if [ "$MA_MOD_8X10G" = "MA_MOD_8X10G-Compatible" ]; then
     echo "${GREEN}${IP}-Found Network Module MA_MOD_8X10G${TEXTRESET}"
@@ -881,8 +940,9 @@ if [ "$MA_MOD_8X10G" = "MA_MOD_8X10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up3.tmp
     echo "${GREEN}Uplink conversion for Switch 3 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 #SWITCH4
@@ -893,8 +953,10 @@ CATSERIAL=$(cat /root/.meraki_mig/tmp/serial4.txt 2>/dev/null)
 if [[ "$CONFIG4" == "/root/.meraki_mig/tmp/switch4.txt" && "$SERIAL4" == "/root/.meraki_mig/tmp/serial4.txt" ]]; then
     \cp -f /root/.meraki_mig/tmp/switch4.txt /root/.meraki_mig/cisco_config.tmp
     \cp -f /root/.meraki_mig/tmp/serial4.txt /root/.meraki_mig/serial.txt
+    echo "${GREEN}${IP}-Found switch 4-Looking for Uplink Ports"
+    echo "New CloudID is:${CATSERIAL}${TEXTRESET}"
 else
-    echo " "
+    echo " " > /dev/null
 fi
 
 #C3850-NM-2-40G 2 x 40
@@ -930,8 +992,9 @@ if [ "$C3850_NM_2_40G" = "C3850-NM-2-40G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up4.tmp
     echo "${GREEN}Uplink conversion for Switch 4 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C3850_NM_4_10G" = "C3850-NM-4-10G-Compatible" ]; then
@@ -944,8 +1007,9 @@ if [ "$C3850_NM_4_10G" = "C3850-NM-4-10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up4.tmp
     echo "${GREEN}Uplink conversion for Switch 4 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C3850_NM_8_10G" = "C3850-NM-8-10G-Compatible" ]; then
@@ -958,8 +1022,9 @@ if [ "$C3850_NM_8_10G" = "C3850-NM-8-10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up4.tmp
     echo "${GREEN}Uplink conversion for Switch 4 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_2Q" = "C9300-NM-2Q-Compatible" ]; then
@@ -972,8 +1037,9 @@ if [ "$C9300_NM_2Q" = "C9300-NM-2Q-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up4.tmp
     echo "${GREEN}Uplink conversion for Switch 4 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_2Y" = "C9300-NM-2Y-Compatible" ]; then
@@ -986,8 +1052,9 @@ if [ "$C9300_NM_2Y" = "C9300-NM-2Y-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up4.tmp
     echo "${GREEN}Uplink conversion for Switch 4 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_2C" = "C9300-NM-2C-Compatible" ]; then
@@ -1000,8 +1067,9 @@ if [ "$C9300_NM_2C" = "C9300-NM-2C-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up4.tmp
     echo "${GREEN}Uplink conversion for Switch 4 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$MA_MOD_2X40G" = "MA_MOD_2X40G-Compatible" ]; then
@@ -1014,8 +1082,9 @@ if [ "$MA_MOD_2X40G" = "MA_MOD_2X40G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up4.tmp
     echo "${GREEN}Uplink conversion for Switch 4 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$MA_MOD_4X10G" = "MA-MOD-4X10G-Compatible" ]; then
@@ -1028,8 +1097,9 @@ if [ "$MA_MOD_4X10G" = "MA-MOD-4X10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up4.tmp
     echo "${GREEN}Uplink conversion for Switch 4 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_8X" = "C9300-NM-8X-Compatible" ]; then
@@ -1042,8 +1112,9 @@ if [ "$C9300_NM_8X" = "C9300-NM-8X-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up4.tmp
     echo "${GREEN}Uplink conversion for Switch 4 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_8Y" = "C9300-NM-8Y-Compatible" ]; then
@@ -1056,8 +1127,9 @@ if [ "$C9300_NM_8Y" = "C9300-NM-8Y-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up4.tmp
     echo "${GREEN}Uplink conversion for Switch 4 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$MA_MOD_4X10G" = "MA_MOD_4X10G-Compatible" ]; then
@@ -1070,8 +1142,9 @@ if [ "$MA_MOD_4X10G" = "MA_MOD_4X10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up4.tmp
     echo "${GREEN}Uplink conversion for Switch 4 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 if [ "$MA_MOD_8X10G" = "MA_MOD_8X10G-Compatible" ]; then
     echo "${GREEN}${IP}-Found Network Module MA_MOD_8X10G${TEXTRESET}"
@@ -1083,8 +1156,9 @@ if [ "$MA_MOD_8X10G" = "MA_MOD_8X10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up4.tmp
     echo "${GREEN}Uplink conversion for Switch 4 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 #SWITCH5
@@ -1095,8 +1169,10 @@ CATSERIAL=$(cat /root/.meraki_mig/tmp/serial5.txt 2>/dev/null)
 if [[ "$CONFIG5" == "/root/.meraki_mig/tmp/switch5.txt" && "$SERIAL5" == "/root/.meraki_mig/tmp/serial5.txt" ]]; then
     \cp -f /root/.meraki_mig/tmp/switch5.txt /root/.meraki_mig/cisco_config.tmp
     \cp -f /root/.meraki_mig/tmp/serial5.txt /root/.meraki_mig/serial.txt
+    echo "${GREEN}${IP}-Found switch 5-Looking for Uplink Ports"
+    echo "New CloudID is:${CATSERIAL}${TEXTRESET}"
 else
-    echo " "
+    echo " " > /dev/null
 fi
 
 #C3850-NM-2-40G 2 x 40
@@ -1132,8 +1208,9 @@ if [ "$C3850_NM_2_40G" = "C3850-NM-2-40G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up5.tmp
     echo "${GREEN}Uplink conversion for Switch 5 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C3850_NM_4_10G" = "C3850-NM-4-10G-Compatible" ]; then
@@ -1146,8 +1223,9 @@ if [ "$C3850_NM_4_10G" = "C3850-NM-4-10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up5.tmp
     echo "${GREEN}Uplink conversion for Switch 5 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C3850_NM_8_10G" = "C3850-NM-8-10G-Compatible" ]; then
@@ -1160,8 +1238,9 @@ if [ "$C3850_NM_8_10G" = "C3850-NM-8-10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up5.tmp
     echo "${GREEN}Uplink conversion for Switch 5 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_2Q" = "C9300-NM-2Q-Compatible" ]; then
@@ -1174,8 +1253,9 @@ if [ "$C9300_NM_2Q" = "C9300-NM-2Q-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up5.tmp
     echo "${GREEN}Uplink conversion for Switch 5 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_2Y" = "C9300-NM-2Y-Compatible" ]; then
@@ -1188,8 +1268,9 @@ if [ "$C9300_NM_2Y" = "C9300-NM-2Y-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up5.tmp
     echo "${GREEN}Uplink conversion for Switch 5 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_2C" = "C9300-NM-2C-Compatible" ]; then
@@ -1202,8 +1283,9 @@ if [ "$C9300_NM_2C" = "C9300-NM-2C-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up5.tmp
     echo "${GREEN}Uplink conversion for Switch 5 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$MA_MOD_2X40G" = "MA_MOD_2X40G-Compatible" ]; then
@@ -1216,8 +1298,9 @@ if [ "$MA_MOD_2X40G" = "MA_MOD_2X40G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up5.tmp
     echo "${GREEN}Uplink conversion for Switch 5 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$MA_MOD_4X10G" = "MA-MOD-4X10G-Compatible" ]; then
@@ -1230,8 +1313,9 @@ if [ "$MA_MOD_4X10G" = "MA-MOD-4X10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up5.tmp
     echo "${GREEN}Uplink conversion for Switch 5 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_8X" = "C9300-NM-8X-Compatible" ]; then
@@ -1244,8 +1328,9 @@ if [ "$C9300_NM_8X" = "C9300-NM-8X-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up5.tmp
     echo "${GREEN}Uplink conversion for Switch 5 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_8Y" = "C9300-NM-8Y-Compatible" ]; then
@@ -1258,8 +1343,9 @@ if [ "$C9300_NM_8Y" = "C9300-NM-8Y-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up5.tmp
     echo "${GREEN}Uplink conversion for Switch 5 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$MA_MOD_4X10G" = "MA_MOD_4X10G-Compatible" ]; then
@@ -1272,8 +1358,9 @@ if [ "$MA_MOD_4X10G" = "MA_MOD_4X10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up5.tmp
     echo "${GREEN}Uplink conversion for Switch 5 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 if [ "$MA_MOD_8X10G" = "MA_MOD_8X10G-Compatible" ]; then
     echo "${GREEN}${IP}-Found Network Module MA_MOD_8X10G${TEXTRESET}"
@@ -1285,8 +1372,9 @@ if [ "$MA_MOD_8X10G" = "MA_MOD_8X10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up5.tmp
     echo "${GREEN}Uplink conversion for Switch 5 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 #SWITCH6
@@ -1297,8 +1385,10 @@ CATSERIAL=$(cat /root/.meraki_mig/tmp/serial6.txt 2>/dev/null)
 if [[ "$CONFIG6" == "/root/.meraki_mig/tmp/switch6.txt" && "$SERIAL6" == "/root/.meraki_mig/tmp/serial6.txt" ]]; then
     \cp -f /root/.meraki_mig/tmp/switch6.txt /root/.meraki_mig/cisco_config.tmp
     \cp -f /root/.meraki_mig/tmp/serial6.txt /root/.meraki_mig/serial.txt
+    echo "${GREEN}${IP}-Found switch 6-Looking for Uplink Ports"
+    echo "New CloudID is:${CATSERIAL}${TEXTRESET}"
 else
-    echo " "
+    echo " " > /dev/null
 fi
 
 #C3850-NM-2-40G 2 x 40
@@ -1334,8 +1424,9 @@ if [ "$C3850_NM_2_40G" = "C3850-NM-2-40G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up6.tmp
     echo "${GREEN}Uplink conversion for Switch 6 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C3850_NM_4_10G" = "C3850-NM-4-10G-Compatible" ]; then
@@ -1348,8 +1439,9 @@ if [ "$C3850_NM_4_10G" = "C3850-NM-4-10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up6.tmp
     echo "${GREEN}Uplink conversion for Switch 6 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C3850_NM_8_10G" = "C3850-NM-8-10G-Compatible" ]; then
@@ -1362,8 +1454,9 @@ if [ "$C3850_NM_8_10G" = "C3850-NM-8-10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up6.tmp
     echo "${GREEN}Uplink conversion for Switch 6 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_2Q" = "C9300-NM-2Q-Compatible" ]; then
@@ -1376,8 +1469,9 @@ if [ "$C9300_NM_2Q" = "C9300-NM-2Q-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up6.tmp
     echo "${GREEN}Uplink conversion for Switch 6 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_2Y" = "C9300-NM-2Y-Compatible" ]; then
@@ -1390,8 +1484,9 @@ if [ "$C9300_NM_2Y" = "C9300-NM-2Y-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up6.tmp
     echo "${GREEN}Uplink conversion for Switch 6 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_2C" = "C9300-NM-2C-Compatible" ]; then
@@ -1404,8 +1499,9 @@ if [ "$C9300_NM_2C" = "C9300-NM-2C-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up6.tmp
     echo "${GREEN}Uplink conversion for Switch 6 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$MA_MOD_2X40G" = "MA_MOD_2X40G-Compatible" ]; then
@@ -1418,8 +1514,9 @@ if [ "$MA_MOD_2X40G" = "MA_MOD_2X40G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up6.tmp
     echo "${GREEN}Uplink conversion for Switch 6 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$MA_MOD_4X10G" = "MA-MOD-4X10G-Compatible" ]; then
@@ -1432,8 +1529,9 @@ if [ "$MA_MOD_4X10G" = "MA-MOD-4X10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up6.tmp
     echo "${GREEN}Uplink conversion for Switch 6 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_8X" = "C9300-NM-8X-Compatible" ]; then
@@ -1446,8 +1544,9 @@ if [ "$C9300_NM_8X" = "C9300-NM-8X-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up6.tmp
     echo "${GREEN}Uplink conversion for Switch 6 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_8Y" = "C9300-NM-8Y-Compatible" ]; then
@@ -1460,8 +1559,9 @@ if [ "$C9300_NM_8Y" = "C9300-NM-8Y-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up6.tmp
     echo "${GREEN}Uplink conversion for Switch 6 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$MA_MOD_4X10G" = "MA_MOD_4X10G-Compatible" ]; then
@@ -1474,8 +1574,9 @@ if [ "$MA_MOD_4X10G" = "MA_MOD_4X10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up6.tmp
     echo "${GREEN}Uplink conversion for Switch 6 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 if [ "$MA_MOD_8X10G" = "MA_MOD_8X10G-Compatible" ]; then
     echo "${GREEN}${IP}-Found Network Module MA_MOD_8X10G${TEXTRESET}"
@@ -1487,8 +1588,9 @@ if [ "$MA_MOD_8X10G" = "MA_MOD_8X10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up6.tmp
     echo "${GREEN}Uplink conversion for Switch 6 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 #SWITCH7
@@ -1499,8 +1601,10 @@ CATSERIAL=$(cat /root/.meraki_mig/tmp/serial7.txt 2>/dev/null)
 if [[ "$CONFIG7" == "/root/.meraki_mig/tmp/switch7.txt" && "$SERIAL7" == "/root/.meraki_mig/tmp/serial7.txt" ]]; then
     \cp -f /root/.meraki_mig/tmp/switch7.txt /root/.meraki_mig/cisco_config.tmp
     \cp -f /root/.meraki_mig/tmp/serial7.txt /root/.meraki_mig/serial.txt
+    echo "${GREEN}${IP}-Found switch 7-Looking for Uplink Ports"
+    echo "New CloudID is:${CATSERIAL}${TEXTRESET}"
 else
-    echo " "
+    echo " " > /dev/null
 fi
 
 #C3850-NM-2-40G 2 x 40
@@ -1536,8 +1640,9 @@ if [ "$C3850_NM_2_40G" = "C3850-NM-2-40G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up7.tmp
     echo "${GREEN}Uplink conversion for Switch 7 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C3850_NM_4_10G" = "C3850-NM-4-10G-Compatible" ]; then
@@ -1550,8 +1655,9 @@ if [ "$C3850_NM_4_10G" = "C3850-NM-4-10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up7.tmp
     echo "${GREEN}Uplink conversion for Switch 7 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C3850_NM_8_10G" = "C3850-NM-8-10G-Compatible" ]; then
@@ -1564,8 +1670,9 @@ if [ "$C3850_NM_8_10G" = "C3850-NM-8-10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up7.tmp
     echo "${GREEN}Uplink conversion for Switch 7 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_2Q" = "C9300-NM-2Q-Compatible" ]; then
@@ -1578,8 +1685,9 @@ if [ "$C9300_NM_2Q" = "C9300-NM-2Q-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up7.tmp
     echo "${GREEN}Uplink conversion for Switch 7 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_2Y" = "C9300-NM-2Y-Compatible" ]; then
@@ -1592,8 +1700,9 @@ if [ "$C9300_NM_2Y" = "C9300-NM-2Y-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up7.tmp
     echo "${GREEN}Uplink conversion for Switch 7 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_2C" = "C9300-NM-2C-Compatible" ]; then
@@ -1606,8 +1715,9 @@ if [ "$C9300_NM_2C" = "C9300-NM-2C-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up7.tmp
     echo "${GREEN}Uplink conversion for Switch 7 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$MA_MOD_2X40G" = "MA_MOD_2X40G-Compatible" ]; then
@@ -1620,8 +1730,9 @@ if [ "$MA_MOD_2X40G" = "MA_MOD_2X40G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up7.tmp
     echo "${GREEN}Uplink conversion for Switch 7 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$MA_MOD_4X10G" = "MA-MOD-4X10G-Compatible" ]; then
@@ -1634,8 +1745,9 @@ if [ "$MA_MOD_4X10G" = "MA-MOD-4X10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up7.tmp
     echo "${GREEN}Uplink conversion for Switch 7 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_8X" = "C9300-NM-8X-Compatible" ]; then
@@ -1648,8 +1760,9 @@ if [ "$C9300_NM_8X" = "C9300-NM-8X-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up7.tmp
     echo "${GREEN}Uplink conversion for Switch 7 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_8Y" = "C9300-NM-8Y-Compatible" ]; then
@@ -1662,8 +1775,9 @@ if [ "$C9300_NM_8Y" = "C9300-NM-8Y-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up7.tmp
     echo "${GREEN}Uplink conversion for Switch 7 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$MA_MOD_4X10G" = "MA_MOD_4X10G-Compatible" ]; then
@@ -1676,8 +1790,9 @@ if [ "$MA_MOD_4X10G" = "MA_MOD_4X10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up7.tmp
     echo "${GREEN}Uplink conversion for Switch 7 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 if [ "$MA_MOD_8X10G" = "MA_MOD_8X10G-Compatible" ]; then
     echo "${GREEN}${IP}-Found Network Module MA_MOD_8X10G${TEXTRESET}"
@@ -1689,8 +1804,9 @@ if [ "$MA_MOD_8X10G" = "MA_MOD_8X10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up7.tmp
     echo "${GREEN}Uplink conversion for Switch 7 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 #SWITCH8
@@ -1701,8 +1817,10 @@ CATSERIAL=$(cat /root/.meraki_mig/tmp/serial8.txt 2>/dev/null)
 if [[ "$CONFIG8" == "/root/.meraki_mig/tmp/switch8.txt" && "$SERIAL8" == "/root/.meraki_mig/tmp/serial8.txt" ]]; then
     \cp -f /root/.meraki_mig/tmp/switch8.txt /root/.meraki_mig/cisco_config.tmp
     \cp -f /root/.meraki_mig/tmp/serial8.txt /root/.meraki_mig/serial.txt
+    echo "${GREEN}${IP}-Found switch 8-Looking for Uplink Ports"
+    echo "New CloudID is:${CATSERIAL}${TEXTRESET}"
 else
-    echo " "
+    echo " " > /dev/null
 fi
 
 #C3850-NM-2-40G 2 x 40
@@ -1738,8 +1856,9 @@ if [ "$C3850_NM_2_40G" = "C3850-NM-2-40G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up8.tmp
     echo "${GREEN}Uplink conversion for Switch 8 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C3850_NM_4_10G" = "C3850-NM-4-10G-Compatible" ]; then
@@ -1752,8 +1871,9 @@ if [ "$C3850_NM_4_10G" = "C3850-NM-4-10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up8.tmp
     echo "${GREEN}Uplink conversion for Switch 8 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C3850_NM_8_10G" = "C3850-NM-8-10G-Compatible" ]; then
@@ -1766,8 +1886,9 @@ if [ "$C3850_NM_8_10G" = "C3850-NM-8-10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up8.tmp
     echo "${GREEN}Uplink conversion for Switch 8 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_2Q" = "C9300-NM-2Q-Compatible" ]; then
@@ -1780,8 +1901,9 @@ if [ "$C9300_NM_2Q" = "C9300-NM-2Q-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up8.tmp
     echo "${GREEN}Uplink conversion for Switch 8 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_2Y" = "C9300-NM-2Y-Compatible" ]; then
@@ -1794,8 +1916,9 @@ if [ "$C9300_NM_2Y" = "C9300-NM-2Y-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up8.tmp
     echo "${GREEN}Uplink conversion for Switch 8 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_2C" = "C9300-NM-2C-Compatible" ]; then
@@ -1808,8 +1931,9 @@ if [ "$C9300_NM_2C" = "C9300-NM-2C-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up8.tmp
     echo "${GREEN}Uplink conversion for Switch 8 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$MA_MOD_2X40G" = "MA_MOD_2X40G-Compatible" ]; then
@@ -1822,8 +1946,9 @@ if [ "$MA_MOD_2X40G" = "MA_MOD_2X40G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up8.tmp
     echo "${GREEN}Uplink conversion for Switch 8 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$MA_MOD_4X10G" = "MA-MOD-4X10G-Compatible" ]; then
@@ -1836,8 +1961,9 @@ if [ "$MA_MOD_4X10G" = "MA-MOD-4X10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up8.tmp
     echo "${GREEN}Uplink conversion for Switch 8 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_8X" = "C9300-NM-8X-Compatible" ]; then
@@ -1850,8 +1976,9 @@ if [ "$C9300_NM_8X" = "C9300-NM-8X-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up8.tmp
     echo "${GREEN}Uplink conversion for Switch 8 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 if [ "$C9300_NM_8Y" = "C9300-NM-8Y-Compatible" ]; then
@@ -1864,8 +1991,9 @@ if [ "$C9300_NM_8Y" = "C9300-NM-8Y-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up8.tmp
     echo "${GREEN}Uplink conversion for Switch 8 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else 
+    echo " " > /dev/null
 fi
 
 if [ "$MA_MOD_4X10G" = "MA_MOD_4X10G-Compatible" ]; then
@@ -1878,8 +2006,9 @@ if [ "$MA_MOD_4X10G" = "MA_MOD_4X10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up8.tmp
     echo "${GREEN}Uplink conversion for Switch 8 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 if [ "$MA_MOD_8X10G" = "MA_MOD_8X10G-Compatible" ]; then
     echo "${GREEN}${IP}-Found Network Module MA_MOD_8X10G${TEXTRESET}"
@@ -1891,8 +2020,9 @@ if [ "$MA_MOD_8X10G" = "MA_MOD_8X10G-Compatible" ]; then
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up8.tmp
     echo "${GREEN}Uplink conversion for Switch 8 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-else
     echo " "
+else
+    echo " " > /dev/null
 fi
 
 rm -f /root/.meraki_mig/serial.txt
