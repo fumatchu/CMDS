@@ -25,7 +25,7 @@ while read -r IP; do
 sed -i '/^/d' /root/.meraki_mon_switch/ip_list_single
 
   #What model is the Switch?
-  MODEL9200=$(cat /var/lib/tftpboot/mon_switch/${IP}-shver | grep "Model Number" | grep C9200 -Eo)
+  MODEL9200=$(cat /var/lib/tftpboot/mon_switch/${IP}-shver | grep "Model Number" | grep C9200 -Eo | grep C9200 -m 1)
 
 if [ "$MODEL9200" == "C9200" ]; then
     clear
