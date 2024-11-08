@@ -25,9 +25,9 @@ while read -r IP; do
 sed -i '/^/d' /root/.meraki_mon_switch/ip_list_single
 
   #What model is the Switch?
-  MODEL9200=$(cat /var/lib/tftpboot/mon_switch/${IP}-shver | grep "Model Number" | grep C9200 | tr -cd 'C9200' | sed 's/.$//')
-  MODELC920=$(cat /var/lib/tftpboot/mon_switch/${IP}-shver | grep "Model Number" | grep C9200 | tr -cd 'C9200' | sed 's/.$//' | sed 's/^\(.....\).*/\1/')
-if [ "$MODEL9200" == "C9200" ] || [ "$MODELC920" == "C920" ]; then
+  MODEL9200=$(cat /var/lib/tftpboot/mon_switch/${IP}-shver | grep "Model Number" | grep C9200 -Eo)
+
+if [ "$MODEL9200" == "C9200" ]; then
     clear
     echo "${GREEN}This switch with IP address $IP is a 9200 series switch, deploying the IOS-XE Lite Image"${TEXTRESET}
     sed -i "/set image/c\set image ${IOS_IMAGE_LITE}" /root/.meraki_mon_switch/deploy_img_single.exp
