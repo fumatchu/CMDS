@@ -12,7 +12,7 @@ clear
 #Sanitize config files first
 clear
 rm -r -f /root/.meraki_mig/ip_list_single
-sed -i '/^/d' /root/.meraki_mig/ip_list_single
+#sed -i '/^/d' /root/.meraki_mig/ip_list_single
 touch /root/.meraki_mig/ip_list_single
 touch /root/.meraki_mig/check.tmp
 clear
