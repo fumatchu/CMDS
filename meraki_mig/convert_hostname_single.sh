@@ -37,9 +37,9 @@ sed -i '/,$/ s/$/ '"$HOSTNAME"'/' "$input_file"
 # Use sed to remove anything after the second comma, including the second comma, in each line
 sed -i 's/^\([^,]*,[^,]*\),.*/\1/' "$input_file"
 done <"$INPUT"
-clear
+
 echo ${GREEN}"Deploying Update"${TEXTRESET}
 unbuffer python3.10 /root/.meraki_mig/deploy_hostnames.py
-sleep 2
+echo " "
 #cleanup
 rm -f /root/.meraki_mig/hostnames.txt
