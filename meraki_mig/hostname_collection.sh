@@ -6,6 +6,7 @@ YELLOW=$(tput setaf 3)
 GREEN=$(tput setaf 2)
 DATE=$(date)
 clear
+
 cat <<EOF
 ${GREEN}Hostname Migration${TEXTRESET}
 
@@ -17,7 +18,6 @@ clear
 echo "############################Collection time ${DATE}######################################"
 cat <<EOF
 ${YELLOW}Migrating Hostnames${TEXTRESET}
-*Number of switches is cumulative
 
 EOF
 
@@ -26,35 +26,19 @@ while read -r IP; do
   # Print the IP address to the console
   echo "$IP"
 
-#Get the Serials
-cat /var/lib/tftpboot/mig_switch/${IP}-shmr | grep C9300 |grep -E -o "Q.{0,13}" >> /root/.meraki_mig/hostnames.txt
 
-#Get the hostname
-HOSTNAME=$(cat /var/lib/tftpboot/mig_switch/${IP} | grep hostname | sed 's/hostname //g')
+#Test if this is a stack switch
 
-# Input file
-input_file="/root/.meraki_mig/hostnames.txt"  # Replace with your input file path
+STACK=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmr| sed -n '/^2/p'  2>/dev/null)
 
-# Check if input file exists
-if [[ ! -f "$input_file" ]]; then
-    echo "Error: $input_file does not exist."
-    exit 1
+if [ "$STACK" = "" ]; then
+     sed -i '/^IP=/c\IP=' /root/.meraki_mig/convert_hostname_single.sh
+     sed -i "s/IP=/IP=${IP}/g" /root/.meraki_mig/convert_stack_single.sh
+     /root/.meraki_mig/convert_hostname_single.sh
+   else
+     sed -i '/^IP=/c\IP=' /root/.meraki_mig/convert_hostname_stack.sh
+     sed -i "s/IP=/IP=${IP}/g" /root/.meraki_mig/convert_hostname_stack.sh
+     /root/.meraki_mig/convert_hostname_stack.sh
 fi
 
-# Count the number of lines in the input file
-line_count=$(wc -l < "$input_file")
-echo "Number of switches considered: $line_count"
-echo " "
-
-sed -i 's/$/,/' "$input_file"
-# Insert the variable into lines that end with a comma and have no characters after it
-sed -i '/,$/ s/$/ '"$HOSTNAME"'/' "$input_file"
-# Use sed to remove anything after the second comma, including the second comma, in each line
-sed -i 's/^\([^,]*,[^,]*\),.*/\1/' "$input_file"
 done <"$INPUT"
-
-echo ${GREEN}"Deploying Update"${TEXTRESET}
-unbuffer python3.10 /root/.meraki_mig/deploy_hostnames.py
-sleep 2
-#cleanup
-rm -f /root/.meraki_mig/hostnames.txt
