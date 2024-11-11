@@ -299,8 +299,8 @@ sed -i "/set nameserver2/c\set nameserver2 ${NSIP2}" /root/.meraki_mig/update_ip
 sed -i "/set nameserver2/c\set nameserver2 ${NSIP2}" /root/.meraki_mig/update_ip_name-server_single.exp
 clear
 cat <<EOF
-${GREEN}Updating ip name server with IP address ${NSIP} ${TEXTRESET}
-${GREEN}Updating ip name server with IP address ${NSIP2} ${TEXTRESET}
+${GREEN}Updating ip name server with IP address${TEXTRESET} ${NSIP}
+${GREEN}Updating ip name server with IP address${TEXTRESET} ${NSIP2}
 EOF
 sleep 1
 clear
