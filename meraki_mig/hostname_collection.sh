@@ -33,7 +33,7 @@ STACK=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmr| sed -n '/^2/p'  2>/dev/null
 
 if [ "$STACK" = "" ]; then
      sed -i '/^IP=/c\IP=' /root/.meraki_mig/convert_hostname_single.sh
-     sed -i "s/IP=/IP=${IP}/g" /root/.meraki_mig/convert_stack_single.sh
+     sed -i "s/IP=/IP=${IP}/g" /root/.meraki_mig/convert_hostname_single.sh
      /root/.meraki_mig/convert_hostname_single.sh
    else
      sed -i '/^IP=/c\IP=' /root/.meraki_mig/convert_hostname_stack.sh
