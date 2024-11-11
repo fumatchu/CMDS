@@ -77,7 +77,7 @@ fi
 paste -d ',' "/root/.meraki_mig/serial.tmp" "/root/.meraki_mig/hostnames.tmp" > /root/.meraki_mig/hostnames.txt
 echo ${GREEN}"Deploying Update"${TEXTRESET}
 unbuffer python3.10 /root/.meraki_mig/deploy_hostnames.py
-clear
+echo " "
 
 rm -f /root/.meraki_mig/hostnames.tmp
 rm -f /root/.meraki_mig/serial.tmp
