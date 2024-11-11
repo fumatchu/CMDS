@@ -1,5 +1,5 @@
 import requests
-
+import time
 # Replace with your Meraki API key
 API_KEY = 
 
@@ -41,3 +41,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+time.sleep(1)
