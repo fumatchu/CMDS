@@ -230,10 +230,7 @@ The Wizard is complete!
 The following information has ben set:
 Username to login to the switches: ${GREEN}${USER}${TEXTRESET}
 Password to login to the switches: ${GREEN}${PASS}${TEXTRESET}
-Active IOS-XE Images to Use: ${GREEN}${IMAGE}${TEXTRESET}
-IP HTTP source interface VLAN number: ${GREEN}${VLAN}${TEXTRESET}
-DNS IP Address: ${GREEN}${NSIP}${TEXTRESET}
-DNS IP Address: ${GREEN}${NSIP2}${TEXTRESET}
+
 
 Start your first collection by selecting
 ${GREEN}Data Collection${TEXTRESET} from the Main Menu
