@@ -6,6 +6,8 @@ YELLOW=$(tput setaf 3)
 GREEN=$(tput setaf 2)
 SERVER_IP=$(hostname -I)
 
+rm -f -r /root/port_migration
+rm -r -f /root/.meraki_port_mig/tmp/*
 
 INPUT="/root/.meraki_port_mig/ip_list"
 
@@ -149,6 +151,6 @@ echo "https://$SERVER_IP:9090/=$SERVER_IP/navigator" | tr -d '[:blank:]'
 rm -f /root/.meraki_port_mig/switch_collection.csv
 rm -f /root/.meraki_port_mig/switch_collection.final
 rm -f /root/.meraki_port_mig/switch_collection.final.tmp
-
+rm -r -f /root/.meraki_port_mig/tmp/*
 
 read -p "Press Enter to Continue"
