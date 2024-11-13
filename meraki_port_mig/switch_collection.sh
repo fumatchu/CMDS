@@ -8,6 +8,7 @@ SERVER_IP=$(hostname -I)
 
 rm -f -r /root/port_migration
 rm -r -f /root/.meraki_port_mig/tmp/*
+mkdir -p /root/port_migration/staging
 
 INPUT="/root/.meraki_port_mig/ip_list"
 
@@ -132,7 +133,7 @@ mkdir /root/port_migration/
 #Remove Carriage returns
 grep -v '^[[:space:]]*$' "/root/.meraki_port_mig/switch_collection.final" > "/root/.meraki_port_mig/switch_collection.final.tmp"
 sed -e "s/ /,/g" </root/.meraki_port_mig/switch_collection.final.tmp >>/root/.meraki_port_mig/switch_collection.csv
-sed -i '1i IP_ADDRESS,HOSTNAME,SERIAL,MODEL' /root/.meraki_port_mig/switch_collection.csv
+sed -i '1i IP_ADDRESS,HOSTNAME,SERIAL,MODEL,MERAKI_CLOUD_ID' /root/.meraki_port_mig/switch_collection.csv
 mv /root/.meraki_port_mig/switch_collection.csv /root/port_migration
 cat << EOF
 
@@ -146,7 +147,20 @@ EOF
 
 echo "https://$SERVER_IP:9090/=$SERVER_IP/navigator" | tr -d '[:blank:]'
 
-#mv -v /root/.meraki_port_mig/switch_collection.csv /root/port_migration/
+cat << EOF
+
+Once you have downloaded this file, please insert the Meraki Cloud ID into the spreadsheet, line by line.
+If you are working with switch stacks, for example, two switches in a stack and they have equal amount of ports, you would place (2) Cloud ID in the line
+If you are consolidating switches (i.e. 24X2 to 48), then you will place the appropriate (1) 48 port  Cloud ID in that line.
+
+i.e-
+IPAddress Hostname SwitchSerialNumber SwitchModel24 NewCloudID (representing the 48 port)
+
+You must run the merge program for this to take effect
+
+
+EOF
+
 
 rm -f /root/.meraki_port_mig/switch_collection.csv
 rm -f /root/.meraki_port_mig/switch_collection.final
