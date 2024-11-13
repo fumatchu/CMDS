@@ -3,7 +3,7 @@ import os
 
 # Replace with your API key
 API_KEY = 
-file_path = "/root/.meraki_mig/switch_serials.txt"
+file_path = "/root/.meraki_port_mig/switch_serials.txt"
 
 # Initialize the Meraki Dashboard API client
 dashboard = meraki.DashboardAPI(API_KEY)

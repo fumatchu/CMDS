@@ -147,19 +147,7 @@ EOF
 
 echo "https://$SERVER_IP:9090/=$SERVER_IP/navigator" | tr -d '[:blank:]'
 
-cat << EOF
 
-Once you have downloaded this file, please insert the Meraki Cloud ID into the spreadsheet, line by line.
-If you are working with switch stacks, for example, two switches in a stack and they have equal amount of ports, you would place (2) Cloud ID in the line
-If you are consolidating switches (i.e. 24X2 to 48), then you will place the appropriate (1) 48 port  Cloud ID in that line.
-
-i.e-
-IPAddress Hostname SwitchSerialNumber SwitchModel24 NewCloudID (representing the 48 port)
-
-You must run the merge program for this to take effect
-
-
-EOF
 
 
 rm -f /root/.meraki_port_mig/switch_collection.csv
