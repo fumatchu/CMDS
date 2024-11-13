@@ -48,34 +48,32 @@ echo "Actual Provisioned Switches" | tee -a /root/.meraki_port_mig/logs/network_
 
 cat /root/.meraki_port_mig/discovered_ip > /root/.meraki_port_mig/ip_list
 
-INPUT="/root/.meraki_port_mig/ip_list"
+#INPUT="/root/.meraki_port_mig/ip_list"
 
 # Read file line-by-line to get an IP address
-while read -r IP; do
+
+#while read -r IP; do
 
 #Is the Switch already provisioned?
-    MUSER=$(cat /var/lib/tftpboot/mig_switch/nwd-${IP}-shrunn | grep -Eo -m 1 "username meraki-user" | cut -c10-)
-if [ "$MUSER" = "meraki-user" ]; then
-    echo "${YELLOW}It looks like ${IP} is already provisioned for Catalyst Monitoring"${TEXTRESET}
-    echo "${RED}Skipping..."${TEXTRESET}
-    sed -i "0,/${IP}/d" /root/.meraki_port_mig/ip_list
-    else
-    echo " "
+#    MUSER=$(cat /var/lib/tftpboot/port_switch/nwd-${IP}-shrunn | grep -Eo -m 1 "username meraki-user" | cut -c10-)
+#if [ "$MUSER" = "meraki-user" ]; then
+#    echo "${YELLOW}It looks like ${IP} is already provisioned for Catalyst Monitoring"${TEXTRESET}
+#    echo "${RED}Skipping..."${TEXTRESET}
+#    sed -i "0,/${IP}/d" /root/.meraki_port_mig/ip_list
+#    else
+#    echo " "
 
-fi
+#fi
 
-done <"$INPUT"
+#done <"$INPUT"
 
 cat /root/.meraki_port_mig/ip_list >> /root/.meraki_port_mig/logs/network_discovery
 cat_num_devices=$(< /root/.meraki_port_mig/ip_list wc -l)
 echo " "
 echo "Total Devices Found: ${cat_num_devices}"
-echo "Adding Eligible Switches to IP Batch List"
-#echo "The total estimated time to upgrade and install/reboot IOS-XE is:"
-#/root/.meraki_port_mig/time.sh
 
-#rm -r -f /root/.meraki_port_mig/network_collection.tmp
-#rm -r -f /var/lib/tftpboot/mig_switch/nwd*
-#rm -r -f /root/.meraki_port_mig/discovered_ip
-#rm -r -f /root/.meraki_port_mig/nmap_output
+rm -f /root/.meraki_port_mig/network_collection.tmp
+rm -f /var/lib/tftpboot/port_switch/nwd*
+rm -f /root/.meraki_port_mig/discovered_ip
+rm -f /root/.meraki_port_mig/nmap_output
 read -p "Press Enter"
