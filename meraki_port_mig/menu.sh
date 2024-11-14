@@ -14,13 +14,14 @@ items=(1 "Setup Wizard"
   9 "Create Inventory files"
  10 "Claim Devices"
  11 "Update Physical Address"
- 12 "Batch Cleanup"
- 13 "-----------------------------------------------"
- 14 "Global Environment Settings"
- 15 "Schedule Deployment"
- 16 "Logs"
- 17 "Utilities"
- 18 "Welcome to CMDS"
+ 12 "Update Hostnames"
+ 13 "Batch Cleanup"
+ 14 "-----------------------------------------------"
+ 15 "Global Environment Settings"
+ 16 "Schedule Deployment"
+ 17 "Logs"
+ 18 "Utilities"
+ 19 "Welcome to CMDS"
 )
 
 while choice=$(dialog --title "$TITLE" \
@@ -37,6 +38,7 @@ while choice=$(dialog --title "$TITLE" \
   9) clear & /root/.meraki_port_mig/create_serial_file.sh | tee -a /root/.meraki_port_mig/logs/serialfile_claim.log ;;
  10) clear & /root/.meraki_port_mig/show_inv_claim.sh ;;
  11) clear & /root/.meraki_port_mig/update_physical_address_switch.sh ;;
+ 12) clear & /root/.meraki_port_mig/hostname_collection.sh ;;
  12) clear & /root/.meraki_port_mig/batch_clean.sh ;;
  13) clear & /root/.meraki_port_mig/.logo ;;
  14) clear & /root/.meraki_port_mig/global_environment.sh ;;

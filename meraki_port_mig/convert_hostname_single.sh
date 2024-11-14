@@ -4,10 +4,10 @@ TEXTRESET=$(tput sgr0)
 RED=$(tput setaf 1)
 YELLOW=$(tput setaf 3)
 GREEN=$(tput setaf 2)
-IP=
+IP=192.168.210.227
 
 #Get the Serials
-cat /root/.meraki_port_mig/tmp/${IP} >> /root/.meraki_port_mig/hostnames.txt
+cat /root/.meraki_port_mig/serial/${IP} >> /root/.meraki_port_mig/hostnames.txt
 
 
 #Get the hostname

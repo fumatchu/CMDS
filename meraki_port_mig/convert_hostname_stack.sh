@@ -7,18 +7,18 @@ GREEN=$(tput setaf 2)
 
 IP=
 #Get the Serials
-cat /root/.meraki_port_mig/tmp/${IP} >> /root/.meraki_port_mig/serial.tmp
+cat /root/.meraki_port_mig/serial/${IP} >> /root/.meraki_port_mig/serial.tmp
 
 HOSTNAME=$(cat /var/lib/tftpboot/port_switch/${IP} | grep hostname | sed 's/hostname //g')
-SWITCH1=$(sed -n '1p' /root/.meraki_port_mig/tmp/${IP})
-SWITCH2=$(sed -n '2p' /root/.meraki_port_mig/tmp/${IP})
-SWITCH3=$(sed -n '3p' /root/.meraki_port_mig/tmp/${IP})
-SWITCH4=$(sed -n '4p' /root/.meraki_port_mig/tmp/${IP})
-SWITCH5=$(sed -n '5p' /root/.meraki_port_mig/tmp/${IP})
-SWITCH6=$(sed -n '6p' /root/.meraki_port_mig/tmp/${IP})
-SWITCH7=$(sed -n '7p' /root/.meraki_port_mig/tmp/${IP})
-SWITCH8=$(sed -n '8p' /root/.meraki_port_mig/tmp/${IP})
-SWITCH9=$(sed -n '9p' /root/.meraki_port_mig/tmp/${IP})
+SWITCH1=$(sed -n '1p' /root/.meraki_port_mig/serial/${IP})
+SWITCH2=$(sed -n '2p' /root/.meraki_port_mig/serial/${IP})
+SWITCH3=$(sed -n '3p' /root/.meraki_port_mig/serial/${IP})
+SWITCH4=$(sed -n '4p' /root/.meraki_port_mig/serial/${IP})
+SWITCH5=$(sed -n '5p' /root/.meraki_port_mig/serial/${IP})
+SWITCH6=$(sed -n '6p' /root/.meraki_port_mig/serial/${IP})
+SWITCH7=$(sed -n '7p' /root/.meraki_port_mig/serial/${IP})
+SWITCH8=$(sed -n '8p' /root/.meraki_port_mig/serial/${IP})
+SWITCH9=$(sed -n '9p' /root/.meraki_port_mig/serial/${IP})
 
 
 if [ "$SWITCH1" = "" ]; then

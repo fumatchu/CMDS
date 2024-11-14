@@ -28,7 +28,7 @@ while read -r IP; do
 
 
 # Define the input file
-input_file="/root/.meraki_port_mig/tmp/${IP}"
+input_file="/root/.meraki_port_mig/serial/${IP}"
 
 # Check if the input file exists
 if [ ! -f "$input_file" ]; then

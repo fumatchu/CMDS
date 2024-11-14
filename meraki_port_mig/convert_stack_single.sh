@@ -134,8 +134,7 @@ if [[ "$CONFIG1" == "/root/.meraki_port_mig/tmp/switch1.txt" && "$SERIAL1" == "/
     \cp -f /root/.meraki_port_mig/tmp/switch1.txt /root/.meraki_port_mig/cisco_config.tmp
     \cp -f /root/.meraki_port_mig/tmp/serial1.txt /root/.meraki_port_mig/serial.txt
     #Move the Uplink ports to a separate file
-    awk '/interface GigabitEthernet1\/1\/1/ {start = NR; flag = 1} flag {lines[NR] = $0} /interface AppGigabitEthernet1\/0\/1/ {end = NR; flag = 0} END {if (start && end) {for (i=start; i<=end; i++) print lines[i]}}' /root/.mera
-ki_port_mig/cisco_config.tmp >/root/.meraki_port_mig/cisco_config_up1.tmp
+    awk '/interface GigabitEthernet1\/1\/1/ {start = NR; flag = 1} flag {lines[NR] = $0} /interface AppGigabitEthernet1\/0\/1/ {end = NR; flag = 0} END {if (start && end) {for (i=start; i<=end; i++) print lines[i]}}' /root/.meraki_port_mig/cisco_config.tmp >/root/.meraki_port_mig/cisco_config_up1.tmp
     #Remove the uplinks from the file
     awk '/interface GigabitEthernet1\/1\/1/,/interface AppGigabitEthernet1\/0\/1/{next}1' /root/.meraki_port_mig/cisco_config.tmp >temp_file && mv -f temp_file /root/.meraki_port_mig/cisco_config.tmp
     python3.10 /root/.meraki_port_mig/port_migration.py
@@ -154,8 +153,7 @@ if [[ "$CONFIG2" == "/root/.meraki_port_mig/tmp/switch2.txt" && "$SERIAL2" == "/
     \cp -f /root/.meraki_port_mig/tmp/switch2.txt /root/.meraki_port_mig/cisco_config.tmp
     \cp -f /root/.meraki_port_mig/tmp/serial2.txt /root/.meraki_port_mig/serial.txt
     #Move the Uplink ports to a separate file
-    awk '/interface GigabitEthernet2\/1\/1/ {start = NR; flag = 1} flag {lines[NR] = $0} /interface AppGigabitEthernet2\/0\/1/ {end = NR; flag = 0} END {if (start && end) {for (i=start; i<=end; i++) print lines[i]}}' /root/.mera
-ki_port_mig/cisco_config.tmp >/root/.meraki_port_mig/cisco_config_up2.tmp
+    awk '/interface GigabitEthernet2\/1\/1/ {start = NR; flag = 1} flag {lines[NR] = $0} /interface AppGigabitEthernet2\/0\/1/ {end = NR; flag = 0} END {if (start && end) {for (i=start; i<=end; i++) print lines[i]}}' /root/.meraki_port_mig/cisco_config.tmp >/root/.meraki_port_mig/cisco_config_up2.tmp
     #Remove the uplinks from the file
     awk '/interface GigabitEthernet2\/1\/1/,/interface AppGigabitEthernet2\/0\/1/{next}1' /root/.meraki_port_mig/cisco_config.tmp >temp_file && mv -f temp_file /root/.meraki_port_mig/cisco_config.tmp
     python3.10 /root/.meraki_port_mig/port_migration.py
