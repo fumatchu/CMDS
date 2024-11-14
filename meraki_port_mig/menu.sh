@@ -35,7 +35,7 @@ while choice=$(dialog --title "$TITLE" \
   5) clear & /root/.meraki_port_mig/merge_switches.sh ;;
   8) clear ;;
   9) clear & /root/.meraki_port_mig/create_serial_file.sh | tee -a /root/.meraki_port_mig/logs/serialfile_claim.log ;;
- 10 clear & /root/.meraki_port_mig/show_inv_claim.sh ;;
+ 10) clear & /root/.meraki_port_mig/show_inv_claim.sh ;;
  11) clear & /root/.meraki_port_mig/update_physical_address_switch.sh ;;
  12) clear & /root/.meraki_port_mig/batch_clean.sh ;;
  13) clear & /root/.meraki_port_mig/.logo ;;
