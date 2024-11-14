@@ -7,14 +7,14 @@ GREEN=$(tput setaf 2)
 IP=
 
 #Get the Serials
-cat /var/lib/tftpboot/mig_switch/${IP}-shmr | grep C9300 |grep -E -o "Q.{0,13}" >> /root/.meraki_mig/hostnames.txt
+cat /root/.meraki_port_mig/tmp/${IP} >> /root/.meraki_port_mig/hostnames.txt
 
 
 #Get the hostname
-HOSTNAME=$(cat /var/lib/tftpboot/mig_switch/${IP} | grep hostname | sed 's/hostname //g')
+HOSTNAME=$(cat /var/lib/tftpboot/port_switch/${IP} | grep hostname | sed 's/hostname //g')
 
 # Input file
-input_file="/root/.meraki_mig/hostnames.txt"  # Replace with your input file path
+input_file="/root/.meraki_port_mig/hostnames.txt"  # Replace with your input file path
 
 # Check if input file exists
 if [[ ! -f "$input_file" ]]; then
@@ -34,7 +34,7 @@ sed -i '/,$/ s/$/ '"$HOSTNAME"'/' "$input_file"
 sed -i 's/^\([^,]*,[^,]*\),.*/\1/' "$input_file"
 
 echo ${GREEN}"Deploying Update"${TEXTRESET}
-unbuffer python3.10 /root/.meraki_mig/deploy_hostnames.py
+unbuffer python3.10 /root/.meraki_port_mig/deploy_hostnames.py
 echo " "
 #cleanup
-rm -f /root/.meraki_mig/hostnames.txt
+rm -f /root/.meraki_port_mig/hostnames.txt

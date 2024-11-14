@@ -13,7 +13,7 @@ ${GREEN}Hostname Migration${TEXTRESET}
 EOF
 
 # Set the input file name here
-INPUT="/root/.meraki_mig/ip_list"
+INPUT="/root/.meraki_port_mig/ip_list"
 clear
 echo "############################Collection time ${DATE}######################################"
 cat <<EOF
@@ -27,18 +27,30 @@ while read -r IP; do
   echo "$IP"
 
 
-#Test if this is a stack switch
+# Define the input file
+input_file="/root/.meraki_port_mig/tmp/${IP}"
 
-STACK=$(cat /var/lib/tftpboot/mig_switch/${IP}-shmr| sed -n '/^2/p'  2>/dev/null)
-
-if [ "$STACK" = "" ]; then
-     sed -i '/^IP=/c\IP=' /root/.meraki_mig/convert_hostname_single.sh
-     sed -i "s/IP=/IP=${IP}/g" /root/.meraki_mig/convert_hostname_single.sh
-     /root/.meraki_mig/convert_hostname_single.sh
-   else
-     sed -i '/^IP=/c\IP=' /root/.meraki_mig/convert_hostname_stack.sh
-     sed -i "s/IP=/IP=${IP}/g" /root/.meraki_mig/convert_hostname_stack.sh
-     /root/.meraki_mig/convert_hostname_stack.sh
+# Check if the input file exists
+if [ ! -f "$input_file" ]; then
+  echo "File $input_file not found."
+  exit 1
 fi
+
+# Count the number of lines in the file
+line_count=$(wc -l < "$input_file")
+
+# Conditional statement to check the line count
+if [ "$line_count" -gt 1 ]; then
+  echo "The file ${IP} has more than one line, it's a stack"
+  sed -i '/^IP=/c\IP=' /root/.meraki_port_mig/convert_hostname_stack.sh
+  sed -i "s/IP=/IP=${IP}/g" /root/.meraki_port_mig/convert_hostname_stack.sh
+  /root/.meraki_port_mig/convert_hostname_stack.sh
+else
+  echo "The file ${IP} has one line it's a single switch."
+  sed -i '/^IP=/c\IP=' /root/.meraki_port_mig/convert_hostname_single.sh
+  sed -i "s/IP=/IP=${IP}/g" /root/.meraki_port_mig/convert_hostname_single.sh
+  /root/.meraki_port_mig/convert_hostname_single.sh
+fi
+
 
 done <"$INPUT"
