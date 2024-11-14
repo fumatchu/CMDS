@@ -53,4 +53,4 @@ done < "$input_file"
 rm -f /root/.meraki_port_mig/tmp/IP_ADDRESS
 
 #update the ip_list with current ip addresses
-ls /root/.meraki_port_mig/tmp/ > /root/.meraki_port_mig/ip_list
+ls /root/.meraki_port_mig/serial/ > /root/.meraki_port_mig/ip_list
