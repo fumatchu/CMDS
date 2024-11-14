@@ -8,7 +8,7 @@ GREEN=$(tput setaf 2)
 IP=
 
 #Get Serials for stack
-cat /root/.meraki_port_mig/tmp/${IP} >>/root/.meraki_port_mig/serial.txt
+cat /root/.meraki_port_mig/serial/${IP} >>/root/.meraki_port_mig/serial.txt
 sleep 1
 #Cut the config down to ports only (remove top portion of config)
 sed -n '/interface GigabitEthernet/,$p' /var/lib/tftpboot/port_switch/${IP} >/root/.meraki_port_mig/cisco_config.tmp
