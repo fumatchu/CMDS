@@ -15,13 +15,14 @@ items=(1 "Setup Wizard"
  10 "Claim Devices"
  11 "Update Physical Address"
  12 "Update Hostnames"
- 13 "Batch Cleanup"
- 14 "-----------------------------------------------"
- 15 "Global Environment Settings"
- 16 "Schedule Deployment"
- 17 "Logs"
- 18 "Utilities"
- 19 "Welcome to CMDS"
+ 13 "Port Migration"
+ 14 "Batch Cleanup"
+ 15 "-----------------------------------------------"
+ 16 "Global Environment Settings"
+ 17 "Schedule Deployment"
+ 18 "Logs"
+ 19 "Utilities"
+ 20 "Welcome to CMDS"
 )
 
 while choice=$(dialog --title "$TITLE" \
@@ -39,13 +40,14 @@ while choice=$(dialog --title "$TITLE" \
  10) clear & /root/.meraki_port_mig/show_inv_claim.sh ;;
  11) clear & /root/.meraki_port_mig/update_physical_address_switch.sh ;;
  12) clear & /root/.meraki_port_mig/hostname_collection.sh ;;
- 12) clear & /root/.meraki_port_mig/batch_clean.sh ;;
- 13) clear & /root/.meraki_port_mig/.logo ;;
- 14) clear & /root/.meraki_port_mig/global_environment.sh ;;
- 15) clear & /root/.meraki_port_mig/schedule.sh ;;
- 16) clear & /root/.meraki_port_mig/logging_environment.sh ;;
- 17) clear & /root/.meraki_port_mig/utilities.sh ;;
- 18) clear & /root/.meraki_port_mig/welcome.readme | more ;;
+ 13) clear & /root/.meraki_port_mig/port_migration.sh ;;
+ 14) clear & /root/.meraki_port_mig/batch_clean.sh ;;
+ 15) clear & /root/.meraki_port_mig/.logo ;;
+ 16) clear & /root/.meraki_port_mig/global_environment.sh ;;
+ 17) clear & /root/.meraki_port_mig/schedule.sh ;;
+ 18) clear & /root/.meraki_port_mig/logging_environment.sh ;;
+ 19) clear & /root/.meraki_port_mig/utilities.sh ;;
+ 20) clear & /root/.meraki_port_mig/welcome.readme | more ;;
   esac
 done
 clear # clear after user pressed Cancel
