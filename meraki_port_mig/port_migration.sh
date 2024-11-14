@@ -50,43 +50,47 @@ if [[ "$CONFIGSTACK" == "2/0/1" && "$INTTEN" == "interface TenGigabitEthernet1/0
 fi
 
 ##Single Switch
-if [[ "$CONFIGSTACK" == "" && "$INTGI" == "interface GigabitEthernet1/0/1" ]]; then
-    echo "${GREEN}${IP} looks to be a single switch with Gigabit Interfaces${TEXTRESET}"
-    sed -n '/interface GigabitEthernet/,$p' /var/lib/tftpboot/port_switch/$IP > /root/.meraki_port_mig/cisco_config.tmp
-    cat /var/lib/tftpboot/port_switch/${IP}-shmr | grep C9300 |grep -E -o "Q.{0,13}" >> /root/.meraki_port_mig/serial.txt
-    echo "Deploying port configurations into dashboard"
-    python3.10 /root/.meraki_port_mig/port_migration.py
-    rm -r -f /root/.meraki_port_mig/serial.txt
-    rm -r -f /root/.meraki_port_mig/cisco_config.tmp
+    if [[ "$CONFIGSTACK" == "" && "$INTGI" == "interface GigabitEthernet1/0/1" ]]; then
+        echo "${GREEN}${IP} looks to be a single switch with Gigabit Interfaces${TEXTRESET}"
+        sleep 2
+        sed -i '/^IP=/c\IP=' /root/.meraki_port_mig/convert_stack_single.sh
+        sed -i "s/IP=/IP=${IP}/g" /root/.meraki_port_mig/convert_stack_single.sh
+        /root/.meraki_port_mig/convert_stack_single.sh
+        rm -r -f /root/.meraki_port_mig/serial.txt
+        rm -r -f /root/.meraki_port_mig/cisco_config.tmp
+        rm -r -f /root/.meraki_port_mig/cisco_config_up.tmp
     else
-    echo " "
-fi
+        echo " "
+    fi
 
-
-if [[ "$CONFIGSTACK" == "" && "$INTTWO" == "interface TwoGigabitEthernet1/0/1" ]]; then
-    echo "${GREEN}${IP} looks to be a single switch with MultiGigabit Interfaces${TEXTRESET}"
-    sed -n '/interface TwoGigabitEthernet/,$p' /var/lib/tftpboot/port_switch/$IP > /root/.meraki_port_mig/cisco_config.tmp
-    cat /var/lib/tftpboot/port_switch/${IP}-shmr | grep C9300 |grep -E -o "Q.{0,13}" >> /root/.meraki_port_mig/serial.txt
-    echo "Deploying port configurations into dashboard"
-    python3.10 /root/.meraki_port_mig/port_migration.py
-    rm -r -f /root/.meraki_port_mig/serial.txt
-    rm -r -f /root/.meraki_port_mig/cisco_config.tmp
+    if [[ "$CONFIGSTACK" == "" && "$INTTWO" == "interface TwoGigabitEthernet1/0/1" ]]; then
+        echo "${GREEN}${IP} looks to be a single switch with MultiGigabit Interfaces${TEXTRESET}"
+        sleep 2
+        sed -i '/^IP=/c\IP=' /root/.meraki_port_mig/convert_stack_single.sh
+        sed -i "s/IP=/IP=${IP}/g" /root/.meraki_port_mig/convert_stack_single.sh
+        /root/.meraki_port_mig/convert_stack_single.sh
+        rm -r -f /root/.meraki_port_mig/serial.txt
+        rm -r -f /root/.meraki_port_mig/cisco_config.tmp
+        rm -r -f /root/.meraki_port_mig/cisco_config_up.tmp
     else
-    echo " "
-fi
+        echo " "
+    fi
 
-if [[ "$CONFIGSTACK" == "" && "$INTTEN" == "interface TenGigabitEthernet1/0/1" ]]; then
-    echo "${GREEN}${IP} looks to be a single switch with MultiGigabit Interfaces${TEXTRESET}"
-    sed -n '/interface TenGigabitEthernet/,$p' /var/lib/tftpboot/port_switch/$IP > /root/.meraki_port_mig/cisco_config.tmp
-    cat /var/lib/tftpboot/port_switch/${IP}-shmr | grep C9300 |grep -E -o "Q.{0,13}" >> /root/.meraki_port_mig/serial.txt
-    echo "Deploying port configurations into dashboard"
-    python3.10 /root/.meraki_port_mig/port_migration.py
-    rm -r -f /root/.meraki_port_mig/serial.txt
-    rm -r -f /root/.meraki_port_mig/cisco_config.tmp
+    if [[ "$CONFIGSTACK" == "" && "$INTTEN" == "interface TenGigabitEthernet1/0/1" ]]; then
+        echo "${GREEN}${IP} looks to be a single switch with MultiGigabit Interfaces${TEXTRESET}"
+        sleep 2
+        sleep 2
+        sed -i '/^IP=/c\IP=' /root/.meraki_port_mig/convert_stack_single.sh
+        sed -i "s/IP=/IP=${IP}/g" /root/.meraki_port_mig/convert_stack_single.sh
+        /root/.meraki_port_mig/convert_stack_single.sh
+        rm -r -f /root/.meraki_port_mig/serial.txt
+        rm -r -f /root/.meraki_port_mig/cisco_config.tmp
+        rm -r -f /root/.meraki_port_mig/cisco_config_up.tmp
     else
-    echo " "
-fi
+        echo " "
+    fi
 
 done <"$INPUT"
-echo "Script Complete"
+rm -f /root/.meraki_port_mig/cisco_config*
+echo "Migration Script Complete"
 sleep 2

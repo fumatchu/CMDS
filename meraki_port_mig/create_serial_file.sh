@@ -54,9 +54,3 @@ rm -f /root/.meraki_port_mig/tmp/IP_ADDRESS
 
 #update the ip_list with current ip addresses
 ls /root/.meraki_port_mig/tmp/ > /root/.meraki_port_mig/ip_list
-
-#Claim Devices
-/root/.meraki_port_mig/show_inv_claim.sh
-
-#Update hostnames
-clear & /root/.meraki_port_mig/hostname_collection.sh
