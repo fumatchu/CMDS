@@ -11,17 +11,16 @@ items=(1 "Setup Wizard"
   4 "Create CSV for Inventory"
   5 "Merge 24 port to 48 port"
   8 "-----------------------------------------------"
-  9 "Create files and Claim Devices"
- 10 "Update Physical Address"
- 11 "Deploy Access Template to Downlink Ports (Quick Deploy)"
- 12 "Template Deployment"
- 13 "Batch Cleanup"
- 14 "-----------------------------------------------"
- 15 "Global Environment Settings"
- 16 "Schedule Deployment"
- 17 "Logs"
- 18 "Utilities"
- 19 "Welcome to CMDS"
+  9 "Create Inventory files"
+ 10 "Claim Devices"
+ 11 "Update Physical Address"
+ 12 "Batch Cleanup"
+ 13 "-----------------------------------------------"
+ 14 "Global Environment Settings"
+ 15 "Schedule Deployment"
+ 16 "Logs"
+ 17 "Utilities"
+ 18 "Welcome to CMDS"
 )
 
 while choice=$(dialog --title "$TITLE" \
@@ -36,16 +35,15 @@ while choice=$(dialog --title "$TITLE" \
   5) clear & /root/.meraki_port_mig/merge_switches.sh ;;
   8) clear ;;
   9) clear & /root/.meraki_port_mig/create_serial_file.sh | tee -a /root/.meraki_port_mig/logs/serialfile_claim.log ;;
- 10) clear & /root/.meraki_port_mig/update_physical_address_switch.sh ;;
- 11) clear & /root/.meraki_port_mig/port_deploy.sh ;;
- 12) clear & /root/.meraki_port_mig/adv_template.sh ;;
- 13) clear & /root/.meraki_port_mig/batch_clean.sh ;;
- 14) clear & /root/.meraki_port_mig/.logo ;;
- 15) clear & /root/.meraki_port_mig/global_environment.sh ;;
- 16) clear & /root/.meraki_port_mig/schedule.sh ;;
- 17) clear & /root/.meraki_port_mig/logging_environment.sh ;;
- 18) clear & /root/.meraki_port_mig/utilities.sh ;;
- 19) clear & /root/.meraki_port_mig/welcome.readme | more ;;
+ 10 clear & /root/.meraki_port_mig/show_inv_claim.sh ;;
+ 11) clear & /root/.meraki_port_mig/update_physical_address_switch.sh ;;
+ 12) clear & /root/.meraki_port_mig/batch_clean.sh ;;
+ 13) clear & /root/.meraki_port_mig/.logo ;;
+ 14) clear & /root/.meraki_port_mig/global_environment.sh ;;
+ 15) clear & /root/.meraki_port_mig/schedule.sh ;;
+ 16) clear & /root/.meraki_port_mig/logging_environment.sh ;;
+ 17) clear & /root/.meraki_port_mig/utilities.sh ;;
+ 18) clear & /root/.meraki_port_mig/welcome.readme | more ;;
   esac
 done
 clear # clear after user pressed Cancel
