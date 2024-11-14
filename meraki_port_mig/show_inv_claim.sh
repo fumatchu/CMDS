@@ -6,8 +6,8 @@ YELLOW=$(tput setaf 3)
 GREEN=$(tput setaf 2)
 
 
-cat /root/.meraki_port_mig/tmp/* | grep -E -o "Q.{0,13}"
-cat /root/.meraki_port_mig/tmp/* | grep -E -o "Q.{0,13}" >/root/.meraki_port_mig/switch_serials.txt
+cat /root/.meraki_port_mig/serial/* | grep -E -o "Q.{0,13}"
+cat /root/.meraki_port_mig/serial/* | grep -E -o "Q.{0,13}" >/root/.meraki_port_mig/switch_serials.txt
 
 
 clear
