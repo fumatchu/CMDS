@@ -7,7 +7,7 @@ mkdir -p /root/.meraki_port_mig/staging
 input_file="/root/.meraki_port_mig/staging/switch_collection.csv"
 
 # Define the output directory
-output_dir="/root/.meraki_port_mig/tmp"
+output_dir="/root/.meraki_port_mig/serial"
 
 # Check if the input file exists
 if [ ! -f "$input_file" ]; then
