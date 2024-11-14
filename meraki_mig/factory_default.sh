@@ -1,11 +1,3 @@
-#!/bin/bash
-#Factory default the Server
-TEXTRESET=$(tput sgr0)
-RED=$(tput setaf 1)
-YELLOW=$(tput setaf 3)
-GREEN=$(tput setaf 2)
-DATE=$(date)
-clear
 
 #!/bin/bash
 #Factory default the Server

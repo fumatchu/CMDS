@@ -11,7 +11,7 @@ dashboard = meraki.DashboardAPI(API_KEY)
 def list_organizations(api_key):
     try:
         # Fetch the list of organizations
-        organizations = dashboard.organizations.getOrganizations()        
+        organizations = dashboard.organizations.getOrganizations()
         if organizations:
             print("Organizations:")
             for idx, org in enumerate(organizations, start=1):
@@ -20,7 +20,7 @@ def list_organizations(api_key):
         else:
             print("No organizations found.")
             return None
-    
+
     except meraki.exceptions.APIError as e:
         print(f"An error occurred: {e}")
         return None
@@ -49,7 +49,7 @@ def list_networks(api_key, org_id):
     try:
         # Fetch the list of networks in the organization
         networks = dashboard.organizations.getOrganizationNetworks(org_id)
-        
+
         if networks:
             print(f"\nNetworks in organization ID {org_id}:")
             for idx, network in enumerate(networks, start=1):
@@ -58,7 +58,7 @@ def list_networks(api_key, org_id):
         else:
             print("No networks found in the organization.")
             return None
-    
+
     except meraki.exceptions.APIError as e:
         print(f"An error occurred: {e}")
         return None
@@ -99,7 +99,7 @@ def read_serials_from_file(file_path):
     if not os.path.exists(file_path):
         print(f"File not found: {file_path}")
         return None
-    
+
     try:
         with open(file_path, 'r') as file:
             serials = [line.strip() for line in file.readlines() if line.strip()]

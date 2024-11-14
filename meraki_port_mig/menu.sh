@@ -11,7 +11,7 @@ items=(1 "Setup Wizard"
   4 "Create CSV for Inventory"
   5 "Merge 24 port to 48 port"
   8 "-----------------------------------------------"
-  9 "Deploy Updates"
+  9 "Create files and Claim Devices"
  10 "Update Physical Address"
  11 "Deploy Access Template to Downlink Ports (Quick Deploy)"
  12 "Template Deployment"
@@ -35,7 +35,7 @@ while choice=$(dialog --title "$TITLE" \
   4) clear & /root/.meraki_port_mig/switch_collection.sh ;;
   5) clear & /root/.meraki_port_mig/merge_switches.sh ;;
   8) clear ;;
-  9) clear & /root/.meraki_port_mig/deploy_check.sh | tee -a /root/.meraki_port_mig/logs/soft_hard_check_deployment.log ;;
+  9) clear & /root/.meraki_port_mig/create_serial_file.sh | tee -a /root/.meraki_port_mig/logs/serialfile_claim.log ;;
  10) clear & /root/.meraki_port_mig/update_physical_address_switch.sh ;;
  11) clear & /root/.meraki_port_mig/port_deploy.sh ;;
  12) clear & /root/.meraki_port_mig/adv_template.sh ;;
