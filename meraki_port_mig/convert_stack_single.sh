@@ -310,6 +310,42 @@ else
     echo " " > /dev/null
 fi
 
+#SWITCH1
+CONFIGUP1=$(ls /root/.meraki_port_mig/cisco_config_up1.tmp 2>/dev/null)
+if [[ "$CONFIGUP1" == "/root/.meraki_port_mig/cisco_config_up1.tmp" ]]; then
+    echo "${GREEN}${IP}-Found Network Module C9300-NM-8X${TEXTRESET}"
+    echo "${GREEN}Migrating Gigabit/TenGigabit Information to Uplink${TEXTRESET}"
+    #Remove unneeded interfaces
+    sed -i '/interface FortyGigabitEthernet1\/1\/1/,$d' /root/.meraki_port_mig/cisco_config_up1.tmp
+    mv /root/.meraki_port_mig/cisco_config_up1.tmp /root/.meraki_port_mig/cisco_config_up.tmp
+    python3.10 /root/.meraki_port_mig/port_mig-C9300-NM-8X.py
+    rm -f /root/.meraki_mig/cisco_config_up.tmp
+    rm -f /root/.meraki_mig/cisco_config_up1.tmp
+    echo "${GREEN}Uplink conversion for Switch 1 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
+    echo " "
+else
+    echo " " > /dev/null
+fi
+
+#SWITCH2
+CONFIGUP2=$(ls /root/.meraki_port_mig/cisco_config_up2.tmp 2>/dev/null)
+if [[ "$CONFIGUP2" == "/root/.meraki_port_mig/cisco_config_up2.tmp" ]]; then
+    echo "${GREEN}${IP}-Found Network Module C9300-NM-8X${TEXTRESET}"
+    echo "${GREEN}Migrating Gigabit/TenGigabit Information to Uplink${TEXTRESET}"
+    #Remove unneeded interfaces
+    sed -i '/interface FortyGigabitEthernet1\/1\/1/,$d' /root/.meraki_port_mig/cisco_config_up2.tmp
+    mv /root/.meraki_port_mig/cisco_config_up2.tmp /root/.meraki_port_mig/cisco_config_up.tmp
+    python3.10 /root/.meraki_port_mig/port_mig-C9300-NM-8X.py
+    rm -f /root/.meraki_mig/cisco_config_up.tmp
+    rm -f /root/.meraki_mig/cisco_config_up2.tmp
+    echo "${GREEN}Uplink conversion for Switch 2 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
+    echo " "
+else
+    echo " " > /dev/null
+fi
+
+
+
 
 
 rm -f /root/.meraki_port_mig/serial.txt
