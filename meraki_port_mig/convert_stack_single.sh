@@ -133,11 +133,58 @@ if [[ "$CONFIG1" == "/root/.meraki_port_mig/tmp/switch1.txt" && "$SERIAL1" == "/
     \cp -f /root/.meraki_port_mig/tmp/switch1.txt /root/.meraki_port_mig/cisco_config.tmp
     \cp -f /root/.meraki_port_mig/tmp/serial1.txt /root/.meraki_port_mig/serial.txt
     #Move the Uplink ports to a separate file
-    awk '/interface GigabitEthernet1\/1\/1/ {start = NR; flag = 1} flag {lines[NR] = $0} /interface FortyGigabitEthernet1\/1\/2/ {end = NR; flag = 0} END {if (start && end) {for (i=start; i<=end; i++) print lines[i]}}' /root/.meraki_port_mig/cisco_config.tmp >/root/.meraki_port_mig/cisco_config_up1.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/GigabitEthernet1\/1\/1/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up1.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/GigabitEthernet1\/1\/2/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up1.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/GigabitEthernet1\/1\/3/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up1.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/GigabitEthernet1\/1\/4/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up1.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet1\/1\/1/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up1.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet1\/1\/2/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up1.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet1\/1\/3/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up1.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet1\/1\/4/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up1.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet1\/1\/5/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up1.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet1\/1\/6/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up1.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet1\/1\/7/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up1.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet1\/1\/8/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up1.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/FortyGigabitEthernet1\/1\/1/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up1.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/FortyGigabitEthernet1\/1\/2/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up1.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TwentyFiveGigE1\/1\/1/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up1.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TwentyFiveGigE1\/1\/2/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up1.tmp
     #Remove the uplinks from the file
-    awk '/interface GigabitEthernet1\/1\/1/,/interface FortyGigabitEthernet1\/1\/2/{next}1' /root/.meraki_port_mig/cisco_config.tmp >temp_file && mv -f temp_file /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/GigabitEthernet1\/1\/1/,/!/{//!d;}; /GigabitEthernet1\/1\/1/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/GigabitEthernet1\/1\/2/,/!/{//!d;}; /GigabitEthernet1\/1\/2/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/GigabitEthernet1\/1\/3/,/!/{//!d;}; /GigabitEthernet1\/1\/3/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/GigabitEthernet1\/1\/4/,/!/{//!d;}; /GigabitEthernet1\/1\/4/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet1\/1\/1/,/!/{//!d;}; /TenGigabitEthernet1\/1\/1/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet1\/1\/2/,/!/{//!d;}; /TenGigabitEthernet1\/1\/2/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet1\/1\/3/,/!/{//!d;}; /TenGigabitEthernet1\/1\/3/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet1\/1\/4/,/!/{//!d;}; /TenGigabitEthernet1\/1\/4/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet1\/1\/5/,/!/{//!d;}; /TenGigabitEthernet1\/1\/5/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet1\/1\/6/,/!/{//!d;}; /TenGigabitEthernet1\/1\/6/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet1\/1\/7/,/!/{//!d;}; /TenGigabitEthernet1\/1\/7/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet1\/1\/8/,/!/{//!d;}; /TenGigabitEthernet1\/1\/8/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/FortyGigabitEthernet1\/1\/1/,/!/{//!d;}; /FortyGigabitEthernet1\/1\/1/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/FortyGigabitEthernet1\/1\/2/,/!/{//!d;}; /FortyGigabitEthernet1\/1\/2/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TwentyFiveGigE1\/1\/1/,/!/{//!d;}; /TwentyFiveGigE1\/1\/1/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TwentyFiveGigE1\/1\/2/,/!/{//!d;}; /TwentyFiveGigE1\/1\/2/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/AppGigabitEthernet1\/0\/1/,/!/{//!d;}; /AppGigabitEthernet1\/0\/1/d' /root/.meraki_port_mig/cisco_config.tmp
     unbuffer python3.10 /root/.meraki_port_mig/port_migration.py
     rm -f /root/.meraki_port_mig/cisco_config.tmp
+else
+    echo " " > /dev/null
+fi
+
+#UPLINKS
+#SWITCH1
+CONFIGUP1=$(ls /root/.meraki_port_mig/cisco_config_up1.tmp 2>/dev/null)
+CATSERIAL=$(cat /root/.meraki_port_mig/tmp/serial1.txt 2>/dev/null)
+if [[ "$CONFIGUP1" == "/root/.meraki_port_mig/cisco_config_up1.tmp" ]]; then
+    echo "${GREEN}Migrating Gigabit/TenGigabit Information to Uplink${TEXTRESET}"
+    mv /root/.meraki_port_mig/cisco_config_up1.tmp /root/.meraki_port_mig/cisco_config_up.tmp
+    python3.10 /root/.meraki_port_mig/port_mig-C9300-NM-8X.py
+    rm -f /root/.meraki_mig/cisco_config_up.tmp
+    rm -f /root/.meraki_mig/cisco_config_up1.tmp
+    echo "${GREEN}Uplink conversion for Switch 1 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
+    echo " "
 else
     echo " " > /dev/null
 fi
@@ -152,11 +199,60 @@ if [[ "$CONFIG2" == "/root/.meraki_port_mig/tmp/switch2.txt" && "$SERIAL2" == "/
     \cp -f /root/.meraki_port_mig/tmp/switch2.txt /root/.meraki_port_mig/cisco_config.tmp
     \cp -f /root/.meraki_port_mig/tmp/serial2.txt /root/.meraki_port_mig/serial.txt
     #Move the Uplink ports to a separate file
-    awk '/interface GigabitEthernet2\/1\/1/ {start = NR; flag = 1} flag {lines[NR] = $0} /interface FortyGigabitEthernet2\/1\/2/ {end = NR; flag = 0} END {if (start && end) {for (i=start; i<=end; i++) print lines[i]}}' /root/.meraki_port_mig/cisco_config.tmp >/root/.meraki_port_mig/cisco_config_up2.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/GigabitEthernet2\/1\/1/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up2.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/GigabitEthernet2\/1\/2/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up2.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/GigabitEthernet2\/1\/3/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up2.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/GigabitEthernet2\/1\/4/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up2.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet2\/1\/1/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up2.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet2\/1\/2/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up2.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet2\/1\/3/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up2.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet2\/1\/4/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up2.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet2\/1\/5/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up2.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet2\/1\/6/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up2.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet2\/1\/7/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up2.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet2\/1\/8/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up2.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/FortyGigabitEthernet2\/1\/1/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up2.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/FortyGigabitEthernet2\/1\/2/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up2.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TwentyFiveGigE2\/1\/1/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up2.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TwentyFiveGigE2\/1\/2/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up2.tmp
     #Remove the uplinks from the file
-    awk '/interface GigabitEthernet2\/1\/1/,/interface FortyGigabitEthernet2\/1\/2/{next}1' /root/.meraki_port_mig/cisco_config.tmp >temp_file && mv -f temp_file /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/GigabitEthernet2\/1\/1/,/!/{//!d;}; /GigabitEthernet2\/1\/1/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/GigabitEthernet2\/1\/2/,/!/{//!d;}; /GigabitEthernet2\/1\/2/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/GigabitEthernet2\/1\/3/,/!/{//!d;}; /GigabitEthernet2\/1\/3/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/GigabitEthernet2\/1\/4/,/!/{//!d;}; /GigabitEthernet2\/1\/4/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet2\/1\/1/,/!/{//!d;}; /TenGigabitEthernet2\/1\/1/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet2\/1\/2/,/!/{//!d;}; /TenGigabitEthernet2\/1\/2/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet2\/1\/3/,/!/{//!d;}; /TenGigabitEthernet2\/1\/3/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet2\/1\/4/,/!/{//!d;}; /TenGigabitEthernet2\/1\/4/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet2\/1\/5/,/!/{//!d;}; /TenGigabitEthernet2\/1\/5/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet2\/1\/6/,/!/{//!d;}; /TenGigabitEthernet2\/1\/6/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet2\/1\/7/,/!/{//!d;}; /TenGigabitEthernet2\/1\/7/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet2\/1\/8/,/!/{//!d;}; /TenGigabitEthernet2\/1\/8/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/FortyGigabitEthernet2\/1\/1/,/!/{//!d;}; /FortyGigabitEthernet2\/1\/1/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/FortyGigabitEthernet2\/1\/2/,/!/{//!d;}; /FortyGigabitEthernet2\/1\/2/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TwentyFiveGigE2\/1\/1/,/!/{//!d;}; /TwentyFiveGigE2\/1\/1/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TwentyFiveGigE2\/1\/2/,/!/{//!d;}; /TwentyFiveGigE2\/1\/2/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/AppGigabitEthernet2\/0\/1/,/!/{//!d;}; /AppGigabitEthernet2\/0\/1/d' /root/.meraki_port_mig/cisco_config.tmp
     unbuffer python3.10 /root/.meraki_port_mig/port_migration.py
     rm -f /root/.meraki_port_mig/cisco_config.tmp
+else
+    echo " " > /dev/null
+fi
+
+#UPLINKS
+#SWITCH2
+CONFIGUP2=$(ls /root/.meraki_port_mig/cisco_config_up2.tmp 2>/dev/null)
+CATSERIAL=$(cat /root/.meraki_port_mig/tmp/serial2.txt 2>/dev/null)
+if [[ "$CONFIGUP2" == "/root/.meraki_port_mig/cisco_config_up2.tmp" ]]; then
+    echo "${GREEN}Migrating Gigabit/TenGigabit Information to Uplink${TEXTRESET}"
+    #Remove unneeded interfaces
+    #sed -i '/interface FortyGigabitEthernet1\/1\/1/,$d' /root/.meraki_port_mig/cisco_config_up2.tmp
+    mv /root/.meraki_port_mig/cisco_config_up2.tmp /root/.meraki_port_mig/cisco_config_up.tmp
+    python3.10 /root/.meraki_port_mig/port_mig-C9300-NM-8X.py
+    rm -f /root/.meraki_mig/cisco_config_up.tmp
+    rm -f /root/.meraki_mig/cisco_config_up2.tmp
+    echo "${GREEN}Uplink conversion for Switch 2 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
+    echo " "
 else
     echo " " > /dev/null
 fi
@@ -171,14 +267,64 @@ if [[ "$CONFIG3" == "/root/.meraki_port_mig/tmp/switch3.txt" && "$SERIAL3" == "/
     \cp -f /root/.meraki_port_mig/tmp/switch3.txt /root/.meraki_port_mig/cisco_config.tmp
     \cp -f /root/.meraki_port_mig/tmp/serial3.txt /root/.meraki_port_mig/serial.txt
     #Move the Uplink ports to a separate file
-    awk '/interface GigabitEthernet3\/1\/1/ {start = NR; flag = 1} flag {lines[NR] = $0} /interface FortyGigabitEthernet3\/1\/2/ {end = NR; flag = 0} END {if (start && end) {for (i=start; i<=end; i++) print lines[i]}}' /root/.meraki_port_mig/cisco_config.tmp >/root/.meraki_port_mig/cisco_config_up3.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/GigabitEthernet3\/1\/1/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up3.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/GigabitEthernet3\/1\/2/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up3.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/GigabitEthernet3\/1\/3/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up3.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/GigabitEthernet3\/1\/4/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up3.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet3\/1\/1/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up3.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet3\/1\/2/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up3.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet3\/1\/3/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up3.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet3\/1\/4/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up3.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet3\/1\/5/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up3.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet3\/1\/6/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up3.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet3\/1\/7/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up3.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet3\/1\/8/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up3.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/FortyGigabitEthernet3\/1\/1/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up3.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/FortyGigabitEthernet3\/1\/2/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up3.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TwentyFiveGigE3\/1\/1/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up3.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TwentyFiveGigE3\/1\/2/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up3.tmp
     #Remove the uplinks from the file
-    awk '/interface GigabitEthernet3\/1\/1/,/interface FortyGigabitEthernet3\/1\/2/{next}1' /root/.meraki_port_mig/cisco_config.tmp >temp_file && mv -f temp_file /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/GigabitEthernet3\/1\/1/,/!/{//!d;}; /GigabitEthernet3\/1\/1/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/GigabitEthernet3\/1\/2/,/!/{//!d;}; /GigabitEthernet3\/1\/2/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/GigabitEthernet3\/1\/3/,/!/{//!d;}; /GigabitEthernet3\/1\/3/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/GigabitEthernet3\/1\/4/,/!/{//!d;}; /GigabitEthernet3\/1\/4/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet3\/1\/1/,/!/{//!d;}; /TenGigabitEthernet3\/1\/1/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet3\/1\/2/,/!/{//!d;}; /TenGigabitEthernet3\/1\/2/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet3\/1\/3/,/!/{//!d;}; /TenGigabitEthernet3\/1\/3/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet3\/1\/4/,/!/{//!d;}; /TenGigabitEthernet3\/1\/4/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet3\/1\/5/,/!/{//!d;}; /TenGigabitEthernet3\/1\/5/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet3\/1\/6/,/!/{//!d;}; /TenGigabitEthernet3\/1\/6/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet3\/1\/7/,/!/{//!d;}; /TenGigabitEthernet3\/1\/7/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet3\/1\/8/,/!/{//!d;}; /TenGigabitEthernet3\/1\/8/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/FortyGigabitEthernet3\/1\/1/,/!/{//!d;}; /FortyGigabitEthernet3\/1\/1/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/FortyGigabitEthernet3\/1\/2/,/!/{//!d;}; /FortyGigabitEthernet3\/1\/2/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TwentyFiveGigE3\/1\/1/,/!/{//!d;}; /TwentyFiveGigE3\/1\/1/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TwentyFiveGigE3\/1\/2/,/!/{//!d;}; /TwentyFiveGigE3\/1\/2/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/AppGigabitEthernet3\/0\/1/,/!/{//!d;}; /AppGigabitEthernet3\/0\/1/d' /root/.meraki_port_mig/cisco_config.tmp
     unbuffer python3.10 /root/.meraki_port_mig/port_migration.py
     rm -f /root/.meraki_port_mig/cisco_config.tmp
 else
     echo " " > /dev/null
 fi
+
+#UPLINKS
+#SWITCH3
+CONFIGUP3=$(ls /root/.meraki_port_mig/cisco_config_up3.tmp 2>/dev/null)
+CATSERIAL=$(cat /root/.meraki_port_mig/tmp/serial3.txt 2>/dev/null)
+if [[ "$CONFIGUP3" == "/root/.meraki_port_mig/cisco_config_up3.tmp" ]]; then
+    echo "${GREEN}Migrating Gigabit/TenGigabit Information to Uplink${TEXTRESET}"
+    #Remove unneeded interfaces
+    #sed -i '/interface FortyGigabitEthernet1\/1\/1/,$d' /root/.meraki_port_mig/cisco_config_up3.tmp
+    mv /root/.meraki_port_mig/cisco_config_up3.tmp /root/.meraki_port_mig/cisco_config_up.tmp
+    python3.10 /root/.meraki_port_mig/port_mig-C9300-NM-8X.py
+    rm -f /root/.meraki_mig/cisco_config_up.tmp
+    rm -f /root/.meraki_mig/cisco_config_up3.tmp
+    echo "${GREEN}Uplink conversion for Switch 3 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
+    echo " "
+else
+    echo " " > /dev/null
+fi
+
 
 #Stacked Switch Config 4
 CONFIG4=$(ls /root/.meraki_port_mig/tmp/switch4.txt 2>/dev/null)
@@ -190,11 +336,61 @@ if [[ "$CONFIG4" == "/root/.meraki_port_mig/tmp/switch4.txt" && "$SERIAL4" == "/
     \cp -f /root/.meraki_port_mig/tmp/switch4.txt /root/.meraki_port_mig/cisco_config.tmp
     \cp -f /root/.meraki_port_mig/tmp/serial4.txt /root/.meraki_port_mig/serial.txt
     #Move the Uplink ports to a separate file
-    awk '/interface GigabitEthernet4\/1\/1/ {start = NR; flag = 1} flag {lines[NR] = $0}  /interface FortyGigabitEthernet4\/1\/2/ {end = NR; flag = 0} END {if (start && end) {for (i=start; i<=end; i++) print lines[i]}}' /root/.meraki_port_mig/cisco_config.tmp >/root/.meraki_port_mig/cisco_config_up4.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/GigabitEthernet4\/1\/1/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up4.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/GigabitEthernet4\/1\/2/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up4.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/GigabitEthernet4\/1\/3/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up4.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/GigabitEthernet4\/1\/4/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up4.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet4\/1\/1/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up4.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet4\/1\/2/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up4.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet4\/1\/3/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up4.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet4\/1\/4/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up4.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet4\/1\/5/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up4.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet4\/1\/6/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up4.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet4\/1\/7/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up4.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet4\/1\/8/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up4.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/FortyGigabitEthernet4\/1\/1/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up4.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/FortyGigabitEthernet4\/1\/2/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up4.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TwentyFiveGigE4\/1\/1/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up4.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TwentyFiveGigE4\/1\/2/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up4.tmp
+
     #Remove the uplinks from the file
-    awk '/interface GigabitEthernet4\/1\/1/,/interface FortyGigabitEthernet4\/1\/2/{next}1' /root/.meraki_port_mig/cisco_config.tmp >temp_file && mv -f temp_file /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/GigabitEthernet4\/1\/1/,/!/{//!d;}; /GigabitEthernet4\/1\/1/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/GigabitEthernet4\/1\/2/,/!/{//!d;}; /GigabitEthernet4\/1\/2/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/GigabitEthernet4\/1\/3/,/!/{//!d;}; /GigabitEthernet4\/1\/3/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/GigabitEthernet4\/1\/4/,/!/{//!d;}; /GigabitEthernet4\/1\/4/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet4\/1\/1/,/!/{//!d;}; /TenGigabitEthernet4\/1\/1/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet4\/1\/2/,/!/{//!d;}; /TenGigabitEthernet4\/1\/2/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet4\/1\/3/,/!/{//!d;}; /TenGigabitEthernet4\/1\/3/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet4\/1\/4/,/!/{//!d;}; /TenGigabitEthernet4\/1\/4/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet4\/1\/5/,/!/{//!d;}; /TenGigabitEthernet4\/1\/5/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet4\/1\/6/,/!/{//!d;}; /TenGigabitEthernet4\/1\/6/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet4\/1\/7/,/!/{//!d;}; /TenGigabitEthernet4\/1\/7/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet4\/1\/8/,/!/{//!d;}; /TenGigabitEthernet4\/1\/8/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/FortyGigabitEthernet4\/1\/1/,/!/{//!d;}; /FortyGigabitEthernet4\/1\/1/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/FortyGigabitEthernet4\/1\/2/,/!/{//!d;}; /FortyGigabitEthernet4\/1\/2/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TwentyFiveGigE4\/1\/1/,/!/{//!d;}; /TwentyFiveGigE4\/1\/1/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TwentyFiveGigE4\/1\/2/,/!/{//!d;}; /TwentyFiveGigE4\/1\/2/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/AppGigabitEthernet4\/0\/1/,/!/{//!d;}; /AppGigabitEthernet4\/0\/1/d' /root/.meraki_port_mig/cisco_config.tmp
     unbuffer python3.10 /root/.meraki_port_mig/port_migration.py
     rm -f /root/.meraki_port_mig/cisco_config.tmp
+else
+    echo " " > /dev/null
+fi
+
+#UPLINKS
+#SWITCH4
+CONFIGUP4=$(ls /root/.meraki_port_mig/cisco_config_up4.tmp 2>/dev/null)
+CATSERIAL=$(cat /root/.meraki_port_mig/tmp/serial4.txt 2>/dev/null)
+if [[ "$CONFIGUP4" == "/root/.meraki_port_mig/cisco_config_up4.tmp" ]]; then
+    echo "${GREEN}Migrating Gigabit/TenGigabit Information to Uplink${TEXTRESET}"
+    #Remove unneeded interfaces
+    #sed -i '/interface FortyGigabitEthernet1\/1\/1/,$d' /root/.meraki_port_mig/cisco_config_up4.tmp
+    mv /root/.meraki_port_mig/cisco_config_up4.tmp /root/.meraki_port_mig/cisco_config_up.tmp
+    python3.10 /root/.meraki_port_mig/port_mig-C9300-NM-8X.py
+    rm -f /root/.meraki_mig/cisco_config_up.tmp
+    rm -f /root/.meraki_mig/cisco_config_up4.tmp
+    echo "${GREEN}Uplink conversion for Switch 4 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
+    echo " "
 else
     echo " " > /dev/null
 fi
@@ -209,11 +405,60 @@ if [[ "$CONFIG5" == "/root/.meraki_port_mig/tmp/switch5.txt" && "$SERIAL5" == "/
     \cp -f /root/.meraki_port_mig/tmp/switch5.txt /root/.meraki_port_mig/cisco_config.tmp
     \cp -f /root/.meraki_port_mig/tmp/serial5.txt /root/.meraki_port_mig/serial.txt
     #Move the Uplink ports to a separate file
-    awk '/interface GigabitEthernet5\/1\/1/ {start = NR; flag = 1} flag {lines[NR] = $0} /interface FortyGigabitEthernet5\/1\/2/ {end = NR; flag = 0} END {if (start && end) {for (i=start; i<=end; i++) print lines[i]}}' /root/.meraki_port_mig/cisco_config.tmp >/root/.meraki_port_mig/cisco_config_up5.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/GigabitEthernet5\/1\/1/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up5.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/GigabitEthernet5\/1\/2/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up5.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/GigabitEthernet5\/1\/3/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up5.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/GigabitEthernet5\/1\/4/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up5.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet5\/1\/1/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up5.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet5\/1\/2/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up5.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet5\/1\/3/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up5.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet5\/1\/4/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up5.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet5\/1\/5/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up5.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet5\/1\/6/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up5.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet5\/1\/7/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up5.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet5\/1\/8/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up5.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/FortyGigabitEthernet5\/1\/1/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up5.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/FortyGigabitEthernet5\/1\/2/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up5.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TwentyFiveGigE5\/1\/1/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up5.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TwentyFiveGigE5\/1\/2/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up5.tmp
     #Remove the uplinks from the file
-    awk '/interface GigabitEthernet5\/1\/1/,/interface FortyGigabitEthernet5\/1\/2/{next}1' /root/.meraki_port_mig/cisco_config.tmp >temp_file && mv -f temp_file /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/GigabitEthernet5\/1\/1/,/!/{//!d;}; /GigabitEthernet5\/1\/1/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/GigabitEthernet5\/1\/2/,/!/{//!d;}; /GigabitEthernet5\/1\/2/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/GigabitEthernet5\/1\/3/,/!/{//!d;}; /GigabitEthernet5\/1\/3/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/GigabitEthernet5\/1\/4/,/!/{//!d;}; /GigabitEthernet5\/1\/4/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet5\/1\/1/,/!/{//!d;}; /TenGigabitEthernet5\/1\/1/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet5\/1\/2/,/!/{//!d;}; /TenGigabitEthernet5\/1\/2/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet5\/1\/3/,/!/{//!d;}; /TenGigabitEthernet5\/1\/3/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet5\/1\/4/,/!/{//!d;}; /TenGigabitEthernet5\/1\/4/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet5\/1\/5/,/!/{//!d;}; /TenGigabitEthernet5\/1\/5/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet5\/1\/6/,/!/{//!d;}; /TenGigabitEthernet5\/1\/6/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet5\/1\/7/,/!/{//!d;}; /TenGigabitEthernet5\/1\/7/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet5\/1\/8/,/!/{//!d;}; /TenGigabitEthernet5\/1\/8/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/FortyGigabitEthernet5\/1\/1/,/!/{//!d;}; /FortyGigabitEthernet5\/1\/1/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/FortyGigabitEthernet5\/1\/2/,/!/{//!d;}; /FortyGigabitEthernet5\/1\/2/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TwentyFiveGigE5\/1\/1/,/!/{//!d;}; /TwentyFiveGigE5\/1\/1/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TwentyFiveGigE5\/1\/2/,/!/{//!d;}; /TwentyFiveGigE5\/1\/2/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/AppGigabitEthernet5\/0\/1/,/!/{//!d;}; /AppGigabitEthernet5\/0\/1/d' /root/.meraki_port_mig/cisco_config.tmp
     unbuffer python3.10 /root/.meraki_port_mig/port_migration.py
     rm -f /root/.meraki_port_mig/cisco_config.tmp
+else
+    echo " " > /dev/null
+fi
+
+#UPLINKS
+#SWITCH5
+CONFIGUP5=$(ls /root/.meraki_port_mig/cisco_config_up5.tmp 2>/dev/null)
+CATSERIAL=$(cat /root/.meraki_port_mig/tmp/serial5.txt 2>/dev/null)
+if [[ "$CONFIGUP5" == "/root/.meraki_port_mig/cisco_config_up5.tmp" ]]; then
+    echo "${GREEN}Migrating Gigabit/TenGigabit Information to Uplink${TEXTRESET}"
+    #Remove unneeded interfaces
+    #sed -i '/interface FortyGigabitEthernet1\/1\/1/,$d' /root/.meraki_port_mig/cisco_config_up5.tmp
+    mv /root/.meraki_port_mig/cisco_config_up5.tmp /root/.meraki_port_mig/cisco_config_up.tmp
+    python3.10 /root/.meraki_port_mig/port_mig-C9300-NM-8X.py
+    rm -f /root/.meraki_mig/cisco_config_up.tmp
+    rm -f /root/.meraki_mig/cisco_config_up5.tmp
+    echo "${GREEN}Uplink conversion for Switch 5 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
+    echo " "
 else
     echo " " > /dev/null
 fi
@@ -228,11 +473,61 @@ if [[ "$CONFIG6" == "/root/.meraki_port_mig/tmp/switch6.txt" && "$SERIAL6" == "/
     \cp -f /root/.meraki_port_mig/tmp/switch6.txt /root/.meraki_port_mig/cisco_config.tmp
     \cp -f /root/.meraki_port_mig/tmp/serial6.txt /root/.meraki_port_mig/serial.txt
     #Move the Uplink ports to a separate file
-    awk '/interface GigabitEthernet6\/1\/1/ {start = NR; flag = 1} flag {lines[NR] = $0} /interface FortyGigabitEthernet6\/1\/2/ {end = NR; flag = 0} END {if (start && end) {for (i=start; i<=end; i++) print lines[i]}}' /root/.meraki_port_mig/cisco_config.tmp >/root/.meraki_port_mig/cisco_config_up6.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/GigabitEthernet6\/1\/1/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up6.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/GigabitEthernet6\/1\/2/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up6.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/GigabitEthernet6\/1\/3/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up6.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/GigabitEthernet6\/1\/4/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up6.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet6\/1\/1/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up6.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet6\/1\/2/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up6.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet6\/1\/3/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up6.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet6\/1\/4/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up6.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet6\/1\/5/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up6.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet6\/1\/6/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up6.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet6\/1\/7/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up6.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet6\/1\/8/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up6.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/FortyGigabitEthernet6\/1\/1/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up6.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/FortyGigabitEthernet6\/1\/2/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up6.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TwentyFiveGigE6\/1\/1/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up6.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TwentyFiveGigE6\/1\/2/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up6.tmp
     #Remove the uplinks from the file
-    awk '/interface GigabitEthernet6\/1\/1/,/interface FortyGigabitEthernet6\/1\/2/{next}1' /root/.meraki_port_mig/cisco_config.tmp >temp_file && mv -f temp_file /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/GigabitEthernet6\/1\/1/,/!/{//!d;}; /GigabitEthernet6\/1\/1/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/GigabitEthernet6\/1\/2/,/!/{//!d;}; /GigabitEthernet6\/1\/2/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/GigabitEthernet6\/1\/3/,/!/{//!d;}; /GigabitEthernet6\/1\/3/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/GigabitEthernet6\/1\/4/,/!/{//!d;}; /GigabitEthernet6\/1\/4/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet6\/1\/1/,/!/{//!d;}; /TenGigabitEthernet6\/1\/1/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet6\/1\/2/,/!/{//!d;}; /TenGigabitEthernet6\/1\/2/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet6\/1\/3/,/!/{//!d;}; /TenGigabitEthernet6\/1\/3/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet6\/1\/4/,/!/{//!d;}; /TenGigabitEthernet6\/1\/4/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet6\/1\/5/,/!/{//!d;}; /TenGigabitEthernet6\/1\/5/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet6\/1\/6/,/!/{//!d;}; /TenGigabitEthernet6\/1\/6/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet6\/1\/7/,/!/{//!d;}; /TenGigabitEthernet6\/1\/7/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet6\/1\/8/,/!/{//!d;}; /TenGigabitEthernet6\/1\/8/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/FortyGigabitEthernet6\/1\/1/,/!/{//!d;}; /FortyGigabitEthernet6\/1\/1/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/FortyGigabitEthernet6\/1\/2/,/!/{//!d;}; /FortyGigabitEthernet6\/1\/2/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TwentyFiveGigE6\/1\/1/,/!/{//!d;}; /TwentyFiveGigE6\/1\/1/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TwentyFiveGigE6\/1\/2/,/!/{//!d;}; /TwentyFiveGigE6\/1\/2/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/AppGigabitEthernet6\/0\/1/,/!/{//!d;}; /AppGigabitEthernet6\/0\/1/d' /root/.meraki_port_mig/cisco_config.tmp
+
     unbuffer python3.10 /root/.meraki_port_mig/port_migration.py
     rm -f /root/.meraki_port_mig/cisco_config.tmp
+else
+    echo " " > /dev/null
+fi
+
+#UPLINKS
+#SWITCH6
+CONFIGUP6=$(ls /root/.meraki_port_mig/cisco_config_up6.tmp 2>/dev/null)
+CATSERIAL=$(cat /root/.meraki_port_mig/tmp/serial6.txt 2>/dev/null)
+if [[ "$CONFIGUP6" == "/root/.meraki_port_mig/cisco_config_up6.tmp" ]]; then
+    echo "${GREEN}Migrating Gigabit/TenGigabit Information to Uplink${TEXTRESET}"
+    #Remove unneeded interfaces
+    #sed -i '/interface FortyGigabitEthernet1\/1\/1/,$d' /root/.meraki_port_mig/cisco_config_up6.tmp
+    mv /root/.meraki_port_mig/cisco_config_up2.tmp /root/.meraki_port_mig/cisco_config_up.tmp
+    python3.10 /root/.meraki_port_mig/port_mig-C9300-NM-8X.py
+    rm -f /root/.meraki_mig/cisco_config_up.tmp
+    rm -f /root/.meraki_mig/cisco_config_up6.tmp
+    echo "${GREEN}Uplink conversion for Switch 6 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
+    echo " "
 else
     echo " " > /dev/null
 fi
@@ -247,15 +542,63 @@ if [[ "$CONFIG7" == "/root/.meraki_port_mig/tmp/switch7.txt" && "$SERIAL7" == "/
     \cp -f /root/.meraki_port_mig/tmp/switch7.txt /root/.meraki_port_mig/cisco_config.tmp
     \cp -f /root/.meraki_port_mig/tmp/serial7.txt /root/.meraki_port_mig/serial.txt
     #Move the Uplink ports to a separate file
-    awk '/interface GigabitEthernet7\/1\/1/ {start = NR; flag = 1} flag {lines[NR] = $0} /interface FortyGigabitEthernet7\/1\/2/ {end = NR; flag = 0} END {if (start && end) {for (i=start; i<=end; i++) print lines[i]}}' /root/.meraki_port_mig/cisco_config.tmp >/root/.meraki_port_mig/cisco_config_up7.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/GigabitEthernet7\/1\/1/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up7.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/GigabitEthernet7\/1\/2/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up7.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/GigabitEthernet7\/1\/3/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up7.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/GigabitEthernet7\/1\/4/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up7.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet7\/1\/1/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up7.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet7\/1\/2/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up7.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet7\/1\/3/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up7.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet7\/1\/4/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up7.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet7\/1\/5/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up7.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet7\/1\/6/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up7.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet7\/1\/7/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up7.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet7\/1\/8/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up7.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/FortyGigabitEthernet7\/1\/1/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up7.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/FortyGigabitEthernet7\/1\/2/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up7.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TwentyFiveGigE7\/1\/1/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up7.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TwentyFiveGigE7\/1\/2/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up7.tmp
     #Remove the uplinks from the file
-    awk '/interface GigabitEthernet7\/1\/1/,/interface FortyGigabitEthernet7\/1\/2/{next}1' /root/.meraki_port_mig/cisco_config.tmp >temp_file && mv -f temp_file /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/GigabitEthernet7\/1\/1/,/!/{//!d;}; /GigabitEthernet7\/1\/1/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/GigabitEthernet7\/1\/2/,/!/{//!d;}; /GigabitEthernet7\/1\/2/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/GigabitEthernet7\/1\/3/,/!/{//!d;}; /GigabitEthernet7\/1\/3/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/GigabitEthernet7\/1\/4/,/!/{//!d;}; /GigabitEthernet7\/1\/4/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet7\/1\/1/,/!/{//!d;}; /TenGigabitEthernet7\/1\/1/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet7\/1\/2/,/!/{//!d;}; /TenGigabitEthernet7\/1\/2/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet7\/1\/3/,/!/{//!d;}; /TenGigabitEthernet7\/1\/3/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet7\/1\/4/,/!/{//!d;}; /TenGigabitEthernet7\/1\/4/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet7\/1\/5/,/!/{//!d;}; /TenGigabitEthernet7\/1\/5/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet7\/1\/6/,/!/{//!d;}; /TenGigabitEthernet7\/1\/6/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet7\/1\/7/,/!/{//!d;}; /TenGigabitEthernet7\/1\/7/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet7\/1\/8/,/!/{//!d;}; /TenGigabitEthernet7\/1\/8/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/FortyGigabitEthernet7\/1\/1/,/!/{//!d;}; /FortyGigabitEthernet7\/1\/1/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/FortyGigabitEthernet7\/1\/2/,/!/{//!d;}; /FortyGigabitEthernet7\/1\/2/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TwentyFiveGigE7\/1\/1/,/!/{//!d;}; /TwentyFiveGigE7\/1\/1/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TwentyFiveGigE7\/1\/2/,/!/{//!d;}; /TwentyFiveGigE7\/1\/2/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/AppGigabitEthernet7\/0\/1/,/!/{//!d;}; /AppGigabitEthernet7\/0\/1/d' /root/.meraki_port_mig/cisco_config.tmp
     unbuffer python3.10 /root/.meraki_port_mig/port_migration.py
     rm -f /root/.meraki_port_mig/cisco_config.tmp
 else
     echo " " > /dev/null
 fi
 
+#UPLINKS
+#SWITCH7
+CONFIGUP7=$(ls /root/.meraki_port_mig/cisco_config_up7.tmp 2>/dev/null)
+CATSERIAL=$(cat /root/.meraki_port_mig/tmp/serial7.txt 2>/dev/null)
+if [[ "$CONFIGUP7" == "/root/.meraki_port_mig/cisco_config_up7.tmp" ]]; then
+    echo "${GREEN}Migrating Gigabit/TenGigabit Information to Uplink${TEXTRESET}"
+    #Remove unneeded interfaces
+    #sed -i '/interface FortyGigabitEthernet1\/1\/1/,$d' /root/.meraki_port_mig/cisco_config_up7.tmp
+    mv /root/.meraki_port_mig/cisco_config_up7.tmp /root/.meraki_port_mig/cisco_config_up.tmp
+    python3.10 /root/.meraki_port_mig/port_mig-C9300-NM-8X.py
+    rm -f /root/.meraki_mig/cisco_config_up.tmp
+    rm -f /root/.meraki_mig/cisco_config_up7.tmp
+    echo "${GREEN}Uplink conversion for Switch 7 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
+    echo " "
+else
+    echo " " > /dev/null
+fi
 #Stacked Switch Config 8
 CONFIG8=$(ls /root/.meraki_port_mig/tmp/switch8.txt 2>/dev/null)
 SERIAL8=$(ls /root/.meraki_port_mig/tmp/serial8.txt 2>/dev/null)
@@ -266,11 +609,60 @@ if [[ "$CONFIG8" == "/root/.meraki_port_mig/tmp/switch8.txt" && "$SERIAL8" == "/
     \cp -f /root/.meraki_port_mig/tmp/switch8.txt /root/.meraki_port_mig/cisco_config.tmp
     \cp -f /root/.meraki_port_mig/tmp/serial8.txt /root/.meraki_port_mig/serial.txt
     #Move the Uplink ports to a separate file
-    awk '/interface GigabitEthernet8\/1\/1/ {start = NR; flag = 1} flag {lines[NR] = $0} /interface FortyGigabitEthernet8\/1\/2/ {end = NR; flag = 0} END {if (start && end) {for (i=start; i<=end; i++) print lines[i]}}' /root/.meraki_port_mig/cisco_config.tmp >/root/.meraki_port_mig/cisco_config_up8.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/GigabitEthernet8\/1\/1/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up8.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/GigabitEthernet8\/1\/2/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up8.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/GigabitEthernet8\/1\/3/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up8.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/GigabitEthernet8\/1\/4/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up8.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet8\/1\/1/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up8.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet8\/1\/2/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up8.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet8\/1\/3/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up8.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet8\/1\/4/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up8.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet8\/1\/5/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up8.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet8\/1\/6/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up8.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet8\/1\/7/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up8.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet8\/1\/8/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up8.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/FortyGigabitEthernet8\/1\/1/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up8.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/FortyGigabitEthernet8\/1\/2/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up8.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TwentyFiveGigE8\/1\/1/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up8.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TwentyFiveGigE8\/1\/2/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up8.tmp
     #Remove the uplinks from the file
-    awk '/interface GigabitEthernet8\/1\/1/,/interface FortyGigabitEthernet8\/1\/2/{next}1' /root/.meraki_port_mig/cisco_config.tmp >temp_file && mv -f temp_file /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/GigabitEthernet8\/1\/1/,/!/{//!d;}; /GigabitEthernet8\/1\/1/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/GigabitEthernet8\/1\/2/,/!/{//!d;}; /GigabitEthernet8\/1\/2/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/GigabitEthernet8\/1\/3/,/!/{//!d;}; /GigabitEthernet8\/1\/3/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/GigabitEthernet8\/1\/4/,/!/{//!d;}; /GigabitEthernet8\/1\/4/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet8\/1\/1/,/!/{//!d;}; /TenGigabitEthernet8\/1\/1/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet8\/1\/2/,/!/{//!d;}; /TenGigabitEthernet8\/1\/2/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet8\/1\/3/,/!/{//!d;}; /TenGigabitEthernet8\/1\/3/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet8\/1\/4/,/!/{//!d;}; /TenGigabitEthernet8\/1\/4/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet8\/1\/5/,/!/{//!d;}; /TenGigabitEthernet8\/1\/5/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet8\/1\/6/,/!/{//!d;}; /TenGigabitEthernet8\/1\/6/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet8\/1\/7/,/!/{//!d;}; /TenGigabitEthernet8\/1\/7/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet8\/1\/8/,/!/{//!d;}; /TenGigabitEthernet8\/1\/8/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/FortyGigabitEthernet8\/1\/1/,/!/{//!d;}; /FortyGigabitEthernet8\/1\/1/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/FortyGigabitEthernet8\/1\/2/,/!/{//!d;}; /FortyGigabitEthernet8\/1\/2/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TwentyFiveGigE8\/1\/1/,/!/{//!d;}; /TwentyFiveGigE8\/1\/1/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TwentyFiveGigE8\/1\/2/,/!/{//!d;}; /TwentyFiveGigE8\/1\/2/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/AppGigabitEthernet8\/0\/1/,/!/{//!d;}; /AppGigabitEthernet8\/0\/1/d' /root/.meraki_port_mig/cisco_config.tmp
     unbuffer python3.10 /root/.meraki_port_mig/port_migration.py
     rm -f /root/.meraki_port_mig/cisco_config.tmp
+else
+    echo " " > /dev/null
+fi
+
+#UPLINKS
+#SWITCH8
+CONFIGUP8=$(ls /root/.meraki_port_mig/cisco_config_up8.tmp 2>/dev/null)
+CATSERIAL=$(cat /root/.meraki_port_mig/tmp/serial8.txt 2>/dev/null)
+if [[ "$CONFIGUP8" == "/root/.meraki_port_mig/cisco_config_up8.tmp" ]]; then
+    echo "${GREEN}Migrating Gigabit/TenGigabit Information to Uplink${TEXTRESET}"
+    #Remove unneeded interfaces
+    #sed -i '/interface FortyGigabitEthernet1\/1\/1/,$d' /root/.meraki_port_mig/cisco_config_up8.tmp
+    mv /root/.meraki_port_mig/cisco_config_up8.tmp /root/.meraki_port_mig/cisco_config_up.tmp
+    python3.10 /root/.meraki_port_mig/port_mig-C9300-NM-8X.py
+    rm -f /root/.meraki_mig/cisco_config_up.tmp
+    rm -f /root/.meraki_mig/cisco_config_up8.tmp
+    echo "${GREEN}Uplink conversion for Switch 8 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
+    echo " "
 else
     echo " " > /dev/null
 fi
@@ -285,173 +677,56 @@ if [[ "$CONFIG9" == "/root/.meraki_port_mig/tmp/switch9.txt" && "$SERIAL9" == "/
     \cp -f /root/.meraki_port_mig/tmp/switch9.txt /root/.meraki_port_mig/cisco_config.tmp
     \cp -f /root/.meraki_port_mig/tmp/serial9.txt /root/.meraki_port_mig/serial.txt
     #Move the Uplink ports to a separate file
-    awk '/interface GigabitEthernet9\/1\/1/ {start = NR; flag = 1} flag {lines[NR] = $0} /interface FortyGigabitEthernet9\/1\/2/ {end = NR; flag = 0} END {if (start && end) {for (i=start; i<=end; i++) print lines[i]}}' /root/.meraki_port_mig/cisco_config.tmp >/root/.meraki_port_mig/cisco_config_up9.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/GigabitEthernet9\/1\/1/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up9.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/GigabitEthernet9\/1\/2/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up9.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/GigabitEthernet9\/1\/3/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up9.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/GigabitEthernet9\/1\/4/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up9.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet9\/1\/1/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up9.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet9\/1\/2/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up9.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet9\/1\/3/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up9.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet9\/1\/4/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up9.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet9\/1\/5/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up9.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet9\/1\/6/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up9.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet9\/1\/7/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up9.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TenGigabitEthernet9\/1\/8/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up9.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/FortyGigabitEthernet9\/1\/1/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up9.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/FortyGigabitEthernet9\/1\/2/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up9.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TwentyFiveGigE9\/1\/1/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up9.tmp
+    cat /root/.meraki_port_mig/cisco_config.tmp | awk '/TwentyFiveGigE9\/1\/2/ {found=1} found {print} /!/{if (found) exit}' >>/root/.meraki_port_mig/cisco_config_up9.tmp
     #Remove the uplinks from the file
-    awk '/interface GigabitEthernet9\/1\/1/,/interface FortyGigabitEthernet9\/1\/2/{next}1' /root/.meraki_port_mig/cisco_config.tmp >temp_file && mv -f temp_file /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/GigabitEthernet9\/1\/1/,/!/{//!d;}; /GigabitEthernet9\/1\/1/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/GigabitEthernet9\/1\/2/,/!/{//!d;}; /GigabitEthernet9\/1\/2/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/GigabitEthernet9\/1\/3/,/!/{//!d;}; /GigabitEthernet9\/1\/3/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/GigabitEthernet9\/1\/4/,/!/{//!d;}; /GigabitEthernet9\/1\/4/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet9\/1\/1/,/!/{//!d;}; /TenGigabitEthernet9\/1\/1/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet9\/1\/2/,/!/{//!d;}; /TenGigabitEthernet9\/1\/2/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet9\/1\/3/,/!/{//!d;}; /TenGigabitEthernet9\/1\/3/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet9\/1\/4/,/!/{//!d;}; /TenGigabitEthernet9\/1\/4/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet9\/1\/5/,/!/{//!d;}; /TenGigabitEthernet9\/1\/5/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet9\/1\/6/,/!/{//!d;}; /TenGigabitEthernet9\/1\/6/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet9\/1\/7/,/!/{//!d;}; /TenGigabitEthernet9\/1\/7/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TenGigabitEthernet9\/1\/8/,/!/{//!d;}; /TenGigabitEthernet9\/1\/8/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/FortyGigabitEthernet9\/1\/1/,/!/{//!d;}; /FortyGigabitEthernet9\/1\/1/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/FortyGigabitEthernet9\/1\/2/,/!/{//!d;}; /FortyGigabitEthernet9\/1\/2/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TwentyFiveGigE9\/1\/1/,/!/{//!d;}; /TwentyFiveGigE9\/1\/1/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/TwentyFiveGigE9\/1\/2/,/!/{//!d;}; /TwentyFiveGigE9\/1\/2/d' /root/.meraki_port_mig/cisco_config.tmp
+    sed -i '/AppGigabitEthernet9\/0\/1/,/!/{//!d;}; /AppGigabitEthernet9\/0\/1/d' /root/.meraki_port_mig/cisco_config.tmp
     unbuffer python3.10 /root/.meraki_port_mig/port_migration.py
     rm -f /root/.meraki_port_mig/cisco_config.tmp
 else
     echo " " > /dev/null
 fi
 
-#Determine the Hardware Uplink (NM) for the switch
-
-
-#SWITCH1
-CONFIGUP1=$(ls /root/.meraki_port_mig/cisco_config_up1.tmp 2>/dev/null)
-CATSERIAL=$(cat /root/.meraki_port_mig/tmp/serial1.txt 2>/dev/null)
-if [[ "$CONFIGUP1" == "/root/.meraki_port_mig/cisco_config_up1.tmp" ]]; then
-    echo "${GREEN}${IP}-Found Network Module C9300-NM-8X${TEXTRESET}"
-    echo "${GREEN}Migrating Gigabit/TenGigabit Information to Uplink${TEXTRESET}"
-    #Remove unneeded interfaces
-    sed -i '/interface FortyGigabitEthernet1\/1\/1/,$d' /root/.meraki_port_mig/cisco_config_up1.tmp
-    mv /root/.meraki_port_mig/cisco_config_up1.tmp /root/.meraki_port_mig/cisco_config_up.tmp
-    unbuffer python3.10 /root/.meraki_port_mig/port_mig-C9300-NM-8X.py
-    rm -f /root/.meraki_mig/cisco_config_up.tmp
-    rm -f /root/.meraki_mig/cisco_config_up1.tmp
-    echo "${GREEN}Uplink conversion for Switch 1 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-    echo " "
-else
-    echo " " > /dev/null
-fi
-
-#SWITCH2
-CONFIGUP2=$(ls /root/.meraki_port_mig/cisco_config_up2.tmp 2>/dev/null)
-CATSERIAL=$(cat /root/.meraki_port_mig/tmp/serial2.txt 2>/dev/null)
-if [[ "$CONFIGUP2" == "/root/.meraki_port_mig/cisco_config_up2.tmp" ]]; then
-    echo "${GREEN}${IP}-Found Network Module C9300-NM-8X${TEXTRESET}"
-    echo "${GREEN}Migrating Gigabit/TenGigabit Information to Uplink${TEXTRESET}"
-    #Remove unneeded interfaces
-    sed -i '/interface FortyGigabitEthernet1\/1\/1/,$d' /root/.meraki_port_mig/cisco_config_up2.tmp
-    mv /root/.meraki_port_mig/cisco_config_up2.tmp /root/.meraki_port_mig/cisco_config_up.tmp
-    unbuffer python3.10 /root/.meraki_port_mig/port_mig-C9300-NM-8X.py
-    rm -f /root/.meraki_mig/cisco_config_up.tmp
-    rm -f /root/.meraki_mig/cisco_config_up2.tmp
-    echo "${GREEN}Uplink conversion for Switch 2 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-    echo " "
-else
-    echo " " > /dev/null
-fi
-#SWITCH3
-CONFIGUP3=$(ls /root/.meraki_port_mig/cisco_config_up3.tmp 2>/dev/null)
-CATSERIAL=$(cat /root/.meraki_port_mig/tmp/serial3.txt 2>/dev/null)
-if [[ "$CONFIGUP3" == "/root/.meraki_port_mig/cisco_config_up3.tmp" ]]; then
-    echo "${GREEN}${IP}-Found Network Module C9300-NM-8X${TEXTRESET}"
-    echo "${GREEN}Migrating Gigabit/TenGigabit Information to Uplink${TEXTRESET}"
-    #Remove unneeded interfaces
-    sed -i '/interface FortyGigabitEthernet1\/1\/1/,$d' /root/.meraki_port_mig/cisco_config_up3.tmp
-    mv /root/.meraki_port_mig/cisco_config_up3.tmp /root/.meraki_port_mig/cisco_config_up.tmp
-    unbuffer python3.10 /root/.meraki_port_mig/port_mig-C9300-NM-8X.py
-    rm -f /root/.meraki_mig/cisco_config_up.tmp
-    rm -f /root/.meraki_mig/cisco_config_up3.tmp
-    echo "${GREEN}Uplink conversion for Switch 3 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-    echo " "
-else
-    echo " " > /dev/null
-fi
-
-#SWITCH4
-CONFIGUP4=$(ls /root/.meraki_port_mig/cisco_config_up4.tmp 2>/dev/null)
-CATSERIAL=$(cat /root/.meraki_port_mig/tmp/serial4.txt 2>/dev/null)
-if [[ "$CONFIGUP4" == "/root/.meraki_port_mig/cisco_config_up4.tmp" ]]; then
-    echo "${GREEN}${IP}-Found Network Module C9300-NM-8X${TEXTRESET}"
-    echo "${GREEN}Migrating Gigabit/TenGigabit Information to Uplink${TEXTRESET}"
-    #Remove unneeded interfaces
-    sed -i '/interface FortyGigabitEthernet1\/1\/1/,$d' /root/.meraki_port_mig/cisco_config_up4.tmp
-    mv /root/.meraki_port_mig/cisco_config_up4.tmp /root/.meraki_port_mig/cisco_config_up.tmp
-    unbuffer python3.10 /root/.meraki_port_mig/port_mig-C9300-NM-8X.py
-    rm -f /root/.meraki_mig/cisco_config_up.tmp
-    rm -f /root/.meraki_mig/cisco_config_up4.tmp
-    echo "${GREEN}Uplink conversion for Switch 4 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-    echo " "
-else
-    echo " " > /dev/null
-fi
-
-
-#SWITCH5
-CONFIGUP5=$(ls /root/.meraki_port_mig/cisco_config_up5.tmp 2>/dev/null)
-CATSERIAL=$(cat /root/.meraki_port_mig/tmp/serial5.txt 2>/dev/null)
-if [[ "$CONFIGUP5" == "/root/.meraki_port_mig/cisco_config_up5.tmp" ]]; then
-    echo "${GREEN}${IP}-Found Network Module C9300-NM-8X${TEXTRESET}"
-    echo "${GREEN}Migrating Gigabit/TenGigabit Information to Uplink${TEXTRESET}"
-    #Remove unneeded interfaces
-    sed -i '/interface FortyGigabitEthernet1\/1\/1/,$d' /root/.meraki_port_mig/cisco_config_up5.tmp
-    mv /root/.meraki_port_mig/cisco_config_up5.tmp /root/.meraki_port_mig/cisco_config_up.tmp
-    unbuffer python3.10 /root/.meraki_port_mig/port_mig-C9300-NM-8X.py
-    rm -f /root/.meraki_mig/cisco_config_up.tmp
-    rm -f /root/.meraki_mig/cisco_config_up5.tmp
-    echo "${GREEN}Uplink conversion for Switch 5 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-    echo " "
-else
-    echo " " > /dev/null
-fi
-
-#SWITCH6
-CONFIGUP6=$(ls /root/.meraki_port_mig/cisco_config_up6.tmp 2>/dev/null)
-CATSERIAL=$(cat /root/.meraki_port_mig/tmp/serial6.txt 2>/dev/null)
-if [[ "$CONFIGUP6" == "/root/.meraki_port_mig/cisco_config_up6.tmp" ]]; then
-    echo "${GREEN}${IP}-Found Network Module C9300-NM-8X${TEXTRESET}"
-    echo "${GREEN}Migrating Gigabit/TenGigabit Information to Uplink${TEXTRESET}"
-    #Remove unneeded interfaces
-    sed -i '/interface FortyGigabitEthernet1\/1\/1/,$d' /root/.meraki_port_mig/cisco_config_up6.tmp
-    mv /root/.meraki_port_mig/cisco_config_up2.tmp /root/.meraki_port_mig/cisco_config_up.tmp
-    unbuffer python3.10 /root/.meraki_port_mig/port_mig-C9300-NM-8X.py
-    rm -f /root/.meraki_mig/cisco_config_up.tmp
-    rm -f /root/.meraki_mig/cisco_config_up6.tmp
-    echo "${GREEN}Uplink conversion for Switch 6 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-    echo " "
-else
-    echo " " > /dev/null
-fi
-
-
-#SWITCH7
-CONFIGUP7=$(ls /root/.meraki_port_mig/cisco_config_up7.tmp 2>/dev/null)
-CATSERIAL=$(cat /root/.meraki_port_mig/tmp/serial7.txt 2>/dev/null)
-if [[ "$CONFIGUP7" == "/root/.meraki_port_mig/cisco_config_up7.tmp" ]]; then
-    echo "${GREEN}${IP}-Found Network Module C9300-NM-8X${TEXTRESET}"
-    echo "${GREEN}Migrating Gigabit/TenGigabit Information to Uplink${TEXTRESET}"
-    #Remove unneeded interfaces
-    sed -i '/interface FortyGigabitEthernet1\/1\/1/,$d' /root/.meraki_port_mig/cisco_config_up7.tmp
-    mv /root/.meraki_port_mig/cisco_config_up7.tmp /root/.meraki_port_mig/cisco_config_up.tmp
-    unbuffer python3.10 /root/.meraki_port_mig/port_mig-C9300-NM-8X.py
-    rm -f /root/.meraki_mig/cisco_config_up.tmp
-    rm -f /root/.meraki_mig/cisco_config_up7.tmp
-    echo "${GREEN}Uplink conversion for Switch 7 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-    echo " "
-else
-    echo " " > /dev/null
-fi
-
-#SWITCH8
-CONFIGUP8=$(ls /root/.meraki_port_mig/cisco_config_up8.tmp 2>/dev/null)
-CATSERIAL=$(cat /root/.meraki_port_mig/tmp/serial8.txt 2>/dev/null)
-if [[ "$CONFIGUP8" == "/root/.meraki_port_mig/cisco_config_up8.tmp" ]]; then
-    echo "${GREEN}${IP}-Found Network Module C9300-NM-8X${TEXTRESET}"
-    echo "${GREEN}Migrating Gigabit/TenGigabit Information to Uplink${TEXTRESET}"
-    #Remove unneeded interfaces
-    sed -i '/interface FortyGigabitEthernet1\/1\/1/,$d' /root/.meraki_port_mig/cisco_config_up8.tmp
-    mv /root/.meraki_port_mig/cisco_config_up8.tmp /root/.meraki_port_mig/cisco_config_up.tmp
-    unbuffer python3.10 /root/.meraki_port_mig/port_mig-C9300-NM-8X.py
-    rm -f /root/.meraki_mig/cisco_config_up.tmp
-    rm -f /root/.meraki_mig/cisco_config_up8.tmp
-    echo "${GREEN}Uplink conversion for Switch 8 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
-    echo " "
-else
-    echo " " > /dev/null
-fi
-
+#UPLINKS
 #SWITCH9
 CONFIGUP9=$(ls /root/.meraki_port_mig/cisco_config_up9.tmp 2>/dev/null)
 CATSERIAL=$(cat /root/.meraki_port_mig/tmp/serial9.txt 2>/dev/null)
 if [[ "$CONFIGUP9" == "/root/.meraki_port_mig/cisco_config_up9.tmp" ]]; then
-    echo "${GREEN}${IP}-Found Network Module C9300-NM-8X${TEXTRESET}"
     echo "${GREEN}Migrating Gigabit/TenGigabit Information to Uplink${TEXTRESET}"
     #Remove unneeded interfaces
-    sed -i '/interface FortyGigabitEthernet1\/1\/1/,$d' /root/.meraki_port_mig/cisco_config_up9.tmp
+    #sed -i '/interface FortyGigabitEthernet1\/1\/1/,$d' /root/.meraki_port_mig/cisco_config_up9.tmp
     mv /root/.meraki_port_mig/cisco_config_up9.tmp /root/.meraki_port_mig/cisco_config_up.tmp
-    unbuffer python3.10 /root/.meraki_port_mig/port_mig-C9300-NM-8X.py
+    python3.10 /root/.meraki_port_mig/port_mig-C9300-NM-8X.py
     rm -f /root/.meraki_mig/cisco_config_up.tmp
     rm -f /root/.meraki_mig/cisco_config_up9.tmp
     echo "${GREEN}Uplink conversion for Switch 9 (${IP} to ${CATSERIAL}) Complete${TEXTRESET}"
@@ -459,10 +734,6 @@ if [[ "$CONFIGUP9" == "/root/.meraki_port_mig/cisco_config_up9.tmp" ]]; then
 else
     echo " " > /dev/null
 fi
-
-
-
-
 
 rm -f /root/.meraki_port_mig/serial.txt
 rm -f /root/.meraki_port_mig/cisco_config.tmp
