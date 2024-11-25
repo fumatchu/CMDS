@@ -365,4 +365,68 @@ capture && /^!/ {
 
 echo "Specified configurations have been removed and saved to $output_file"
 echo "Merged configuration saved to $output_config"
-mv -v /root/.meraki_port_mig/staging/active/merged_48_port_config.tmp.txt /root/.meraki_port_mig/staging/active/merged_48_port_config.txt
+
+mv -f /root/.meraki_port_mig/staging/active/merged_48_port_config.tmp.txt /root/.meraki_port_mig/staging/active/${IP1}.merged
+
+
+#Clean up the original file
+#Remove the First switch config from the real config
+# Ensure SWITCH1 variable is set
+if [ -z "$SWITCH1" ]; then
+  echo "SWITCH11 variable is not set. Please set USEROPTION1 before running the script."
+  exit 1
+fi
+
+# Define the input configuration file
+input_file="/var/lib/tftpboot/port_switch/${IP1}"  # Replace with your actual switch config file path
+
+# Use sed to remove the desired configurations
+sed -i "/^interface .*${SWITCH1}\/[01]\/[0-9]\+/,/^!/d" "$input_file"
+
+echo "Removed configurations for ports starting with ${SWITCH1}/0/* and ${SWITCH1}/1/* from $input_file."
+
+#Remove the Second switch config from the real config
+
+# Ensure SWITCH2 variable is set
+if [ -z "$SWITCH2" ]; then
+  echo "SWITCH2 variable is not set. Please set SWITCH2 before running the script."
+  exit 1
+fi
+
+# Define the input configuration file
+input_file="/var/lib/tftpboot/port_switch/${IP1}"  # Replace with your actual switch config file path
+
+# Use sed to remove the desired configurations
+sed -i "/^interface .*${SWITCH2}\/[01]\/[0-9]\+/,/^!/d" "$input_file"
+
+echo "Removed configurations for ports starting with ${SWITCH2}/0/* and ${SWITCH2}/1/* from $input_file."
+
+#Insert the merged config into the real config
+# Define the input configuration file and the file to insert
+config_file="/var/lib/tftpboot/port_switch/${IP1}"  # Replace with your actual switch config file path
+insert_file="/root/.meraki_port_mig/staging/active/${IP1}.merged" # Replace with the file you want to insert
+
+# Use awk to insert the content of insert_file above the line containing "interface Vlan1"
+awk -v insert_file="$insert_file" '
+BEGIN {
+    # Read the content of the file to be inserted
+    while ((getline line < insert_file) > 0) {
+        insert_lines = insert_lines line "\n"
+    }
+    close(insert_file)
+}
+/^interface Vlan1/ {
+    # Before printing "interface Vlan1", print the inserted content and a "!"
+    print insert_lines "!"
+}
+{ print }
+' "$config_file" > temp_config.txt
+
+# Move the modified content back to the original config file
+mv temp_config.txt "$config_file"
+
+echo "Inserted content above 'interface Vlan1' in $config_file."
+
+
+#Clean up Directories
+find /root/.meraki_port_mig/staging -type f -exec rm -f {} +
