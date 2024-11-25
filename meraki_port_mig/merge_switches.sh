@@ -223,54 +223,146 @@ echo "Moved files to Active staging"
 sleep 1
 echo "Merging ${IP1}switch${SWITCH1}.txt and ${IP2}switch${SWITCH2}.txt"
 
+#Remove the Uplink ports of switch one and place them in a temp file
+# Define the input and temporary output files
+input_file="/root/.meraki_port_mig/staging/active/${IP1}switch${SWITCH1}.txt"  # Replace with your actual switch config file path
+tmp_file="/root/.meraki_port_mig/staging/active/tmp_config.txt"  # The temporary file to store extracted configurations
 
-#Modify the Secondary switch selection and change port to 25-48
-
-sed -i -e 's/\bGigabitEthernet1\/0\/1\b/GigabitEthernet1\/0\/25/g' \
--e 's/\bGigabitEthernet1\/0\/2\b/GigabitEthernet1\/0\/26/g' \
--e 's/\bGigabitEthernet1\/0\/3\b/GigabitEthernet1\/0\/27/g' \
--e 's/\bGigabitEthernet1\/0\/4\b/GigabitEthernet1\/0\/28/g' \
--e 's/\bGigabitEthernet1\/0\/5\b/GigabitEthernet1\/0\/29/g' \
--e 's/\bGigabitEthernet1\/0\/6\b/GigabitEthernet1\/0\/30/g' \
--e 's/\bGigabitEthernet1\/0\/7\b/GigabitEthernet1\/0\/31/g' \
--e 's/\bGigabitEthernet1\/0\/8\b/GigabitEthernet1\/0\/32/g' \
--e 's/\bGigabitEthernet1\/0\/9\b/GigabitEthernet1\/0\/33/g' \
--e 's/\bGigabitEthernet1\/0\/10\b/GigabitEthernet1\/0\/34/g' \
--e 's/\bGigabitEthernet1\/0\/11\b/GigabitEthernet1\/0\/35/g' \
--e 's/\bGigabitEthernet1\/0\/12\b/GigabitEthernet1\/0\/36/g' \
--e 's/\bGigabitEthernet1\/0\/13\b/GigabitEthernet1\/0\/37/g' \
--e 's/\bGigabitEthernet1\/0\/14\b/GigabitEthernet1\/0\/38/g' \
--e 's/\bGigabitEthernet1\/0\/15\b/GigabitEthernet1\/0\/39/g' \
--e 's/\bGigabitEthernet1\/0\/16\b/GigabitEthernet1\/0\/40/g' \
--e 's/\bGigabitEthernet1\/0\/17\b/GigabitEthernet1\/0\/41/g' \
--e 's/\bGigabitEthernet1\/0\/18\b/GigabitEthernet1\/0\/42/g' \
--e 's/\bGigabitEthernet1\/0\/19\b/GigabitEthernet1\/0\/43/g' \
--e 's/\bGigabitEthernet1\/0\/20\b/GigabitEthernet1\/0\/44/g' \
--e 's/\bGigabitEthernet1\/0\/21\b/GigabitEthernet1\/0\/45/g' \
--e 's/\bGigabitEthernet1\/0\/22\b/GigabitEthernet1\/0\/46/g' \
--e 's/\bGigabitEthernet1\/0\/23\b/GigabitEthernet1\/0\/47/g' \
--e 's/\bGigabitEthernet1\/0\/24\b/GigabitEthernet1\/0\/48/g' /root/.meraki_port_mig/staging/active/${IP2}switch${SWITCH2}.txt
-
-
-sed -i "/Ethernet${SWITCH2}\/1\/1/,\$d" /root/.meraki_port_mig/staging/active/${IP2}switch${SWITCH2}.txt
-echo "Ports modified and uplink ports stripped"
-
-#Merge switch 2 into switch 1
-awk -v insert_file="/root/.meraki_port_mig/staging/active/${IP2}switch${SWITCH2}.txt" '
-BEGIN {
-  # Read the contents of file2 into an array
-  while ((getline line < insert_file) > 0) {
-    insert_lines[++i] = line
-  }
-  close(insert_file)
+# Use awk to find and extract the desired port configurations
+awk '
+/^interface .*\/1\/[0-9]+/ {
+    capture = 1
 }
-{
-  if ($0 ~ /1\/1\/1/ && !inserted) {
-    # Insert the contents of file2 before printing the first line with 1/1/1
-    for (j = 1; j <= i; j++) {
-      print insert_lines[j]
+capture {
+    print
+    if (/^!/) {
+        capture = 0
     }
-    inserted = 1  # Ensure insertion happens only once
+}
+' "$input_file" > "$tmp_file"
+
+echo "Port configurations with middle number 1 have been moved to $tmp_file"
+
+#Remove all the uplink ports from the configs since we have moved the uplink ports we want to keep
+#Switch1
+# Define the input and output files
+input_file="/root/.meraki_port_mig/staging/active/${IP1}switch${SWITCH1}.txt"  # Replace with your actual switch config file path
+output_file="/root/.meraki_port_mig/staging/active/${IP1}switch${SWITCH1}tmp.txt"  # The file to save the modified configuration
+
+# Use awk to process the file and remove the specified port configurations
+awk '
+/^interface .*\/1\/[0-9]+/ {
+    capture = 1
+}
+!capture { print }
+capture && /^!/ {
+    capture = 0
+}
+' "$input_file" > "$output_file"
+mv -v /root/.meraki_port_mig/staging/active/${IP1}switch${SWITCH1}tmp.txt /root/.meraki_port_mig/staging/active/${IP1}switch${SWITCH1}.txt
+echo "Port configurations with middle number 1 have been removed and saved to $output_file"
+
+
+#Remove all the uplink ports from the configs since we have moved the uplink ports we want to keep
+#Switch2
+
+# Define the input and output files
+input_file="/root/.meraki_port_mig/staging/active/${IP2}switch${SWITCH2}.txt"  # Replace with your actual switch config file path
+output_file="/root/.meraki_port_mig/staging/active/${IP2}switch${SWITCH2}tmp.txt"  # The file to save the modified configuration
+
+# Use awk to process the file and remove the specified port configurations
+awk '
+/^interface .*\/1\/[0-9]+/ {
+    capture = 1
+}
+!capture { print }
+capture && /^!/ {
+    capture = 0
+}
+' "$input_file" > "$output_file"
+mv -v /root/.meraki_port_mig/staging/active/${IP2}switch${SWITCH2}tmp.txt /root/.meraki_port_mig/staging/active/${IP2}switch${SWITCH2}.txt
+echo "Port configurations with middle number 1 have been removed and saved to $output_file"
+
+
+
+#Take the Downlink ports and merge them
+# Define the input configuration files
+config1="/root/.meraki_port_mig/staging/active/${IP1}switch${SWITCH1}.txt"  # Replace with your first switch config file
+config2="/root/.meraki_port_mig/staging/active/${IP2}switch${SWITCH2}.txt"  # Replace with your second switch config file
+
+# Define the output configuration file
+output_config="/root/.meraki_port_mig/staging/active/merged_48_port_config.txt"
+
+# Function to find the first module number in a configuration file
+find_first_module() {
+  awk '/^interface / && /GigabitEthernet/ {
+    if (match($2, /[0-9]+\/[0-9]+\/[0-9]+/, arr)) {
+      split(arr[0], parts, "/")
+      print parts[1]  # Return the first part which is the module number
+      exit
+    }
+  }' "$1"
+}
+
+# Function to renumber ports in the second config, starting from 25
+renumber_ports() {
+  awk -v old_mod="$1" -v new_mod="$2" '
+  BEGIN {
+    port_offset = 24  # Offset for the second switch to start from port 25
   }
-  print $0
-}' /root/.meraki_port_mig/staging/active/${IP1}switch${SWITCH1}.txt > /root/.meraki_port_mig/staging/active/${IP1}
+  /^interface / {
+    if ($2 ~ "GigabitEthernet" old_mod "/0/") {
+      # Extract the port number
+      split($2, a, "/")
+      # Calculate the new port number
+      new_port = a[3] + port_offset
+      # Reconstruct the interface name with the new module and port number
+      $2 = "GigabitEthernet" new_mod "/0/" new_port
+    }
+  }
+  { print }
+  ' "$3"
+}
+
+# Find the module numbers
+first_config_module=$(find_first_module "$config1")
+second_config_module=$(find_first_module "$config2")
+
+# Start with the configuration of the first switch
+cat "$config1" > "$output_config"
+
+# Renumber ports for the second switch and append to the output file
+renumber_ports "$second_config_module" "$first_config_module" "$config2" >> "$output_config"
+
+#Insert the uplink ports from switch 1 back into the config
+cat /root/.meraki_port_mig/staging/active/tmp_config.txt >> /root/.meraki_port_mig/staging/active/merged_48_port_config.txt
+
+#Clean up the file
+# Define the input and output files
+input_file="/root/.meraki_port_mig/staging/active/merged_48_port_config.txt"  # Replace with your actual switch config file path
+output_file="/root/.meraki_port_mig/staging/active/merged_48_port_config.tmp.txt"  # The file to save the modified configuration
+
+# Use awk to process the file and remove the specified configurations
+awk '
+BEGIN {
+    count_0_25 = 0
+    capture = 0
+}
+/^interface .*0\/25/ {
+    count_0_25++
+    if (count_0_25 == 2) {
+        capture = 1
+    }
+}
+/^interface AppGigabitEthernet/ {
+    capture = 1
+}
+!capture { print }
+capture && /^!/ {
+    capture = 0
+}
+' "$input_file" > "$output_file"
+
+echo "Specified configurations have been removed and saved to $output_file"
+echo "Merged configuration saved to $output_config"
+mv -v /root/.meraki_port_mig/staging/active/merged_48_port_config.tmp.txt /root/.meraki_port_mig/staging/active/merged_48_port_config.txt
