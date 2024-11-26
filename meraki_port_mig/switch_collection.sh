@@ -6,6 +6,7 @@ YELLOW=$(tput setaf 3)
 GREEN=$(tput setaf 2)
 SERVER_IP=$(hostname -I)
 
+mkdir -p /root/.meraki_port_mig/tmp
 rm -f -r /root/port_migration/*
 rm -r -f /root/.meraki_port_mig/tmp/*
 mkdir -p /root/port_migration/staging
