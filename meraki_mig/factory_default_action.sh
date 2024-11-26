@@ -83,6 +83,12 @@ EOF
   mv /root/MIGInstaller/.servman /root
   chmod 700 -R /root/.servman
 
+  
+  mkdir /var/lib/tftpboot/wlc
+  mkdir /var/lib/tftpboot/mon_switch
+  mkdir /var/lib/tftpboot/mig_switch
+  mkdir /var/lib/tftpboot/port_switch
+  chmod -R 777 /var/lib/tftpboot/
   #Cleanup Install Files
   sed -i '/MIGInstall.sh/d' /root/.bash_profile
   rm -r -f /root/MIG*
