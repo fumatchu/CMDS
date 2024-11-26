@@ -135,7 +135,7 @@ mkdir -p /root/port_migration/
 grep -v '^[[:space:]]*$' "/root/.meraki_port_mig/switch_collection.final" > "/root/.meraki_port_mig/switch_collection.final.tmp"
 sed -e "s/ /,/g" </root/.meraki_port_mig/switch_collection.final.tmp >>/root/.meraki_port_mig/switch_collection.csv
 sed -i '1i IP_ADDRESS,HOSTNAME,SERIAL,MODEL,MERAKI_CLOUD_ID' /root/.meraki_port_mig/switch_collection.csv
-sed -i '25i DO_NOT_ERASE,' /root/.meraki_port_mig/switch_collection.csv
+echo "END," >> /root/.meraki_port_mig/switch_collection.csv
 mv /root/.meraki_port_mig/switch_collection.csv /root/port_migration
 cat << EOF
 
