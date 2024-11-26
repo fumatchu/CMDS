@@ -87,6 +87,7 @@ EOF
   sed -i '/MIGInstall.sh/d' /root/.bash_profile
   rm -r -f /root/MIG*
   rm -r -f /root/mig*
+  rm -f /root/factory_default_action.sh
   clear
   cat <<EOF
 ${GREEN}
@@ -100,7 +101,7 @@ EOF
   echo " "
   read -p "Press Enter to Continue"
   echo ${RED}"Rebooting${TEXTRESET}"
-  rm -f /root/factory_default_action.sh
+  
   sleep 1
   reboot
 
