@@ -19,10 +19,9 @@ items=(1 "Setup Wizard"
  14 "Batch Cleanup"
  15 "-----------------------------------------------"
  16 "Global Environment Settings"
- 17 "Schedule Deployment"
- 18 "Logs"
- 19 "Utilities"
- 20 "Welcome to CMDS"
+ 17 "Logs"
+ 18 "Utilities"
+ 19 "Welcome to CMDS"
 )
 
 while choice=$(dialog --title "$TITLE" \
@@ -44,10 +43,9 @@ while choice=$(dialog --title "$TITLE" \
  14) clear & /root/.meraki_port_mig/batch_clean.sh ;;
  15) clear ;;
  16) clear & /root/.meraki_port_mig/global_environment.sh ;;
- 17) clear & /root/.meraki_port_mig/schedule.sh ;;
- 18) clear & /root/.meraki_port_mig/logging_environment.sh ;;
- 19) clear & /root/.meraki_port_mig/utilities.sh ;;
- 20) clear & /root/.meraki_port_mig/welcome.readme | more ;;
+ 17) clear & /root/.meraki_port_mig/logging_environment.sh ;;
+ 18) clear & /root/.meraki_port_mig/utilities.sh ;;
+ 19) clear & /root/.meraki_port_mig/welcome.readme | more ;;
   esac
 done
 clear # clear after user pressed Cancel
