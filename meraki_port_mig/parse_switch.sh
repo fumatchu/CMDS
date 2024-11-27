@@ -4,11 +4,11 @@ RED=$(tput setaf 1)
 YELLOW=$(tput setaf 3)
 GREEN=$(tput setaf 2)
 
-IP1=192.168.210.153
-IP2=192.168.210.153
-USEROPTION1=1
-USEROPTION2=2
-AIP=192.168.210.153
+IP1=
+IP2=
+USEROPTION1=
+USEROPTION2=
+AIP=
 
 sed -n '/interface GigabitEthernet/,$p' /var/lib/tftpboot/port_switch/${AIP} >/root/.meraki_port_mig/cisco_config.tmp
 
