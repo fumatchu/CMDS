@@ -430,3 +430,4 @@ echo "Inserted content above 'interface Vlan1' in $config_file."
 
 #Clean up Directories
 find /root/.meraki_port_mig/staging -type f -exec rm -f {} +
+rm -f /root/.meraki_port_mig/cisco_config.tmp

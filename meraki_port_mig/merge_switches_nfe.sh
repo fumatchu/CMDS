@@ -1,5 +1,3 @@
-NFE
-
 #!/bin/bash
 #Check if the top line has the headers
 
@@ -7,7 +5,7 @@ NFE
 input_file="/root/port_migration/staging/switch_collection.csv"  # Replace with your actual file path
 
 # Check if the first line contains "MERGE-IPADDRESS" and remove it if it does
-sed -i '1{/MERGE-IPADDR/d;}' "$input_file"
+sed -i '1{/"MERGE-""IPADDR"/d;}' "$input_file"
 
 # Define the input CSV file
 input_file="/root/port_migration/staging/switch_collection.csv"  # Replace with your actual CSV file path
@@ -295,3 +293,4 @@ echo "Inserted content above 'interface Vlan1' in $config_file."
 
 #Clean up Directories
 find /root/.meraki_port_mig/staging -type f -exec rm -f {} +
+rm -f /root/.meraki_port_mig/cisco_config.tmp
