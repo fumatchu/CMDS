@@ -23,10 +23,12 @@ done
 clear
 sleep 1
 cat <<EOF
-${GREEN}Updating the Switch(es) Physical address with:${TEXTRESET} ${ADDR} 
+${GREEN}Updating the Switch(es) Physical address with:${TEXTRESET} ${ADDR}
 
 EOF
 sleep 2
+
+cat /root/.meraki_port_mig/serial/* | grep -E -o "Q.{0,13}" >/root/.meraki_port_mig/switch_serials.txt
 
 sed -i '0,/new_address = /{/new_address = /d;}' /root/.meraki_port_mig/update_physical_address_switch.py
 echo new_address = "\"${ADDR}\"" >/root/.meraki_port_mig/address.txt
