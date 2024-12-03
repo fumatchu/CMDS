@@ -33,7 +33,7 @@ while choice=$(dialog --title "$TITLE" \
   2) clear ;;
   3) clear & rm -r -f /root/.ssh/known_hosts & /root/.meraki_port_mig/clean.exp ;;
   4) clear & /root/.meraki_port_mig/switch_collection.sh ;;
-  5) clear & /root/.meraki_port_mig/merge_switches.sh ;;
+  5) clear & /root/.meraki_port_mig/merge_24_48_menu.sh ;;
   8) clear ;;
   9) clear & /root/.meraki_port_mig/create_serial_file.sh | tee -a /root/.meraki_port_mig/logs/serialfile_creation.log ;;
  10) clear & /root/.meraki_port_mig/show_inv_claim.sh | tee -a /root/.meraki_port_mig/logs/claim.log ;;
