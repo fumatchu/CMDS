@@ -1,4 +1,4 @@
-=#!/bin/bash
+#!/bin/bash
 #Create a layout of all the devices
 
 rm -f /root/.meraki_port_mig/tmp/layout
