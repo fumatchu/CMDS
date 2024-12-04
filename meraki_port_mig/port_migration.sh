@@ -9,13 +9,16 @@ while read -r IP; do
   # Print the IP address to the console
   echo "Migrating ports for $IP"
   sleep 2
-CONFIGSTACK=$(cat /var/lib/tftpboot/port_switch/$IP | grep -m 1 -o '2/0/1')
+
+CONFIGSTACK=$(cat /var/lib/tftpboot/port_switch/$IP | grep -m 1 -o '[2-9]/0/1$')
+#CONFIGSTACK=$(cat /var/lib/tftpboot/port_switch/$IP | grep -m 1 -o '2/0/1')
 INTGI=$(cat /var/lib/tftpboot/port_switch/$IP | grep -m 1 -o 'interface GigabitEthernet1/0/1')
 INTTWO=$(cat /var/lib/tftpboot/port_switch/$IP | grep -m 1 -o 'interface TwoGigabitEthernet1/0/1')
 INTTEN=$(cat /var/lib/tftpboot/port_switch/$IP | grep -m 1 -o 'interface TenGigabitEthernet1/0/1')
 #Determine if this switch is a stack or a single switch
 #Stacked Switch
-if [[ "$CONFIGSTACK" == "2/0/1" && "$INTGI" == "interface GigabitEthernet1/0/1" ]]; then
+#if [[ "$CONFIGSTACK" == "2/0/1" && "$INTGI" == "interface GigabitEthernet1/0/1" ]]; then
+if [[ "$CONFIGSTACK" =~ [2-9]/0/1$ && "$INTGI" == "interface GigabitEthernet1/0/1" ]]; then
     echo "${GREEN}This looks to be a stack of switches with Gigabit Interfaces${TEXTRESET}"
     sed -i '/^IP=/c\IP=' /root/.meraki_port_mig/convert_stack_single.sh
     sed -i "s/IP=/IP=${IP}/g" /root/.meraki_port_mig/convert_stack_single.sh
@@ -27,7 +30,8 @@ if [[ "$CONFIGSTACK" == "2/0/1" && "$INTGI" == "interface GigabitEthernet1/0/1" 
 fi
 
 
-if [[ "$CONFIGSTACK" == "2/0/1" && "$INTTWO" == "interface TwoGigabitEthernet1/0/1" ]]; then
+#if [[ "$CONFIGSTACK" == "2/0/1" && "$INTTWO" == "interface TwoGigabitEthernet1/0/1" ]]; then
+if [[ "$CONFIGSTACK" =~ [2-9]/0/1$ && "$INTTWO" == "interface TwoGigabitEthernet1/0/1" ]]; then
     echo "${GREEN}This looks to be a stack of switches with MultiGigabit Interfaces${TEXTRESET}"
     sed -i '/^IP=/c\IP=' /root/.meraki_port_mig/convert_stack_single.sh
     sed -i "s/IP=/IP=${IP}/g" /root/.meraki_port_mig/convert_stack_single.sh
@@ -38,7 +42,8 @@ if [[ "$CONFIGSTACK" == "2/0/1" && "$INTTWO" == "interface TwoGigabitEthernet1/0
     echo " "
 fi
 
-if [[ "$CONFIGSTACK" == "2/0/1" && "$INTTEN" == "interface TenGigabitEthernet1/0/1" ]]; then
+#if [[ "$CONFIGSTACK" == "2/0/1" && "$INTTEN" == "interface TenGigabitEthernet1/0/1" ]]; then
+if [[ "$CONFIGSTACK" =~ [2-9]/0/1$ && "$INTTEN" == "interface TenGigabitEthernet1/0/1" ]]; then
     echo "${GREEN}This looks to be a stack of switches with MultiGigabit Interfaces${TEXTRESET}"
     sed -i '/^IP=/c\IP=' /root/.meraki_port_mig/convert_stack_single.sh
     sed -i "s/IP=/IP=${IP}/g" /root/.meraki_port_mig/convert_stack_single.sh
