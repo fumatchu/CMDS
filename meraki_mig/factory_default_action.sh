@@ -23,6 +23,7 @@ if [[ "$REPLY" =~ ^[Yy]$ ]]; then
   rm -f -r /root/archive/
   find /var/lib/tftpboot/ -mindepth 1 -path /var/lib/tftpboot/images -prune -o -exec rm -rf {} +
   rm -r -f /root/.meraki*
+  rm -r -f /root/port_migration
   rm -f /usr/sbin/meraki_migration
   sleep 2
   cat <<EOF
