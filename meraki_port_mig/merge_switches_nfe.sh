@@ -1,4 +1,16 @@
 #!/bin/bash
+#Cleanup
+rm -r -f /root/.meraki_port_mig/serial/*
+rm -r -f /root/.meraki_port_mig/tmp*
+rm -f /root/.meraki_port_mig/cisco_config.tmp
+
+# Define the directory path
+staging_dir="/root/.meraki_port_mig/staging"
+
+# Use find to locate all files and remove them, retaining subdirectories
+find "$staging_dir" -type f -exec rm -f {} +
+
+echo "All files in $staging_dir have been removed, subdirectories are retained."
 
 # Define the input file with entries
 input_file="/root/port_migration/staging/port_merge.csv"  # Ensure this is the correct path
@@ -13,6 +25,13 @@ mkdir -p "$serial_dir"
 
 # Define the configuration file to be updated
 config_file="/root/.meraki_port_mig/parse_switch.sh"
+
+# Use sed to clear the values for IP1, IP2, USEROPTION1, USEROPTION2, and AIP
+        sed -i 's/^IP1=.*/IP1=/' "$config_file"
+        sed -i 's/^IP2=.*/IP2=/' "$config_file"
+        sed -i 's/^USEROPTION1=.*/USEROPTION1=/' "$config_file"
+        sed -i 's/^USEROPTION2=.*/USEROPTION2=/' "$config_file"
+        sed -i 's/^AIP=.*/AIP=/' "$config_file"
 
 # Initialize variables
 pair=()
@@ -151,3 +170,4 @@ done
 #    fi
 #done < "$input_file"
 #echo "Processing complete."
+read -p "Press Enter to Continue"
