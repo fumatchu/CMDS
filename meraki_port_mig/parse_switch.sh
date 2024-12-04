@@ -83,9 +83,29 @@ awk 'BEGIN {found=0} /interface TenGigabitEthernet9\/0\/1/ && !found {print "swi
 parse_config
 echo "Configuration files created in $output_dir"
 
+echo "Cleaning up files"
 
+# Define the directory path
+staging_dir="/root/.meraki_port_mig/staging"
+
+# Process each file in the directory
+for file in "$staging_dir"/*; do
+    # Check if the entry is a regular file
+    if [[ -f "$file" ]]; then
+        # Use awk to extract lines from "interface" to "!"
+        awk '/^interface/,/^!/' "$file" > "${file}.tmp"
+
+        # Move the temporary file back to the original file
+        mv "${file}.tmp" "$file"
+
+        echo "Processed file: $file"
+    fi
+done
+
+echo "Processing complete."
 
 
 
 echo "${GREEN}Parsing complete${TEXTRESET}"
+rm -f /root/.meraki_port_mig/cisco_config.tmp
 sleep 1
