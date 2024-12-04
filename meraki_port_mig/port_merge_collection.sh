@@ -48,3 +48,5 @@ Which can be downloaded from this link:
 EOF
 
 echo "https://$SERVER_IP:9090/=$SERVER_IP/navigator" | tr -d '[:blank:]'
+
+read -p "Press Enter"
