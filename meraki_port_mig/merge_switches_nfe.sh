@@ -12,6 +12,7 @@ find "$staging_dir" -type f -exec rm -f {} +
 
 echo "All files in $staging_dir have been removed, subdirectories are retained."
 
+
 # Define the input file with entries
 input_file="/root/port_migration/staging/port_merge.csv"  # Ensure this is the correct path
 
@@ -32,6 +33,16 @@ config_file="/root/.meraki_port_mig/parse_switch.sh"
         sed -i 's/^USEROPTION1=.*/USEROPTION1=/' "$config_file"
         sed -i 's/^USEROPTION2=.*/USEROPTION2=/' "$config_file"
         sed -i 's/^AIP=.*/AIP=/' "$config_file"
+
+# Check if the first line starts with "IP_ADDRESS"
+if head -n 1 "$input_file" | grep -q "^IP_ADDRESS"; then
+    # If it does, remove the first line
+    sed -i '1d' "$input_file"
+    echo "First line starting with 'IP_ADDRESS' has been removed."
+else
+    echo "No change made. The first line does not start with 'IP_ADDRESS'."
+fi
+
 
 # Initialize variables
 pair=()
