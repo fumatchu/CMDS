@@ -1,5 +1,13 @@
 #!/bin/bash
+
+
 #Create a layout of all the devices
+
+TEXTRESET=$(tput sgr0)
+RED=$(tput setaf 1)
+YELLOW=$(tput setaf 3)
+GREEN=$(tput setaf 2)
+SERVER_IP=$(hostname -I)
 
 rm -f /root/.meraki_port_mig/tmp/layout
 
@@ -19,8 +27,7 @@ echo " " >> /root/.meraki_port_mig/tmp/layout
 done <"$INPUT"
 sed -i '1i This is the mapping of all discovered devices' /root/.meraki_port_mig/tmp/layout
 sed -i '2i for each switch merge in a stack you must specify a separate line to merge' /root/.meraki_port_mig/tmp/layout
-sed -i '3i If there were two switches in a stack specify line 1 as IP address then the Switch number in the stack' /root/.meraki_port_mig/tmp/layou
-t
+sed -i '3i If there were two switches in a stack specify line 1 as IP address then the Switch number in the stack' /root/.meraki_port_mig/tmp/layout
 sed -i '4i and the corresponding Meraki serial number mapping to that switch' /root/.meraki_port_mig/tmp/layout
 sed -i '5i DELETE THE DISCOVERED DEVICES COLUMN (COLUMN A) AND THIS VERBIAGE BEFORE UPLOADING' /root/.meraki_port_mig/tmp/layout
 sed -i '6i DISCOVERED DEVICES,IP_ADDRESS,SWITCH_NUMBER,MERAKI_SERIAL' /root/.meraki_port_mig/tmp/layout
@@ -28,3 +35,16 @@ sed -i '7i EXAMPLE,192.168.1.1,1,QXXX-XXXX-XXXX' /root/.meraki_port_mig/tmp/layo
 sed -i '8i ,192.168.1.1,2,QXXX-XXXX-XXXX' /root/.meraki_port_mig/tmp/layout
 cp /root/.meraki_port_mig/tmp/layout /root/port_migration/port_merge.csv
 rm -f /root/.meraki_port_mig/tmp/layout
+
+
+cat << EOF
+
+The Inventory csv file has been produced and is in the directory:
+
+/root/port_migration
+
+Which can be downloaded from this link:
+
+EOF
+
+echo "https://$SERVER_IP:9090/=$SERVER_IP/navigator" | tr -d '[:blank:]'
