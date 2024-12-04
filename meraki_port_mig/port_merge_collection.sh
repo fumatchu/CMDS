@@ -27,3 +27,4 @@ sed -i '6i DISCOVERED DEVICES,IP_ADDRESS,SWITCH_NUMBER,MERAKI_SERIAL' /root/.mer
 sed -i '7i EXAMPLE,192.168.1.1,1,QXXX-XXXX-XXXX' /root/.meraki_port_mig/tmp/layout
 sed -i '8i ,192.168.1.1,2,QXXX-XXXX-XXXX' /root/.meraki_port_mig/tmp/layout
 cp /root/.meraki_port_mig/tmp/layout /root/port_migration/port_merge.csv
+rm -f /root/.meraki_port_mig/tmp/layout
