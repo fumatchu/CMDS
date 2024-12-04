@@ -134,7 +134,10 @@ mkdir -p /root/port_migration/
 #Remove Carriage returns
 grep -v '^[[:space:]]*$' "/root/.meraki_port_mig/switch_collection.final" > "/root/.meraki_port_mig/switch_collection.final.tmp"
 sed -e "s/ /,/g" </root/.meraki_port_mig/switch_collection.final.tmp >>/root/.meraki_port_mig/switch_collection.csv
-sed -i '1i IP_ADDRESS,HOSTNAME,SERIAL,MODEL,MERAKI_CLOUD_ID,MERGE-"IPADDR"-SW-"NUMBER"' /root/.meraki_port_mig/switch_collection.csv
+sed -i '1i IP_ADDRESS,HOSTNAME,CAT_SERIAL,CAT_MODEL,MERAKI_SERIAL_NEMUBER,' /root/.meraki_port_mig/switch_collection.csv
+echo "If you are merging 24 port switches you must also duplicate the MERAKI_SERIAL for each 48 port switch set as the destination switch," >> /root/.meraki_port_mig/switch_collection.csv
+echo "EXAMPLE,,C9300-24,C9300-24,MERGED,QXXX-1111-1111,QXXX-1111-1111," >> /root/.meraki_port_mig/switch_collection.csv
+echo "ANOTHER EXAMPLE,,C9300-24,C9300-24,C9300-24,C9300-24,MERGED,QXXX-1111-1111,QXXX-1111-1111,QXXX-1111-1111,QXXX-1111-1111,
 echo "END," >> /root/.meraki_port_mig/switch_collection.csv
 mv /root/.meraki_port_mig/switch_collection.csv /root/port_migration
 cat << EOF
