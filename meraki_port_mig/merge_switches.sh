@@ -199,15 +199,14 @@ if [[ "$CONFIGSTACK" == "2/0/1" ]]; then
   esac
 else
   echo "This is a Single Switch"
-  sed -i '/^IP=/c\IP=' /root/.meraki_port_mig/parse_switch.sh\
-       && sed -i "s/IP=/IP=${IP2}/g" /root/.meraki_port_mig/parse_switch.sh\
+  sed -i '/^IP2=/c\IP2=' /root/.meraki_port_mig/parse_switch.sh\
+       && sed -i "s/IP2=/IP2=${IP2}/g" /root/.meraki_port_mig/parse_switch.sh\
        && sed -i '/^USEROPTION2=/c\USEROPTION2=' /root/.meraki_port_mig/parse_switch.sh\
        && sed -i "s/USEROPTION2=/USEROPTION2=1/g" /root/.meraki_port_mig/parse_switch.sh\
        && sed -i '/^AIP=/c\AIP=' /root/.meraki_port_mig/parse_switch.sh\
        && sed -i "s/AIP=/AIP=${IP2}/g" /root/.meraki_port_mig/parse_switch.sh\
        && /root/.meraki_port_mig/parse_switch.sh
 fi
-
 
 
 IP1=$(cat /root/.meraki_port_mig/parse_switch.sh | grep IP1= | cut -c5-)
