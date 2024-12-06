@@ -1,5 +1,5 @@
 #!/bin/bash
-#Man this one was fun script to call lines in csv file, parse and prep for migration (STACK and SINGLE)
+
 TEXTRESET=$(tput sgr0)
 RED=$(tput setaf 1)
 YELLOW=$(tput setaf 3)
