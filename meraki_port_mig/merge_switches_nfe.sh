@@ -20,7 +20,7 @@ directory="/root/.meraki_port_mig/tmp"
 if head -n 1 "$input_file" | grep -q "^IP_ADDRESS"; then
     # If it does, remove the first line
     sed -i '1d' "$input_file"
-    sleep 2
+    sleep 1
 
 else
     echo "Processing File"
