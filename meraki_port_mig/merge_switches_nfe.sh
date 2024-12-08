@@ -1,184 +1,187 @@
 #!/bin/bash
-#Cleanup
-rm -r -f /root/.meraki_port_mig/serial/*
-rm -r -f /root/.meraki_port_mig/tmp*
-rm -f /root/.meraki_port_mig/cisco_config.tmp
 
-# Define the directory path
-staging_dir="/root/.meraki_port_mig/staging"
+TEXTRESET=$(tput sgr0)
+RED=$(tput setaf 1)
+YELLOW=$(tput setaf 3)
+GREEN=$(tput setaf 2)
 
-# Use find to locate all files and remove them, retaining subdirectories
-find "$staging_dir" -type f -exec rm -f {} +
-
-echo "All files in $staging_dir have been removed, subdirectories are retained."
-
-
-# Define the input file with entries
+# Define the input CSV file path
 input_file="/root/port_migration/staging/port_merge.csv"  # Ensure this is the correct path
 
 # Define the output directory for the new files
 output_dir="/root/.meraki_port_mig/tmp"
 mkdir -p "$output_dir"
 
-# Define the directory for serial files
-serial_dir="/root/.meraki_port_mig/serial"
-mkdir -p "$serial_dir"
 
-# Define the configuration file to be updated
-config_file="/root/.meraki_port_mig/parse_switch.sh"
-
-# Use sed to clear the values for IP1, IP2, USEROPTION1, USEROPTION2, and AIP
-        sed -i 's/^IP1=.*/IP1=/' "$config_file"
-        sed -i 's/^IP2=.*/IP2=/' "$config_file"
-        sed -i 's/^USEROPTION1=.*/USEROPTION1=/' "$config_file"
-        sed -i 's/^USEROPTION2=.*/USEROPTION2=/' "$config_file"
-        sed -i 's/^AIP=.*/AIP=/' "$config_file"
+# Define the directory to read files from
+directory="/root/.meraki_port_mig/tmp"
 
 # Check if the first line starts with "IP_ADDRESS"
 if head -n 1 "$input_file" | grep -q "^IP_ADDRESS"; then
     # If it does, remove the first line
     sed -i '1d' "$input_file"
-    echo "First line starting with 'IP_ADDRESS' has been removed."
+
 else
-    echo "No change made. The first line does not start with 'IP_ADDRESS'."
+    echo "Processing File"
 fi
 
-
-# Initialize variables
+# Initialize an array to store pairs of lines
 pair=()
 
 # Read through the input file line by line
-while IFS= read -r line; do
+while IFS=, read -r ip useroption; do
+    # Stop processing if the line contains "END"
+    if [[ "$ip" == "END" ]]; then
+        break
+    fi
+
     # Add the current line to the pair array
-    pair+=("$line")
+    pair+=("$ip,$useroption")
 
-    # If the pair array has two entries, process and write them to a new file
+    # If the pair array has two entries, process them
     if (( ${#pair[@]} == 2 )); then
-        # Extract IP address and number from the first line of the pair
-        if [[ ${pair[0]} =~ ^([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}),([0-9]+), ]]; then
-            ip1="${BASH_REMATCH[1]}"
-            useroption1="${BASH_REMATCH[2]}"
+        # Compare the two IP addresses in the pair
+        if [[ "${pair[0]%%,*}" == "${pair[1]%%,*}" ]]; then
+            # Extract the IP address for the file name
+            ip="${pair[0]%%,*}"
+            output_file="$output_dir/${ip}_stack.txt"
+            echo ${YELLOW}"These are the Stacks:${TEXTRESET} ${pair[0]} and ${pair[1]}"
+            # Write the pair to the determined output file
+            echo -e "${pair[0]}\n${pair[1]}" > "$output_file"
+        else
+            # Extract the IP address for the first entry
+            ip1="${pair[0]%%,*}"
+            output_file="$output_dir/${ip1}_single.txt"
+            echo ${YELLOW}"These are Single Switches:${TEXTRESET} ${pair[0]} and ${pair[1]}"
+            echo -e "${pair[0]}\n${pair[1]}" > "$output_file"
         fi
-
-        # Extract IP address and number from the second line of the pair
-        if [[ ${pair[1]} =~ ^([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}),([0-9]+), ]]; then
-            ip2="${BASH_REMATCH[1]}"
-            useroption2="${BASH_REMATCH[2]}"
-        fi
-
-        # Determine a unique file name by checking existing files
-        file_index=1
-        output_file="$output_dir/${ip1}_${file_index}.txt"
-        while [[ -f "$output_file" ]]; do
-            ((file_index++))
-            output_file="$output_dir/${ip1}_${file_index}.txt"
-        done
-
-        # Write the pair to the determined output file
-        echo -e "${pair[0]}\n${pair[1]}" > "$output_file"
-        echo "Created file: $output_file"
 
         # Reset the pair array for the next set of two lines
         pair=()
     fi
 done < "$input_file"
 
-# If there's an odd entry left, write it to a new file using its IP
+# Handle the case if there's an odd number of lines
 if (( ${#pair[@]} == 1 )); then
-    if [[ ${pair[0]} =~ ^([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}),([0-9]+), ]]; then
-        ip1="${BASH_REMATCH[1]}"
-        useroption1="${BASH_REMATCH[2]}"
-        file_index=1
-        output_file="$output_dir/${ip1}_${file_index}.txt"
-        while [[ -f "$output_file" ]]; do
-            ((file_index++))
-            output_file="$output_dir/${ip1}_${file_index}.txt"
-        done
-        echo -e "${pair[0]}" > "$output_file"
-        echo "Created file: $output_file"
-    fi
+    ip="${pair[0]%%,*}"
+    output_file="$output_dir/${ip}_single.txt"
+    echo "Running command single for IP: ${pair[0]}"
+    echo "${pair[0]}" > "$output_file"
 fi
 
-echo "File creation complete. Proceeding with parsing..."
 
-# Read each file in the output directory and update the config file
-for file in "$output_dir"/*.txt; do
-    if [[ -f "$file" ]]; then
-        # Extract IP addresses and user options from the file
-        {
-            read -r line1
-            read -r line2
-        } < "$file"
+# Define the path to the parse_switch.sh file
+parse_switch_file="/root/.meraki_port_mig/parse_switch.sh"
 
-        if [[ $line1 =~ ^([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}),([0-9]+), ]]; then
-            ip1="${BASH_REMATCH[1]}"
-            useroption1="${BASH_REMATCH[2]}"
-            sed -i "s/^IP1=.*/IP1=${ip1}/" "$config_file"
-            sed -i "s/^AIP=.*/AIP=${ip1}/" "$config_file"
-            sed -i "s/^USEROPTION1=.*/USEROPTION1=${useroption1}/" "$config_file"
-        fi
+# Process each file in the directory (For STACKED Switches)
+for file in "$directory"/*stack*.txt; do
+#for file in "$directory"/*single*.txt; do
+    # Check if the file exists and is readable
+    if [[ -f "$file" && -r "$file" ]]; then
+        echo "Processing file: $file"
 
-        if [[ $line2 =~ ^([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}),([0-9]+), ]]; then
-            ip2="${BASH_REMATCH[1]}"
-            useroption2="${BASH_REMATCH[2]}"
-            sed -i "s/^IP2=.*/IP2=${ip2}/" "$config_file"
-            sed -i "s/^USEROPTION2=.*/USEROPTION2=${useroption2}/" "$config_file"
-        fi
+        # Initialize a counter to track line number
+        line_number=0
 
-        echo "Updated $config_file with IP1=${ip1}, IP2=${ip2}, USEROPTION1=${useroption1}, and USEROPTION2=${useroption2} from file $file"
+        # Read each line in the file
+        while IFS=, read -r ip number serial; do
+            ((line_number++))
+            if [[ $line_number -eq 1 ]]; then
+                # Set the variables from the first line
+                IP1="$ip"
+                USEROPTION1="$number"
+                AIP="$IP1"
 
-        # Execute the script after updating the configuration
-        /root/.meraki_port_mig/parse_switch.sh
-        /root/.meraki_port_mig/merge_switches_nfe_end.sh
+                # Output the variables for the first line
+                echo "IP1=$IP1"
+                echo "USEROPTION1=$USEROPTION1"
+                echo "AIP (first line)=$AIP"
+                echo "Serial number removed: $serial"
 
-        # Use sed to clear the values for IP1, IP2, USEROPTION1, USEROPTION2, and AIP
-        sed -i 's/^IP1=.*/IP1=/' "$config_file"
-        sed -i 's/^IP2=.*/IP2=/' "$config_file"
-        sed -i 's/^USEROPTION1=.*/USEROPTION1=/' "$config_file"
-        sed -i 's/^USEROPTION2=.*/USEROPTION2=/' "$config_file"
-        sed -i 's/^AIP=.*/AIP=/' "$config_file"
+                # Use sed to update the parse_switch.sh file with the variables
+                sed -i "s/^IP1=.*/IP1=${IP1}/" "$parse_switch_file"
+                sed -i "s/^USEROPTION1=.*/USEROPTION1=${USEROPTION1}/" "$parse_switch_file"
+                sed -i "s/^AIP=.*/AIP=${AIP}/" "$parse_switch_file"
+                $parse_switch_file
 
-        # Extract the last entry's serial number from the file and create a new file
-        last_entry=$(tail -n 1 "$file")
-        if [[ $last_entry =~ (Q[A-Z0-9]{3}-[A-Z0-9]{4}-[A-Z0-9]{4})$ ]]; then
-            serial="${BASH_REMATCH[1]}"
-            ip_for_serial="${last_entry%%,*}"  # Get the IP part before the first comma
-            serial_output_file="$serial_dir/${ip_for_serial}.txt"
-           echo "$serial" > "$serial_output_file"
-            echo "Created serial file: $serial_output_file"
-        fi
+            elif [[ $line_number -eq 2 ]]; then
+                # Set the variables from the second line
+                IP2="$ip"
+                USEROPTION2="$number"
+                AIP="$IP2"
+
+                # Output the variables for the second line
+                echo "IP2=$IP2"
+                echo "USEROPTION2=$USEROPTION2"
+                echo "AIP (second line)=$AIP"
+
+                # Use sed to update the parse_switch.sh file with the variables
+                sed -i "s/^IP2=.*/IP2=${IP2}/" "$parse_switch_file"
+                sed -i "s/^USEROPTION2=.*/USEROPTION2=${USEROPTION2}/" "$parse_switch_file"
+                sed -i "s/^AIP=.*/AIP=${AIP}/" "$parse_switch_file"
+                $parse_switch_file
+                #Execute the Merge
+                /root/.meraki_port_mig/merge_switches_nfe_end.sh
+                # Break after processing the second line
+                break
+            fi
+        done < "$file"
     fi
 done
 
-#echo "Processing complete."
 
+# Process each file in the directory (For SINGLE Switches)
+#for file in "$directory"/*stack*.txt; do
+for file in "$directory"/*single*.txt; do
+    # Check if the file exists and is readable
+    if [[ -f "$file" && -r "$file" ]]; then
+        echo "Processing file: $file"
 
-# Define the input file with entries
-#input_file="/root/port_migration/staging/port_merge.csv"  # Ensure this is the correct path
+        # Initialize a counter to track line number
+        line_number=0
 
-# Define the directory for serial files
-#serial_dir="/root/.meraki_port_mig/serial"
-#mkdir -p "$serial_dir"
+        # Read each line in the file
+        while IFS=, read -r ip number serial; do
+            ((line_number++))
+            if [[ $line_number -eq 1 ]]; then
+                # Set the variables from the first line
+                IP1="$ip"
+                USEROPTION1="$number"
+                AIP="$IP1"
 
-# Read through the input file line by line
-#while IFS= read -r line; do
-#    # Extract the IP address and serial number if present
-#    if [[ $line =~ ^([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}),[0-9]+,(Q[A-Z0-9]{3}-[A-Z0-9]{4}-[A-Z0-9]{4}) ]]; then
-#        ip="${BASH_REMATCH[1]}"
-#        serial="${BASH_REMATCH[2]}"
+                # Output the variables for the first line
+                echo "IP1=$IP1"
+                echo "USEROPTION1=$USEROPTION1"
+                echo "AIP (first line)=$AIP"
+                echo "Serial number removed: $serial"
 
-        # Determine a unique file name by checking existing files
-#        file_index=1
-#        serial_output_file="$serial_dir/${ip}.txt"
-#        while [[ -f "$serial_output_file" ]]; do
-#            serial_output_file="$serial_dir/${ip}_${file_index}.txt"
-#            ((file_index++))
-#        done
+                # Use sed to update the parse_switch.sh file with the variables
+                sed -i "s/^IP1=.*/IP1=${IP1}/" "$parse_switch_file"
+                sed -i "s/^USEROPTION1=.*/USEROPTION1=${USEROPTION1}/" "$parse_switch_file"
+                sed -i "s/^AIP=.*/AIP=${AIP}/" "$parse_switch_file"
+                $parse_switch_file
 
-#        # Write the serial number to the determined output file
-#        echo "$serial" > "$serial_output_file"
-#        echo "Created serial file: $serial_output_file"
-#    fi
-#done < "$input_file"
-#echo "Processing complete."
-read -p "Press Enter to Continue"
+            elif [[ $line_number -eq 2 ]]; then
+                # Set the variables from the second line
+                IP2="$ip"
+                USEROPTION2="$number"
+                AIP="$IP2"
+
+                # Output the variables for the second line
+                echo "IP2=$IP2"
+                echo "USEROPTION2=$USEROPTION2"
+                echo "AIP (second line)=$AIP"
+
+                # Use sed to update the parse_switch.sh file with the variables
+                sed -i "s/^IP2=.*/IP2=${IP2}/" "$parse_switch_file"
+                sed -i "s/^USEROPTION2=.*/USEROPTION2=${USEROPTION2}/" "$parse_switch_file"
+                sed -i "s/^AIP=.*/AIP=${AIP}/" "$parse_switch_file"
+                $parse_switch_file
+                #Execute the Merge
+                /root/.meraki_port_mig/merge_switches_nfe_end.sh
+                # Break after processing the second line
+                break
+            fi
+        done < "$file"
+    fi
+done
