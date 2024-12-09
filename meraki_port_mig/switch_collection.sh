@@ -168,6 +168,7 @@ echo "IP_ADDRESS,HOSTNAME,CAT_SERIAL,CAT_MODEL,MERAKI_SERIAL_NUMBER," >> /root/.
 echo "DATA,DATA,DATA,DATA,DATA,DATA"  >> /root/.meraki_port_mig/switch_collection.csv
 echo "Then the END statment"  >> /root/.meraki_port_mig/switch_collection.csv
 echo "MAKE SURE THIS IS SAVED IN THE /root/port_migration/STAGING directory with the same name- switch_collection.csv" >> /root/.meraki_port_mig/switch_collection.csv
+echo "https://$SERVER_IP:9090/=$SERVER_IP/navigator" | tr -d '[:blank:]' >> /root/.meraki_port_mig/switch_collection.csv
 echo "END," >> /root/.meraki_port_mig/switch_collection.csv
 mv /root/.meraki_port_mig/switch_collection.csv /root/port_migration
 
