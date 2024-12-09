@@ -26,8 +26,13 @@ else
     echo "Processing File"
 fi
 
+read -p "PAUSE"
+
+
 # Initialize an array to store pairs of lines
 pair=()
+# Counter to increment file names
+file_counter=1
 
 # Read through the input file line by line
 while IFS=, read -r ip useroption; do
@@ -45,17 +50,17 @@ while IFS=, read -r ip useroption; do
         if [[ "${pair[0]%%,*}" == "${pair[1]%%,*}" ]]; then
             # Extract the IP address for the file name
             ip="${pair[0]%%,*}"
-            output_file="$output_dir/${ip}_stack.txt"
-            #echo ${YELLOW}"These are the Stacks:${TEXTRESET} ${pair[0]} and ${pair[1]}"
-            # Write the pair to the determined output file
+            output_file="$output_dir/${ip}_stack_$file_counter.txt"
             echo -e "${pair[0]}\n${pair[1]}" > "$output_file"
         else
             # Extract the IP address for the first entry
             ip1="${pair[0]%%,*}"
-            output_file="$output_dir/${ip1}_single.txt"
-            #echo ${YELLOW}"These are Single Switches:${TEXTRESET} ${pair[0]} and ${pair[1]}"
+            output_file="$output_dir/${ip1}_single_$file_counter.txt"
             echo -e "${pair[0]}\n${pair[1]}" > "$output_file"
         fi
+
+        # Increment the file counter for the next file
+        ((file_counter++))
 
         # Reset the pair array for the next set of two lines
         pair=()
@@ -65,10 +70,12 @@ done < "$input_file"
 # Handle the case if there's an odd number of lines
 if (( ${#pair[@]} == 1 )); then
     ip="${pair[0]%%,*}"
-    output_file="$output_dir/${ip}_single.txt"
+    output_file="$output_dir/${ip}_single_$file_counter.txt"
     echo "Running command single for IP: ${pair[0]}"
     echo "${pair[0]}" > "$output_file"
 fi
+
+
 
 
 # Define the path to the parse_switch.sh file
@@ -130,6 +137,7 @@ for file in "$directory"/*stack*.txt; do
     fi
 done
 
+read -p "PAUSE Now going to process files"
 
 # Process each file in the directory (For SINGLE Switches)
 #for file in "$directory"/*stack*.txt; do
