@@ -11,6 +11,27 @@ rm -f -r /root/port_migration/*
 rm -r -f /root/.meraki_port_mig/tmp/*
 mkdir -p /root/port_migration/staging
 
+#Check if the file exists
+# Define the file path
+file_path="/root/port_migration/switch_collection.csv"
+
+# Check if the file exists
+if [[ -f "$file_path" ]]; then
+    # Prompt the user for confirmation
+    read -p "The file $file_path exists. Do you want to overwrite it? (Y/N): " response
+
+    # Check user response
+    if [[ "$response" == "Y" || "$response" == "y" ]]; then
+        # Delete the file
+        rm "$file_path"
+        echo "File $file_path has been deleted."
+    else
+        echo "File $file_path will not be overwritten."
+    fi
+else
+    echo "File $file_path does not exist."
+fi
+
 INPUT="/root/.meraki_port_mig/ip_list"
 
 # Read file line-by-line to get an IP address
@@ -135,9 +156,18 @@ mkdir -p /root/port_migration/
 grep -v '^[[:space:]]*$' "/root/.meraki_port_mig/switch_collection.final" > "/root/.meraki_port_mig/switch_collection.final.tmp"
 sed -e "s/ /,/g" </root/.meraki_port_mig/switch_collection.final.tmp >>/root/.meraki_port_mig/switch_collection.csv
 sed -i '1i IP_ADDRESS,HOSTNAME,CAT_SERIAL,CAT_MODEL,MERAKI_SERIAL_NUMBER,' /root/.meraki_port_mig/switch_collection.csv
-echo "If you are merging 24 port switches you must also duplicate the MERAKI_SERIAL for each 48 port switch set as the destination switch," >> /root/.meraki_port_mig/switch_collection.csv
-echo "EXAMPLE,,C9300-24,C9300-24,MERGED,QXXX-1111-1111,QXXX-1111-1111," >> /root/.meraki_port_mig/switch_collection.csv
-echo "ANOTHER EXAMPLE,,C9300-24,C9300-24,C9300-24,C9300-24,MERGED,QXXX-1111-1111,QXXX-1111-1111,QXXX-1111-1111,QXXX-1111-1111," >> /root/.meraki_port_mig/switch_collection.csv
+echo "If you are merging 24 port switches you sepcify the qty 1 Meraki Serial," >> /root/.meraki_port_mig/switch_collection.csv
+echo "The first switch in becomes primary and the second switch does not need to be known," >> /root/.meraki_port_mig/switch_collection.csv
+echo "EXAMPLE,,C9300-24,C9300-24,QXXX-1111-1111,QXXX-1111-1111," >> /root/.meraki_port_mig/switch_collection.csv
+echo "EXAMPLE of a MERGED SWITCH, ,C9300-24,C9300-24,QXXX-1111-1111," >> /root/.meraki_port_mig/switch_collection.csv
+echo "ANOTHER EXAMPLE-SINGLE SWITCHES,,C9300-24,C9300-24,C9300-24,C9300-24,QXXX-1111-1111,QXXX-1111-1111,QXXX-1111-1111,QXXX-1111-1111," >> /root/.meraki_port_mig/switch_collection.csv
+echo "ANOTHER EXAMPLE-STACK SWITCHES,,C9300-24,C9300-24,C9300-24,C9300-24,QXXX-1111-1111,QXXX-1111-1111,QXXX-1111-1111,QXXX-1111-1111," >> /root/.meraki_port_mig/switch_collection.csv
+echo "Please remove everything from this file except the header the END entry and your new information" >> /root/.meraki_port_mig/switch_collection.csv
+echo "The final format of the file should look like this:" >> /root/.meraki_port_mig/switch_collection.csv
+echo "IP_ADDRESS,HOSTNAME,CAT_SERIAL,CAT_MODEL,MERAKI_SERIAL_NUMBER," >> /root/.meraki_port_mig/switch_collection.csv
+echo "DATA,DATA,DATA,DATA,DATA,DATA"  >> /root/.meraki_port_mig/switch_collection.csv
+echo "Then the END statment"  >> /root/.meraki_port_mig/switch_collection.csv
+echo "MAKE SURE THIS IS SAVED IN THE /root/port_migration/STAGING directory with the same name- switch_collection.csv" >> /root/.meraki_port_mig/switch_collection.csv
 echo "END," >> /root/.meraki_port_mig/switch_collection.csv
 mv /root/.meraki_port_mig/switch_collection.csv /root/port_migration
 
