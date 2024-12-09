@@ -51,6 +51,7 @@ while IFS= read -r line; do
 done < "$input_file"
 
 rm -f /root/.meraki_port_mig/serial/IP_ADDRESS
+rm -f /root/.meraki_port_mig/serial/END
 
 #update the ip_list with current ip addresses
 ls /root/.meraki_port_mig/serial/ > /root/.meraki_port_mig/ip_list
