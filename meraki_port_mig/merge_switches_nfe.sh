@@ -46,14 +46,14 @@ while IFS=, read -r ip useroption; do
             # Extract the IP address for the file name
             ip="${pair[0]%%,*}"
             output_file="$output_dir/${ip}_stack.txt"
-            echo ${YELLOW}"These are the Stacks:${TEXTRESET} ${pair[0]} and ${pair[1]}"
+            #echo ${YELLOW}"These are the Stacks:${TEXTRESET} ${pair[0]} and ${pair[1]}"
             # Write the pair to the determined output file
             echo -e "${pair[0]}\n${pair[1]}" > "$output_file"
         else
             # Extract the IP address for the first entry
             ip1="${pair[0]%%,*}"
             output_file="$output_dir/${ip1}_single.txt"
-            echo ${YELLOW}"These are Single Switches:${TEXTRESET} ${pair[0]} and ${pair[1]}"
+            #echo ${YELLOW}"These are Single Switches:${TEXTRESET} ${pair[0]} and ${pair[1]}"
             echo -e "${pair[0]}\n${pair[1]}" > "$output_file"
         fi
 
@@ -186,3 +186,4 @@ for file in "$directory"/*single*.txt; do
         done < "$file"
     fi
 done
+read -p "Press Enter"
