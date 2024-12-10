@@ -122,7 +122,7 @@ while IFS= read -r line; do
 
 done <"$input_file"
 
-#When merging ports, the serial number and switch number no longer align (i.e. serial2 switch3). we must correct this
+#When merging ports, the serial number and switch number no longer align when they are stacks (i.e. serial2 switch3). we must correct this
 # Source directory containing the files
 source_dir="/root/.meraki_port_mig/tmp"
 
