@@ -95,3 +95,4 @@ def main():
             print(f'Could not extract port number from interface {interface}')
 
 if __name__ == '__main__':
+    main()
