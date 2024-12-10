@@ -122,6 +122,75 @@ while IFS= read -r line; do
 
 done <"$input_file"
 
+#When merging ports, the serial number and switch number no longer align (i.e. serial2 switch3). we must correct this
+# Source directory containing the files
+source_dir="/root/.meraki_port_mig/tmp"
+
+# Temporary directory for renaming process (ensure it's empty or use a unique path)
+temp_dir="${source_dir}/temp_rename"
+
+# Create the temporary directory
+mkdir -p "$temp_dir"
+
+# Move to the source directory
+cd "$source_dir" || exit
+
+# List and sort serial files and switch files
+serial_files=(serial*.txt)
+switch_files=(switch*.txt)
+
+# Sort both arrays to ensure they are in numerical order
+IFS=$'\n' serial_files=($(sort -V <<<"${serial_files[*]}"))
+IFS=$'\n' switch_files=($(sort -V <<<"${switch_files[*]}"))
+
+# Check if the file names are already aligned
+aligned=true
+for i in "${!serial_files[@]}"; do
+  if [ "$i" -lt "${#switch_files[@]}" ]; then
+    # Extract the numeric part from the serial file name
+    serial_number="${serial_files[$i]//[!0-9]/}"
+
+    # Determine the expected switch file name
+    expected_switch_file="switch${serial_number}.txt"
+
+    if [ "${switch_files[$i]}" != "$expected_switch_file" ]; then
+      aligned=false
+      break
+    fi
+  fi
+done
+
+# If already aligned, do nothing
+if $aligned; then
+  echo "Files are already aligned. No changes made."
+  # Clean up temporary directory
+  rmdir "$temp_dir"
+  exit 0
+fi
+
+# Rename switch files to align with serial numbers
+for i in "${!serial_files[@]}"; do
+  if [ "$i" -lt "${#switch_files[@]}" ]; then
+    # Extract the numeric part from the serial file name
+    serial_number="${serial_files[$i]//[!0-9]/}"
+
+    # Determine the new switch file name
+    new_switch_file="switch${serial_number}.txt"
+
+    # Move the switch file to the temporary directory with the new name
+    mv "${switch_files[$i]}" "$temp_dir/$new_switch_file"
+    echo "Renamed ${switch_files[$i]} to $new_switch_file"
+  fi
+done
+
+# Move the renamed files back to the source directory
+mv "$temp_dir"/* "$source_dir"
+
+# Clean up: remove the temporary directory
+rmdir "$temp_dir"
+
+echo "File renaming completed."
+
 ##Determine the number of switches in the stack and convert them one by one
 #Stacked Switch Config 1
 CONFIG1=$(ls /root/.meraki_port_mig/tmp/switch1.txt 2>/dev/null)
