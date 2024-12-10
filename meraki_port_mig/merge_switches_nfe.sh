@@ -26,8 +26,6 @@ else
     echo "Processing File"
 fi
 
-read -p "PAUSE"
-
 
 # Initialize an array to store pairs of lines
 pair=()
