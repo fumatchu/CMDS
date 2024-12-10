@@ -135,7 +135,6 @@ for file in "$directory"/*stack*.txt; do
     fi
 done
 
-read -p "PAUSE Now going to process files"
 
 # Process each file in the directory (For SINGLE Switches)
 #for file in "$directory"/*stack*.txt; do
