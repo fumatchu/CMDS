@@ -165,7 +165,7 @@ if $aligned; then
   echo "Files are already aligned. No changes made."
   # Clean up temporary directory
   rmdir "$temp_dir"
-  exit 0
+  #exit 0 #Script fails when files ARE aligned 
 fi
 
 # Rename switch files to align with serial numbers
