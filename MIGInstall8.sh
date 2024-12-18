@@ -207,7 +207,7 @@ if $test_failed; then
     fi
 else
     echo "All tests passed successfully."
-    sleep 1
+    sleep 3
     # Continue with the script or exit as needed
 fi
 clear
