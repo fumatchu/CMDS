@@ -125,36 +125,67 @@ if [ -z "$INTERFACE" ]; then
 fi
 
 if [ "$DETECTIP" = "ipv4.method:                            auto" ]; then
-  echo ${RED}"Interface $INTERFACE is using DHCP${TEXTRESET}"
+# Function to validate IP address in CIDR notation
+validate_cidr() {
+  local cidr=$1
+  local n="(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])"
+  local m="(3[0-2]|[1-2]?[0-9])"
+  [[ $cidr =~ ^$n(\.$n){3}/$m$ ]]
+}
+
+# Function to validate an IP address in dotted notation
+validate_ip() {
+  local ip=$1
+  local n="(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])"
+  [[ $ip =~ ^$n(\.$n){3}$ ]]
+}
+
+# Function to validate FQDN
+validate_fqdn() {
+  local fqdn=$1
+  [[ $fqdn =~ ^([a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$ ]]
+}
+
+# Main script logic
+if [ "$DETECTIP" = "ipv4.method:                            auto" ]; then
+  echo -e "${RED}Interface $INTERFACE is using DHCP${TEXTRESET}"
+
+  # Validate IPADDR
   read -p "Please provide a static IP address in CIDR format (i.e 192.168.24.2/24): " IPADDR
-  while [ -z "$IPADDR" ]; do
-    echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+  while ! validate_cidr "$IPADDR"; do
+    echo -e "${RED}The entry is not in valid CIDR notation. Please Try again${TEXTRESET}"
     read -p "Please provide a static IP address in CIDR format (i.e 192.168.24.2/24): " IPADDR
   done
-  while [[ ! $IPADDR =~ ^$n(\.$n){3}/$m$ ]]; do
-    read -p ${RED}"The entry is not in valid CIDR notation. Please Try again:${TEXTRESET} " IPADDR
+
+  # Validate GW
+  read -p "Please provide a Default Gateway Address: " GW
+  while ! validate_ip "$GW"; do
+    echo -e "${RED}The entry is not a valid IP address. Please Try again${TEXTRESET}"
+    read -p "Please provide a Default Gateway Address: " GW
   done
-  read -p "Please Provide a Default Gateway Address: " GW
-  while [ -z "$GW" ]; do
-    echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
-    read -p "Please Provide a Default Gateway Address: " GW
-  done
+
+  # Validate HOSTNAME
   read -p "Please provide the FQDN for this machine: " HOSTNAME
-  while [ -z "$HOSTNAME" ]; do
-    echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+  while ! validate_fqdn "$HOSTNAME"; do
+    echo -e "${RED}The entry is not a valid FQDN. Please Try again${TEXTRESET}"
     read -p "Please provide the FQDN for this machine: " HOSTNAME
   done
+
+  # Validate DNSSERVER
   read -p "Please provide an upstream DNS IP for resolution: " DNSSERVER
-  while [ -z "$DNSSERVER" ]; do
-    echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+  while ! validate_ip "$DNSSERVER"; do
+    echo -e "${RED}The entry is not a valid IP address. Please Try again${TEXTRESET}"
     read -p "Please provide an upstream DNS IP for resolution: " DNSSERVER
   done
+
+  # Validate DNSSEARCH
   read -p "Please provide the domain search name: " DNSSEARCH
   while [ -z "$DNSSEARCH" ]; do
-    echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+    echo -e "${RED}The response cannot be blank. Please Try again${TEXTRESET}"
     read -p "Please provide the domain search name: " DNSSEARCH
   done
-  clear
+fi
+clear
   cat <<EOF
 The following changes to the system will be configured:
 IP address: ${GREEN}$IPADDR${TEXTRESET}
