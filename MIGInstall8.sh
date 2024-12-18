@@ -1,6 +1,10 @@
 #!/bin/bash
 #Meraki-Mig.sh
 #This script installs the Meraki migration server
+TEXTRESET=$(tput sgr0)
+RED=$(tput setaf 1)
+YELLOW=$(tput setaf 3)
+GREEN=$(tput setaf 2)
 clear
 #Check for Network Connectivity
 echo "Checking for Internet Connectivity"
@@ -67,10 +71,6 @@ else
 fi
 clear
 dnf -y install net-tools dmidecode
-TEXTRESET=$(tput sgr0)
-RED=$(tput setaf 1)
-YELLOW=$(tput setaf 3)
-GREEN=$(tput setaf 2)
 INTERFACE=$(nmcli | grep "connected to" | cut -d " " -f4)
 DETECTIP=$(nmcli -f ipv4.method con show $INTERFACE)
 FQDN=$(hostname)
