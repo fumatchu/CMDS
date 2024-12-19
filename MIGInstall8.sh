@@ -125,76 +125,90 @@ if [ -z "$INTERFACE" ]; then
 fi
 
 if [ "$DETECTIP" = "ipv4.method:                            auto" ]; then
-# Function to validate IP address in CIDR notation
-validate_cidr() {
-  local cidr=$1
-  local n="(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])"
-  local m="(3[0-2]|[1-2]?[0-9])"
-  [[ $cidr =~ ^$n(\.$n){3}/$m$ ]]
-}
+  # Function to validate IP address in CIDR notation
+  validate_cidr() {
+    local cidr=$1
+    local n="(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])"
+    local m="(3[0-2]|[1-2]?[0-9])"
+    [[ $cidr =~ ^$n(\.$n){3}/$m$ ]]
+  }
 
-# Function to validate an IP address in dotted notation
-validate_ip() {
-  local ip=$1
-  local n="(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])"
-  [[ $ip =~ ^$n(\.$n){3}$ ]]
-}
+  # Function to validate an IP address in dotted notation
+  validate_ip() {
+    local ip=$1
+    local n="(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])"
+    [[ $ip =~ ^$n(\.$n){3}$ ]]
+  }
 
-# Function to validate FQDN
-validate_fqdn() {
-  local fqdn=$1
-  [[ $fqdn =~ ^([a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$ ]]
-}
+  # Function to validate FQDN
+  validate_fqdn() {
+    local fqdn=$1
+    [[ $fqdn =~ ^([a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$ ]]
+  }
 
-# Main script logic
-if [ "$DETECTIP" = "ipv4.method:                            auto" ]; then
-  echo -e "${RED}Interface $INTERFACE is using DHCP${TEXTRESET}"
+  while true; do
+    # Main script logic
+    echo -e "${RED}Interface $INTERFACE is using DHCP${TEXTRESET}"
 
-  # Validate IPADDR
-  read -p "Please provide a static IP address in CIDR format (i.e 192.168.24.2/24): " IPADDR
-  while ! validate_cidr "$IPADDR"; do
-    echo -e "${RED}The entry is not in valid CIDR notation. Please Try again${TEXTRESET}"
+    # Validate IPADDR
     read -p "Please provide a static IP address in CIDR format (i.e 192.168.24.2/24): " IPADDR
-  done
+    while ! validate_cidr "$IPADDR"; do
+      echo -e "${RED}The entry is not in valid CIDR notation. Please Try again${TEXTRESET}"
+      read -p "Please provide a static IP address in CIDR format (i.e 192.168.24.2/24): " IPADDR
+    done
 
-  # Validate GW
-  read -p "Please provide a Default Gateway Address: " GW
-  while ! validate_ip "$GW"; do
-    echo -e "${RED}The entry is not a valid IP address. Please Try again${TEXTRESET}"
+    # Validate GW
     read -p "Please provide a Default Gateway Address: " GW
-  done
+    while ! validate_ip "$GW"; do
+      echo -e "${RED}The entry is not a valid IP address. Please Try again${TEXTRESET}"
+      read -p "Please provide a Default Gateway Address: " GW
+    done
 
-  # Validate HOSTNAME
-  read -p "Please provide the FQDN for this machine: " HOSTNAME
-  while ! validate_fqdn "$HOSTNAME"; do
-    echo -e "${RED}The entry is not a valid FQDN. Please Try again${TEXTRESET}"
+    # Validate HOSTNAME
     read -p "Please provide the FQDN for this machine: " HOSTNAME
-  done
+    while ! validate_fqdn "$HOSTNAME"; do
+      echo -e "${RED}The entry is not a valid FQDN. Please Try again${TEXTRESET}"
+      read -p "Please provide the FQDN for this machine: " HOSTNAME
+    done
 
-  # Validate DNSSERVER
-  read -p "Please provide an upstream DNS IP for resolution: " DNSSERVER
-  while ! validate_ip "$DNSSERVER"; do
-    echo -e "${RED}The entry is not a valid IP address. Please Try again${TEXTRESET}"
+    # Validate DNSSERVER
     read -p "Please provide an upstream DNS IP for resolution: " DNSSERVER
-  done
+    while ! validate_ip "$DNSSERVER"; do
+      echo -e "${RED}The entry is not a valid IP address. Please Try again${TEXTRESET}"
+      read -p "Please provide an upstream DNS IP for resolution: " DNSSERVER
+    done
 
-  # Validate DNSSEARCH
-  read -p "Please provide the domain search name: " DNSSEARCH
-  while [ -z "$DNSSEARCH" ]; do
-    echo -e "${RED}The response cannot be blank. Please Try again${TEXTRESET}"
+    # Validate DNSSEARCH
     read -p "Please provide the domain search name: " DNSSEARCH
-  done
-fi
-clear
-  cat <<EOF
+    while [ -z "$DNSSEARCH" ]; do
+      echo -e "${RED}The response cannot be blank. Please Try again${TEXTRESET}"
+      read -p "Please provide the domain search name: " DNSSEARCH
+    done
+
+    clear
+    cat <<EOF
 The following changes to the system will be configured:
 IP address: ${GREEN}$IPADDR${TEXTRESET}
 Gateway: ${GREEN}$GW${TEXTRESET}
 DNS Search: ${GREEN}$DNSSEARCH${TEXTRESET}
 DNS Server: ${GREEN}$DNSSERVER${TEXTRESET}
 HOSTNAME: ${GREEN}$HOSTNAME${TEXTRESET}
+
 EOF
-  read -p "Press Enter to Continue"
+
+    # Ask the user to confirm the changes
+    read -p "Are these settings correct? (y/n): " CONFIRM
+    if [ "$CONFIRM" = "y" ] || [ "$CONFIRM" = "Y" ]; then
+      break
+    else
+      echo -e "${RED}Reconfiguring Interface${TEXTRESET}"
+      sleep 2
+      clear
+    fi
+  done
+
+  # Continue with the script here, as changes have been confirmed
+fi
   nmcli con mod $INTERFACE ipv4.address $IPADDR
   nmcli con mod $INTERFACE ipv4.gateway $GW
   nmcli con mod $INTERFACE ipv4.method manual
