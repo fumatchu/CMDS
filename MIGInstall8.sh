@@ -575,11 +575,11 @@ mv /root/Python-3.10.5/ /opt/
 rm -f /root/Python*
 alias python3=/opt/Python-3.10.5/python
 clear
-/usr/local/bin/python3.10 -m pip install --upgrade pip
-pip3.10 install meraki
-pip3.10 install requests
-pip3.10 install --upgrade autopep8
-pip3.10 install pandas
+/usr/local/bin/python3.10 -m pip install --root-user-action=ignore --upgrade pip
+pip3.10 install --root-user-action=ignore meraki
+pip3.10 install --root-user-action=ignore requests
+pip3.10 install --root-user-action=ignore --upgrade autopep8
+pip3.10 install --root-user-action=ignore pandas
 
 #Build tftp-server
 \cp -f /usr/lib/systemd/system/tftp.service /etc/systemd/system/tftp-server.service
