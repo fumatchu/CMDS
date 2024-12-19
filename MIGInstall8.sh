@@ -279,11 +279,33 @@ if [[ "$REPLY" =~ ^[Yy]$ ]]; then
   firewall-cmd --zone=public --add-service ntp --permanent
   clear
 
-  read -p "Please provide the appropriate network scope in CIDR format (i.e 192.168.0.0/16) to allow NTP for clients: " NTPCIDR
-  while [ -z "$NTPCIDR" ]; do
-    echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+ # Function to validate CIDR format
+isValidCIDR() {
+    local cidr=$1
+    # Regular expression to match valid IPv4 CIDR notation
+    [[ $cidr =~ ^([0-9]{1,3}\.){3}[0-9]{1,3}/([0-9]|[12][0-9]|3[0-2])$ ]] || return 1
+
+    # Split the IP and prefix length
+    IFS=/ read -r ip prefix <<< "$cidr"
+    
+    # Check if each octet of the IP is less than or equal to 255
+    IFS=. read -r o1 o2 o3 o4 <<< "$ip"
+    (( o1 <= 255 && o2 <= 255 && o3 <= 255 && o4 <= 255 )) || return 1
+
+    return 0
+}
+
+# Prompt user for CIDR input and validate
+while true; do
     read -p "Please provide the appropriate network scope in CIDR format (i.e 192.168.0.0/16) to allow NTP for clients: " NTPCIDR
-  done
+    if [ -z "$NTPCIDR" ]; then
+        echo -e "${RED}The response cannot be blank. Please try again.${TEXTRESET}"
+    elif ! isValidCIDR "$NTPCIDR"; then
+        echo -e "${RED}Invalid CIDR format. Please provide a valid CIDR (e.g., 192.168.0.0/16).${TEXTRESET}"
+    else
+        break
+    fi
+done
 
   sed -i "/#allow /c\allow $NTPCIDR" /etc/chrony.conf
 
