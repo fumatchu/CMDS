@@ -221,7 +221,7 @@ EOF
   done
 else
   echo -e "${GREEN}Interface $INTERFACE is using a static IP address${TEXTRESET}"
-  sleep 1
+  sleep 2
 fi
 clear
 if [ "$FQDN" = "localhost.localdomain" ]; then
