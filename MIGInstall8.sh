@@ -28,7 +28,7 @@ ping_address() {
 test_failed=false
 
 # Check DNS resolution for google.com
-echo "Checking DNS resolution for google.com..."
+echo "Checking DNS resolution for google.com via ping..."
 if check_dns_resolution "google.com"; then
     echo "DNS resolution for google.com is successful."
 else
