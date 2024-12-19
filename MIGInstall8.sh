@@ -199,6 +199,12 @@ EOF
     # Ask the user to confirm the changes
     read -p "Are these settings correct? (y/n): " CONFIRM
     if [ "$CONFIRM" = "y" ] || [ "$CONFIRM" = "Y" ]; then
+    nmcli con mod $INTERFACE ipv4.address $IPADDR
+    nmcli con mod $INTERFACE ipv4.gateway $GW
+    nmcli con mod $INTERFACE ipv4.method manual
+    nmcli con mod $INTERFACE ipv4.dns-search $DNSSEARCH
+    nmcli con mod $INTERFACE ipv4.dns $DNSSERVER
+    hostnamectl set-hostname $HOSTNAME
       break
     else
       echo -e "${RED}Reconfiguring Interface${TEXTRESET}"
@@ -206,15 +212,8 @@ EOF
       clear
     fi
   done
-
-  # Continue with the script here, as changes have been confirmed
 fi
-  nmcli con mod $INTERFACE ipv4.address $IPADDR
-  nmcli con mod $INTERFACE ipv4.gateway $GW
-  nmcli con mod $INTERFACE ipv4.method manual
-  nmcli con mod $INTERFACE ipv4.dns-search $DNSSEARCH
-  nmcli con mod $INTERFACE ipv4.dns $DNSSERVER
-  hostnamectl set-hostname $HOSTNAME
+  
 
   cat <<EOF
 The System must reboot for the changes to take effect.
