@@ -1,9 +1,9 @@
 #!/usr/bin/expect -f
 
 set timeout 10  ;# Set timeout to 10 seconds to allow devices some time to respond
-set server_ip "192.168.245.20"
-set switch_user "admin"
-set switch_pass "Nocompromise75!!"
+set server_ip default_server
+set switch_user default_user
+set switch_pass default_pass
 set DATE [timestamp -format %Y%m%d]
 log_file /root/.meraki_port_mig/logs/$DATE.log
 set fh [open /root/.meraki_port_mig/discovered_ip r]
