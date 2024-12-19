@@ -575,7 +575,7 @@ mv /root/Python-3.10.5/ /opt/
 rm -f /root/Python*
 alias python3=/opt/Python-3.10.5/python
 clear
-/usr/local/bin/python3.10 -m pip install --root-user-action=ignore --upgrade pip
+/usr/local/bin/python3.10 -m pip install --upgrade pip
 pip3.10 install --root-user-action=ignore meraki
 pip3.10 install --root-user-action=ignore requests
 pip3.10 install --root-user-action=ignore --upgrade autopep8
