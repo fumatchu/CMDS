@@ -124,30 +124,29 @@ if [ -z "$INTERFACE" ]; then
   exit 1
 fi
 
+# Function to validate IP address in CIDR notation
+validate_cidr() {
+  local cidr=$1
+  local n="(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])"
+  local m="(3[0-2]|[1-2]?[0-9])"
+  [[ $cidr =~ ^$n(\.$n){3}/$m$ ]]
+}
+
+# Function to validate an IP address in dotted notation
+validate_ip() {
+  local ip=$1
+  local n="(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])"
+  [[ $ip =~ ^$n(\.$n){3}$ ]]
+}
+
+# Function to validate FQDN
+validate_fqdn() {
+  local fqdn=$1
+  [[ $fqdn =~ ^([a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$ ]]
+}
+
 if [ "$DETECTIP" = "ipv4.method:                            auto" ]; then
-  # Function to validate IP address in CIDR notation
-  validate_cidr() {
-    local cidr=$1
-    local n="(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])"
-    local m="(3[0-2]|[1-2]?[0-9])"
-    [[ $cidr =~ ^$n(\.$n){3}/$m$ ]]
-  }
-
-  # Function to validate an IP address in dotted notation
-  validate_ip() {
-    local ip=$1
-    local n="(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])"
-    [[ $ip =~ ^$n(\.$n){3}$ ]]
-  }
-
-  # Function to validate FQDN
-  validate_fqdn() {
-    local fqdn=$1
-    [[ $fqdn =~ ^([a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$ ]]
-  }
-
   while true; do
-    # Main script logic
     echo -e "${RED}Interface $INTERFACE is using DHCP${TEXTRESET}"
 
     # Validate IPADDR
@@ -199,12 +198,20 @@ EOF
     # Ask the user to confirm the changes
     read -p "Are these settings correct? (y/n): " CONFIRM
     if [ "$CONFIRM" = "y" ] || [ "$CONFIRM" = "Y" ]; then
-    nmcli con mod $INTERFACE ipv4.address $IPADDR
-    nmcli con mod $INTERFACE ipv4.gateway $GW
-    nmcli con mod $INTERFACE ipv4.method manual
-    nmcli con mod $INTERFACE ipv4.dns-search $DNSSEARCH
-    nmcli con mod $INTERFACE ipv4.dns $DNSSERVER
-    hostnamectl set-hostname $HOSTNAME
+      nmcli con mod $INTERFACE ipv4.address $IPADDR
+      nmcli con mod $INTERFACE ipv4.gateway $GW
+      nmcli con mod $INTERFACE ipv4.method manual
+      nmcli con mod $INTERFACE ipv4.dns-search $DNSSEARCH
+      nmcli con mod $INTERFACE ipv4.dns $DNSSERVER
+      hostnamectl set-hostname $HOSTNAME
+      echo "/root/MIGInstaller/MIGInstall8.sh" >>/root/.bash_profile
+      echo "The System must reboot for the changes to take effect."
+      echo "${RED}Please log back in as root.${TEXTRESET}"
+      echo "The installer will continue when you log back in."
+      echo "If using SSH, please use the IP Address: $IPADDR"
+      echo "${RED}Rebooting${TEXTRESET}"
+      sleep 2
+      reboot
       break
     else
       echo -e "${RED}Reconfiguring Interface${TEXTRESET}"
@@ -212,23 +219,8 @@ EOF
       clear
     fi
   done
-fi
-  
-
-  cat <<EOF
-The System must reboot for the changes to take effect.
-${RED}Please log back in as root.${TEXTRESET}
-The installer will continue when you log back in.
-If using SSH, please use the IP Address: $IPADDR
-
-EOF
-  read -p "Press Enter to Continue"
-  clear
-  echo "/root/MIGInstaller/MIGInstall8.sh" >>/root/.bash_profile
-  reboot
-  exit
 else
-  echo ${GREEN}"Interface $INTERFACE is using a static IP address ${TEXTRESET}"
+  echo -e "${GREEN}Interface $INTERFACE is using a static IP address${TEXTRESET}"
 fi
 clear
 if [ "$FQDN" = "localhost.localdomain" ]; then
