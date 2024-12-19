@@ -334,35 +334,101 @@ if [[ "$REPLY" =~ ^[Yy]$ ]]; then
   firewall-cmd --zone=public --add-service dhcp --permanent
   clear
 
-  read -p "Please provide the beginning IP address in the lease range (based on the network $SUBNETNETWORK): " DHCPBEGIP
-  while [ -z "$DHCPBEGIP" ]; do
-    echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+  # Function to validate IP address format
+isValidIP() {
+    local ip=$1
+    # Regular expression to match valid IPv4 address
+    [[ $ip =~ ^([0-9]{1,3}\.){3}[0-9]{1,3}$ ]] || return 1
+
+    # Check if each octet is less than or equal to 255
+    IFS=. read -r o1 o2 o3 o4 <<< "$ip"
+    (( o1 <= 255 && o2 <= 255 && o3 <= 255 && o4 <= 255 )) || return 1
+
+    return 0
+}
+
+# Function to validate netmask format
+isValidNetmask() {
+    local netmask=$1
+    # List of valid netmask values
+    local valid_netmasks=(
+        "255.255.255.255" "255.255.255.254" "255.255.255.252" "255.255.255.248"
+        "255.255.255.240" "255.255.255.224" "255.255.255.192" "255.255.255.128"
+        "255.255.255.0"   "255.255.254.0"   "255.255.252.0"   "255.255.248.0"
+        "255.255.240.0"   "255.255.224.0"   "255.255.192.0"   "255.255.128.0"
+        "255.255.0.0"     "255.254.0.0"     "255.252.0.0"     "255.248.0.0"
+        "255.240.0.0"     "255.224.0.0"     "255.192.0.0"     "255.128.0.0"
+        "255.0.0.0"       "254.0.0.0"       "252.0.0.0"       "248.0.0.0"
+        "240.0.0.0"       "224.0.0.0"       "192.0.0.0"       "128.0.0.0"
+        "0.0.0.0"
+    )
+    
+    for valid in "${valid_netmasks[@]}"; do
+        if [[ "$netmask" == "$valid" ]]; then
+            return 0
+        fi
+    done
+
+    return 1
+}
+
+# Prompt user for beginning IP address and validate
+while true; do
     read -p "Please provide the beginning IP address in the lease range (based on the network $SUBNETNETWORK): " DHCPBEGIP
-  done
+    if [ -z "$DHCPBEGIP" ]; then
+        echo -e "${RED}The response cannot be blank. Please try again.${TEXTRESET}"
+    elif ! isValidIP "$DHCPBEGIP"; then
+        echo -e "${RED}Invalid IP format. Please provide a valid IP address.${TEXTRESET}"
+    else
+        break
+    fi
+done
 
-  read -p "Please provide the ending IP address in the lease range (based on the network $SUBNETNETWORK): " DHCPENDIP
-  while [ -z "$DHCPENDIP" ]; do
-    echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+# Prompt user for ending IP address and validate
+while true; do
     read -p "Please provide the ending IP address in the lease range (based on the network $SUBNETNETWORK): " DHCPENDIP
-  done
+    if [ -z "$DHCPENDIP" ]; then
+        echo -e "${RED}The response cannot be blank. Please try again.${TEXTRESET}"
+    elif ! isValidIP "$DHCPENDIP"; then
+        echo -e "${RED}Invalid IP format. Please provide a valid IP address.${TEXTRESET}"
+    else
+        break
+    fi
+done
 
-  read -p "Please provide the netmask for clients: " DHCPNETMASK
-  while [ -z "$DHCPNETMASK" ]; do
-    echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
-    read -p "Please provide the default netmask for clients: " DHCPNETMASK
-  done
+# Prompt user for netmask and validate
+while true; do
+    read -p "Please provide the netmask for clients: " DHCPNETMASK
+    if [ -z "$DHCPNETMASK" ]; then
+        echo -e "${RED}The response cannot be blank. Please try again.${TEXTRESET}"
+    elif ! isValidNetmask "$DHCPNETMASK"; then
+        echo -e "${RED}Invalid netmask format. Please provide a valid netmask (e.g., 255.255.255.0).${TEXTRESET}"
+    else
+        break
+    fi
+done
 
-  read -p "Please provide the default gateway for clients: " DHCPDEFGW
-  while [ -z "$DHCPDEFGW" ]; do
-    echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+# Prompt user for default gateway and validate
+while true; do
     read -p "Please provide the default gateway for clients: " DHCPDEFGW
-  done
+    if [ -z "$DHCPDEFGW" ]; then
+        echo -e "${RED}The response cannot be blank. Please try again.${TEXTRESET}"
+    elif ! isValidIP "$DHCPDEFGW"; then
+        echo -e "${RED}Invalid IP format. Please provide a valid IP address.${TEXTRESET}"
+    else
+        break
+    fi
+done
 
-  read -p "Please provide a description for this subnet: " SUBNETDESC
-  while [ -z "$SUBNETDESC" ]; do
-    echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+# Prompt user for subnet description and ensure it's not blank
+while true; do
     read -p "Please provide a description for this subnet: " SUBNETDESC
-  done
+    if [ -z "$SUBNETDESC" ]; then
+        echo -e "${RED}The response cannot be blank. Please try again.${TEXTRESET}"
+    else
+        break
+    fi
+done
 
   #Configure DHCP
   mv /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.orig
