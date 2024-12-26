@@ -121,7 +121,7 @@ echo "Process completed."
 
 
 # Paths to the files and directories
-ip_list_file="/root/.meraki_mig/ip_list"
+ip_list_file="/root/.meraki_mig/discovered_ip"
 tftpboot_dir="/var/lib/tftpboot/mig_switch"
 
 # Temporary file to hold IPs that have corresponding files
