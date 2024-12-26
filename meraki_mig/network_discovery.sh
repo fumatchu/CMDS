@@ -137,9 +137,11 @@ while IFS= read -r ip; do
         # If the file exists, keep the IP in the list
         echo "$ip" >> "$temp_file"
     else
+        echo " "
         echo "${YELLOW}The device with IP $ip was either unreachable or the credentials were incorrect."${TEXTRESET}
         echo "If you believe this to be an error, please review the credentials or status of the device."
         echo "${RED}Removing $ip from the Data collection list."${TEXTRESET}
+        echo " "
     fi
 done < "$ip_list_file"
 
