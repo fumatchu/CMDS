@@ -28,7 +28,7 @@ read -r -p "Would you like to deploy these changes to all switches now? [y/N]" -
 echo # (optional) move to a new line
 if [[ "$REPLY" =~ ^[Yy]$ ]]; then
   clear
-  ${GREEN}Updating ntp name server with IP address ${NTP} ${TEXTRESET}
+ echo ${GREEN}"Updating ntp name server with IP address ${NTP} ${TEXTRESET}"
   sleep 1
 /root/.meraki_mon_switch/update_ntp_server.exp
 fi
