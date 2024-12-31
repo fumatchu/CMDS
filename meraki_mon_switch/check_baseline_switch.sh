@@ -35,30 +35,59 @@ while read -r IP; do
   echo "$IP"
 
   echo ${GREEN}"Checking IOS-XE Version${TEXTRESET}"
-  echo " "
-x=$(cat /var/lib/tftpboot/mon_switch/$IP-shver |grep "Cisco IOS XE Software, Version" | cut -c32-)
-first=${x%%.*}          # Delete first dot and what follows.
-last=${x##*.}           # Delete up to last dot.
-mid=${x##$first.}       # Delete first number and dot.
-mid=${mid%%.$last}      # Delete dot and last number.
-#echo $first $mid $last
-echo "IOS-XE Version is ${YELLOW}$x${TEXTRESET}"
- if [ $first -ge 17 ] && [ $mid -ge 3 ] && [ $last -gt 1 ]; then
-    echo "${GREEN}IOS-XE Version Meets Minimum Requirement${TEXTRESET}"
+  # Function to compare version strings
+version_compare() {
+  local IFS=.
+  local i ver1 ver2
+  ver1=(${1//[!0-9.]/})
+  ver2=(${2//[!0-9.]/})
+  # Pad the shorter version with zeros for proper comparison
+  for ((i=${#ver1[@]}; i<${#ver2[@]}; i++)); do ver1[i]=0; done
+  for ((i=${#ver2[@]}; i<${#ver1[@]}; i++)); do ver2[i]=0; done
+  for ((i=0; i<${#ver1[@]}; i++)); do
+    if ((10#${ver1[i]} > 10#${ver2[i]})); then
+      return 1
+    elif ((10#${ver1[i]} < 10#${ver2[i]})); then
+      return 2
+    fi
+  done
+  return 0
+}
+
+  x=$(cat /var/lib/tftpboot/mon_switch/$IP-shver | grep "Cisco IOS XE Software, Version" | cut -c32-)
+  echo "IOS-XE Version is ${YELLOW}$x${TEXTRESET}"
+
+  # Define supported version ranges
+  min_version="17.3.0"
+  max_version="17.10.0"
+  specific_version="17.12.3"
+
+  # Compare the version
+  version_compare "${x}" "${min_version}"
+  result_min=$?
+
+  version_compare "${x}" "${max_version}"
+  result_max=$?
+
+  version_compare "${x}" "${specific_version}"
+  result_specific=$?
+
+  # Check if the version meets requirements
+  if { [ $result_min -eq 1 ] && [ $result_max -eq 2 ]; } || [ $result_specific -eq 0 ]; then
+    echo "${GREEN}IOS-XE Version Meets Requirement${TEXTRESET}"
     echo " "
   else
-    echo "${RED}ERROR: IOS-XE version does not meet the minimum requirement${TEXTRESET}"
-    echo "Supported versions are IOS-XE 17.3 - 17.10.1, and 17.12.3"
+    echo "${RED}ERROR: IOS-XE version does not meet the requirement${TEXTRESET}"
+    echo "Supported versions are IOS-XE 17.3.0 - 17.10.0, and 17.12.3"
     echo "Please see the following link to download:"
     echo "https://software.cisco.com/download/home"
-    echo "A CCO ID is required" 
+    echo "A CCO ID is required"
     echo "1" >> /root/.meraki_mon_switch/check.tmp
     sleep 5
     echo "Exiting the Check"
     sleep 2
-    exit    
-fi
-
+    exit
+  fi
 
  #Is the Switch in INSTALL Mode?
   echo "Checking INSTALL or BUNDLE Mode"
@@ -76,7 +105,7 @@ fi
     echo "Exiting the Check"
     sleep 2
     exit
-    
+
   fi
 
 #Does the Switch allow VTY telnet output?
@@ -113,7 +142,7 @@ fi
     echo "1" >> /root/.meraki_mon_switch/check.tmp
     echo ${YELLOW}"Attemping to Correct Issue"${TEXTRESET}
     echo " "
-    sleep 1 
+    sleep 1
     echo $IP >> /root/.meraki_mon_switch/ip_list_single
     /root/.meraki_mon_switch/update_ntp_server_single.exp > /dev/null 2>&1
     sed -i '/^/d' /root/.meraki_mon_switch/ip_list_single
@@ -133,7 +162,7 @@ fi
     echo "1" >> /root/.meraki_mon_switch/check.tmp
     echo ${YELLOW}"Attemping to Correct Issue"${TEXTRESET}
     echo " "
-    sleep 1 
+    sleep 1
     echo $IP >> /root/.meraki_mon_switch/ip_list_single
     /root/.meraki_mon_switch/update_ip_name-server_single.exp > /dev/null 2>&1
     sed -i '/^/d' /root/.meraki_mon_switch/ip_list_single
@@ -150,7 +179,7 @@ fi
     echo "1" >> /root/.meraki_mon_switch/check.tmp
     echo ${YELLOW}"Attemping to Correct Issue"${TEXTRESET}
     echo " "
-    sleep 1 
+    sleep 1
     echo $IP >> /root/.meraki_mon_switch/ip_list_single
     /root/.meraki_mon_switch/update_ip_name-server_single.exp > /dev/null 2>&1
     sed -i '/^/d' /root/.meraki_mon_switch/ip_list_single
@@ -196,7 +225,7 @@ fi
     echo $IP >> /root/.meraki_mon_switch/ip_list_single
     /root/.meraki_mon_switch/update_aaa_config_single.exp > /dev/null 2>&1
     sed -i '/^/d' /root/.meraki_mon_switch/ip_list_single
-    sleep 2 
+    sleep 2
   fi
 
 
@@ -259,7 +288,7 @@ fi
     echo " "
     echo "1" >> /root/.meraki_mon_switch/check.tmp
     echo "The response was:"
-    cat /root/.meraki_mon_switch/network_test.tmp | tail -4 
+    cat /root/.meraki_mon_switch/network_test.tmp | tail -4
     echo " "
     rm -r -f /root/.meraki_mon_switch/network_test.tmp
     sed -i '/^/d' /root/.meraki_mon_switch/ip_list_single
