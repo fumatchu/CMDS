@@ -52,8 +52,8 @@ Once you have uploaded the IOS images, then you must specify the following (via 
         -The IOS image you would like to use (must be uploaded first)
         -The IP addresses of the switches to migrate (management IP via VLAN)
         -An NTP Server if needed for the Switches
-        -An IP Address of a DNS Server for the switches 
-        -A Gateway of last resort IP Address. This will be used to enable routing. 
+        -An IP Address of a DNS Server for the switches
+        -A Gateway of last resort IP Address. This will be used to enable routing.
          ${YELLOW}*Keep in mind this address will change with every subnet/batch you use$*${TEXTRESET}
 
 Please keep in mind that it's required to have a privileged user (15) on the switch(es)
@@ -289,52 +289,98 @@ cat <<EOF
 ${GREEN}Update Complete${TEXTRESET}
 EOF
 clear
+# Function to validate an IP address in dotted notation
+validate_ip() {
+  local ip=$1
+  local n="(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])"
+  [[ $ip =~ ^$n(\.$n){3}$ ]]
+}
+
+clear
 echo "${GREEN}Provide an NTP Server IP address${TEXTRESET}"
-read -p "Please provide the NTP IP address you would like to use for time syncronization (If Needed): " NTP
-while [ -z "$NTP" ]; do
-  echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
-  read -p "Please provide the NTP IP address you would like to use for time syncronization: " NTP
+
+# Prompt for NTP server IP address and validate
+while true; do
+  read -p "Please provide the NTP IP address you would like to use for time synchronization (If Needed): " NTP
+  if [ -z "$NTP" ]; then
+    echo "${RED}The response cannot be blank. Please try again.${TEXTRESET}"
+  elif validate_ip "$NTP"; then
+    break
+  else
+    echo "${RED}Invalid IP address format. Please try again.${TEXTRESET}"
+  fi
 done
+
 clear
 cat <<EOF
-${GREEN}Updating NTP name server with IP address ${NTP} ${TEXTRESET}
+${GREEN}Updating NTP name server with IP address${TEXTRESET} ${NTP}
 
 EOF
-sleep 1
 
+sleep 1
 sed -i "/set ntpserver/c\set ntpserver ${NTP}" /root/.meraki_mon_switch/update_ntp_server.exp
 sed -i "/set ntpserver/c\set ntpserver ${NTP}" /root/.meraki_mon_switch/update_ntp_server_single.exp
 
+# Function to validate an IP address in dotted notation
+validate_ip() {
+  local ip=$1
+  local n="(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])"
+  [[ $ip =~ ^$n(\.$n){3}$ ]]
+}
+
 clear
-read -p "Please provide the DNS IP address you would like to use for name resolution: " NSIP
-while [ -z "$USER" ]; do
-  echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+
+# Prompt for DNS server IP address and validate
+while true; do
   read -p "Please provide the DNS IP address you would like to use for name resolution: " NSIP
+  if [ -z "$NSIP" ]; then
+    echo "${RED}The response cannot be blank. Please try again.${TEXTRESET}"
+  elif validate_ip "$NSIP"; then
+    break
+  else
+    echo "${RED}Invalid IP address format. Please try again.${TEXTRESET}"
+  fi
 done
 
 sed -i "/set nameserver1/c\set nameserver1 ${NSIP}" /root/.meraki_mon_switch/update_ip_name-server.exp
 sed -i "/set nameserver1/c\set nameserver1 ${NSIP}" /root/.meraki_mon_switch/update_ip_name-server_single.exp
 
 
-read -p "Please provide the secondary DNS IP address you would like to use for name resolution: " NSIP2
-while [ -z "$USER" ]; do
-  echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
+# Function to validate an IP address in dotted notation
+validate_ip() {
+  local ip=$1
+  local n="(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])"
+  [[ $ip =~ ^$n(\.$n){3}$ ]]
+}
+
+clear
+
+# Prompt for secondary DNS server IP address and validate
+while true; do
   read -p "Please provide the secondary DNS IP address you would like to use for name resolution: " NSIP2
+  if [ -z "$NSIP2" ]; then
+    echo "${RED}The response cannot be blank. Please try again.${TEXTRESET}"
+  elif validate_ip "$NSIP2"; then
+    break
+  else
+    echo "${RED}Invalid IP address format. Please try again.${TEXTRESET}"
+  fi
 done
 
 sed -i "/set nameserver2/c\set nameserver2 ${NSIP2}" /root/.meraki_mon_switch/update_ip_name-server.exp
 sed -i "/set nameserver2/c\set nameserver2 ${NSIP2}" /root/.meraki_mon_switch/update_ip_name-server_single.exp
 clear
+
 cat <<EOF
-${GREEN}Updating ip name server with IP address${TEXTRESET} ${NSIP} 
-${GREEN}Updating ip name server with IP address${TEXTRESET} ${NSIP2} 
+${GREEN}Updating ip name server with IP address${TEXTRESET} ${NSIP}
+${GREEN}Updating ip name server with IP address${TEXTRESET} ${NSIP2}
 EOF
 sleep 1
 clear
-cat << EOF 
+cat << EOF
 ${GREEN}Provide Default Gateway IP address${TEXTRESET}
 For each subnet of switches you modify, you must provide the corresponding Default-Gateway for the network segment
-This must be changed per subnet and can be done so with the menu option 
+This must be changed per subnet and can be done so with the menu option
 Main Menu --> Utilities --> Deploy Default Route
 ${RED}*THIS MUST BE DONE FOR EACH SUBNET OF SWITCHES, OTHERWISE, CONNECTIVITY WILL BE LOST*${TEXTRESET}
 
@@ -344,12 +390,32 @@ If ip default-gateway is programmed, server will use that entry as the gateway o
 If routing is not enabled, and there is no ip defaut-gateway statement, the server will default to what you specify here
 
 EOF
-read -p "Please provide the IP address you would like to use for the Gateway of Last resort (routing Default Gateway): " GWLR
-while [ -z "$USER" ]; do
-  echo ${RED}"The response cannot be blank. Please Try again${TEXTRESET}"
-  read -p  "Please provide the IP address you would like to use for the Gateway of Last resort:" GWLR
-done
+
+# Function to validate an IP address in dotted notation
+validate_ip() {
+  local ip=$1
+  local n="(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])"
+  [[ $ip =~ ^$n(\.$n){3}$ ]]
+}
+
 clear
+
+# Prompt for the Gateway of Last Resort IP address and validate
+while true; do
+  read -p "Please provide the IP address you would like to use for the Gateway of Last resort (routing Default Gateway): " GWLR
+  if [ -z "$GWLR" ]; then
+    echo "${RED}The response cannot be blank. Please try again.${TEXTRESET}"
+  elif validate_ip "$GWLR"; then
+    break
+  else
+    echo "${RED}Invalid IP address format. Please try again.${TEXTRESET}"
+  fi
+done
+
+clear
+
+
+
 cat <<EOF
 ${GREEN}Updating gateway of last resort with IP address ${GWLR} ${TEXTRESET}
 
@@ -362,7 +428,7 @@ clear
 cat <<EOF
 ${GREEN}Adding Management IP Addresses to the Server for Collection${TEXTRESET}
 
-There are two ways to collect the IP addresses of the Catalyst Switches that are eligible for onboarding. 
+There are two ways to collect the IP addresses of the Catalyst Switches that are eligible for onboarding.
 
 You can:
 
