@@ -398,8 +398,6 @@ validate_ip() {
   [[ $ip =~ ^$n(\.$n){3}$ ]]
 }
 
-clear
-
 # Prompt for the Gateway of Last Resort IP address and validate
 while true; do
   read -p "Please provide the IP address you would like to use for the Gateway of Last resort (routing Default Gateway): " GWLR
