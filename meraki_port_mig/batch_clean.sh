@@ -43,8 +43,8 @@ if [[ "$REPLY" =~ ^[Yy]$ ]]; then
         echo ${YELLOW}"Cleaning the Batch IP List"${TEXTRESET}
         rm -f /root/.meraki_port_mig/ip_list
         touch /root/.meraki_port_mig/ip_list
-        rm -f /root/mearki_port_mig/*.txt
-        rm -f /root/mearki_port_mig/serial/*
+        rm -f /root/meraki_port_mig/*.txt
+        rm -f /root/meraki_port_mig/serial/*
         rm -r /root/port_migration/switch*
         sleep 2
 
