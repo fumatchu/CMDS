@@ -10,7 +10,7 @@ clear
 cat <<EOF
 ${GREEN}Batch Cleanup${TEXTRESET}
 
-This will archive all logs to an acrhive folder in the logs and root directory
+This will archive all logs to an archive folder in the logs and root directory
 It will also move the Registered Meraki Device (Serial and Hardware)
 To the root directory (for historical purposes)
 Configuration data, like Switch usernames, passwords, and the Meraki API key
