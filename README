@@ -96,10 +96,3 @@ The requirements for installing are the following:
 After the minimal installation of Rocky, in the repository, Click on the EASY_INSTALL file
 Inside of this file, you will see the following lines of Code:
 
-cd /root/
-dnf -y install wget
-wget https://raw.githubusercontent.com/fumatchu/CMDS/main/mig-installer.sh
-chmod 700 ./mig-installer.sh
-/root/mig-installer.sh
-
-You can copy it (or from here) and paste into your terminal connection to the server via SSH to start the depndency installs
