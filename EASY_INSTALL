@@ -1,7 +1,15 @@
+# ⚠️ Archived Project
+
+This repository is archived and no longer actively maintained.
+
+Please use **CMDS2** instead:
+👉 https://github.com/fumatchu/CMDS2
+
+This code remains available for historical reference.
+
 #Installing
 #Install Rocky Minimal
 #Make sure you specify the domain name you want to use for name resolution.
 #After the GUI install:
 #(Just copy and paste the following linee on the Rocky terminal or remote SSH terminal- remote suggested)
 
-dnf -y install wget && cd /root &&  bash <(wget -qO- https://raw.githubusercontent.com/fumatchu/CMDS/main/mig-installer.sh)
